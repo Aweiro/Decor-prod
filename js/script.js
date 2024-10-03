@@ -7,4 +7,14 @@ input.addEventListener('focus', function (){
 
 input.addEventListener('blur', function (){
     form.classList.remove('form--active')
+
 })
+
+
+
+function confirmCall(number) {
+    const confirmMessage = `Ви впевнені, що хочете зателефонувати на номер ${number}?`;
+    if (confirm(confirmMessage)) {
+        window.location.href = `tel:${number}`;
+    }
+}

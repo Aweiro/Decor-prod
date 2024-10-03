@@ -9,5 +9,19 @@
 	align-items: center;
 }
 
+
 .navigation-list {
+
+.nav__link{
+  display: inline-block;
+  margin: 0 3rem;
+  color: var(--black-color);
+  transition: all transform 0.5s ease-out;
+}
+.nav__link:hover{
+  transform: scale(1.2);
+  color: var(--your-hover-color);
+  transition: all transform 0.5s ease-out;
+
+}
 }

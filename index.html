@@ -3,7 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Cut Space</title>
+
+		<title>Декор</title>
+
 		<link rel="stylesheet" href="./css/main.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,21 +15,23 @@
 		/>
 	</head>
 	<body>
-		
+
+
 		<nav class="nav">
 			<div class="container">
 				<div class="nav__row">
 					<div class="logo">
 						<img src="./img/icons/logo.svg" alt="logo" />
-						<span>CutSpace</span>
+
+						<span>Декор</span>
 					</div>
 					<div class="navigation-list">
 						<ul>
-							<li><a href="#" class="active">Home</a></li>
-							<li><a href="#">About us</a></li>
-							<li class="nav__none"><a href="#">Find space</a></li>
-							<li class="nav__none"><a href="#">Share space</a></li>
-							<li class="nav__none"><a href="#">Promote space</a></li>
+							<li class="nav__link"><a href="#" class="active">Головна</a></li>
+							<li class="nav__link"><a href="#">Про нас</a></li>
+							<li class="nav__link"><a href="#">Портфоліо</a></li>
+							<li class="nav__link"><a href="#">Послуги</a></li>
+							<li class="nav__link"><a href="#">Відгуки</a></li>
 						</ul>
 					</div>
 				</div>
@@ -39,6 +43,7 @@
 				<div class="header__row">
 					<div class="header__text">
 						<h1 class="header__title">
+
 							Декоративна штукатурка <br>| Івано-Франківськ <br>| Львів
 						</h1>
 						<p>
@@ -46,15 +51,10 @@
 							• Безкоштовні взірці, під ваш об’єкт <br>
 							• знижки на матеріал від 15% ,при купівлі від 200 кг матеріалу 30%
 						</p>
-						<!-- <form class="header__form form">
-							<label class="form__label">
-								<input
-									type="text"
-									class="form__input"
-									placeholder="Your email address"
-								/>
-							</label> -->
+
+							</label> 
 							<a href="#testimonials" class="form__button button">Каталог продукції</a>
+
 						</form>
 					</div>
 					<div class="header__img">
@@ -283,6 +283,7 @@
 			</div>
 		</section>
 
+
 		<footer class="footer">
 			<div class="container">
 				<div class="footer__row">
@@ -290,13 +291,17 @@
 						<div class="footer__logo">
 							<div class="logo">
 								<img src="./img/icons/logo.svg" alt="logo" />
-								<span>CutSpace</span>
+
+								<span>Декор</span>
+
 							</div>
 						</div>
 
 						<div class="footer__info-text">
 							<p>
-								Quae fuerit causa, nollem me ab illo inventore veritatis et.
+								Декоративні штукатурки Maxima Decor дозволяють 
+                створювати сучасні ефекти: камінь, бетон, травертин, 
+                марморін, мерехтливий, перламутр, оксамит, мармур. 
 							</p>
 						</div>
 
@@ -318,37 +323,36 @@
 
 					<div class="footer__nav">
 						<div class="footer__nav-block">
-							<h4 class="footer__nav-block-title">Privacy</h4>
+							<h4 class="footer__nav-block-title">Навігація</h4>
 							<ul>
-								<li><a href="#!">Si sine causa</a></li>
-								<li><a href="#!">Quae fuerit causa</a></li>
-								<li><a href="#!">Certe, inquam</a></li>
-								<li><a href="#!">Torquatos nostros?</a></li>
+                <li><a href="#!">Головна</a></li>
+								<li><a href="#!">Про нас</a></li>
+								<li><a href="#!">Портфоліо</a></li>
+                <li><a href="#!">Послуги</a></li>
+								<li><a href="#!">Відгуки</a></li>
+							
 							</ul>
 						</div>
 
-						<div class="footer__nav-block">
-							<h4 class="footer__nav-block-title">Legal</h4>
-							<ul>
-								<li><a href="#!">Si sine causa</a></li>
-								<li><a href="#!">Quae fuerit causa</a></li>
-								<li><a href="#!">Certe, inquam</a></li>
-								<li><a href="#!">Torquatos nostros?</a></li>
-							</ul>
-						</div>
+						
 
 						<div class="footer__nav-block">
-							<h4 class="footer__nav-block-title">Contact</h4>
+							<h4 class="footer__nav-block-title">Контакти</h4>
 							<ul>
-								<li><a href="#!">Si sine causa</a></li>
-								<li><a href="#!">Quae fuerit causa</a></li>
-								<li><a href="#!">Certe, inquam</a></li>
-								<li><a href="#!">Torquatos nostros?</a></li>
+								<li><a href="mailto:info@cutspace.com">info@cutspace.com</a></li>
+                <li>
+                 <a href="#!" onclick="confirmCall('+380974660590')">+380 97 466 0590</a>
+               </li>
+
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
+
+      <div class="footer__bottom">
+        <p>&copy; 2024 Декор. Всі права захищені.</p>
+    </div>
 		</footer>
 
 		<script src="./js/script.js"></script>

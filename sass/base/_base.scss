@@ -1,13 +1,19 @@
-html,
+html{
+  scroll-behavior: smooth;
+}
 body {
 	font-family: 'Poppins', sans-serif;
 	font-size: 16px;
 	line-height: 1.687;
 	color: $black-color;
-	scroll-behavior: smooth;
+
 }
 .container {
 	max-width: 1340px;
+
+}
+.container {
+	max-width: 1140px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 15px;
