@@ -1,0 +1,38 @@
+html,
+body {
+	font-family: 'Poppins', sans-serif;
+	font-size: 16px;
+	line-height: 1.687;
+	color: $black-color;
+}
+.container {
+	max-width: 1140px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+
+	&--fluid {
+		max-width: unset;
+		width: 100%;
+	}
+
+	&--no--padding {
+		padding: 0;
+	}
+}
+
+.visually-hiden {
+	opacity: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+	display: block;
+	margin-left: -10000px;
+	background: transparent;
+	font-size: 0;
+}
+
+.none {
+	display: none;
+}

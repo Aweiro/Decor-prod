@@ -1,0 +1,32 @@
+.header {
+}
+
+.header__row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.header__text {
+	width: 465px;
+}
+.header__text p {
+	line-height: 1.6875;
+	margin-bottom: 1em;
+}
+.header__title {
+	margin-right: -160px;
+	position: relative;
+	z-index: 9;
+
+	font-size: 54px;
+	margin-bottom: 25px;
+	font-weight: 700;
+	line-height: 1.46;
+}
+.header__img img {
+	border-radius: 40px 40px 40px 0;
+}
+
+.header__form {
+	margin-top: 42px;
+}
