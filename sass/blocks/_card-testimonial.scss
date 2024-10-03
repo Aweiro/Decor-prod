@@ -1,0 +1,83 @@
+.card-testimonial {
+	border-radius: 5px;
+	overflow: hidden;
+	max-width: 350px;
+
+	transition: box-shadow 0.2s ease-in;
+
+	&:hover {
+		box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
+		.card-testimonial__btn-play {
+			opacity: 1;
+			transform: translateY(0%);
+		}
+	}
+	&:hover .card-testimonial__img {
+		transform: scale(1.2);
+	}
+}
+.card-testimonial__img {
+	object-fit: cover;
+	width: 100%;
+	transition: all 0.5s ease-in-out;
+	min-height: 220px;
+
+}
+
+.card-testimonial__img-wrapper {
+	overflow: hidden;
+	position: relative;
+
+	max-height: 220px;
+}
+
+.card-testimonial__btn-play {
+	position: absolute;
+	z-index: 1;
+	right: 20px;
+	bottom: 20px;
+	opacity: 0;
+	transform: translateY(25%);
+	transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+
+.card-testimonial__btn-svg {
+	circle {
+		fill: #d6cee3;
+		transition: fill 0.2s ease-in;
+	}
+
+	path {
+		fill: #615478;
+		transition: fill 0.2s ease-in;
+	}
+
+	&:hover {
+		circle {
+			fill: #615478;
+		}
+
+		path {
+			fill: #d6cee3;
+		}
+	}
+}
+
+.card-testimonial__body {
+	padding: 30px;
+}
+.card-testimonial__text {
+	margin-bottom: 23px;
+}
+.card-testimonial__name {
+	font-size: 18px;
+	font-weight: 700;
+}
+.card-testimonial__city {
+	color: #58bebf;
+	transition: color 0.2s ease-in;
+
+	.card-testimonial:hover & {
+		color: #f78434;
+	}
+}

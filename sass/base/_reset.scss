@@ -1,0 +1,48 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	font-size: inherit;
+}
+
+input,
+button {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+button,
+input[type='submit'] {
+	background: none;
+	cursor: pointer;
+}
+
+input:focus,
+button:focus {
+	outline: none;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
