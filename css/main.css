@@ -113,17 +113,18 @@ body {
 
 .navigation-list .nav__link {
   display: inline-block;
-  margin: 0 3rem;
+  margin: 0 2rem;
   color: var(--black-color);
-  -webkit-transition: all transform 0.5s ease-out;
-  transition: all transform 0.5s ease-out;
 }
-.navigation-list .nav__link:hover {
+.navigation-list .nav__link a {
+  display: block;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.navigation-list .nav__link :not(.active):hover {
+  color: #f78434;
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
-  color: var(--your-hover-color);
-  -webkit-transition: all transform 0.5s ease-out;
-  transition: all transform 0.5s ease-out;
 }
 
 .logo {
@@ -141,83 +142,6 @@ body {
   margin-right: 10px;
 }
 
-.form {
-  border-radius: 29px;
-  background: #fff;
-  -webkit-box-shadow: 0px 17px 42px 0px rgba(0, 0, 0, 0.12);
-          box-shadow: 0px 17px 42px 0px rgba(0, 0, 0, 0.12);
-  height: 58px;
-  -webkit-transition: -webkit-box-shadow 0.2s ease-in;
-  transition: -webkit-box-shadow 0.2s ease-in;
-  transition: box-shadow 0.2s ease-in;
-  transition: box-shadow 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.form--active {
-  -webkit-box-shadow: 0px 17px 42px 0px rgba(247, 132, 52, 0.27);
-          box-shadow: 0px 17px 42px 0px rgba(247, 132, 52, 0.27);
-}
-
-.form__label {
-  position: relative;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  padding-left: 72px;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.form__label::before {
-  position: absolute;
-  top: 20px;
-  left: 28px;
-  content: "";
-  display: block;
-  width: 24px;
-  height: 19px;
-  background-image: url("./../img/icons/mail.svg");
-  background-size: initial;
-}
-
-.form__input {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  margin-right: 10px;
-  width: 220px;
-}
-.form__input::-webkit-input-placeholder {
-  color: #bbb;
-}
-.form__input::-moz-placeholder {
-  color: #bbb;
-}
-.form__input:-ms-input-placeholder {
-  color: #bbb;
-}
-.form__input::-ms-input-placeholder {
-  color: #bbb;
-}
-.form__input::placeholder {
-  color: #bbb;
-}
-
 .navigation-list ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -232,9 +156,6 @@ body {
 .navigation-list a {
   -webkit-transition: color 0.2s ease;
   transition: color 0.2s ease;
-}
-.navigation-list a:hover {
-  color: #f78434;
 }
 .navigation-list a.active {
   color: #f78434;
@@ -457,6 +378,27 @@ body {
           transform: translateY(-50%);
 }
 
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 30px; /* Place the button at the bottom of the page */
+  right: 20px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  height: 60px;
+  width: 60px;
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  border-radius: 60px; /* Rounded corners */
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+#myBtn:hover {
+  background-color: lightgrey; /* Add a dark-grey background on hover */
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
 .title {
   font-size: 42px;
   font-weight: 700;
@@ -546,7 +488,7 @@ body {
 }
 
 .footer__info {
-  max-width: 300px;
+  max-width: 400px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -562,7 +504,7 @@ body {
 .footer__info-text {
   width: 100%;
   text-align: justify;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .footer__socials {

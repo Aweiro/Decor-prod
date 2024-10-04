@@ -9,19 +9,19 @@
 	align-items: center;
 }
 
-
 .navigation-list {
-
-.nav__link{
-  display: inline-block;
-  margin: 0 3rem;
-  color: var(--black-color);
-  transition: all transform 0.5s ease-out;
-}
-.nav__link:hover{
-  transform: scale(1.2);
-  color: var(--your-hover-color);
-  transition: all transform 0.5s ease-out;
-
-}
+	.nav__link {
+		a {
+			display: block;
+			transition: all 0.2s ease-in;
+		}
+		display: inline-block;
+		margin: 0 2rem;
+		color: var(--black-color);
+	}
+	.nav__link :not(.active):hover {
+		// color: var(--your-hover-color);
+		color: $accent-color;
+		transform: scale(1.2);
+	}
 }
