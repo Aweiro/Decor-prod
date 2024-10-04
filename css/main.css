@@ -11,6 +11,10 @@ a {
   text-decoration: none;
 }
 
+a:active {
+  background-color: none;
+}
+
 h1,
 h2,
 h3,
