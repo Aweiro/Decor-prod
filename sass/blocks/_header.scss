@@ -26,6 +26,9 @@
 }
 .header__img img {
 	border-radius: 40px 40px 40px 0;
+  width: 500px;
+  height: auto;
+  object-fit: cover;
 }
 
 .header__form {
