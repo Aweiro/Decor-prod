@@ -30,3 +30,9 @@
 .header__form {
 	margin-top: 42px;
 }
+
+.buttons__row {
+	display: flex;
+	justify-content: space-between;
+	column-gap: 10px;
+}

@@ -1,11 +1,12 @@
 .button {
-	display: inline-block;
+	display: block;
 	height: 58px;
 	padding-left: 37px;
 	padding-right: 37px;
 	border-radius: 5px;
 	background-color: none;
 	border: 2px solid black;
+	text-wrap: nowrap;
 
 	line-height: 55px;
 	font-weight: 400;
@@ -17,16 +18,7 @@
 		color: white;
 	}
 
-	&--white {
-		background-color: #fff;
-		color: $black-color;
-		transition: all 0.2s ease-in;
 
-		&:hover {
-			background-color: $black-color;
-			color: #fff;
-		}
-	}
 
 	&--play {
 		padding-left: 50px;
@@ -48,6 +40,10 @@
 			transform: translateY(-50%);
 		}
 	}
+
+	&--call {
+		// margin-left: 1em;
+	}
 }
 
 
@@ -62,17 +58,19 @@
 	height: 60px;
 	width: 60px;
 
-  // border: none; /* Remove borders */
-  // outline: none; /* Remove outline */
-  // background-color: red; /* Set a background color */
   color: white; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
   // padding: 15px; /* Some padding */
   border-radius: 60px; /* Rounded corners */
 	transition: all .2s ease;
+	// transform: translateY(0%);
+
 }
 
 #myBtn:hover {
   background-color: lightgrey; /* Add a dark-grey background on hover */
 	transform: scale(1.1);
+}
+#myBtn:active {
+	transform: translateY(-25%) scale(1.1);
 }
