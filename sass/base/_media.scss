@@ -486,15 +486,11 @@
 // Адаптивність для планшетів (від 768px до 1024px)
 @media screen and (max-width: 1024px) {
   .container {
-    max-width: 100%;
+    max-width: 90%;
     padding-left: 10px;
     padding-right: 10px;
   }
 
-  .nav__row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
   .navigation-list .nav__link {
     margin: 0 1rem;
@@ -521,8 +517,18 @@
   }
 
   .card-testimonial {
-    max-width: 100%;
+    min-width: 100%;
+
   }
+	
+	.card-testimonial__img-wrapper {
+		height: 340px;
+	}
+	
+	.card-testimonial__img {
+		width: 100%;
+
+	}
 
   .footer__nav {
     flex-direction: column;

@@ -9,6 +9,7 @@
 }
 .header__text {
 	width: 465px;
+	// background-color: black;
 }
 .header__text p {
 	line-height: 1.6875;
@@ -19,16 +20,31 @@
 	position: relative;
 	z-index: 9;
 
-	font-size: 54px;
-	margin-bottom: 25px;
+	font-size: 49px;
+	margin-bottom: 15px;
 	font-weight: 700;
 	line-height: 1.46;
+
+	&::before {
+		content: '';
+		display: block;
+
+		width: 5%;
+		height: 2px;
+		background-color: rgb(200, 189, 160);
+	}
+
+	&::after {
+		content: '';
+		display: block;
+
+		width: 25%;
+		height: 2px;
+		background-color: rgb(200, 189, 160);
+	}
 }
 .header__img img {
 	border-radius: 40px 40px 40px 0;
-  width: 500px;
-  height: auto;
-  object-fit: cover;
 }
 
 .header__form {
