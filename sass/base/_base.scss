@@ -1,5 +1,7 @@
 html{
   scroll-behavior: smooth;
+  background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+  
 }
 body {
 	font-family: 'Poppins', sans-serif;
@@ -7,6 +9,7 @@ body {
 	line-height: 1.687;
 	color: $black-color;
 
+  
 }
 // .container {
 // 	max-width: 1340px;
