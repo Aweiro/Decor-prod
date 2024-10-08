@@ -16,6 +16,18 @@ body {
 	color: $black-color;
   
 }
+//hamburger
+.hamburger {
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: none;
+}
+
 
 // sticky footer
 .content {
@@ -24,6 +36,8 @@ body {
 .footer {
 	flex-shrink: 0;
 }
+
+
 
 .container {
 	max-width: 1340px;

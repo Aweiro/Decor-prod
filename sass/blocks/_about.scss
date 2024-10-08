@@ -8,17 +8,47 @@ body{
 }
 
 
-.about-title{
-  font-size: 36px;
-  color: #333; 
-  margin-bottom: 20px;
-}
-.about-us{
-  
-  padding-top: 60px;
-	padding-bottom: 60px;
-  
-}
-.about-subtitle{
+.about-us__text{
+ max-width: 50%;
+ flex: 1;
+ }
 
+.about-title{
+  font-size: 28px;
+  color: #333; 
+  // margin-bottom: 500px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.about-us{
+  padding-top: 20px;
+	padding-bottom: 20px; 
+  // margin-bottom: 500px;
+}
+
+.about-subtitle{
+font-size: 16px;
+color: #666;
+max-width: 48%;
+margin-right: 20px;
+}
+
+.about-us__img{
+  max-width: 50%;
+  flex: 1;
+}
+
+.about-us__img img{
+  width: 100%;
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-us__row {
+  width: 100%;
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }

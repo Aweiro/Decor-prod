@@ -76,6 +76,17 @@ body {
   color: #323232;
 }
 
+.hamburger {
+  font-size: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: none;
+}
+
 .content {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 auto;
@@ -655,15 +666,135 @@ body {
   line-height: 1.6;
 }
 
+.about-us__text {
+  max-width: 50%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
 .about-title {
-  font-size: 36px;
+  font-size: 28px;
   color: #333;
-  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .about-us {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.about-subtitle {
+  font-size: 16px;
+  color: #666;
+  max-width: 48%;
+  margin-right: 20px;
+}
+
+.about-us__img {
+  max-width: 50%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.about-us__img img {
+  width: 100%;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-us__row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 20px;
+}
+
+.about__header {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px;
+}
+
+.slideshow-container {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  border: none;
+  border-radius: 20px;
+  -webkit-box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+.slide {
+  display: none; /* Сховати всі слайди за замовчуванням */
+  -webkit-transition: opacity 1s ease-in-out, -webkit-transform 1s ease-in-out;
+  transition: opacity 1s ease-in-out, -webkit-transform 1s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20px;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.slide img:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05); /* Ефект збільшення при наведенні */
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Сильніша тінь для кнопок */
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.9); /* Зміна кольору при наведенні */
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
 }
 
 @media screen and (max-width: 1024px) {
@@ -731,13 +862,17 @@ body {
             align-items: center;
   }
   .navigation-list ul {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    display: none;
+    margin-top: 20px;
+  }
+  .navigation-list.show ul {
+    display: block;
   }
   .navigation-list li {
     margin-right: 20px;
+  }
+  .hamburger {
+    display: block; /* Показуємо бургер-кнопку */
   }
   .header__title {
     font-size: 28px;
