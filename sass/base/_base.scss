@@ -70,3 +70,30 @@ body {
 .none {
 	display: none;
 }
+
+// риска під силками при наведенні
+.dash-under-link {
+	a::after {
+		content: '';
+		display: block;
+		width: 0;
+		height: 2px;
+		background: #a09d9d;
+		transition: width 0.3s ease; 
+		position: absolute;
+		bottom: -2px; /* Розташування рисочки під текстом */
+		left: 0%;
+		transform: translateX(0%);
+}
+
+	a:hover::after {
+			width: 100%; /* Рисочка при наведенні */
+	}
+
+	&__center {
+		a::after {
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+}

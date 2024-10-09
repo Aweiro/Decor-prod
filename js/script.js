@@ -42,6 +42,7 @@ document.getElementById('hamburgerBtn').addEventListener('click', function() {
   navigationList.classList.toggle('show'); 
 });
 
+
 // carusel
 let slideIndex = 0;
 showSlides(slideIndex);

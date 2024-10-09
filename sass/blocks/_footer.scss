@@ -1,5 +1,5 @@
 .footer {
-  padding-top: 86px;
+  padding-top: 60px;
   padding-bottom: 20px;
   background: linear-gradient(to bottom, #555, #222);
   color: #ffffff;
@@ -7,6 +7,8 @@
   width: 100%;
   font-family: 'Poppins', sans-serif;
   position: relative;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
 
 .footer__row {
@@ -110,24 +112,6 @@ line-height: 1.3;
       transition: color 0.3s; 
   }
 
-  
-
-  a::after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 2px;
-      background: #a09d9d;
-      transition: width 0.3s ease; 
-      position: absolute;
-      bottom: -2px; /* Розташування рисочки під текстом */
-      left: 50%;
-      transform: translateX(-50%);
-  }
-
-  a:hover::after {
-      width: 100%; /* Рисочка при наведенні */
-  }
 }
 
 .footer__nav-block-title {

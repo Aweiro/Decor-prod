@@ -89,9 +89,20 @@
 		text-align: center;
 	}
 
-	.header__img img {
-		width: 100%;
+	.header__row {
+		justify-content: center;
 	}
+
+	.header__img  {
+		// width: 100%;
+		display: none;
+	}
+
+	// .header__title {
+	// 	margin-right: 0px;
+	// }
+
+
 
 	.form {
 		height: auto;
@@ -150,8 +161,6 @@
 		flex-direction: column;
 		justify-content: center;
 	}
-
-	
 
 	.header__title {
 		font-size: 24px;
