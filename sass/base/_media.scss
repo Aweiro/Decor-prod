@@ -73,11 +73,15 @@
 	}
 
   .navigation-list.show ul {
-		display: block;
+		display: flex;
+		flex-direction: column;
   }
 
 	.navigation-list li {
 		margin-right: 20px;
+		width: 100vw;
+		padding: auto 10px;
+		background-color: red;
 	}
 
   .hamburger {

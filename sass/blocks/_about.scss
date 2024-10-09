@@ -1,54 +1,87 @@
-body{
-  font-family: 'Poppins', sans-serif;
-  padding: 0;
-  margin: 0;
-  background: linear-gradient(to bottom, #f5f5f5, #ffffff);
-  color: #333;
-  line-height: 1.6;
+
+.about-us {
+  padding: 20px;
 }
 
+.about-us__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px; /* Зменшено до 10px для більшої компактності */
+}
 
-.about-us__text{
- max-width: 50%;
- flex: 1;
- }
+.about-us__img {
+  max-width: 40%; /* Збільшено до 25% для більших квадратів */
+  flex: 1;
+  margin: 0 5px; /* Відступи навколо фото зменшено до 5px */
+  object-fit: contain;
+}
 
-.about-title{
+.about-us__img img {
+  width: 100%;
+  height: auto; /* Автоматичне збереження пропорцій */
+  aspect-ratio: 1; /* Зробити фото квадратними */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  object-position: top;
+}
+
+.about-us__text {
+  max-width: 50%; /* Зменшено простір для тексту */
+  flex: 1;
+  margin: 0 15px; /* Відступи навколо тексту зменшено до 5px */
+  color: #666;
+}
+
+.about-title {
   font-size: 28px;
-  color: #333; 
-  // margin-bottom: 500px;
+  color: #151414;
   font-weight: 700;
   text-align: center;
 }
 
-.about-us{
-  padding-top: 20px;
-	padding-bottom: 20px; 
-  // margin-bottom: 500px;
+.about-subtitle {
+  font-size: 20px;
+  color: #2c2b2b;
+  margin-bottom: 10px; 
 }
 
-.about-subtitle{
-font-size: 16px;
-color: #666;
-max-width: 48%;
-margin-right: 20px;
+/* Стиль для шахматного розташування */
+.about-us__row.left .about-us__img {
+  order: 1; /* Зображення ліворуч */
 }
 
-.about-us__img{
-  max-width: 50%;
-  flex: 1;
+.about-us__row.left .about-us__text {
+  order: 2; /* Текст праворуч */
 }
 
-.about-us__img img{
-  width: 100%;
-  border-radius: 8px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.about-us__row.right .about-us__img {
+  order: 2; /* Зображення праворуч */
 }
 
-.about-us__row {
-  width: 100%;
-  display: flex;
-  // align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+.about-us__row.right .about-us__text {
+  order: 1; /* Текст ліворуч */
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .about-us__row {
+    // flex-dir;
+  }
+
+  .about-us__img{
+    max-width: 100%;
+    margin: 10px 0; 
+  }
+
+  .about-subtitle{
+    max-width: 100%;
+    font-size: 1.5em;
+  }
+
+  .about-us__text {
+    max-width: 100%;
+    font-size: 0.6em;
+  }
 }
