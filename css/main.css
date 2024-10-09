@@ -857,7 +857,7 @@ body {
 
 .parallax {
   /* The image used */
-  background-image: url(../../img/parallax/img_parallax.jpg);
+  background-image: url(../img/parallax/img_parallax.jpg);
   -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
           box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   /* Full height */
@@ -867,13 +867,14 @@ body {
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 .parallax__bottom {
   height: 35vh;
   background-position: bottom;
 }
 .parallax__about-us {
-  background-image: url(../../img/parallax/shtukaturka_parallax.jpg);
+  background-image: url(../img/parallax/shtukaturka_parallax.jpg);
   margin: 50px 0;
   height: 50vh;
   -webkit-filter: blur(0.15rem);
