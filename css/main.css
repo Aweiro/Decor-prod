@@ -656,67 +656,108 @@ body {
   color: #aaa;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  padding: 0;
-  margin: 0;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#ffffff));
-  background: linear-gradient(to bottom, #f5f5f5, #ffffff);
-  color: #333;
-  line-height: 1.6;
-}
-
-.about-us__text {
-  max-width: 50%;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-.about-title {
-  font-size: 28px;
-  color: #333;
-  font-weight: 700;
-  text-align: center;
-}
-
 .about-us {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
 }
 
-.about-subtitle {
-  font-size: 16px;
-  color: #666;
-  max-width: 48%;
-  margin-right: 20px;
+.about-us__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 50px; /* Зменшено до 10px для більшої компактності */
 }
 
 .about-us__img {
-  max-width: 50%;
+  max-width: 40%; /* Збільшено до 25% для більших квадратів */
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  margin: 0 5px; /* Відступи навколо фото зменшено до 5px */
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .about-us__img img {
   width: 100%;
+  height: auto; /* Автоматичне збереження пропорцій */
+  aspect-ratio: 1; /* Зробити фото квадратними */
   border-radius: 8px;
   -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
 }
 
-.about-us__row {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  gap: 20px;
+.about-us__text {
+  max-width: 50%; /* Зменшено простір для тексту */
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0 15px; /* Відступи навколо тексту зменшено до 5px */
+  color: #666;
 }
 
+.about-title {
+  font-size: 28px;
+  color: #151414;
+  font-weight: 700;
+  text-align: center;
+}
+
+.about-subtitle {
+  font-size: 20px;
+  color: #2c2b2b;
+  margin-bottom: 10px;
+}
+
+/* Стиль для шахматного розташування */
+.about-us__row.left .about-us__img {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1; /* Зображення ліворуч */
+}
+
+.about-us__row.left .about-us__text {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2; /* Текст праворуч */
+}
+
+.about-us__row.right .about-us__img {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2; /* Зображення праворуч */
+}
+
+.about-us__row.right .about-us__text {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1; /* Текст ліворуч */
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .about-us__img {
+    max-width: 100%;
+    margin: 10px 0;
+  }
+  .about-subtitle {
+    max-width: 100%;
+    font-size: 1.5em;
+  }
+  .about-us__text {
+    max-width: 100%;
+    font-size: 0.6em;
+  }
+}
 .about__header {
   width: 100%;
   height: auto;
