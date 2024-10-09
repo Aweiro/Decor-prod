@@ -13,9 +13,6 @@
 	a {
 		transition: color 0.2s ease;
 
-		&:hover {
-			color: $accent-color;
-		}
 
 		&.active {
 			color: $accent-color;

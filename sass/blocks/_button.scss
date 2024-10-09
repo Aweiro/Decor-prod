@@ -1,11 +1,12 @@
 .button {
-	display: inline-block;
+	display: block;
 	height: 58px;
 	padding-left: 37px;
 	padding-right: 37px;
 	border-radius: 5px;
 	background-color: none;
 	border: 2px solid black;
+	text-wrap: nowrap;
 
 	line-height: 55px;
 	font-weight: 400;
@@ -17,16 +18,7 @@
 		color: white;
 	}
 
-	&--white {
-		background-color: #fff;
-		color: $black-color;
-		transition: all 0.2s ease-in;
 
-		&:hover {
-			background-color: $black-color;
-			color: #fff;
-		}
-	}
 
 	&--play {
 		padding-left: 50px;
@@ -48,4 +40,34 @@
 			transform: translateY(-50%);
 		}
 	}
+
+}
+
+
+// scroll to top
+
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 30px; /* Place the button at the bottom of the page */
+  right: 20px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+	height: 60px;
+	width: 60px;
+
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  // padding: 15px; /* Some padding */
+  border-radius: 60px; /* Rounded corners */
+	transition: all .2s ease;
+	// transform: translateY(0%);
+
+}
+
+#myBtn:hover {
+  background-color: lightgrey; /* Add a dark-grey background on hover */
+	transform: scale(1.1);
+}
+#myBtn:active {
+	transform: translateY(-25%) scale(1.1);
 }

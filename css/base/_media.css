@@ -1,0 +1,16 @@
+@media (max-width: 900px) {
+  .header__title {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  .header__text {
+    width: 100%;
+  }
+  .header__img img {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+.header__title {
+  font-size: 42px;
+}
