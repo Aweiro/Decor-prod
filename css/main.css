@@ -288,8 +288,6 @@ body {
 .testimonials {
   padding-top: 40px;
   padding-bottom: 30px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .testimonials__heading {
@@ -674,7 +672,7 @@ body {
 }
 
 .about-us {
-  padding: 20px;
+  margin-top: 50px;
 }
 
 .about-us__row {
@@ -855,32 +853,158 @@ body {
   right: 0;
 }
 
-.parallax {
-  /* The image used */
-  background-image: url(../img/parallax/img_parallax.jpg);
-  -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-          box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-  /* Full height */
-  height: 35vh;
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
+.tell-me__block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 30px;
+  height: 200px;
+  width: 100%;
+  background-color: rgb(235, 235, 235);
+  -webkit-box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+          box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
-.parallax__bottom {
-  height: 35vh;
-  background-position: bottom;
+.tell-me__block input[name=name], .tell-me__block [name=phone] {
+  min-width: 13em;
+  width: 13vw;
+  padding: 12px 10px 12px 35px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid darkgray;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
-.parallax__about-us {
-  background-image: url(../img/parallax/shtukaturka_parallax.jpg);
-  margin: 50px 0;
-  height: 50vh;
-  -webkit-filter: blur(0.15rem);
-          filter: blur(0.15rem);
+.tell-me__block input[name=name]::-webkit-input-placeholder, .tell-me__block [name=phone]::-webkit-input-placeholder {
+  color: rgb(46, 45, 45);
+}
+.tell-me__block input[name=name]::-moz-placeholder, .tell-me__block [name=phone]::-moz-placeholder {
+  color: rgb(46, 45, 45);
+}
+.tell-me__block input[name=name]:-ms-input-placeholder, .tell-me__block [name=phone]:-ms-input-placeholder {
+  color: rgb(46, 45, 45);
+}
+.tell-me__block input[name=name]::-ms-input-placeholder, .tell-me__block [name=phone]::-ms-input-placeholder {
+  color: rgb(46, 45, 45);
+}
+.tell-me__block input[name=name]::placeholder, .tell-me__block [name=phone]::placeholder {
+  color: rgb(46, 45, 45);
+}
+.tell-me__block input[name=name]:focus, .tell-me__block [name=phone]:focus {
+  background: none;
 }
 
+.tell-me__inputs {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.tell-me__row {
+  -webkit-column-gap: 50px;
+     -moz-column-gap: 50px;
+          column-gap: 50px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.tell-me__row h1 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: rgb(46, 45, 45);
+  width: auto;
+  font-weight: 700;
+  font-size: 24px;
+}
+.tell-me__row form {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+}
+.tell-me__row form svg {
+  margin-top: 1.3em;
+  position: absolute;
+  width: 1.3em;
+  height: 1.3em;
+}
+.tell-me__row button {
+  margin: auto 0;
+  padding: 0 50px;
+}
+
+@media screen and (max-width: 1090px) {
+  .tell-me__row {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    row-gap: 20px;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
+  .tell-me__row form {
+    width: 100%;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
+}
+@media screen and (max-width: 800px) {
+  .tell-me__block {
+    height: auto;
+    padding: 20px;
+  }
+  .tell-me__row form {
+    row-gap: 20px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+@media screen and (max-width: 560px) {
+  .tell-me__block {
+    text-align: center;
+  }
+  .tell-me__row h1 {
+    font-size: 22px;
+  }
+  .tell-me__inputs {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    row-gap: 20px;
+  }
+}
 @media screen and (max-width: 1024px) {
   .container {
     max-width: 90%;
@@ -949,7 +1073,12 @@ body {
     display: none;
     margin-top: 20px;
   }
+  .navigation-list.show {
+    width: 100%;
+  }
   .navigation-list.show ul {
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -957,12 +1086,33 @@ body {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    text-align: center;
   }
   .navigation-list li {
     margin-right: 20px;
-    width: 100vw;
-    padding: auto 10px;
-    background-color: red;
+    padding: 20px auto;
+    width: 100%;
+  }
+  .navigation-list li:last-child {
+    margin: 0;
+  }
+  .navigation-list li a {
+    padding: 10px;
+    border-bottom: 1px solid rgb(205, 205, 205);
+    background-color: rgb(235, 235, 235);
+  }
+  .dash-under-link ul {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
   .hamburger {
     display: block; /* Показуємо бургер-кнопку */
