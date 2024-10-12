@@ -1,6 +1,6 @@
-// .header {
-
-// }
+.header {
+ padding-bottom: 50px;
+}
 
 .header__row {
 	display: flex;
@@ -44,6 +44,8 @@
 	}
 }
 .header__img img {
+
+	
 	border-radius: 40px 40px 40px 0;
 	width: 30vw;
 	// height: 10vh;

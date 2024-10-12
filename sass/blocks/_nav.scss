@@ -11,18 +11,21 @@
 
 .navigation-list {
 	.nav__link {
+		display: inline-block;
+		margin: 0 2rem;
+
+
+
 		a {
 			display: block;
 			transition: all 0.2s ease-in;
 		}
-		display: inline-block;
-		margin: 0 2rem;
-		color: var(--black-color);
+
+		
 	}
 	.nav__link :not(.active):hover {
-		// color: var(--your-hover-color);
 		color: $accent-color;
-		transform: scale(1.2);
+		transform: scale(1.05);
 	}
 }
 
