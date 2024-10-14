@@ -55,6 +55,7 @@
 	}
 }
 
+
 // Адаптивність для мобільних пристроїв (до 768px)
 @media screen and (max-width: 768px) {
 	.nav {
@@ -174,6 +175,10 @@
 		padding-bottom: 40px;
 	}
 
+	.footer__nav {
+		margin-top: 30px;
+	}
+
 	.footer__row {
 		flex-direction: column;
 		align-items: center;
@@ -188,10 +193,55 @@
 		flex-direction: row;
 		justify-content: center;
 	}
+
+
+
+	.about__header {
+		width: 100%;
+		padding: 40px 0;
+
+		.container {
+			padding: 0;
+			margin: 0;
+			max-width: 100%;
+		
+			
+		}
+		
+	}
+
+	.slideshow-container {
+		border-radius: 0;
+	}
+
+	.slide img {
+		border-radius: 0;
+	}
+
+	.about-us__img {
+		max-width: 100%;
+		margin: 10px 0;
+	}
+
+	.about-subtitle {
+		max-width: 100%;
+		font-size: 1.5em;
+	}
+
+	.about-us__text {
+		max-width: 100%;
+		font-size: 0.8em;
+	}
 }
+
+
 
 // Адаптивність для дуже маленьких екранів (до 480px)
 @media screen and (max-width: 480px) {
+	
+	.about-us__text {
+		font-size: 0.6em;
+	}
 
 	.container {
 
@@ -232,6 +282,11 @@
 		margin: 0 auto 15px auto;
 	}
 
+	.footer__info-text p {
+		font-size: 14px;
+		font-weight: normal;
+	}
+
 	.buttons__row {
 		flex-direction: column;
 		row-gap: 10px;
@@ -240,5 +295,12 @@
 	.button {
 		// height: 50px;
 		// line-height: 50px;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	
+	.about-us__text {
+		font-size: 0.5em;
 	}
 }
