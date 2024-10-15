@@ -6,7 +6,7 @@
 
 		<title>West Decor</title>
 
-    <link rel="shortcut icon" href="./img/icons/logo.png">
+		<link rel="shortcut icon" href="./img/icons/logo.png" />
 		<link rel="stylesheet" href="./css/main.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +16,6 @@
 		/>
 	</head>
 	<body>
-
 		<nav class="nav">
 			<div class="container">
 				<div class="nav__row">
@@ -26,12 +25,14 @@
 						<!-- <span>West Decor</span> -->
 					</div>
 
-            <!--Hamburger menu-->
-      <button id="hamburgerBtn" class="hamburger">&#9776;</button>
+					<!--Hamburger menu-->
+					<button id="hamburgerBtn" class="hamburger">&#9776;</button>
 
 					<div class="navigation-list">
 						<ul class="dash-under-link">
-							<li class="nav__link"><a href="index.html" class="active">Головна</a></li>
+							<li class="nav__link">
+								<a href="index.html" class="active">Головна</a>
+							</li>
 							<li class="nav__link"><a href="about.html">Про нас</a></li>
 							<li class="nav__link"><a href="#">Портфоліо</a></li>
 							<li class="nav__link"><a href="#">Послуги</a></li>
@@ -40,60 +41,99 @@
 					</div>
 				</div>
 			</div>
-    </div>
-  
 		</nav>
 
 		<main class="content">
-
 			<header class="header">
 				<div class="container">
 					<div class="header__row">
 						<div class="header__text">
 							<h1 class="header__title">
-								Декоративна штукатурка <br>Івано-Франківськ <br>Львів
+								Декоративна штукатурка <br />Івано-Франківськ <br />Львів
 							</h1>
 							<p>
-								• Мистецтво на стінах вашого дому <br>
-								• Безкоштовні взірці, під ваш об’єкт <br>
-								• знижки на матеріал від 15% ,при купівлі від 200 кг матеріалу 30%
+								• Мистецтво на стінах вашого дому <br />
+								• Безкоштовні взірці, під ваш об’єкт <br />
+								• знижки на матеріал від 15% ,при купівлі від 200 кг матеріалу
+								30%
 							</p>
 
-								</label> 
-
-								<div class="buttons__row">
-									<a href="#testimonials" class="button">Каталог продукції</a>
-									<button class="button button--call">Замовити дзвінок</button>
-								</div>
-						
+							<div class="buttons__row">
+								<a href="#testimonials" class="button">Каталог продукції</a>
+								<a href="#tell-me" class="button button--call">Замовити дзвінок</a>
+							</div>
 						</div>
 						<div class="header__img">
-							<img src="./img/header/1.jpg" alt="header" />
+							<img src="./img/header/moon.png" alt="header" />
 						</div>
 					</div>
 				</div>
 			</header>
 
-			<section class="tell-me">
+			<section class="tell-me" id="tell-me">
 				<div class="container">
 					<div class="tell-me__block">
 						<div class="tell-me__row">
 							<h1>Замовити констультацію</h1>
-							<form action="tell-me">
+							<form action="" id="consultationForm">
 								<div class="tell-me__inputs">
 									<label for="phone">
-										<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><circle cx="24" cy="11" r="7"/><path d="M4 41c0-8.837 8.059-16 18-16m9 17l10-10l-4-4l-10 10v4z"/></g></svg>
-										<input type="text" name="name" placeholder="Ваше ім'я">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="1em"
+											height="1em"
+											viewBox="0 0 48 48"
+										>
+											<g
+												fill="none"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="4"
+											>
+												<circle cx="24" cy="11" r="7" />
+												<path
+													d="M4 41c0-8.837 8.059-16 18-16m9 17l10-10l-4-4l-10 10v4z"
+												/>
+											</g>
+										</svg>
+										<input
+											type="text"
+											name="name"
+											id="name"
+											placeholder="Ваше ім'я"
+											required
+										/>
 									</label>
 
 									<label for="phone">
-										<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M8.172 15.829c3.845 3.845 7.408 4.266 8.454 4.305c1.264.046 2.554-.986 3.112-2.043c-.89-1.044-2.049-1.854-3.318-2.732c-.749.748-1.672 2.138-2.901 1.64c-.699-.281-2.425-1.076-3.933-2.585S7.283 11.18 7 10.482c-.498-1.231.896-2.156 1.645-2.905c-.878-1.29-1.674-2.479-2.716-3.324c-1.072.56-2.11 1.84-2.063 3.121c.039 1.046.46 4.609 4.306 8.455m8.38 6.304c-1.44-.053-5.521-.617-9.795-4.89c-4.273-4.274-4.836-8.354-4.89-9.795c-.08-2.196 1.602-4.329 3.545-5.162a1.47 1.47 0 0 1 1.445.159c1.608 1.173 2.717 2.95 3.67 4.342A1.504 1.504 0 0 1 10.35 8.7l-1.356 1.357C9.309 10.752 9.95 11.95 11 13s2.248 1.691 2.944 2.006l1.355-1.356a1.5 1.5 0 0 1 1.918-.171c1.42.984 3.088 2.077 4.304 3.634a1.47 1.47 0 0 1 .189 1.485c-.837 1.953-2.955 3.616-5.158 3.535"/></g></svg>
-										<input type="tel" name="phone" placeholder="Номер телефону">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="1em"
+											height="1em"
+											viewBox="0 0 24 24"
+										>
+											<g fill="none" fill-rule="evenodd">
+												<path
+													d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+												/>
+												<path
+													fill="currentColor"
+													d="M8.172 15.829c3.845 3.845 7.408 4.266 8.454 4.305c1.264.046 2.554-.986 3.112-2.043c-.89-1.044-2.049-1.854-3.318-2.732c-.749.748-1.672 2.138-2.901 1.64c-.699-.281-2.425-1.076-3.933-2.585S7.283 11.18 7 10.482c-.498-1.231.896-2.156 1.645-2.905c-.878-1.29-1.674-2.479-2.716-3.324c-1.072.56-2.11 1.84-2.063 3.121c.039 1.046.46 4.609 4.306 8.455m8.38 6.304c-1.44-.053-5.521-.617-9.795-4.89c-4.273-4.274-4.836-8.354-4.89-9.795c-.08-2.196 1.602-4.329 3.545-5.162a1.47 1.47 0 0 1 1.445.159c1.608 1.173 2.717 2.95 3.67 4.342A1.504 1.504 0 0 1 10.35 8.7l-1.356 1.357C9.309 10.752 9.95 11.95 11 13s2.248 1.691 2.944 2.006l1.355-1.356a1.5 1.5 0 0 1 1.918-.171c1.42.984 3.088 2.077 4.304 3.634a1.47 1.47 0 0 1 .189 1.485c-.837 1.953-2.955 3.616-5.158 3.535"
+												/>
+											</g>
+										</svg>
+										<input
+											type="tel"
+											name="phone"
+											id="phone"
+											placeholder="Номер телефону"
+											required
+										/>
 									</label>
 								</div>
 
 								<button class="button">Відправити</button>
-
 							</form>
 						</div>
 					</div>
@@ -102,27 +142,41 @@
 
 			<section class="testimonials" id="testimonials">
 				<div class="container">
-						<div class="testimonials__heading">
-								<div class="testimonials__title">
-										<h2 class="title">Варіанти декору</h2>
-								</div>
-								<div class="testimonials__subtitle">
-										<p>Допоможемо підібрати варінт з перелічених, або розглянемо ваш!</p>
-								</div>
+					<div class="testimonials__heading">
+						<div class="testimonials__title">
+							<h2 class="title">Варіанти декору</h2>
 						</div>
-						<div class="testimonials__row">
+						<div class="testimonials__subtitle">
+							<p>
+								Допоможемо підібрати варінт з перелічених, або розглянемо ваш!
+							</p>
+						</div>
+					</div>
+					<div class="testimonials__row">
+						<a href="#!" class="card-testimonial">
+							<div class="card-testimonial__img-wrapper">
+								<button
+									class="card-testimonial__btn-play"
+									onclick="confirmCall('+380 95 716 87 47')"
+								>
+									<svg
+										class="card-testimonial__btn-svg"
+										version="1.0"
+										xmlns="http://www.w3.org/2000/svg"
+										width="50"
+										height="50"
+										viewBox="0 0 1280.000000 1280.000000"
+										preserveAspectRatio="xMidYMid meet"
+									>
+										<circle cx="640" cy="640" r="640" />
 
-								<a href="#!" class="card-testimonial">
-										<div class="card-testimonial__img-wrapper">
-												<button class="card-testimonial__btn-play" onclick="confirmCall('+380 95 716 87 47')">
-													<svg class="card-testimonial__btn-svg" version="1.0" xmlns="http://www.w3.org/2000/svg"
-													width="50" height="50" viewBox="0 0 1280.000000 1280.000000"
-													preserveAspectRatio="xMidYMid meet">
-													<circle cx="640" cy="640" r="640"/>
-
-													<g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-													fill="#000000" stroke="none">
-													<path d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
+										<g
+											transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+											fill="#000000"
+											stroke="none"
+										>
+											<path
+												d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
 													-1022 -907 -604 -1648 -1433 -2146 -2402 -395 -769 -615 -1549 -690 -2450 -17
 													-193 -17 -757 0 -950 75 -901 295 -1681 690 -2450 610 -1187 1579 -2156 2766
 													-2766 769 -395 1549 -615 2450 -690 193 -17 757 -17 950 0 901 75 1681 295
@@ -133,48 +187,72 @@
 													-1385 -693 -2628 -1672 -3591 -961 -943 -2169 -1494 -3524 -1605 -193 -16
 													-657 -16 -850 0 -1385 114 -2628 693 -3591 1672 -943 961 -1494 2169 -1605
 													3524 -16 193 -16 657 0 850 114 1385 693 2628 1672 3591 878 862 1988 1408
-													3189 1568 416 55 832 66 1244 31z"/>
-													<path d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
+													3189 1568 416 55 832 66 1244 31z"
+											/>
+											<path
+												d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
 													-315 67 -129 1153 -2002 1181 -2035 57 -68 178 -105 267 -81 46 12 662 365
 													715 409 71 59 108 190 78 277 -8 22 -276 495 -596 1050 -471 817 -591 1018
-													-628 1052 -68 64 -164 87 -254 61z"/>
-													<path d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
+													-628 1052 -68 64 -164 87 -254 61z"
+											/>
+											<path
+												d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
 													-1346 165 -1616 1352 -3892 2728 -5232 360 -351 731 -631 1033 -779 191 -94
 													332 -132 523 -141 257 -12 504 61 877 261 113 60 151 85 147 96 -5 13 -1156
 													2013 -1190 2068 l-15 22 -39 -20 c-69 -35 -183 -69 -275 -80 -215 -27 -466 49
 													-712 216 -587 397 -1121 1268 -1263 2059 -81 448 -20 809 175 1038 33 39 144
 													132 166 139 7 2 -220 406 -591 1049 -331 574 -605 1047 -609 1052 -4 4 -75
-													-35 -159 -85z"/>
-													<path d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
+													-35 -159 -85z"
+											/>
+											<path
+												d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
 													-72 -71 -101 -183 -71 -271 17 -50 1155 -2025 1197 -2078 71 -90 212 -117 326
 													-62 86 41 614 347 655 380 56 45 90 120 90 202 0 37 -5 81 -12 96 -34 80
-													-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"/>
-													</g>
+													-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"
+											/>
+										</g>
+									</svg>
+								</button>
+								<img
+									src="./img/testimonials/2.jpg"
+									alt="img"
+									class="card-testimonial__img"
+								/>
+							</div>
+							<div class="card-testimonial__body">
+								<p class="card-testimonial__text">
+									Декоративне покриття для внутрішніх робіт дозволяє домогтися
+									імітації натурального каменю і скелястих порід.
+								</p>
+								<p class="card-testimonial__name">Скеля</p>
+								<p class="card-testimonial__city">Ціна декору</p>
+							</div>
+						</a>
 
-													</svg>
+						<a href="#!" class="card-testimonial">
+							<div class="card-testimonial__img-wrapper">
+								<button
+									class="card-testimonial__btn-play"
+									onclick="confirmCall('+380 95 716 87 47')"
+								>
+									<svg
+										class="card-testimonial__btn-svg"
+										version="1.0"
+										xmlns="http://www.w3.org/2000/svg"
+										width="50"
+										height="50"
+										viewBox="0 0 1280.000000 1280.000000"
+										preserveAspectRatio="xMidYMid meet"
+									>
+										<circle cx="640" cy="640" r="640" />
 
-												
-												</button>
-												<img src="./img/testimonials/2.jpg" alt="img" class="card-testimonial__img">
-										</div>
-										<div class="card-testimonial__body">
-												<p class="card-testimonial__text">Декоративне покриття для внутрішніх робіт дозволяє домогтися імітації натурального каменю і скелястих порід.</p>
-												<p class="card-testimonial__name">Скеля</p>
-												<p class="card-testimonial__city">Ціна декору</p>
-										</div>
-								</a>
-
-								<a href="#!" class="card-testimonial">
-									<div class="card-testimonial__img-wrapper">
-											<button class="card-testimonial__btn-play" onclick="confirmCall('+380 95 716 87 47')">
-												<svg class="card-testimonial__btn-svg" version="1.0" xmlns="http://www.w3.org/2000/svg"
-												width="50" height="50" viewBox="0 0 1280.000000 1280.000000"
-												preserveAspectRatio="xMidYMid meet">
-												<circle cx="640" cy="640" r="640"/>
-
-												<g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-												fill="#000000" stroke="none">
-												<path d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
+										<g
+											transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+											fill="#000000"
+											stroke="none"
+										>
+											<path
+												d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
 												-1022 -907 -604 -1648 -1433 -2146 -2402 -395 -769 -615 -1549 -690 -2450 -17
 												-193 -17 -757 0 -950 75 -901 295 -1681 690 -2450 610 -1187 1579 -2156 2766
 												-2766 769 -395 1549 -615 2450 -690 193 -17 757 -17 950 0 901 75 1681 295
@@ -185,48 +263,72 @@
 												-1385 -693 -2628 -1672 -3591 -961 -943 -2169 -1494 -3524 -1605 -193 -16
 												-657 -16 -850 0 -1385 114 -2628 693 -3591 1672 -943 961 -1494 2169 -1605
 												3524 -16 193 -16 657 0 850 114 1385 693 2628 1672 3591 878 862 1988 1408
-												3189 1568 416 55 832 66 1244 31z"/>
-												<path d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
+												3189 1568 416 55 832 66 1244 31z"
+											/>
+											<path
+												d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
 												-315 67 -129 1153 -2002 1181 -2035 57 -68 178 -105 267 -81 46 12 662 365
 												715 409 71 59 108 190 78 277 -8 22 -276 495 -596 1050 -471 817 -591 1018
-												-628 1052 -68 64 -164 87 -254 61z"/>
-												<path d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
+												-628 1052 -68 64 -164 87 -254 61z"
+											/>
+											<path
+												d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
 												-1346 165 -1616 1352 -3892 2728 -5232 360 -351 731 -631 1033 -779 191 -94
 												332 -132 523 -141 257 -12 504 61 877 261 113 60 151 85 147 96 -5 13 -1156
 												2013 -1190 2068 l-15 22 -39 -20 c-69 -35 -183 -69 -275 -80 -215 -27 -466 49
 												-712 216 -587 397 -1121 1268 -1263 2059 -81 448 -20 809 175 1038 33 39 144
 												132 166 139 7 2 -220 406 -591 1049 -331 574 -605 1047 -609 1052 -4 4 -75
-												-35 -159 -85z"/>
-												<path d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
+												-35 -159 -85z"
+											/>
+											<path
+												d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
 												-72 -71 -101 -183 -71 -271 17 -50 1155 -2025 1197 -2078 71 -90 212 -117 326
 												-62 86 41 614 347 655 380 56 45 90 120 90 202 0 37 -5 81 -12 96 -34 80
-												-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"/>
-												</g>
+												-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"
+											/>
+										</g>
+									</svg>
+								</button>
+								<img
+									src="./img/testimonials/2.jpg"
+									alt="img"
+									class="card-testimonial__img"
+								/>
+							</div>
+							<div class="card-testimonial__body">
+								<p class="card-testimonial__text">
+									Декоративне покриття для внутрішніх робіт дозволяє домогтися
+									імітації натурального каменю і скелястих порід.
+								</p>
+								<p class="card-testimonial__name">Скеля</p>
+								<p class="card-testimonial__city">Ціна декору</p>
+							</div>
+						</a>
 
-												</svg>
+						<a href="#!" class="card-testimonial">
+							<div class="card-testimonial__img-wrapper">
+								<button
+									class="card-testimonial__btn-play"
+									onclick="confirmCall('+380 95 716 87 47')"
+								>
+									<svg
+										class="card-testimonial__btn-svg"
+										version="1.0"
+										xmlns="http://www.w3.org/2000/svg"
+										width="50"
+										height="50"
+										viewBox="0 0 1280.000000 1280.000000"
+										preserveAspectRatio="xMidYMid meet"
+									>
+										<circle cx="640" cy="640" r="640" />
 
-											
-											</button>
-											<img src="./img/testimonials/2.jpg" alt="img" class="card-testimonial__img">
-									</div>
-									<div class="card-testimonial__body">
-											<p class="card-testimonial__text">Декоративне покриття для внутрішніх робіт дозволяє домогтися імітації натурального каменю і скелястих порід.</p>
-											<p class="card-testimonial__name">Скеля</p>
-											<p class="card-testimonial__city">Ціна декору</p>
-									</div>
-							</a>
-
-								<a href="#!" class="card-testimonial">
-										<div class="card-testimonial__img-wrapper">
-											<button class="card-testimonial__btn-play" onclick="confirmCall('+380 95 716 87 47')">
-													<svg class="card-testimonial__btn-svg" version="1.0" xmlns="http://www.w3.org/2000/svg"
-													width="50" height="50" viewBox="0 0 1280.000000 1280.000000"
-													preserveAspectRatio="xMidYMid meet">
-													<circle cx="640" cy="640" r="640"/>
-
-													<g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-													fill="#000000" stroke="none">
-													<path d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
+										<g
+											transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+											fill="#000000"
+											stroke="none"
+										>
+											<path
+												d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
 													-1022 -907 -604 -1648 -1433 -2146 -2402 -395 -769 -615 -1549 -690 -2450 -17
 													-193 -17 -757 0 -950 75 -901 295 -1681 690 -2450 610 -1187 1579 -2156 2766
 													-2766 769 -395 1549 -615 2450 -690 193 -17 757 -17 950 0 901 75 1681 295
@@ -237,46 +339,72 @@
 													-1385 -693 -2628 -1672 -3591 -961 -943 -2169 -1494 -3524 -1605 -193 -16
 													-657 -16 -850 0 -1385 114 -2628 693 -3591 1672 -943 961 -1494 2169 -1605
 													3524 -16 193 -16 657 0 850 114 1385 693 2628 1672 3591 878 862 1988 1408
-													3189 1568 416 55 832 66 1244 31z"/>
-													<path d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
+													3189 1568 416 55 832 66 1244 31z"
+											/>
+											<path
+												d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
 													-315 67 -129 1153 -2002 1181 -2035 57 -68 178 -105 267 -81 46 12 662 365
 													715 409 71 59 108 190 78 277 -8 22 -276 495 -596 1050 -471 817 -591 1018
-													-628 1052 -68 64 -164 87 -254 61z"/>
-													<path d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
+													-628 1052 -68 64 -164 87 -254 61z"
+											/>
+											<path
+												d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
 													-1346 165 -1616 1352 -3892 2728 -5232 360 -351 731 -631 1033 -779 191 -94
 													332 -132 523 -141 257 -12 504 61 877 261 113 60 151 85 147 96 -5 13 -1156
 													2013 -1190 2068 l-15 22 -39 -20 c-69 -35 -183 -69 -275 -80 -215 -27 -466 49
 													-712 216 -587 397 -1121 1268 -1263 2059 -81 448 -20 809 175 1038 33 39 144
 													132 166 139 7 2 -220 406 -591 1049 -331 574 -605 1047 -609 1052 -4 4 -75
-													-35 -159 -85z"/>
-													<path d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
+													-35 -159 -85z"
+											/>
+											<path
+												d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
 													-72 -71 -101 -183 -71 -271 17 -50 1155 -2025 1197 -2078 71 -90 212 -117 326
 													-62 86 41 614 347 655 380 56 45 90 120 90 202 0 37 -5 81 -12 96 -34 80
-													-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"/>
-													</g>
+													-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"
+											/>
+										</g>
+									</svg>
+								</button>
+								<img
+									src="./img/testimonials/3.jpg"
+									alt="img"
+									class="card-testimonial__img"
+								/>
+							</div>
+							<div class="card-testimonial__body">
+								<p class="card-testimonial__text">
+									Декоративне покриття для внутрішніх робіт дозволяє домогтися
+									імітації натурального каменю і скелястих порід.
+								</p>
+								<p class="card-testimonial__name">Феєрія</p>
+								<p class="card-testimonial__city">Ціна декору</p>
+							</div>
+						</a>
 
-													</svg>
-												</button>
-												<img src="./img/testimonials/3.jpg" alt="img" class="card-testimonial__img">
-										</div>
-										<div class="card-testimonial__body">
-												<p class="card-testimonial__text">Декоративне покриття для внутрішніх робіт дозволяє домогтися імітації натурального каменю і скелястих порід.</p>
-												<p class="card-testimonial__name">Феєрія</p>
-												<p class="card-testimonial__city">Ціна декору</p>
-										</div>
-								</a>
+						<a href="#!" class="card-testimonial">
+							<div class="card-testimonial__img-wrapper">
+								<button
+									class="card-testimonial__btn-play"
+									onclick="confirmCall('+380 95 716 87 47')"
+								>
+									<svg
+										class="card-testimonial__btn-svg"
+										version="1.0"
+										xmlns="http://www.w3.org/2000/svg"
+										width="50"
+										height="50"
+										viewBox="0 0 1280.000000 1280.000000"
+										preserveAspectRatio="xMidYMid meet"
+									>
+										<circle cx="640" cy="640" r="640" />
 
-								<a href="#!" class="card-testimonial">
-									<div class="card-testimonial__img-wrapper">
-										<button class="card-testimonial__btn-play" onclick="confirmCall('+380 95 716 87 47')">
-												<svg class="card-testimonial__btn-svg" version="1.0" xmlns="http://www.w3.org/2000/svg"
-													width="50" height="50" viewBox="0 0 1280.000000 1280.000000"
-													preserveAspectRatio="xMidYMid meet">
-													<circle cx="640" cy="640" r="640"/>
-
-													<g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-													fill="#000000" stroke="none">
-													<path d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
+										<g
+											transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+											fill="#000000"
+											stroke="none"
+										>
+											<path
+												d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
 													-1022 -907 -604 -1648 -1433 -2146 -2402 -395 -769 -615 -1549 -690 -2450 -17
 													-193 -17 -757 0 -950 75 -901 295 -1681 690 -2450 610 -1187 1579 -2156 2766
 													-2766 769 -395 1549 -615 2450 -690 193 -17 757 -17 950 0 901 75 1681 295
@@ -287,46 +415,72 @@
 													-1385 -693 -2628 -1672 -3591 -961 -943 -2169 -1494 -3524 -1605 -193 -16
 													-657 -16 -850 0 -1385 114 -2628 693 -3591 1672 -943 961 -1494 2169 -1605
 													3524 -16 193 -16 657 0 850 114 1385 693 2628 1672 3591 878 862 1988 1408
-													3189 1568 416 55 832 66 1244 31z"/>
-													<path d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
+													3189 1568 416 55 832 66 1244 31z"
+											/>
+											<path
+												d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
 													-315 67 -129 1153 -2002 1181 -2035 57 -68 178 -105 267 -81 46 12 662 365
 													715 409 71 59 108 190 78 277 -8 22 -276 495 -596 1050 -471 817 -591 1018
-													-628 1052 -68 64 -164 87 -254 61z"/>
-													<path d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
+													-628 1052 -68 64 -164 87 -254 61z"
+											/>
+											<path
+												d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
 													-1346 165 -1616 1352 -3892 2728 -5232 360 -351 731 -631 1033 -779 191 -94
 													332 -132 523 -141 257 -12 504 61 877 261 113 60 151 85 147 96 -5 13 -1156
 													2013 -1190 2068 l-15 22 -39 -20 c-69 -35 -183 -69 -275 -80 -215 -27 -466 49
 													-712 216 -587 397 -1121 1268 -1263 2059 -81 448 -20 809 175 1038 33 39 144
 													132 166 139 7 2 -220 406 -591 1049 -331 574 -605 1047 -609 1052 -4 4 -75
-													-35 -159 -85z"/>
-													<path d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
+													-35 -159 -85z"
+											/>
+											<path
+												d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
 													-72 -71 -101 -183 -71 -271 17 -50 1155 -2025 1197 -2078 71 -90 212 -117 326
 													-62 86 41 614 347 655 380 56 45 90 120 90 202 0 37 -5 81 -12 96 -34 80
-													-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"/>
-													</g>
+													-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"
+											/>
+										</g>
+									</svg>
+								</button>
+								<img
+									src="./img/testimonials/4.jpg"
+									alt="img"
+									class="card-testimonial__img"
+								/>
+							</div>
+							<div class="card-testimonial__body">
+								<p class="card-testimonial__text">
+									Декоративне покриття для внутрішніх робіт дозволяє домогтися
+									імітації натурального каменю і скелястих порід.
+								</p>
+								<p class="card-testimonial__name">Назва декору</p>
+								<p class="card-testimonial__city">Ціна декору</p>
+							</div>
+						</a>
 
-													</svg>
-											</button>
-											<img src="./img/testimonials/4.jpg" alt="img" class="card-testimonial__img">
-									</div>
-									<div class="card-testimonial__body">
-											<p class="card-testimonial__text">Декоративне покриття для внутрішніх робіт дозволяє домогтися імітації натурального каменю і скелястих порід.</p>
-											<p class="card-testimonial__name">Назва декору</p>
-											<p class="card-testimonial__city">Ціна декору</p>
-									</div>
-							</a>
+						<a href="#!" class="card-testimonial">
+							<div class="card-testimonial__img-wrapper">
+								<button
+									class="card-testimonial__btn-play"
+									onclick="confirmCall('+380 95 716 87 47')"
+								>
+									<svg
+										class="card-testimonial__btn-svg"
+										version="1.0"
+										xmlns="http://www.w3.org/2000/svg"
+										width="50"
+										height="50"
+										viewBox="0 0 1280.000000 1280.000000"
+										preserveAspectRatio="xMidYMid meet"
+									>
+										<circle cx="640" cy="640" r="640" />
 
-								<a href="#!" class="card-testimonial">
-										<div class="card-testimonial__img-wrapper">
-											<button class="card-testimonial__btn-play" onclick="confirmCall('+380 95 716 87 47')">
-													<svg class="card-testimonial__btn-svg" version="1.0" xmlns="http://www.w3.org/2000/svg"
-													width="50" height="50" viewBox="0 0 1280.000000 1280.000000"
-													preserveAspectRatio="xMidYMid meet">
-													<circle cx="640" cy="640" r="640"/>
-
-													<g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-													fill="#000000" stroke="none">
-													<path d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
+										<g
+											transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+											fill="#000000"
+											stroke="none"
+										>
+											<path
+												d="M6145 12794 c-216 -13 -391 -28 -530 -45 -995 -122 -1927 -467 -2760
 													-1022 -907 -604 -1648 -1433 -2146 -2402 -395 -769 -615 -1549 -690 -2450 -17
 													-193 -17 -757 0 -950 75 -901 295 -1681 690 -2450 610 -1187 1579 -2156 2766
 													-2766 769 -395 1549 -615 2450 -690 193 -17 757 -17 950 0 901 75 1681 295
@@ -337,42 +491,50 @@
 													-1385 -693 -2628 -1672 -3591 -961 -943 -2169 -1494 -3524 -1605 -193 -16
 													-657 -16 -850 0 -1385 114 -2628 693 -3591 1672 -943 961 -1494 2169 -1605
 													3524 -16 193 -16 657 0 850 114 1385 693 2628 1672 3591 878 862 1988 1408
-													3189 1568 416 55 832 66 1244 31z"/>
-													<path d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
+													3189 1568 416 55 832 66 1244 31z"
+											/>
+											<path
+												d="M5060 10738 c-55 -15 -679 -379 -716 -418 -85 -87 -103 -206 -47
 													-315 67 -129 1153 -2002 1181 -2035 57 -68 178 -105 267 -81 46 12 662 365
 													715 409 71 59 108 190 78 277 -8 22 -276 495 -596 1050 -471 817 -591 1018
-													-628 1052 -68 64 -164 87 -254 61z"/>
-													<path d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
+													-628 1052 -68 64 -164 87 -254 61z"
+											/>
+											<path
+												d="M3942 9868 c-216 -132 -322 -210 -434 -317 -341 -326 -432 -664 -362
 													-1346 165 -1616 1352 -3892 2728 -5232 360 -351 731 -631 1033 -779 191 -94
 													332 -132 523 -141 257 -12 504 61 877 261 113 60 151 85 147 96 -5 13 -1156
 													2013 -1190 2068 l-15 22 -39 -20 c-69 -35 -183 -69 -275 -80 -215 -27 -466 49
 													-712 216 -587 397 -1121 1268 -1263 2059 -81 448 -20 809 175 1038 33 39 144
 													132 166 139 7 2 -220 406 -591 1049 -331 574 -605 1047 -609 1052 -4 4 -75
-													-35 -159 -85z"/>
-													<path d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
+													-35 -159 -85z"
+											/>
+											<path
+												d="M8220 5330 c-55 -8 -74 -18 -428 -222 -156 -90 -299 -179 -319 -198
 													-72 -71 -101 -183 -71 -271 17 -50 1155 -2025 1197 -2078 71 -90 212 -117 326
 													-62 86 41 614 347 655 380 56 45 90 120 90 202 0 37 -5 81 -12 96 -34 80
-													-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"/>
-													</g>
-
-													</svg>
-												</button>
-												<img src="./img/testimonials/5.jpg" alt="img" class="card-testimonial__img">
-										</div>
-										<div class="card-testimonial__body">
-												<p class="card-testimonial__text">Декоративне покриття для внутрішніх робіт дозволяє домогтися імітації натурального каменю і скелястих порід.</p>
-												<p class="card-testimonial__name">Травертин</p>
-												<p class="card-testimonial__city">Ціна декору</p>
-										</div>
-								</a>
-								
-
-						</div>
+													-1175 2043 -1206 2075 -61 64 -141 91 -232 78z"
+											/>
+										</g>
+									</svg>
+								</button>
+								<img
+									src="./img/testimonials/5.jpg"
+									alt="img"
+									class="card-testimonial__img"
+								/>
+							</div>
+							<div class="card-testimonial__body">
+								<p class="card-testimonial__text">
+									Декоративне покриття для внутрішніх робіт дозволяє домогтися
+									імітації натурального каменю і скелястих порід.
+								</p>
+								<p class="card-testimonial__name">Травертин</p>
+								<p class="card-testimonial__city">Ціна декору</p>
+							</div>
+						</a>
+					</div>
 				</div>
 			</section>
-
-
-
 		</main>
 
 		<footer class="footer">
@@ -384,15 +546,14 @@
 								<img src="./img/icons/logo.png" alt="logo" />
 
 								<!-- <span>Декор</span> -->
-
 							</div>
 						</div>
 
 						<div class="footer__info-text">
 							<p>
-								Декоративні штукатурки West Decor дозволяють 
-                створювати сучасні ефекти: камінь, бетон, травертин, 
-                марморін, мерехтливий, перламутр, оксамит, мармур. 
+								Декоративні штукатурки West Decor дозволяють створювати сучасні
+								ефекти: камінь, бетон, травертин, марморін, мерехтливий,
+								перламутр, оксамит, мармур.
 							</p>
 						</div>
 
@@ -416,52 +577,60 @@
 						<div class="footer__nav-block">
 							<h4 class="footer__nav-block-title">Навігація</h4>
 							<ul class="dash-under-link dash-under-link__center">
-                <li><a href="index.html">Головна</a></li>
+								<li><a href="index.html">Головна</a></li>
 								<li><a href="about.html">Про нас</a></li>
 								<li><a href="#!">Портфоліо</a></li>
-                <li><a href="#!">Послуги</a></li>
+								<li><a href="#!">Послуги</a></li>
 								<li><a href="#!">Відгуки</a></li>
-							
 							</ul>
 						</div>
-
-						
 
 						<div class="footer__nav-block">
 							<h4 class="footer__nav-block-title">Контакти</h4>
 							<ul>
-								<li><a href="mailto:info@cutspace.com">info@cutspace.com</a></li>
-                <li>
-                 <a href="#!" onclick="confirmCall('+380 95 716 87 47')">+380 95 716 87 47</a>
-               </li>
-
+								<li>
+									<a href="mailto:info@cutspace.com">info@cutspace.com</a>
+								</li>
+								<li>
+									<a href="#!" onclick="confirmCall('+380 95 716 87 47')"
+										>+380 95 716 87 47</a
+									>
+								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 
-      <div class="footer__bottom">
-        <p>&copy; 2024 West Decor. Всі права захищені.</p>
-    </div>
+			<div class="footer__bottom">
+				<p>&copy; 2024 West Decor. Всі права захищені.</p>
+			</div>
 		</footer>
-
 
 		<!-- scroll to top -->
 		<button onclick="topFunction()" id="myBtn" title="Go to top">
-			<svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" 
-			text-rendering="geometricPrecision" image-rendering="optimizeQuality" 
-			fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 511.998 511.998">
-			<path fill-rule="nonzero" d="M255.999 511.999c70.684-.001 134.695-28.658 181.019-74.981 46.323-46.324 74.981-110.335 74.98-181.019 0-70.691-28.657-134.695-74.98-181.018C390.694 28.657 326.691 0 255.999 0 185.308 0 121.304 28.657 74.981 74.981 28.657 121.304 0 185.308 0 255.999c0 70.684 28.657 134.695 74.981 181.019 46.323 46.323 110.327 74.981 181.018 74.981zm-74.995-203.995c-29.412 16.955-43.962-6.609-27.542-23.789l84.234-95.914c15.311-15.318 21.289-15.318 36.607 0l84.234 95.914c16.303 17.26 2.086 40.686-27.549 23.789l-74.989-44.549-74.995 44.549zM410.99 410.99c-39.657 39.657-94.473 64.199-154.991 64.199-60.525 0-115.334-24.542-154.991-64.199-39.657-39.657-64.199-94.473-64.199-154.991 0-60.525 24.542-115.334 64.199-154.991 39.657-39.657 94.466-64.199 154.991-64.199 60.526 0 115.334 24.542 154.991 64.199 39.657 39.657 64.199 94.466 64.199 154.991 0 60.518-24.542 115.334-64.199 154.991z"/>
-		</svg>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				shape-rendering="geometricPrecision"
+				text-rendering="geometricPrecision"
+				image-rendering="optimizeQuality"
+				fill-rule="evenodd"
+				clip-rule="evenodd"
+				viewBox="0 0 511.998 511.998"
+			>
+				<path
+					fill-rule="nonzero"
+					d="M255.999 511.999c70.684-.001 134.695-28.658 181.019-74.981 46.323-46.324 74.981-110.335 74.98-181.019 0-70.691-28.657-134.695-74.98-181.018C390.694 28.657 326.691 0 255.999 0 185.308 0 121.304 28.657 74.981 74.981 28.657 121.304 0 185.308 0 255.999c0 70.684 28.657 134.695 74.981 181.019 46.323 46.323 110.327 74.981 181.018 74.981zm-74.995-203.995c-29.412 16.955-43.962-6.609-27.542-23.789l84.234-95.914c15.311-15.318 21.289-15.318 36.607 0l84.234 95.914c16.303 17.26 2.086 40.686-27.549 23.789l-74.989-44.549-74.995 44.549zM410.99 410.99c-39.657 39.657-94.473 64.199-154.991 64.199-60.525 0-115.334-24.542-154.991-64.199-39.657-39.657-64.199-94.473-64.199-154.991 0-60.525 24.542-115.334 64.199-154.991 39.657-39.657 94.466-64.199 154.991-64.199 60.526 0 115.334 24.542 154.991 64.199 39.657 39.657 64.199 94.466 64.199 154.991 0 60.518-24.542 115.334-64.199 154.991z"
+				/>
+			</svg>
 		</button>
 
-    <!-- <div class="hamburger" id="hamburger">
+		<!-- <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
       <span></span>
     </div> -->
-    <!-- шось я добавив -->
+		<!-- шось я добавив -->
 
 		<script src="./js/script.js"></script>
 	</body>

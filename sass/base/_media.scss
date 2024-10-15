@@ -13,7 +13,7 @@
 
 	.header__text {
 		font-size: 16px;
-		min-width: 80%;
+		min-width: 75%;
 		line-height: 1.5;
 	}
 
@@ -23,8 +23,7 @@
 	}
 
 	.header__img img {
-		width: 100%;
-		border-radius: 20px;
+		// width: 100%;
 	}
 
 	.testimonials__row {
@@ -257,7 +256,7 @@
 	}
 
 	.testimonials__row {
-		row-gap: 10px;
+		row-gap: 20px;
 	}
 
 	.card-testimonial {

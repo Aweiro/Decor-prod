@@ -223,9 +223,8 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -265,8 +264,13 @@ body {
 }
 
 .header__img img {
-  border-radius: 40px 40px 40px 0;
+  border-radius: 50%;
+  background-color: darkgray;
   width: 30vw;
+  -webkit-box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+          box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  -webkit-box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+          box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 .header__form {
@@ -1020,16 +1024,12 @@ body {
   }
   .header__text {
     font-size: 16px;
-    min-width: 80%;
+    min-width: 75%;
     line-height: 1.5;
   }
   .header__title {
     font-size: 42px;
     margin-right: 0;
-  }
-  .header__img img {
-    width: 100%;
-    border-radius: 20px;
   }
   .testimonials__row {
     -ms-flex-wrap: wrap;
@@ -1237,7 +1237,7 @@ body {
     font-size: 24px;
   }
   .testimonials__row {
-    row-gap: 10px;
+    row-gap: 20px;
   }
   .card-testimonial {
     border: 1px solid whitesmoke;
