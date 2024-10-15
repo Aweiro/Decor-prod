@@ -63,21 +63,56 @@
 	}
 
 	.nav__row {
+		
 		flex-direction: column;
 		align-items: center;
 	}
 
 	.navigation-list ul {
+		
     display: none;
     margin-top: 20px;
 	}
 
+	.navigation-list.show {
+		width: 100%;
+	}
+
   .navigation-list.show ul {
-		display: block;
+		box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+		display: flex;
+		flex-direction: column;
+		// justify-content: center;
+		align-items: center;
+		align-content: center;
+		// width: 100%;
+		text-align: center;
+		// padding: auto;
   }
 
 	.navigation-list li {
 		margin-right: 20px;
+		// width: 100vw;
+		padding: 20px auto;
+		width: 100%;
+
+		&:last-child{
+			margin: 0;
+		}
+		
+		a {
+			padding: 10px;
+			border-bottom: 1px solid rgb(205, 205, 205);
+
+			background-color: rgb(235, 235, 235);
+
+		}
+	}
+
+	.dash-under-link ul{
+
+		justify-content: center;
+		align-items: center;
 	}
 
   .hamburger {
@@ -157,6 +192,11 @@
 
 // Адаптивність для дуже маленьких екранів (до 480px)
 @media screen and (max-width: 480px) {
+
+	.container {
+
+	}
+
 	.nav__row {
 		flex-direction: column;
 		justify-content: center;
