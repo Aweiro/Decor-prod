@@ -2,9 +2,17 @@
  padding-bottom: 50px;
 }
 
+.background {
+  
+  background-image: url('../img/header/bg9.jpg'); /* Заміни 'your-image.jpg' на шлях до твого зображення */
+  background-size: cover; /* Забезпечує покриття всього блоку */
+  background-position: top; /* Центрує зображення */
+  background-repeat: no-repeat; /* Відміняє повторення зображення */
+}
+
 .header__row {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 }
 .header__text {
@@ -44,10 +52,14 @@
 	}
 }
 .header__img img {
-
 	
-	border-radius: 40px 40px 40px 0;
+	border-radius: 50%;
+	background-color: darkgray;
+	
 	width: 30vw;
+	box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+	// box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+	box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 	// height: 10vh;
 }
 
