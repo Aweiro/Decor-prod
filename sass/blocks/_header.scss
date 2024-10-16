@@ -5,9 +5,11 @@
 .background {
   
   background-image: url('../img/header/bg9.jpg'); /* Заміни 'your-image.jpg' на шлях до твого зображення */
-  background-size: cover; /* Забезпечує покриття всього блоку */
-  background-position: top; /* Центрує зображення */
-  background-repeat: no-repeat; /* Відміняє повторення зображення */
+
+	background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .header__row {
