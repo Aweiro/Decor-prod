@@ -80,25 +80,32 @@ setInterval(() => {
 	changeSlide(1);
 }, 3000);
 
+
 // Відправлення даних у Telegram
 const telegramToken = '7560368551:AAHxWrOZebiC-5-lcxRNF0P3QIxN2SXN-z0'; // Токен вашого Telegram бота
 const chatId = '5772059243'; // Ваш Chat ID або ID вашого аккаунта
 
 // Додаємо обробник події для форми
 const consultationForm = document.getElementById('consultationForm');
+const submitButton = document.getElementById('submitBtn');
+
 if (consultationForm) {
 	consultationForm.addEventListener('submit', function (e) {
 		e.preventDefault(); // Зупиняємо стандартну поведінку форми (перенаправлення)
 
 		// Отримуємо значення полів форми
-		const name = document.getElementById('name').value;
-		const phone = document.getElementById('phone').value;
+		const name = document.getElementById('name').value.trim();
+		const phone = document.getElementById('phone').value.trim();
 
 		// Перевіряємо, чи заповнені поля
 		if (!name || !phone) {
-			document.getElementById('status').innerText = 'Заповніть всі поля!';
+			alert('Заповніть всі поля!'); // Можна додати просте повідомлення через alert
 			return;
 		}
+
+		// Блокуємо кнопку, щоб уникнути багаторазового надсилання
+		submitButton.disabled = true;
+		submitButton.innerText = 'Надсилаємо...';
 
 		// Формуємо повідомлення
 		const message = `Нове замовлення консультації:\nІм'я: ${name}\nТелефон: ${phone}`;
@@ -118,18 +125,23 @@ if (consultationForm) {
 			.then((data) => {
 				// Якщо повідомлення успішно надіслано
 				if (data.ok) {
-					document.getElementById('status').innerText =
-						'Повідомлення успішно надіслано!';
+					submitButton.innerText = 'Надіслано'; // Змінюємо текст кнопки
+					submitButton.style.backgroundColor = '#262626';
+					submitButton.style.color = '#ffffff';
+					submitButton.disabled = true; // Блокуємо кнопку після успішного надсилання
 				} else {
 					// Якщо сталася помилка
-					document.getElementById('status').innerText =
-						'Помилка при надсиланні повідомлення.';
+					alert('Помилка при надсиланні повідомлення. Спробуйте ще раз.');
+					submitButton.disabled = false; // Дозволяємо повторну спробу
+					submitButton.innerText = 'Відправити'; // Повертаємо оригінальний текст
 				}
 			})
 			.catch((error) => {
 				// Відображаємо повідомлення про помилку у випадку, якщо запит не пройшов
-				document.getElementById('status').innerText =
-					'Сталася помилка при відправці.';
+				console.error('Помилка при відправці повідомлення:', error);
+				alert('Сталася помилка при відправці. Спробуйте ще раз.');
+				submitButton.disabled = false; // Дозволяємо повторну спробу
+				submitButton.innerText = 'Відправити'; // Повертаємо оригінальний текст
 			});
 	});
 }
