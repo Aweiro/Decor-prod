@@ -1030,11 +1030,16 @@ body {
     color: rgb(46, 45, 45);
   }
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) {
   .container {
-    max-width: 90%;
+    max-width: 95%;
     padding-left: 10px;
     padding-right: 10px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .container {
+    max-width: 95%;
   }
   .navigation-list .nav__link {
     margin: 0 1rem;
@@ -1238,8 +1243,15 @@ body {
   }
 }
 @media screen and (max-width: 480px) {
+  .about-us {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .about-us__row {
+    margin-bottom: 0px; /* Зменшено до 10px для більшої компактності */
+  }
   .background {
-    background-size: auto;
+    background-attachment: local;
   }
   .about-us__text {
     font-size: 0.6em;
