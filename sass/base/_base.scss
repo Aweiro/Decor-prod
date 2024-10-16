@@ -97,3 +97,13 @@ body {
 		}
 	}
 }
+
+.background {
+  
+  background-image: url('../img/header/bg9.jpg'); /* Заміни 'your-image.jpg' на шлях до твого зображення */
+
+	background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

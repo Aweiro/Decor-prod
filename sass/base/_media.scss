@@ -237,6 +237,10 @@
 
 // Адаптивність для дуже маленьких екранів (до 480px)
 @media screen and (max-width: 480px) {
+
+	.background {
+		background-size: auto;
+	}
 	
 	.about-us__text {
 		font-size: 0.6em;
