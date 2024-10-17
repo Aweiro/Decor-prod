@@ -31,10 +31,6 @@
 		margin-right: 0;
 	}
 
-	.header__img img {
-		// width: 100%;
-	}
-
 	.testimonials__row {
 		// row-gap: 30px;
 		flex-wrap: wrap;
@@ -265,10 +261,6 @@
 		font-size: 0.6em;
 	}
 
-	.container {
-
-	}
-
 	.nav__row {
 		flex-direction: column;
 		justify-content: center;
@@ -314,10 +306,6 @@
 		row-gap: 10px;
 	}
 
-	.button {
-		// height: 50px;
-		// line-height: 50px;
-	}
 }
 
 @media screen and (max-width: 360px) {
