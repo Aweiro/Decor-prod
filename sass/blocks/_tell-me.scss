@@ -1,0 +1,157 @@
+.tell-me__block {
+display: flex;
+align-items: center;
+padding: 0 30px;
+margin-top: 50px;
+
+height: 200px;
+	width: 100%;
+	background-color: rgb(235, 235, 235);
+	// box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+	// box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+	input[name=name], [name=phone] {
+		min-width: 13em;
+		width: 13vw;
+		padding: 12px 10px 12px 35px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid darkgray;
+		background: none;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		// border-radius: 3px;
+		box-sizing: border-box;
+		&::placeholder {
+			// color: rgba(255, 255, 255, 0.8);
+			color: rgb(46, 45, 45);
+		}
+
+		&:focus {
+			background: none;
+		}
+	}
+}
+
+.tell-me__inputs {
+	flex: 1;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.tell-me__row {
+	column-gap: 50px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	// text-align: center;
+
+	h1{
+		flex: 1;
+		color: rgb(46, 45, 45);
+		width: auto;
+		font-weight: 700;
+		// font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		font-size: 24px;
+	}
+
+	form {
+		flex: 2;
+		display: flex;
+		justify-content: space-between;
+		position: relative;
+
+		svg {
+			// margin: 0 auto;
+			margin-top: 1.3em;
+			position: absolute;
+			// margin-right: -50px;
+				width: 1.3em;
+				height: 1.3em;
+		}
+	}
+
+	button {
+		margin: auto 0;
+		padding: 0 50px;
+	}
+}
+
+
+
+
+@media screen and (max-width: 1090px) {
+	.tell-me__row {
+		flex-direction: column;
+		// height: 100%;
+		row-gap: 20px;
+		justify-content: space-evenly;
+
+		form {
+			// flex: 1;
+			width: 100%;
+			justify-content: space-evenly;
+		}
+	}
+}
+
+@media screen and (max-width: 800px) {
+
+	.tell-me__block {
+	height: auto;
+	padding: 20px;
+	}
+
+	.tell-me__row {
+
+		form {
+		row-gap: 20px;
+
+			flex-direction: column;
+		}
+	}
+}
+
+@media screen and (max-width: 560px) {
+
+	.tell-me__block {
+		text-align: center;
+		
+	}
+
+	.tell-me__row {
+		h1 {
+			font-size: 18px;
+		}
+
+		button {
+			padding: 0 40px;
+			font-size: 12px;
+		}
+		
+	}
+
+	.tell-me__inputs {
+		flex-direction: column;
+		align-items: center;
+		row-gap: 20px;
+		}
+	
+		input[name=name], [name=phone] {
+			min-width: 13em;
+			width: 13vw;
+			padding: 12px 10px 12px 35px;
+			margin: 8px 0;
+	
+
+			&::placeholder {
+				font-size: 12px;
+				// color: rgba(255, 255, 255, 0.8);
+				color: rgb(46, 45, 45);
+			}
+	
+		}
+		
+	}

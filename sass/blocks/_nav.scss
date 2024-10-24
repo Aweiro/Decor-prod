@@ -1,6 +1,8 @@
 .nav {
-	padding-top: 35px;
-	padding-bottom: 33px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+
 }
 
 .nav__row {
@@ -10,4 +12,24 @@
 }
 
 .navigation-list {
+	.nav__link {
+		display: inline-block;
+		margin: 0 2rem;
+
+
+
+		a {
+			display: block;
+			transition: all 0.2s ease-in;
+		}
+
+		
+	}
+	.nav__link :not(.active):hover {
+		color: $accent-color;
+		transform: scale(1.05);
+	}
 }
+
+
+// hamburger menu
