@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="./css/main.css" />
+</head>
+<body>
+    <div class="navigation-list">
+        <ul class="dash-under-link">
+            <li class="nav__link"><a href="index.html" class="active">Головна</a></li>
+            <li class="nav__link"><a href="about.html">Про нас</a></li>
+            <li class="nav__link"><a href="#">Портфоліо</a></li>
+            <li class="nav__link"><a href="#">Послуги</a></li>
+            <li class="nav__link"><a href="#">Відгуки</a></li>
+            <li class="nav__link"><a href="admin.html">Панель Адміністратора</a></li>
+        </ul>
+    </div>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" id="photo" name="photo" accept="image/*" required />
+      <input type="text" id="description" name="description" placeholder="Опис" required /> <!-- Поле для опису -->
+      <input type="number" id="price" name="price" placeholder="Ціна" step="0.01" required /> <!-- Поле для ціни -->
+      <button type="submit">Завантажити</button>
+  </form>
+  
+
+    <h2>Список фото</h2>
+    <div id="photoList" class="testimonials__row"></div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>

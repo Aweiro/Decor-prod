@@ -1,0 +1,14 @@
+[
+  {
+    "name": "1729782003971.jpg",
+    "url": "http://localhost:3000/uploads/1729782003971.jpg",
+    "description": "Феєрія ",
+    "price": "1"
+  },
+  {
+    "name": "1729782033543.jpg",
+    "url": "http://localhost:3000/uploads/1729782033543.jpg",
+    "description": "о",
+    "price": "2"
+  }
+]
