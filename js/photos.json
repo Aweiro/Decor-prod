@@ -6,9 +6,15 @@
     "price": "1"
   },
   {
-    "name": "1729782033543.jpg",
-    "url": "http://localhost:3000/uploads/1729782033543.jpg",
-    "description": "о",
-    "price": "2"
+    "name": "1729872755729.jpeg",
+    "url": "http://localhost:3000/uploads/1729872755729.jpeg",
+    "description": "add",
+    "price": "32"
+  },
+  {
+    "name": "1729873029035.jpg",
+    "url": "http://localhost:3000/uploads/1729873029035.jpg",
+    "description": " decor decor  decor decor  decor decor  decor decor  decor decor  decor decor  decor decor ",
+    "price": "344"
   }
 ]
