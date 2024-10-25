@@ -172,6 +172,11 @@ fetch('http://localhost:3000/photos')
           description.className = 'photo-card-text';
           description.innerText = photo.description || 'Опис відсутній';
 
+          const title = document.createElement('h3');
+          title.className = 'card-testimonial__title';
+          title.innerText = photo.decorName || 'Назва декору відсутня'; // Відображаємо назву декору
+
+
           // Ціна фотографії
           const price = document.createElement('p');
           price.className = 'photo-card-price';
@@ -180,6 +185,7 @@ fetch('http://localhost:3000/photos')
           // Додаємо елементи до картки
           imgWrapper.appendChild(img);
           photoBody.appendChild(description);
+          photoBody.appendChild(title); // Додаємо назву декору
           photoBody.appendChild(price);
           photoCard.appendChild(imgWrapper);
           photoCard.appendChild(photoBody);
@@ -221,6 +227,11 @@ function loadPhotos() {
                 description.className = 'card-testimonial__text';
                 description.innerText = photo.description || 'Опис відсутній';
 
+                const title = document.createElement('h3');
+                title.className = 'card-testimonial__title';
+                title.innerText = photo.decorName || 'Назва декору відсутня'; // Відображаємо назву декору
+                
+
                 const price = document.createElement('p');
                 price.className = 'card-testimonial__city';
                 price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`;
@@ -231,6 +242,7 @@ function loadPhotos() {
 
                 imgWrapper.appendChild(img);
                 photoBody.appendChild(description);
+                photoBody.appendChild(title); // Додаємо назву декору
                 photoBody.appendChild(price);
                 photoBody.appendChild(deleteButton);
                 photoCard.appendChild(imgWrapper);

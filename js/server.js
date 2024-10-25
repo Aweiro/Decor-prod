@@ -47,24 +47,25 @@ const writePhotosJson = (photos) => {
 
 // Обробка запиту на завантаження фото
 app.post('/upload', upload.single('photo'), (req, res) => {
-    const { description, price } = req.body;
-    if (req.file) {
-        // Зберігаємо інформацію про фото в photos.json
-        const photos = readPhotosJson();
-        const newPhoto = {
-            name: req.file.filename,
-            url: `http://localhost:${PORT}/uploads/${req.file.filename}`,
-            description,
-            price
-        };
-        photos.push(newPhoto);
-        writePhotosJson(photos);
-        
-        res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
-    } else {
-        res.status(400).json({ message: 'Не вдалося завантажити фото.' });
-    }
+  const { description, decorName, price } = req.body; // Додайте decorName
+  if (req.file) {
+      const photos = readPhotosJson();
+      const newPhoto = {
+          name: req.file.filename,
+          url: `http://localhost:${PORT}/uploads/${req.file.filename}`,
+          description: description || 'Опис відсутній',
+          decorName: decorName || 'Назва декору відсутня', // Додайте decorName
+          price: price ? parseFloat(price) : 0
+      };
+      photos.push(newPhoto);
+      writePhotosJson(photos);
+      
+      res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+  } else {
+      res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+  }
 });
+
 
 // Отримання списку фото
 app.get('/photos', (req, res) => {
