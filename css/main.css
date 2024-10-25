@@ -1045,27 +1045,16 @@ body {
 }
 
 #photosContainer {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex; /* Використовуємо флекс для вирівнювання зображень */
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; /* Дозволяє зображенням переноситися на новий рядок */
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center; /* Центруємо зображення */
-}
-
-.photo-card {
-  margin: 15px; /* Відступи між картками */
-  border: 1px solid #ddd; /* Рамка навколо картки */
-  border-radius: 8px; /* Кути рамки */
-  overflow: hidden; /* Приховуємо зайве */
-  max-width: 250px; /* Максимальна ширина картки */
-  -webkit-transition: -webkit-transform 0.3s;
-  transition: -webkit-transform 0.3s;
-  transition: transform 0.3s;
-  transition: transform 0.3s, -webkit-transform 0.3s; /* Анімація при наведенні */
-  background-color: #fff; /* Білий фон для картки */
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 30px;
 }
 
 .photo-card-wrapper {
@@ -1080,30 +1069,69 @@ body {
   width: 100%;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  max-height: 220px;
-}
-.photo-card img:hover {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
+  height: 220px;
 }
 
-.photo-card p {
-  margin: 10px; /* Відступи для параграфів */
-  font-size: 0.9em; /* Розмір шрифту для опису та ціни */
+.photo-card:hover img {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+}
+
+.photo-card-price {
+  color: #58bebf;
+  text-align: left;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  -webkit-transition: color 0.2s ease-in;
+  transition: color 0.2s ease-in;
+}
+.photo-card:hover .photo-card-price {
+  color: #f78434;
+}
+
+.photo-card-text {
+  -ms-grid-column-align: end;
+      justify-self: end;
+  text-align: left;
   color: #666; /* Колір тексту */
 }
 
+.photo-card {
+  border-radius: 5px;
+  overflow: hidden;
+  -ms-flex-preferred-size: calc(25% - 30px);
+      flex-basis: calc(25% - 30px);
+  -webkit-transition: -webkit-box-shadow 0.2s ease-in;
+  transition: -webkit-box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
+  -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 .photo-card:hover {
   -webkit-box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
           box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
 }
 
-.photo-card .card-testimonial__name {
-  font-weight: bold; /* Жирний шрифт для назви декору */
+.photo-card-wrapper {
+  height: auto;
+  display: block;
 }
 
-.photo-card .card-testimonial__city {
-  color: #007BFF; /* Колір ціни */
+.photo-card-body {
+  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: calc(100% - 220px);
+  min-height: 220px;
 }
 
 @media screen and (max-width: 1280px) {
