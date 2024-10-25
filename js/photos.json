@@ -5,5 +5,11 @@
     "description": "jjj",
     "decorName": "ugh",
     "price": "0"
+  },
+  {
+    "name": "1729877458685.jpeg",
+    "url": "http://localhost:3000/uploads/1729877458685.jpeg",
+    "description": "sfsf",
+    "price": "223"
   }
 ]
