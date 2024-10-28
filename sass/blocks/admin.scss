@@ -3,6 +3,8 @@
 	padding: 40px 0; /* Відступи для галереї */
 	text-align: center; /* Вирівнювання тексту по центру */
 	background-color: #f9f9f9; /* Світло-сірий фон для галереї */
+	height: auto;
+
 }
 
 .gallery h2 {
@@ -14,10 +16,9 @@
 
 #photosContainer {
 	flex-wrap: wrap;
-
 	position: relative;
 	display: flex;
-	justify-content: space-between;
+	justify-content: start;
 	gap: 30px;
 }
 
@@ -47,34 +48,13 @@
 ///
 ///
 
-.photo-card-price {
-	color: #58bebf;
-	text-align: left;
-	justify-self: end;
-	
-	transition: color 0.2s ease-in;
 
-	.photo-card:hover & {
-		color: #f78434;
-	}
-
-}
-
-.photo-card-text {
-	justify-self: end;
-
-	text-align: left;
-	color: #666; /* Колір тексту */
-	// margin-bottom: 23px;
-
-
-}
 
 .photo-card {
 	border-radius: 5px;
 	// max-width: 19em;
 	overflow: hidden;
-	flex-basis: calc(25% - 30px);
+	flex-basis: calc(25% - 22.5px);
 
 	
 	transition: box-shadow 0.2s ease-in;
@@ -87,7 +67,7 @@
 }
 
 .photo-card-wrapper {
-	height: auto;
+	// min-height: 500px;
 	display: block;
 }
 
@@ -100,3 +80,123 @@
 
 }
 
+.photo-card-price {
+	color: #58bebf;
+	text-align: left;
+	justify-self: end;
+	transition: color 0.2s ease-in;
+	flex: 0.1;
+
+	.photo-card:hover & {
+		color: #f78434;
+	}
+}
+
+.photo-card-text {
+	justify-self: end;
+	text-align: left;
+	color: #666;
+	flex: 1;
+	margin-bottom: 20px;
+	// min-height: 100%;
+
+}
+
+.card-testimonial__title {
+	text-align: left;
+	justify-self: end;
+	flex: 0.2;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.card-delete-button {
+	margin-top: 10px;
+
+}
+
+.admin-card-title {
+	text-align: center;
+	margin: 30px auto;
+}
+
+.admin-photo-card__container {
+	margin-bottom: 40px;
+}
+
+
+////
+/// 
+/// 
+///
+#uploadForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+#uploadForm input[type="file"],
+#uploadForm input[type="text"],
+#uploadForm input[type="number"],
+#uploadForm button {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#uploadForm input[type="text"]:focus,
+#uploadForm input[type="number"]:focus,
+#uploadForm input[type="file"]:focus {
+  border-color: #8c8c8c;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+#uploadForm button {
+  background-color: #4a4a4a;
+  color: #f7f7f7;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#uploadForm button:hover {
+  background-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#uploadForm button:active {
+  background-color: #222;
+}
+
+#uploadForm input[type="file"]::file-selector-button {
+  background-color: #4a4a4a;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#uploadForm input[type="file"]::file-selector-button:hover {
+  background-color: #333;
+}
+
+#uploadForm input::placeholder {
+  color: #999;
+}

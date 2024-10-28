@@ -158,6 +158,7 @@ fetch('http://localhost:3000/photos')
           const imgWrapper = document.createElement('div');
           imgWrapper.className = 'photo-card-wrapper';
 
+
           // Створення зображення
           const img = document.createElement('img');
           img.src = photo.url;
@@ -172,18 +173,31 @@ fetch('http://localhost:3000/photos')
           description.className = 'photo-card-text';
           description.innerText = photo.description || 'Опис відсутній';
 
+          const title = document.createElement('h3');
+          title.className = 'card-testimonial__title';
+          title.innerText = photo.decorName || 'Назва декору відсутня'; // Відображаємо назву декору
+
+
           // Ціна фотографії
           const price = document.createElement('p');
           price.className = 'photo-card-price';
           price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`; // Додайте ціну з вашої бази даних
           
+				// Call button 
+					const callButton = document.createElement('button');
+        	callButton.innerText = 'Видалити';
+					callButton.className = 'card-testimonial__btn-play'
+          // callButton.onclick = () => deletePhoto(photo.name);
+
           // Додаємо елементи до картки
           imgWrapper.appendChild(img);
           photoBody.appendChild(description);
+          photoBody.appendChild(title); // Додаємо назву декору
           photoBody.appendChild(price);
           photoCard.appendChild(imgWrapper);
           photoCard.appendChild(photoBody);
           photosContainer.appendChild(photoCard); // Додаємо картку до контейнера
+          imgWrapper.appendChild(callButton); // call button
       });
   })
   .catch(error => console.error('Error fetching photos:', error));
@@ -204,10 +218,10 @@ function loadPhotos() {
                 console.log('Отримане фото:', photo); // Лог для перевірки отриманих даних
 
                 const photoCard = document.createElement('div');
-                photoCard.className = 'card-testimonial';
+                photoCard.className = 'photo-card';
 
                 const imgWrapper = document.createElement('div');
-                imgWrapper.className = 'card-testimonial__img-wrapper';
+                imgWrapper.className = 'photo-card-wrapper';
 
                 const img = document.createElement('img');
                 img.src = photo.url;
@@ -215,22 +229,29 @@ function loadPhotos() {
                 img.className = 'card-testimonial__img';
 
                 const photoBody = document.createElement('div');
-                photoBody.className = 'card-testimonial__body';
+                photoBody.className = 'photo-card-body';
 
                 const description = document.createElement('p');
-                description.className = 'card-testimonial__text';
+                description.className = 'photo-card-text';
                 description.innerText = photo.description || 'Опис відсутній';
 
+                const title = document.createElement('h3');
+                title.className = 'card-testimonial__title';
+                title.innerText = photo.decorName || 'Назва декору відсутня'; // Відображаємо назву декору
+                
+
                 const price = document.createElement('p');
-                price.className = 'card-testimonial__city';
+                price.className = 'photo-card-price';
                 price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`;
 
                 const deleteButton = document.createElement('button');
                 deleteButton.innerText = 'Видалити';
+								deleteButton.className = 'card-delete-button button'
                 deleteButton.onclick = () => deletePhoto(photo.name);
 
                 imgWrapper.appendChild(img);
                 photoBody.appendChild(description);
+                photoBody.appendChild(title); // Додаємо назву декору
                 photoBody.appendChild(price);
                 photoBody.appendChild(deleteButton);
                 photoCard.appendChild(imgWrapper);
