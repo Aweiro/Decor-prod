@@ -312,7 +312,7 @@ body {
 }
 
 .testimonials__heading {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -339,17 +339,31 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
   gap: 30px;
 }
 
-.card-testimonial {
+/* Основні стилі для галереї */
+#photosContainer {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  gap: 30px;
+}
+
+.photo-card {
   border-radius: 5px;
   overflow: hidden;
-  -ms-flex-preferred-size: calc(25% - 30px);
-      flex-basis: calc(25% - 30px);
+  -ms-flex-preferred-size: calc(25% - 22.5px);
+      flex-basis: calc(25% - 22.5px);
   -webkit-transition: -webkit-box-shadow 0.2s ease-in;
   transition: -webkit-box-shadow 0.2s ease-in;
   transition: box-shadow 0.2s ease-in;
@@ -357,33 +371,54 @@ body {
   -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
           box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.card-testimonial:hover {
+.photo-card:hover {
   -webkit-box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
           box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
 }
-.card-testimonial:hover .card-testimonial__btn-play {
+.photo-card:hover .card-testimonial__btn-play {
   opacity: 1;
   -webkit-transform: translateY(0%);
           transform: translateY(0%);
 }
-.card-testimonial:hover .card-testimonial__img {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
 
-.card-testimonial__img {
+.photo-card img {
+  max-width: 100%; /* Зображення займає всю ширину картки */
+  border-bottom: 1px solid #ddd; /* Рамка під зображенням */
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  min-height: 220px;
+  height: 220px;
 }
 
-.card-testimonial__img-wrapper {
-  overflow: hidden;
+.photo-card:hover img {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+}
+
+.photo-card-wrapper {
   position: relative;
-  max-height: 220px;
+  display: block;
+}
+
+.photo-card-body {
+  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: calc(100% - 220px);
+}
+
+.photo-card-wrapper {
+  overflow: hidden;
 }
 
 .card-testimonial__btn-play {
@@ -417,26 +452,41 @@ body {
   fill: #d6cee3;
 }
 
-.card-testimonial__body {
-  padding: 30px;
-}
-
-.card-testimonial__text {
-  margin-bottom: 23px;
-}
-
-.card-testimonial__name {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.card-testimonial__city {
+.photo-card-price {
   color: #58bebf;
+  text-align: left;
+  -ms-grid-column-align: end;
+      justify-self: end;
   -webkit-transition: color 0.2s ease-in;
   transition: color 0.2s ease-in;
+  -webkit-box-flex: 0.1;
+      -ms-flex: 0.1;
+          flex: 0.1;
 }
-.card-testimonial:hover .card-testimonial__city {
+.photo-card:hover .photo-card-price {
   color: #f78434;
+}
+
+.photo-card-text {
+  -ms-grid-column-align: end;
+      justify-self: end;
+  text-align: left;
+  color: #666;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-bottom: 20px;
+}
+
+.card-testimonial__title {
+  text-align: left;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  -webkit-box-flex: 0.2;
+      -ms-flex: 0.2;
+          flex: 0.2;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .button {
@@ -1031,6 +1081,138 @@ body {
     color: rgb(46, 45, 45);
   }
 }
+.card-delete-button {
+  margin-top: 10px;
+}
+
+.admin-card-title {
+  text-align: center;
+  margin: 30px auto;
+}
+
+.admin-photo-card__container {
+  margin-bottom: 40px;
+}
+
+#uploadForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+#uploadForm input[type=file],
+#uploadForm input[type=text],
+#uploadForm input[type=number],
+#uploadForm button {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-transition: border-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
+}
+
+#uploadForm input[type=text]:focus,
+#uploadForm input[type=number]:focus,
+#uploadForm input[type=file]:focus {
+  border-color: #8c8c8c;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+
+#uploadForm button {
+  background-color: #4a4a4a;
+  color: #f7f7f7;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  -webkit-transition: background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, -webkit-box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
+}
+
+#uploadForm button:hover {
+  background-color: #333;
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#uploadForm button:active {
+  background-color: #222;
+}
+
+#uploadForm input[type=file]::-webkit-file-upload-button {
+  background-color: #4a4a4a;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+#uploadForm input[type=file]::file-selector-button {
+  background-color: #4a4a4a;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+#uploadForm input[type=file]::-webkit-file-upload-button:hover {
+  background-color: #333;
+}
+
+#uploadForm input[type=file]::file-selector-button:hover {
+  background-color: #333;
+}
+
+#uploadForm input::-webkit-input-placeholder {
+  color: #999;
+}
+
+#uploadForm input::-moz-placeholder {
+  color: #999;
+}
+
+#uploadForm input:-ms-input-placeholder {
+  color: #999;
+}
+
+#uploadForm input::-ms-input-placeholder {
+  color: #999;
+}
+
+#uploadForm input::placeholder {
+  color: #999;
+}
+
 @media screen and (max-width: 1280px) {
   .container {
     max-width: 95%;
@@ -1054,21 +1236,16 @@ body {
     font-size: 42px;
     margin-right: 0;
   }
-  .testimonials__row {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-  }
-  .card-testimonial {
+  .photo-card {
     -ms-flex-preferred-size: calc(50% - 15px);
         flex-basis: calc(50% - 15px);
   }
-  .card-testimonial__img-wrapper {
-    min-height: 340px;
-  }
-  .card-testimonial__img {
+  .photo-card-wrapper img {
     width: 100%;
+    height: 300px;
+  }
+  .photo-card-body {
+    height: calc(100% - 300px);
   }
   .footer__nav {
     -webkit-box-orient: vertical;
@@ -1177,7 +1354,7 @@ body {
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .card-testimonial {
+  .photo-card {
     -ms-flex-preferred-size: 100%;
         flex-basis: 100%;
   }
@@ -1269,16 +1446,19 @@ body {
   .header__title {
     font-size: 24px;
   }
-  .testimonials__row {
+  #photosContainer {
     row-gap: 20px;
   }
-  .card-testimonial {
+  .photo-card {
     border: 1px solid whitesmoke;
   }
-  .card-testimonial__img-wrapper {
-    min-height: 140px;
+  .photo-card-wrapper img {
+    min-height: 340px;
   }
-  .card-testimonial__name {
+  .photo-card-body {
+    height: calc(100% - 340px);
+  }
+  .card-testimonial__title {
     font-size: 16px;
   }
   .footer__nav-block {

@@ -1,0 +1,51 @@
+[
+  {
+    "name": "1729880067503.jpg",
+    "url": "http://localhost:3000/uploads/1729880067503.jpg",
+    "description": "7",
+    "decorName": "7",
+    "price": 97
+  },
+  {
+    "name": "1730110621706.jpg",
+    "url": "http://localhost:3000/uploads/1730110621706.jpg",
+    "description": "234",
+    "decorName": "24",
+    "price": 24
+  },
+  {
+    "name": "1730111338268.jpg",
+    "url": "http://localhost:3000/uploads/1730111338268.jpg",
+    "description": "egershesh egershesh egershesh egershesh egershesh egershesh egershesh egershesh egershesh ",
+    "decorName": "3wr",
+    "price": 24
+  },
+  {
+    "name": "1730115669884.jpeg",
+    "url": "http://localhost:3000/uploads/1730115669884.jpeg",
+    "description": "214",
+    "decorName": "234",
+    "price": 234
+  },
+  {
+    "name": "1730115774622.jpeg",
+    "url": "http://localhost:3000/uploads/1730115774622.jpeg",
+    "description": "Опис товару Опис товару Опис товару Опис товару Опис товару ",
+    "decorName": "Назва декору",
+    "price": 350
+  },
+  {
+    "name": "1730117779077.jpg",
+    "url": "http://localhost:3000/uploads/1730117779077.jpg",
+    "description": "234wrew",
+    "decorName": "wrewr",
+    "price": 24234
+  },
+  {
+    "name": "1730145037208.jpeg",
+    "url": "http://localhost:3000/uploads/1730145037208.jpeg",
+    "description": "з9ш",
+    "decorName": "лшор",
+    "price": 888
+  }
+]
