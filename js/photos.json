@@ -7,13 +7,6 @@
     "price": 97
   },
   {
-    "name": "1730110613331.jpg",
-    "url": "http://localhost:3000/uploads/1730110613331.jpg",
-    "description": "24",
-    "decorName": "24",
-    "price": 24
-  },
-  {
     "name": "1730110621706.jpg",
     "url": "http://localhost:3000/uploads/1730110621706.jpg",
     "description": "234",
@@ -54,5 +47,12 @@
     "description": "lkm",
     "decorName": "lk",
     "price": 88
+  },
+  {
+    "name": "1730145037208.jpeg",
+    "url": "http://localhost:3000/uploads/1730145037208.jpeg",
+    "description": "з9ш",
+    "decorName": "лшор",
+    "price": 888
   }
 ]

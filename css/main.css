@@ -344,11 +344,25 @@ body {
   gap: 30px;
 }
 
-.card-testimonial {
+/* Основні стилі для галереї */
+#photosContainer {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  gap: 30px;
+}
+
+.photo-card {
   border-radius: 5px;
   overflow: hidden;
-  -ms-flex-preferred-size: calc(25% - 30px);
-      flex-basis: calc(25% - 30px);
+  -ms-flex-preferred-size: calc(25% - 22.5px);
+      flex-basis: calc(25% - 22.5px);
   -webkit-transition: -webkit-box-shadow 0.2s ease-in;
   transition: -webkit-box-shadow 0.2s ease-in;
   transition: box-shadow 0.2s ease-in;
@@ -356,33 +370,54 @@ body {
   -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
           box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-.card-testimonial:hover {
+.photo-card:hover {
   -webkit-box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
           box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
 }
-.card-testimonial:hover .card-testimonial__btn-play {
+.photo-card:hover .card-testimonial__btn-play {
   opacity: 1;
   -webkit-transform: translateY(0%);
           transform: translateY(0%);
 }
-.card-testimonial:hover .card-testimonial__img {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
 
-.card-testimonial__img {
+.photo-card img {
+  max-width: 100%; /* Зображення займає всю ширину картки */
+  border-bottom: 1px solid #ddd; /* Рамка під зображенням */
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  min-height: 220px;
+  height: 220px;
 }
 
-.card-testimonial__img-wrapper {
-  overflow: hidden;
+.photo-card:hover img {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+}
+
+.photo-card-wrapper {
   position: relative;
-  max-height: 220px;
+  display: block;
+}
+
+.photo-card-body {
+  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: calc(100% - 220px);
+}
+
+.photo-card-wrapper {
+  overflow: hidden;
 }
 
 .card-testimonial__btn-play {
@@ -416,26 +451,41 @@ body {
   fill: #d6cee3;
 }
 
-.card-testimonial__body {
-  padding: 30px;
-}
-
-.card-testimonial__text {
-  margin-bottom: 23px;
-}
-
-.card-testimonial__name {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.card-testimonial__city {
+.photo-card-price {
   color: #58bebf;
+  text-align: left;
+  -ms-grid-column-align: end;
+      justify-self: end;
   -webkit-transition: color 0.2s ease-in;
   transition: color 0.2s ease-in;
+  -webkit-box-flex: 0.1;
+      -ms-flex: 0.1;
+          flex: 0.1;
 }
-.card-testimonial:hover .card-testimonial__city {
+.photo-card:hover .photo-card-price {
   color: #f78434;
+}
+
+.photo-card-text {
+  -ms-grid-column-align: end;
+      justify-self: end;
+  text-align: left;
+  color: #666;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-bottom: 20px;
+}
+
+.card-testimonial__title {
+  text-align: left;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  -webkit-box-flex: 0.2;
+      -ms-flex: 0.2;
+          flex: 0.2;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .button {
@@ -1030,127 +1080,6 @@ body {
     color: rgb(46, 45, 45);
   }
 }
-/* Основні стилі для галереї */
-.gallery {
-  padding: 40px 0; /* Відступи для галереї */
-  text-align: center; /* Вирівнювання тексту по центру */
-  background-color: #f9f9f9; /* Світло-сірий фон для галереї */
-  height: auto;
-}
-
-.gallery h2 {
-  font-size: 2.5em; /* Розмір заголовка */
-  margin-bottom: 20px; /* Відступ знизу */
-  font-weight: bold; /* Жирний шрифт */
-  color: #333; /* Колір заголовка */
-}
-
-#photosContainer {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-  gap: 30px;
-}
-
-.photo-card-wrapper {
-  overflow: hidden;
-}
-
-.photo-card img {
-  max-width: 100%; /* Зображення займає всю ширину картки */
-  border-bottom: 1px solid #ddd; /* Рамка під зображенням */
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 100%;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  height: 220px;
-}
-
-.photo-card:hover img {
-  -webkit-transform: scale(1.15);
-          transform: scale(1.15);
-}
-
-.photo-card {
-  border-radius: 5px;
-  overflow: hidden;
-  -ms-flex-preferred-size: calc(25% - 22.5px);
-      flex-basis: calc(25% - 22.5px);
-  -webkit-transition: -webkit-box-shadow 0.2s ease-in;
-  transition: -webkit-box-shadow 0.2s ease-in;
-  transition: box-shadow 0.2s ease-in;
-  transition: box-shadow 0.2s ease-in, -webkit-box-shadow 0.2s ease-in;
-  -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-.photo-card:hover {
-  -webkit-box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
-          box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
-}
-
-.photo-card-wrapper {
-  display: block;
-}
-
-.photo-card-body {
-  padding: 30px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  height: calc(100% - 220px);
-}
-
-.photo-card-price {
-  color: #58bebf;
-  text-align: left;
-  -ms-grid-column-align: end;
-      justify-self: end;
-  -webkit-transition: color 0.2s ease-in;
-  transition: color 0.2s ease-in;
-  -webkit-box-flex: 0.1;
-      -ms-flex: 0.1;
-          flex: 0.1;
-}
-.photo-card:hover .photo-card-price {
-  color: #f78434;
-}
-
-.photo-card-text {
-  -ms-grid-column-align: end;
-      justify-self: end;
-  text-align: left;
-  color: #666;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  margin-bottom: 20px;
-}
-
-.card-testimonial__title {
-  text-align: left;
-  -ms-grid-column-align: end;
-      justify-self: end;
-  -webkit-box-flex: 0.2;
-      -ms-flex: 0.2;
-          flex: 0.2;
-  font-size: 18px;
-  font-weight: 700;
-}
-
 .card-delete-button {
   margin-top: 10px;
 }

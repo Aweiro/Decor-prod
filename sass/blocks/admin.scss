@@ -1,118 +1,5 @@
-/* Основні стилі для галереї */
-.gallery {
-	padding: 40px 0; /* Відступи для галереї */
-	text-align: center; /* Вирівнювання тексту по центру */
-	background-color: #f9f9f9; /* Світло-сірий фон для галереї */
-	height: auto;
-
-}
-
-.gallery h2 {
-	font-size: 2.5em; /* Розмір заголовка */
-	margin-bottom: 20px; /* Відступ знизу */
-	font-weight: bold; /* Жирний шрифт */
-	color: #333; /* Колір заголовка */
-}
-
-#photosContainer {
-	flex-wrap: wrap;
-	position: relative;
-	display: flex;
-	justify-content: start;
-	gap: 30px;
-}
-
-
-.photo-card-wrapper {
-	overflow: hidden;
-}
-
-.photo-card img {
-	max-width: 100%; /* Зображення займає всю ширину картки */
-	border-bottom: 1px solid #ddd; /* Рамка під зображенням */
-
-	object-fit: cover;
-	width: 100%;
-	transition: all 0.5s ease-in-out;
-	height: 220px;
-	
-}
-.photo-card:hover img{
-	transform: scale(1.15);
-}
-
-
-
-///////
-///
-///
-///
-
-
-
-.photo-card {
-	border-radius: 5px;
-	// max-width: 19em;
-	overflow: hidden;
-	flex-basis: calc(25% - 22.5px);
-
-	
-	transition: box-shadow 0.2s ease-in;
-	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-
-	&:hover {
-		box-shadow: 0px 10px 52px 0px rgba(0, 0, 0, 0.08);
-	}
-}
-
-.photo-card-wrapper {
-	// min-height: 500px;
-	display: block;
-}
-
-.photo-card-body {
-	padding: 30px;
-	display: flex;
-	flex-direction: column; 
-	justify-content: space-between;
-	height: calc(100% - 220px);
-
-}
-
-.photo-card-price {
-	color: #58bebf;
-	text-align: left;
-	justify-self: end;
-	transition: color 0.2s ease-in;
-	flex: 0.1;
-
-	.photo-card:hover & {
-		color: #f78434;
-	}
-}
-
-.photo-card-text {
-	justify-self: end;
-	text-align: left;
-	color: #666;
-	flex: 1;
-	margin-bottom: 20px;
-	// min-height: 100%;
-
-}
-
-.card-testimonial__title {
-	text-align: left;
-	justify-self: end;
-	flex: 0.2;
-	font-size: 18px;
-	font-weight: 700;
-}
-
 .card-delete-button {
 	margin-top: 10px;
-
 }
 
 .admin-card-title {
@@ -125,10 +12,8 @@
 }
 
 
-////
-/// 
-/// 
-///
+// Форма завантаження
+
 #uploadForm {
   display: flex;
   flex-direction: column;
