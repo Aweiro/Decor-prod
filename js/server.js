@@ -9,16 +9,16 @@ const PORT = process.env.PORT || 3000;
 
 // Налаштування CORS
 app.use(cors());
-app.use(express.json()); // Додаємо підтримку JSON
+app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Статичні файли для папки uploads
 
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'uploads')); // Директорія для завантаження
+        cb(null, path.join(__dirname, 'uploads'));
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Додати дату до імені
+        cb(null, Date.now() + path.extname(file.originalname));
     },
 });
 
@@ -33,9 +33,13 @@ if (!fs.existsSync(dir)) {
 // Функція для читання photos.json
 const readPhotosJson = () => {
     const filePath = path.join(__dirname, 'photos.json');
-    if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath);
-        return JSON.parse(data);
+    try {
+        if (fs.existsSync(filePath)) {
+            const data = fs.readFileSync(filePath);
+            return JSON.parse(data);
+        }
+    } catch (error) {
+        console.error('Помилка читання photos.json:', error);
     }
     return [];
 };
@@ -43,7 +47,11 @@ const readPhotosJson = () => {
 // Функція для запису photos.json
 const writePhotosJson = (photos) => {
     const filePath = path.join(__dirname, 'photos.json');
-    fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
+    try {
+        fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
+    } catch (error) {
+        console.error('Помилка запису photos.json:', error);
+    }
 };
 
 // Обробка запиту на завантаження фото
@@ -78,7 +86,7 @@ app.delete('/photos/:name', (req, res) => {
     const photoName = req.params.name;
     const filePath = path.join(dir, photoName);
     
-    console.log('Спроба видалення:', filePath); // Лог для перевірки шляху до файлу
+    console.log('Спроба видалення:', filePath);
 
     fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
@@ -101,12 +109,12 @@ app.delete('/photos/:name', (req, res) => {
     });
 });
 
+// Кореневий маршрут для перевірки роботи сервера
+app.get('/', (req, res) => {
+    res.send('Сервер працює!');
+});
+
 // Запуск сервера
 app.listen(PORT, () => {
     console.log(`Сервер запущено на http://localhost:${PORT}`);
-});
-
-
-app.get('/', (req, res) => {
-	res.send('Сервер працює!');
 });
