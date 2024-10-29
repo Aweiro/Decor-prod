@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 3000;
 // Налаштування CORS
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Статичні файли для папки uploads
+
+// Статичні файли для папки uploads та public
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
@@ -61,7 +64,7 @@ app.post('/upload', upload.single('photo'), (req, res) => {
         const photos = readPhotosJson();
         const newPhoto = {
             name: req.file.filename,
-            url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`, // Автоматичне формування URL
+            url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
             description: description || 'Опис відсутній',
             decorName: decorName || 'Назва декору відсутня',
             price: price ? parseFloat(price) : 0
@@ -100,7 +103,6 @@ app.delete('/photos/:name', (req, res) => {
                 return res.status(500).json({ message: 'Не вдалося видалити фото.' });
             }
             
-            // Видаляємо фото з photos.json
             const photos = readPhotosJson().filter(photo => photo.name !== photoName);
             writePhotosJson(photos);
             
@@ -109,9 +111,9 @@ app.delete('/photos/:name', (req, res) => {
     });
 });
 
-// Кореневий маршрут для перевірки роботи сервера
+// Кореневий маршрут для відправки index.html
 app.get('/', (req, res) => {
-    res.send('Сервер працює!');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Запуск сервера
