@@ -11,11 +11,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Статичні файли для папок uploads і public
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Налаштування статичних файлів
+app.use('/uploads', express.static(path.join(__dirname, 'js/uploads')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
 // Додайте цей рядок для обслуговування статичних файлів з кореневої директорії
 app.use(express.static(__dirname));
@@ -23,7 +22,7 @@ app.use(express.static(__dirname));
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'uploads'));
+        cb(null, path.join(__dirname, 'js/uploads'));
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -33,14 +32,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Створення директорії uploads, якщо її немає
-const dir = path.join(__dirname, 'uploads');
+const dir = path.join(__dirname, 'js/uploads');
 if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 }
 
 // Функція для читання photos.json
 const readPhotosJson = () => {
-    const filePath = path.join(__dirname, 'photos.json');
+    const filePath = path.join(__dirname, 'js/photos.json');
     try {
         if (fs.existsSync(filePath)) {
             const data = fs.readFileSync(filePath);
@@ -54,7 +53,7 @@ const readPhotosJson = () => {
 
 // Функція для запису photos.json
 const writePhotosJson = (photos) => {
-    const filePath = path.join(__dirname, 'photos.json');
+    const filePath = path.join(__dirname, 'js/photos.json');
     try {
         fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
     } catch (error) {
@@ -64,15 +63,15 @@ const writePhotosJson = (photos) => {
 
 // Маршрути для відображення HTML-сторінок
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, '../about.html'));
+    res.sendFile(path.join(__dirname, 'about.html'));
 });
 
 app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, '../admin.html'));
+    res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
 // Обробка запиту на завантаження фото
