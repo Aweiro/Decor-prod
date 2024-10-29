@@ -1,9 +1,23 @@
 [
   {
-    "name": "1729876674259.jpg",
-    "url": "http://localhost:3000/uploads/1729876674259.jpg",
-    "description": "jjj",
-    "decorName": "ugh",
-    "price": "0"
+    "name": "1729878193541.jpg",
+    "url": "http://localhost:3000/uploads/1729878193541.jpg",
+    "description": "фф",
+    "decorName": "1",
+    "price": "2"
+  },
+  {
+    "name": "1729879541931.jpg",
+    "url": "http://localhost:3000/uploads/1729879541931.jpg",
+    "description": "ф",
+    "decorName": "ві",
+    "price": 1
+  },
+  {
+    "name": "1729879541934.jpg",
+    "url": "http://localhost:3000/uploads/1729879541934.jpg",
+    "description": "ф",
+    "decorName": "ві",
+    "price": 1
   }
 ]
