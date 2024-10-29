@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Статичні файли для папки uploads та public
+// Статичні файли для папок uploads і public
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -56,6 +56,19 @@ const writePhotosJson = (photos) => {
         console.error('Помилка запису photos.json:', error);
     }
 };
+
+// Маршрути для відображення HTML-сторінок
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'about.html'));
+});
+
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'admin.html'));
+});
 
 // Обробка запиту на завантаження фото
 app.post('/upload', upload.single('photo'), (req, res) => {
@@ -109,11 +122,6 @@ app.delete('/photos/:name', (req, res) => {
             res.status(200).json({ message: 'Фото успішно видалено.' });
         });
     });
-});
-
-// Кореневий маршрут для відправки index.html
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Запуск сервера
