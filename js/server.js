@@ -13,7 +13,9 @@ app.use(express.json());
 
 // Статичні файли для папок uploads і public
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Додайте цей рядок для обслуговування статичних файлів з кореневої директорії
 app.use(express.static(__dirname));
@@ -66,11 +68,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'about.html'));
+    res.sendFile(path.join(__dirname, '../about.html'));
 });
 
 app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin.html'));
+    res.sendFile(path.join(__dirname, '../admin.html'));
 });
 
 // Обробка запиту на завантаження фото
