@@ -1,4 +1,3 @@
-
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -11,12 +10,12 @@ const PORT = process.env.PORT || 3000;
 // Налаштування CORS
 app.use(cors());
 app.use(express.json()); // Додаємо підтримку JSON
-app.use('/uploads', express.static('uploads')); // Статичні файли для папки uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Статичні файли для папки uploads
 
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // Директорія для завантаження
+        cb(null, path.join(__dirname, 'uploads')); // Директорія для завантаження
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname)); // Додати дату до імені
@@ -26,15 +25,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Створення директорії uploads, якщо її немає
-const dir = './uploads';
+const dir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 }
 
 // Функція для читання photos.json
 const readPhotosJson = () => {
-    if (fs.existsSync('photos.json')) {
-        const data = fs.readFileSync('photos.json');
+    const filePath = path.join(__dirname, 'photos.json');
+    if (fs.existsSync(filePath)) {
+        const data = fs.readFileSync(filePath);
         return JSON.parse(data);
     }
     return [];
@@ -42,30 +42,30 @@ const readPhotosJson = () => {
 
 // Функція для запису photos.json
 const writePhotosJson = (photos) => {
-    fs.writeFileSync('photos.json', JSON.stringify(photos, null, 2));
+    const filePath = path.join(__dirname, 'photos.json');
+    fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
 };
 
 // Обробка запиту на завантаження фото
 app.post('/upload', upload.single('photo'), (req, res) => {
-  const { description, decorName, price } = req.body; // Додайте decorName
-  if (req.file) {
-      const photos = readPhotosJson();
-      const newPhoto = {
-          name: req.file.filename,
-          url: `http://localhost:${PORT}/uploads/${req.file.filename}`,
-          description: description || 'Опис відсутній',
-          decorName: decorName || 'Назва декору відсутня', // Додайте decorName
-          price: price ? parseFloat(price) : 0
-      };
-      photos.push(newPhoto);
-      writePhotosJson(photos);
-      
-      res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
-  } else {
-      res.status(400).json({ message: 'Не вдалося завантажити фото.' });
-  }
+    const { description, decorName, price } = req.body;
+    if (req.file) {
+        const photos = readPhotosJson();
+        const newPhoto = {
+            name: req.file.filename,
+            url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`, // Автоматичне формування URL
+            description: description || 'Опис відсутній',
+            decorName: decorName || 'Назва декору відсутня',
+            price: price ? parseFloat(price) : 0
+        };
+        photos.push(newPhoto);
+        writePhotosJson(photos);
+        
+        res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+    } else {
+        res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+    }
 });
-
 
 // Отримання списку фото
 app.get('/photos', (req, res) => {
