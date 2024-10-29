@@ -15,6 +15,9 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Додайте цей рядок для обслуговування статичних файлів з кореневої директорії
+app.use(express.static(__dirname));
+
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
