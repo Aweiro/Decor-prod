@@ -1,0 +1,9 @@
+{
+  "name": "Decor-prod",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node js/server.js"
+  },
+  "dependencies": {}
+}
+
