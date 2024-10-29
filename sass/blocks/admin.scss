@@ -85,3 +85,66 @@
 #uploadForm input::placeholder {
   color: #999;
 }
+
+// login form 
+
+#authSection {
+	background-color: #ffffff;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	width: 300px;
+	margin: 0 auto;
+
+	/* Центрування */
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#authSection h2 {
+	color: #333;
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+#password {
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	transition: border-color 0.3s ease;
+}
+
+#password:focus {
+	border-color: #007bff;
+	outline: none;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+#loginButton {
+	width: 100%;
+	padding: 0.75rem;
+	background-color: #007bff;
+	border: none;
+	color: #fff;
+	border-radius: 5px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#loginButton:hover {
+	background-color: #0056b3;
+}
+
+#authMessage {
+	margin-top: 1rem;
+	font-size: 0.9rem;
+	color: #ff4d4d;
+}
+

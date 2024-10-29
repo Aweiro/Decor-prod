@@ -9,6 +9,14 @@
 <body>
 	<main class="content">
 
+		<div id="authSection">
+			<h2>Введіть пароль для доступу до адмін-панелі</h2>
+			<input type="password" id="password" placeholder="Пароль" />
+			<button id="loginButton">Увійти</button>
+			<div id="authMessage"></div>
+	</div>
+	<div id="adminPanel" style="display:none;">
+
 		<nav class="nav">
 			<div class="container">
 				<div class="nav__row">
@@ -138,6 +146,47 @@
 	</button>
 
 </main>
+
 <script src="./js/script.js"></script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+			const isAdminLoggedIn = localStorage.getItem('isAdminLoggedIn');
+
+			if (isAdminLoggedIn === 'true') {
+					// Якщо адмін увійшов, показати адмін панель та завантажити фотографії
+					document.getElementById('authSection').style.display = 'none';
+					document.getElementById('adminPanel').style.display = 'block';
+					loadPhotos(); // Завантажуємо фотографії
+			} else {
+					// Якщо адмін не увійшов, показати форму входу
+					document.getElementById('authSection').style.display = 'block';
+					document.getElementById('adminPanel').style.display = 'none';
+					document.getElementById('photosContainer').style.display = 'none'; // Сховати контейнер з фото
+			}
+	});
+
+	document.getElementById('loginButton').addEventListener('click', function () {
+			const password = document.getElementById('password').value;
+			if (password === '1') { // Змініть на ваш пароль
+					localStorage.setItem('isAdminLoggedIn', 'true'); // Зберегти стан входу
+					document.getElementById('authSection').style.display = 'none';
+					document.getElementById('adminPanel').style.display = 'block';
+					document.getElementById('photosContainer').style.display = 'block'; // Показати контейнер з фото
+					loadPhotos(); // Завантажуємо фотографії
+			} else {
+					document.getElementById('authMessage').innerText = 'Невірний пароль.';
+					document.getElementById('photosContainer').style.display = 'none'; // Сховати контейнер з фото
+			}
+	});
+
+	function logout() {
+			localStorage.removeItem('isAdminLoggedIn'); // Очищаємо стан входу
+			document.getElementById('adminPanel').style.display = 'none'; // Сховати адмін панель
+			document.getElementById('authSection').style.display = 'block'; // Показати форму входу
+			document.getElementById('photosContainer').style.display = 'none'; // Сховати контейнер з фото
+	}
+</script>
+
 </body>
 </html>
