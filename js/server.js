@@ -12,17 +12,17 @@ app.use(cors());
 app.use(express.json());
 
 // Налаштування статичних файлів
-app.use('/uploads', express.static(path.join(__dirname, 'js/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 
-// Додайте цей рядок для обслуговування статичних файлів з кореневої директорії
+// Статичні HTML файли
 app.use(express.static(__dirname));
 
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'js/uploads'));
+        cb(null, path.join(__dirname, 'uploads'));
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -31,34 +31,26 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Створення директорії uploads, якщо її немає
-const dir = path.join(__dirname, 'js/uploads');
+// Створення директорії js/uploads, якщо її немає
+const dir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+    fs.mkdirSync(dir, { recursive: true });
 }
 
-// Функція для читання photos.json
+// Функція для читання js/photos.json
 const readPhotosJson = () => {
-    const filePath = path.join(__dirname, 'js/photos.json');
-    try {
-        if (fs.existsSync(filePath)) {
-            const data = fs.readFileSync(filePath);
-            return JSON.parse(data);
-        }
-    } catch (error) {
-        console.error('Помилка читання photos.json:', error);
+    const filePath = path.join(__dirname, 'photos.json');
+    if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, JSON.stringify([])); // Створити файл, якщо його немає
     }
-    return [];
+    const data = fs.readFileSync(filePath);
+    return JSON.parse(data);
 };
 
-// Функція для запису photos.json
+// Функція для запису у js/photos.json
 const writePhotosJson = (photos) => {
-    const filePath = path.join(__dirname, 'js/photos.json');
-    try {
-        fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
-    } catch (error) {
-        console.error('Помилка запису photos.json:', error);
-    }
+    const filePath = path.join(__dirname, 'photos.json');
+    fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
 };
 
 // Маршрути для відображення HTML-сторінок
@@ -105,18 +97,14 @@ app.get('/photos', (req, res) => {
 app.delete('/photos/:name', (req, res) => {
     const photoName = req.params.name;
     const filePath = path.join(dir, photoName);
-    
-    console.log('Спроба видалення:', filePath);
 
     fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
-            console.error('Файл не існує:', filePath);
             return res.status(404).json({ message: 'Файл не знайдено.' });
         }
         
         fs.unlink(filePath, (err) => {
             if (err) {
-                console.error('Помилка при видаленні:', err);
                 return res.status(500).json({ message: 'Не вдалося видалити фото.' });
             }
             
