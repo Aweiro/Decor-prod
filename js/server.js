@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true })); // Додаємо для обр
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/css', express.static(path.join(__dirname, '../css')));
 app.use('/img', express.static(path.join(__dirname, '../img')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/js', express.static(path.join(__dirname, '../js')));
 
 // Перевірка та створення директорії uploads
 const uploadDir = path.join(__dirname, 'uploads');
