@@ -236,6 +236,9 @@ fetch(`${baseUrl}/photos`)
   .catch(error => console.error('Error fetching photos:', error));
 
 
+// Динамічне визначення базового URL для запитів
+const baseUrl = window.location.origin;
+
 // Завантаження фотографій
 function loadPhotos() {
     fetch(`${baseUrl}/photos`)
@@ -309,6 +312,7 @@ function deletePhoto(photoName) {
     });
 }
 
+// Обробка форми завантаження фотографії
 document.getElementById('uploadForm').addEventListener('submit', function (e) {
     e.preventDefault();
     const formData = new FormData(this);
@@ -324,9 +328,11 @@ document.getElementById('uploadForm').addEventListener('submit', function (e) {
         return response.json();
     })
     .then(data => {
-        document.getElementById('uploadMessage').innerText = data.message;
-        loadPhotos();
+        document.getElementById('uploadMessage').innerText = data.message || 'Фото успішно завантажено!';
         this.reset();
+
+        // Перезавантажуємо сторінку після успішного завантаження
+        window.location.reload();
     })
     .catch(error => {
         document.getElementById('uploadMessage').innerText = 'Помилка завантаження.';
