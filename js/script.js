@@ -237,7 +237,7 @@ fetch(`${baseUrl}/photos`)
   .catch(error => console.error('Error fetching photos:', error));
 
 
-// Динамічне визначення базового URL для запитів
+
 
 
 // Завантаження фотографій
@@ -342,4 +342,4 @@ document.getElementById('uploadForm').addEventListener('submit', function (e) {
 });
 
 // Завантажуємо фото при завантаженні сторінки
-document.addEventListener('DOMContentLoaded', loadPhotos);
+// document.addEventListener('DOMContentLoaded', loadPhotos);
