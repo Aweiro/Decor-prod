@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Налаштування статичних файлів
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'js/uploads')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 
@@ -22,7 +22,7 @@ app.use(express.static(__dirname));
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'uploads')); // Виправлений шлях
+        cb(null, path.join(__dirname, 'js/uploads'));
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -32,9 +32,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Створення директорії uploads, якщо її немає
-const dir = path.join(__dirname, 'uploads');
+const dir = path.join(__dirname, 'js/uploads');
 if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+    fs.mkdirSync(dir);
 }
 
 // Функція для читання photos.json
