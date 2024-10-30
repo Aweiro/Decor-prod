@@ -13,11 +13,8 @@ app.use(express.json());
 
 // Налаштування статичних файлів
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/img', express.static(path.join(__dirname, 'img')));
-
-// Статичні HTML файли
-app.use(express.static(__dirname));
+app.use('/css', express.static(path.join(__dirname, '../css')));
+app.use('/img', express.static(path.join(__dirname, '../img')));
 
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
@@ -55,15 +52,15 @@ const writePhotosJson = (photos) => {
 
 // Маршрути для відображення HTML-сторінок
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'about.html'));
+    res.sendFile(path.join(__dirname, '../about.html'));
 });
 
 app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin.html'));
+    res.sendFile(path.join(__dirname, '../admin.html'));
 });
 
 // Обробка запиту на завантаження фото
