@@ -37,7 +37,7 @@ const upload = multer({ storage: storage });
 
 // Функція для читання photos.json
 const readPhotosJson = () => {
-    const filePath = path.join(__dirname, 'js', 'photos.json');
+    const filePath = path.join(__dirname, 'photos.json');
     if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, JSON.stringify([])); // Створити файл, якщо його немає
     }
@@ -47,7 +47,7 @@ const readPhotosJson = () => {
 
 // Функція для запису у photos.json
 const writePhotosJson = (photos) => {
-    const filePath = path.join(__dirname, 'js', 'photos.json');
+    const filePath = path.join(__dirname, 'photos.json');
     fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
 };
 
