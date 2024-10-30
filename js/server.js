@@ -31,13 +31,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Створення директорії js/uploads, якщо її немає
+// Створення директорії uploads, якщо її немає
 const dir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
 }
 
-// Функція для читання js/photos.json
+// Функція для читання photos.json
 const readPhotosJson = () => {
     const filePath = path.join(__dirname, 'photos.json');
     if (!fs.existsSync(filePath)) {
@@ -47,7 +47,7 @@ const readPhotosJson = () => {
     return JSON.parse(data);
 };
 
-// Функція для запису у js/photos.json
+// Функція для запису у photos.json
 const writePhotosJson = (photos) => {
     const filePath = path.join(__dirname, 'photos.json');
     fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
