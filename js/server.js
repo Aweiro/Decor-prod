@@ -10,19 +10,22 @@ const PORT = process.env.PORT || 3000;
 // Налаштування CORS
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // Додаємо для обробки form-data
 
 // Налаштування статичних файлів
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/css', express.static(path.join(__dirname, '../css')));
 app.use('/img', express.static(path.join(__dirname, '../img')));
 
+// Перевірка та створення директорії uploads
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 // Налаштування для зберігання файлів
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadDir = path.join(__dirname, 'uploads');
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-        }
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
@@ -34,7 +37,7 @@ const upload = multer({ storage: storage });
 
 // Функція для читання photos.json
 const readPhotosJson = () => {
-    const filePath = path.join(__dirname, 'photos.json');
+    const filePath = path.join(__dirname, 'js', 'photos.json');
     if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, JSON.stringify([])); // Створити файл, якщо його немає
     }
@@ -44,7 +47,7 @@ const readPhotosJson = () => {
 
 // Функція для запису у photos.json
 const writePhotosJson = (photos) => {
-    const filePath = path.join(__dirname, 'photos.json');
+    const filePath = path.join(__dirname, 'js', 'photos.json');
     fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
 };
 
@@ -63,6 +66,10 @@ app.get('/admin', (req, res) => {
 
 // Обробка запиту на завантаження фото
 app.post('/upload', upload.single('photo'), (req, res) => {
+    console.log("Запит на завантаження фото отримано"); // Лог для підтвердження запиту
+    console.log("Дані форми:", req.body);
+    console.log("Файл:", req.file);
+
     const { description, decorName, price } = req.body;
     if (req.file) {
         const photos = readPhotosJson();
@@ -76,8 +83,10 @@ app.post('/upload', upload.single('photo'), (req, res) => {
         photos.push(newPhoto);
         writePhotosJson(photos);
         
+        console.log("Фото успішно збережено:", newPhoto); // Лог для підтвердження збереження
         res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
     } else {
+        console.log("Фото не завантажено"); // Лог для випадку, коли файл не завантажено
         res.status(400).json({ message: 'Не вдалося завантажити фото.' });
     }
 });
@@ -91,7 +100,7 @@ app.get('/photos', (req, res) => {
 // Видалення фото
 app.delete('/photos/:name', (req, res) => {
     const photoName = req.params.name;
-    const filePath = path.join(__dirname, 'uploads', photoName);
+    const filePath = path.join(uploadDir, photoName);
 
     fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
