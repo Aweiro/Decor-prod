@@ -134,6 +134,7 @@ if (consultationForm) {
 }
 
 
+
 // Запит на отримання фотографій
 fetch(`${baseUrl}/photos`)
   .then(response => {
@@ -237,7 +238,7 @@ fetch(`${baseUrl}/photos`)
 
 
 // Динамічне визначення базового URL для запитів
-const baseUrl = window.location.origin;
+
 
 // Завантаження фотографій
 function loadPhotos() {
