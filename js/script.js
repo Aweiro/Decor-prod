@@ -241,105 +241,104 @@ fetch(`${baseUrl}/photos`)
 
 
 // Завантаження фотографій
+// Завантаження фотографій
 function loadPhotos() {
-    fetch(`${baseUrl}/photos`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(photos => {
-            const photoList = document.getElementById('photoList');
-            photoList.innerHTML = '';
-            photos.forEach(photo => {
-                console.log('Отримане фото:', photo);
+	fetch(`${baseUrl}/photos`)
+			.then(response => {
+					if (!response.ok) {
+							throw new Error('Network response was not ok');
+					}
+					return response.json();
+			})
+			.then(photos => {
+					const photoList = document.getElementById('photoList');
+					photoList.innerHTML = '';
+					photos.forEach(photo => {
+							console.log('Отримане фото:', photo);
 
-                const photoCard = document.createElement('div');
-                photoCard.className = 'photo-card';
+							const photoCard = document.createElement('div');
+							photoCard.className = 'photo-card';
 
-                const imgWrapper = document.createElement('div');
-                imgWrapper.className = 'photo-card-wrapper';
+							const imgWrapper = document.createElement('div');
+							imgWrapper.className = 'photo-card-wrapper';
 
-                const img = document.createElement('img');
-                img.src = photo.url;
-                img.alt = photo.name;
+							const img = document.createElement('img');
+							img.src = photo.url;
+							img.alt = photo.name;
 
-                const photoBody = document.createElement('div');
-                photoBody.className = 'photo-card-body';
+							const photoBody = document.createElement('div');
+							photoBody.className = 'photo-card-body';
 
-                const description = document.createElement('p');
-                description.className = 'photo-card-text';
-                description.innerText = photo.description || 'Опис відсутній';
+							const description = document.createElement('p');
+							description.className = 'photo-card-text';
+							description.innerText = photo.description || 'Опис відсутній';
 
-                const title = document.createElement('h3');
-                title.className = 'card-testimonial__title';
-                title.innerText = photo.decorName || 'Назва декору відсутня';
+							const title = document.createElement('h3');
+							title.className = 'card-testimonial__title';
+							title.innerText = photo.decorName || 'Назва декору відсутня';
 
-                const price = document.createElement('p');
-                price.className = 'photo-card-price';
-                price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`;
+							const price = document.createElement('p');
+							price.className = 'photo-card-price';
+							price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`;
 
-                const deleteButton = document.createElement('button');
-                deleteButton.innerText = 'Видалити';
-                deleteButton.className = 'card-delete-button button';
-                deleteButton.onclick = () => deletePhoto(photo.name);
+							const deleteButton = document.createElement('button');
+							deleteButton.innerText = 'Видалити';
+							deleteButton.className = 'card-delete-button button';
+							deleteButton.onclick = () => deletePhoto(photo.name);
 
-                imgWrapper.appendChild(img);
-                photoBody.appendChild(description);
-                photoBody.appendChild(title);
-                photoBody.appendChild(price);
-                photoBody.appendChild(deleteButton);
-                photoCard.appendChild(imgWrapper);
-                photoCard.appendChild(photoBody);
-                photoList.appendChild(photoCard);
-            });
-        })
-        .catch(error => console.error('Error fetching photos:', error));
+							imgWrapper.appendChild(img);
+							photoBody.appendChild(description);
+							photoBody.appendChild(title);
+							photoBody.appendChild(price);
+							photoBody.appendChild(deleteButton);
+							photoCard.appendChild(imgWrapper);
+							photoCard.appendChild(photoBody);
+							photoList.appendChild(photoCard);
+					});
+			})
+			.catch(error => console.error('Error fetching photos:', error));
 }
 
 // Видалення фотографії
 function deletePhoto(photoName) {
-    fetch(`${baseUrl}/photos/${photoName}`, {
-        method: 'DELETE',
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        loadPhotos();
-    })
-    .catch(error => {
-        console.error('Error deleting photo:', error);
-    });
+	fetch(`${baseUrl}/photos/${photoName}`, {
+			method: 'DELETE',
+	})
+	.then(response => response.json())
+	.then(data => {
+			alert(data.message);
+			loadPhotos();
+	})
+	.catch(error => {
+			console.error('Error deleting photo:', error);
+	});
 }
 
 // Обробка форми завантаження фотографії
 document.getElementById('uploadForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const formData = new FormData(this);
+	e.preventDefault();
+	const formData = new FormData(this);
 
-    fetch(`${baseUrl}/upload`, {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        document.getElementById('uploadMessage').innerText = data.message || 'Фото успішно завантажено!';
-        this.reset();
-
-        // Перезавантажуємо сторінку після успішного завантаження
-        window.location.reload();
-    })
-    .catch(error => {
-        document.getElementById('uploadMessage').innerText = 'Помилка завантаження.';
-        console.error('Error:', error);
-    });
+	fetch(`${baseUrl}/upload`, {
+			method: 'POST',
+			body: formData,
+	})
+	.then(response => {
+			if (!response.ok) {
+					throw new Error('Network response was not ok');
+			}
+			return response.json();
+	})
+	.then(data => {
+			alert(data.message); // Повідомлення про успішне завантаження
+			loadPhotos();
+			this.reset();
+	})
+	.catch(error => {
+			document.getElementById('uploadMessage').innerText = 'Помилка завантаження.';
+			console.error('Error:', error);
+	});
 });
 
 // Завантажуємо фото при завантаженні сторінки
-// document.addEventListener('DOMContentLoaded', loadPhotos);
+document.addEventListener('DOMContentLoaded', loadPhotos);
