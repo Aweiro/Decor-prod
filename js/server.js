@@ -3,9 +3,13 @@ const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
+const db = require('./firebase');
+
+const bodyParser = require('body-parser');
+const upload = multer({ dest: 'uploads/' });
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 // Налаштування CORS
 app.use(cors());
@@ -19,38 +23,38 @@ app.use('/img', express.static(path.join(__dirname, '../img')));
 app.use('/js', express.static(path.join(__dirname, '../js')));
 
 // Перевірка та створення директорії uploads
-const uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
+// const uploadDir = path.join(__dirname, 'uploads');
+// if (!fs.existsSync(uploadDir)) {
+//     fs.mkdirSync(uploadDir, { recursive: true });
+// }
 
 // Налаштування для зберігання файлів
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    },
-});
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, uploadDir);
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + path.extname(file.originalname));
+//     },
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
 // Функція для читання photos.json
-const readPhotosJson = () => {
-    const filePath = path.join(__dirname, 'photos.json');
-    if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, JSON.stringify([])); // Створити файл, якщо його немає
-    }
-    const data = fs.readFileSync(filePath);
-    return JSON.parse(data);
-};
+// const readPhotosJson = () => {
+//     const filePath = path.join(__dirname, 'photos.json');
+//     if (!fs.existsSync(filePath)) {
+//         fs.writeFileSync(filePath, JSON.stringify([])); // Створити файл, якщо його немає
+//     }
+//     const data = fs.readFileSync(filePath);
+//     return JSON.parse(data);
+// };
 
 // Функція для запису у photos.json
-const writePhotosJson = (photos) => {
-    const filePath = path.join(__dirname, 'photos.json');
-    fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
-};
+// const writePhotosJson = (photos) => {
+//     const filePath = path.join(__dirname, 'photos.json');
+//     fs.writeFileSync(filePath, JSON.stringify(photos, null, 2));
+// };
 
 // Маршрути для відображення HTML-сторінок
 app.get('/', (req, res) => {
@@ -66,62 +70,100 @@ app.get('/admin', (req, res) => {
 });
 
 // Обробка запиту на завантаження фото
-app.post('/upload', upload.single('photo'), (req, res) => {
-    console.log("Запит на завантаження фото отримано"); // Лог для підтвердження запиту
-    console.log("Дані форми:", req.body);
-    console.log("Файл:", req.file);
+// app.post('/upload', upload.single('photo'), (req, res) => {
+//     console.log("Запит на завантаження фото отримано"); // Лог для підтвердження запиту
+//     console.log("Дані форми:", req.body);
+//     console.log("Файл:", req.file);
 
-    const { description, decorName, price } = req.body;
-    if (req.file) {
-        const photos = readPhotosJson();
-        const newPhoto = {
-            name: req.file.filename,
-            url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
-            description: description || 'Опис відсутній',
-            decorName: decorName || 'Назва декору відсутня',
-            price: price ? parseFloat(price) : 0
-        };
-        photos.push(newPhoto);
-        writePhotosJson(photos);
+//     const { description, decorName, price } = req.body;
+//     if (req.file) {
+//         const photos = readPhotosJson();
+//         const newPhoto = {
+//             name: req.file.filename,
+//             url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
+//             description: description || 'Опис відсутній',
+//             decorName: decorName || 'Назва декору відсутня',
+//             price: price ? parseFloat(price) : 0
+//         };
+//         photos.push(newPhoto);
+//         writePhotosJson(photos);
         
-        console.log("Фото успішно збережено:", newPhoto); // Лог для підтвердження збереження
-        res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
-    } else {
-        console.log("Фото не завантажено"); // Лог для випадку, коли файл не завантажено
-        res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+//         console.log("Фото успішно збережено:", newPhoto); // Лог для підтвердження збереження
+//         res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+//     } else {
+//         console.log("Фото не завантажено"); // Лог для випадку, коли файл не завантажено
+//         res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+//     }
+// });
+
+// Отримання списку фото
+app.get('/photos', async (req, res) => {
+    try {
+        const photosSnapshot = await db.collection('photos').get();
+        const photos = photosSnapshot.docs.map(doc => doc.data());
+        res.status(200).json(photos);
+    } catch (error) {
+        console.error('Помилка отримання фото з Firestore:', error);
+        res.status(500).send('Не вдалося отримати фото');
     }
 });
 
-// Отримання списку фото
-app.get('/photos', (req, res) => {
-    const photos = readPhotosJson();
-    res.status(200).json(photos);
+// Додавання нового фото
+app.post('/upload', upload.single('photo'), async (req, res) => {
+  console.log("Запит на завантаження фото отримано");
+  console.log("Дані форми:", req.body);
+  console.log("Файл:", req.file);
+
+  const { description, decorName, price } = req.body;
+  if (req.file) {
+      try {
+          const newPhoto = {
+              name: req.file.filename,
+              url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
+              description: description || 'Опис відсутній',
+              decorName: decorName || 'Назва декору відсутня',
+              price: price ? parseFloat(price) : 0
+          };
+          
+          // Додавання фото в колекцію Firestore
+          await db.collection('photos').add(newPhoto);
+          
+          console.log("Фото успішно збережено:", newPhoto);
+          res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+      } catch (error) {
+          console.error("Помилка збереження фото в Firestore:", error);
+          res.status(500).json({ message: 'Не вдалося зберегти фото.' });
+      }
+  } else {
+      console.log("Фото не завантажено");
+      res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+  }
 });
 
 // Видалення фото
-app.delete('/photos/:name', (req, res) => {
-    const photoName = req.params.name;
-    const filePath = path.join(uploadDir, photoName);
+app.delete('/photos/:name', async (req, res) => {
+  const photoName = req.params.name;
 
-    fs.access(filePath, fs.constants.F_OK, (err) => {
-        if (err) {
-            return res.status(404).json({ message: 'Файл не знайдено.' });
-        }
-        
-        fs.unlink(filePath, (err) => {
-            if (err) {
-                return res.status(500).json({ message: 'Не вдалося видалити фото.' });
-            }
-            
-            const photos = readPhotosJson().filter(photo => photo.name !== photoName);
-            writePhotosJson(photos);
-            
-            res.status(200).json({ message: 'Фото успішно видалено.' });
-        });
-    });
+  try {
+      const photoSnapshot = await db.collection('photos').where('name', '==', photoName).get();
+      
+      if (photoSnapshot.empty) {
+          return res.status(404).json({ message: 'Фото не знайдено.' });
+      }
+
+      photoSnapshot.forEach(async doc => {
+          await doc.ref.delete();
+      });
+      
+      res.status(200).json({ message: 'Фото успішно видалено.' });
+  } catch (error) {
+      console.error('Помилка видалення фото з Firestore:', error);
+      res.status(500).json({ message: 'Не вдалося видалити фото.' });
+  }
 });
 
-// Запуск сервера
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Сервер запущено на http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
