@@ -108,6 +108,7 @@ app.get('/photos', async (req, res) => {
     }
 });
 
+
 // Додавання нового фото
 app.post('/upload', upload.single('photo'), async (req, res) => {
   console.log("Запит на завантаження фото отримано");
@@ -117,13 +118,14 @@ app.post('/upload', upload.single('photo'), async (req, res) => {
   const { description, decorName, price } = req.body;
   if (req.file) {
       try {
-          const newPhoto = {
-              name: req.file.filename,
-              url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
-              description: description || 'Опис відсутній',
-              decorName: decorName || 'Назва декору відсутня',
-              price: price ? parseFloat(price) : 0
-          };
+        const newPhoto = {
+          name: req.file.filename,
+          url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`.replace('http:', 'https:'),
+          description: description || 'Опис відсутній',
+          decorName: decorName || 'Назва декору відсутня',
+          price: price ? parseFloat(price) : 0
+      };
+      
           
           // Додавання фото в колекцію Firestore
           await db.collection('photos').add(newPhoto);
