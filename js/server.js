@@ -73,7 +73,8 @@ app.post('/upload', upload.single('photo'), (req, res) => {
         });
 
         blobStream.on('finish', async () => {
-            const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.originalname)}?alt=media&token=${uniqueToken}`;
+            // const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.originalname)}?alt=media&token=${uniqueToken}`;
+            const publicUrl = `https://firebasestorage.googleapis.com/v0/b/west-decor.appspot.com/o/uploads%2F1.jpg?alt=media&token=67296033-1b58-45c4-878d-e8a9e424a4e3`;
 
             const newPhoto = {
                 name: req.file.originalname,
