@@ -138,6 +138,27 @@ app.post('/upload', upload.single('photo'), async (req, res) => {
 //     }
 // });
 
+app.delete('/photos/:name', async (req, res) => {
+  const photoName = req.params.name;
+
+  try {
+      const photoSnapshot = await db.collection('photos').where('name', '==', photoName).get();
+      
+      if (photoSnapshot.empty) {
+          return res.status(404).json({ message: 'Фото не знайдено.' });
+      }
+
+      photoSnapshot.forEach(async doc => {
+          await doc.ref.delete();
+      });
+      
+      res.status(200).json({ message: 'Фото успішно видалено.' });
+  } catch (error) {
+      console.error('Помилка видалення фото з Firestore:', error);
+      res.status(500).json({ message: 'Не вдалося видалити фото.' });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
