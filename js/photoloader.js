@@ -183,30 +183,30 @@ function deletePhoto(photoName) {
 }
 
 // Обробка форми завантаження фотографії
-document.getElementById('uploadForm').addEventListener('submit', function (e) {
-	e.preventDefault();
-	const formData = new FormData(this);
+// document.getElementById('uploadForm').addEventListener('submit', function (e) {
+// 	e.preventDefault();
+// 	const formData = new FormData(this);
 
-	fetch(`${baseUrl}/upload`, {
-			method: 'POST',
-			body: formData,
-	})
-	.then(response => {
-			if (!response.ok) {
-					throw new Error('Network response was not ok');
-			}
-			return response.json();
-	})
-	.then(data => {
-			alert(data.message); // Повідомлення про успішне завантаження
-			loadPhotos();
-			this.reset();
-	})
-	.catch(error => {
-			document.getElementById('uploadMessage').innerText = 'Помилка завантаження.';
-			console.error('Error:', error);
-	});
-});
+// 	fetch(`${baseUrl}/upload`, {
+// 			method: 'POST',
+// 			body: formData,
+// 	})
+// 	.then(response => {
+// 			if (!response.ok) {
+// 					throw new Error('Network response was not ok');
+// 			}
+// 			return response.json();
+// 	})
+// 	.then(data => {
+// 			alert(data.message); // Повідомлення про успішне завантаження
+// 			loadPhotos();
+// 			this.reset();
+// 	})
+// 	.catch(error => {
+// 			document.getElementById('uploadMessage').innerText = 'Помилка завантаження.';
+// 			console.error('Error:', error);
+// 	});
+// });
 
 // Завантажуємо фото при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', loadPhotos);
