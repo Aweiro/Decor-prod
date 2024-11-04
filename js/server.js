@@ -56,34 +56,52 @@ app.post('/upload', upload.single('photo'), async (req, res) => {
   console.log("Файл:", req.file);
 
   const { description, decorName, price } = req.body;
-  if (req.file) {
-		const uniqueToken = uuidv4();
-      try {
-				// const publicUrl = `https://firebasestorage.googleapis.com/v0/b/west-decor.appspot.com/o/uploads%2F1.jpg?alt=media&token=67296033-1b58-45c4-878d-e8a9e424a4e3`;
-        const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.originalname)}?alt=media&token=${uniqueToken}`;
 
-				
-				const newPhoto = {
-						name: req.file.originalname,
-						url: publicUrl,
-						description: description || 'Опис відсутній',
-						decorName: decorName || 'Назва декору відсутня',
-						price: price ? parseFloat(price) : 0
-				};
-      
-          
-          // Додавання фото в колекцію Firestore
-          await db.collection('photos').add(newPhoto);
-          
-          console.log("Фото успішно збережено:", newPhoto);
-          res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
-      } catch (error) {
-          console.error("Помилка збереження фото в Firestore:", error);
-          res.status(500).json({ message: 'Не вдалося зберегти фото.' });
+  if (req.file) {
+    const uniqueToken = uuidv4();
+    const blob = bucket.file(`uploads/${req.file.originalname}`);
+    const blobStream = blob.createWriteStream({
+      metadata: {
+        contentType: req.file.mimetype,
+        metadata: {
+          firebaseStorageDownloadTokens: uniqueToken
+        }
       }
+    });
+
+    blobStream.on('error', (error) => {
+      console.error("Помилка завантаження в Firebase Storage:", error);
+      res.status(500).json({ message: 'Не вдалося завантажити фото.' });
+    });
+
+    blobStream.on('finish', async () => {
+      const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.originalname)}?alt=media&token=${uniqueToken}`;
+
+      const newPhoto = {
+        name: req.file.originalname,
+        url: publicUrl,
+        description: description || 'Опис відсутній',
+        decorName: decorName || 'Назва декору відсутня',
+        price: price ? parseFloat(price) : 0
+      };
+
+      try {
+        // Додавання фото в колекцію Firestore
+        await db.collection('photos').add(newPhoto);
+
+        console.log("Фото успішно збережено:", newPhoto);
+        res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+      } catch (error) {
+        console.error("Помилка збереження фото в Firestore:", error);
+        res.status(500).json({ message: 'Не вдалося зберегти фото в Firestore.' });
+      }
+    });
+
+    // Завершення завантаження у Firebase Storage
+    blobStream.end(req.file.buffer);
   } else {
-      console.log("Фото не завантажено");
-      res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+    console.log("Фото не завантажено");
+    res.status(400).json({ message: 'Не вдалося завантажити фото.' });
   }
 });
 
