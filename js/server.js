@@ -109,48 +109,53 @@ app.get('/photos', async (req, res) => {
 
 
 // Додавання нового фото
-if (req.file) {
-	const uniqueToken = uuidv4();
-	const blob = bucket.file(`uploads/${req.file.filename}`);
-	const blobStream = blob.createWriteStream({
-			metadata: {
-					contentType: req.file.mimetype,
+app.post('/upload', upload.single('photo'), (req, res) => {
+	const { description, decorName, price } = req.body;
+	
+	if (req.file) {
+			const uniqueToken = uuidv4();
+			const blob = bucket.file(`uploads/${req.file.filename}`);
+			const blobStream = blob.createWriteStream({
 					metadata: {
-							firebaseStorageDownloadTokens: uniqueToken
+							contentType: req.file.mimetype,
+							metadata: {
+									firebaseStorageDownloadTokens: uniqueToken
+							}
 					}
-			}
-	});
+			});
 
-	blobStream.on('error', (error) => {
-			console.error("Помилка завантаження в Firebase Storage:", error);
-			res.status(500).json({ message: 'Не вдалося завантажити фото.' });
-	});
+			blobStream.on('error', (error) => {
+					console.error("Помилка завантаження в Firebase Storage:", error);
+					res.status(500).json({ message: 'Не вдалося завантажити фото.' });
+			});
 
-	blobStream.on('finish', async () => {
-			const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
+			blobStream.on('finish', async () => {
+					const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
 
-			const newPhoto = {
-					name: req.file.filename,
-					url: publicUrl,
-					description: description || 'Опис відсутній',
-					decorName: decorName || 'Назва декору відсутня',
-					price: price ? parseFloat(price) : 0
-			};
+					const newPhoto = {
+							name: req.file.filename,
+							url: publicUrl,
+							description: description || 'Опис відсутній',
+							decorName: decorName || 'Назва декору відсутня',
+							price: price ? parseFloat(price) : 0
+					};
 
-			try {
-					await db.collection('photos').add(newPhoto);
-					console.log("Фото успішно збережено:", newPhoto);
-					res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
-			} catch (error) {
-					console.error("Помилка збереження в Firestore:", error);
-					res.status(500).json({ message: 'Не вдалося зберегти фото в Firestore.' });
-			}
-	});
+					try {
+							await db.collection('photos').add(newPhoto);
+							console.log("Фото успішно збережено:", newPhoto);
+							res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+					} catch (error) {
+							console.error("Помилка збереження в Firestore:", error);
+							res.status(500).json({ message: 'Не вдалося зберегти фото в Firestore.' });
+					}
+			});
 
-	blobStream.end(req.file.buffer);
-} else {
-	res.status(400).json({ message: 'Не вдалося завантажити фото.' });
-}
+			blobStream.end(req.file.buffer);
+	} else {
+			res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+	}
+});
+
 
 
 
