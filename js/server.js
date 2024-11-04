@@ -109,39 +109,27 @@ app.get('/photos', async (req, res) => {
 
 
 // Додавання нового фото
-app.post('/upload', upload.single('photo'), async (req, res) => {
-  console.log("Запит на завантаження фото отримано");
-  console.log("Дані форми:", req.body);
-  console.log("Файл:", req.file);
+blobStream.on('finish', async () => {
+	const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
 
-  const { description, decorName, price } = req.body;
-  if (req.file) {
-      try {
-				const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
+	const newPhoto = {
+			name: req.file.filename,
+			url: publicUrl, // Firebase URL для зображення
+			description: description || 'Опис відсутній',
+			decorName: decorName || 'Назва декору відсутня',
+			price: price ? parseFloat(price) : 0
+	};
 
-        const newPhoto = {
-          name: req.file.filename,
-          url: publicUrl, // Firebase URL для зображення
-       		description: description || 'Опис відсутній',
-          decorName: decorName || 'Назва декору відсутня',
-          price: price ? parseFloat(price) : 0
-      };
-      
-          
-          // Додавання фото в колекцію Firestore
-          await db.collection('photos').add(newPhoto);
-          
-          console.log("Фото успішно збережено:", newPhoto);
-          res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
-      } catch (error) {
-          console.error("Помилка збереження фото в Firestore:", error);
-          res.status(500).json({ message: 'Не вдалося зберегти фото.' });
-      }
-  } else {
-      console.log("Фото не завантажено");
-      res.status(400).json({ message: 'Не вдалося завантажити фото.' });
-  }
+	try {
+			await db.collection('photos').add(newPhoto);
+			console.log("Фото успішно збережено:", newPhoto);
+			res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+	} catch (error) {
+			console.error("Помилка збереження в Firestore:", error);
+			res.status(500).json({ message: 'Не вдалося зберегти фото в Firestore.' });
+	}
 });
+
 
 // Видалення фото
 app.delete('/photos/:name', async (req, res) => {
