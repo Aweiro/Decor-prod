@@ -29,7 +29,7 @@ fetch(`${baseUrl}/photos`)
 
           // Створення зображення
           const img = document.createElement('img');
-          img.src = photo.url;
+          img.src = publicUrl;
           img.alt = photo.name || 'Фото';
 
           // Тіло картки
@@ -132,7 +132,7 @@ function loadPhotos() {
 							imgWrapper.className = 'photo-card-wrapper';
 
 							const img = document.createElement('img');
-							img.src = photo.url;
+							img.src = publicUrl;
 							img.alt = photo.name;
 
 							const photoBody = document.createElement('div');
@@ -188,7 +188,7 @@ document.getElementById('uploadForm').addEventListener('submit', function (e) {
 	e.preventDefault();
 	const formData = new FormData(this);
 
-	fetch(`${publicUrl}/uploads`, {
+	fetch(`${baseUrl}/upload`, {
 			method: 'POST',
 			body: formData,
 	})
