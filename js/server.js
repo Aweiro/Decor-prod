@@ -109,49 +109,49 @@ app.get('/photos', async (req, res) => {
 
 
 // Додавання нового фото
-blobStream.on('finish', async () => {
-	const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
+if (req.file) {
+	const uniqueToken = uuidv4();
+	const blob = bucket.file(`uploads/${req.file.filename}`);
+	const blobStream = blob.createWriteStream({
+			metadata: {
+					contentType: req.file.mimetype,
+					metadata: {
+							firebaseStorageDownloadTokens: uniqueToken
+					}
+			}
+	});
 
-	const newPhoto = {
-			name: req.file.filename,
-			url: publicUrl, // Firebase URL для зображення
-			description: description || 'Опис відсутній',
-			decorName: decorName || 'Назва декору відсутня',
-			price: price ? parseFloat(price) : 0
-	};
+	blobStream.on('error', (error) => {
+			console.error("Помилка завантаження в Firebase Storage:", error);
+			res.status(500).json({ message: 'Не вдалося завантажити фото.' });
+	});
 
-	try {
-			await db.collection('photos').add(newPhoto);
-			console.log("Фото успішно збережено:", newPhoto);
-			res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
-	} catch (error) {
-			console.error("Помилка збереження в Firestore:", error);
-			res.status(500).json({ message: 'Не вдалося зберегти фото в Firestore.' });
-	}
-});
+	blobStream.on('finish', async () => {
+			const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
 
+			const newPhoto = {
+					name: req.file.filename,
+					url: publicUrl,
+					description: description || 'Опис відсутній',
+					decorName: decorName || 'Назва декору відсутня',
+					price: price ? parseFloat(price) : 0
+			};
 
-// Видалення фото
-app.delete('/photos/:name', async (req, res) => {
-  const photoName = req.params.name;
+			try {
+					await db.collection('photos').add(newPhoto);
+					console.log("Фото успішно збережено:", newPhoto);
+					res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+			} catch (error) {
+					console.error("Помилка збереження в Firestore:", error);
+					res.status(500).json({ message: 'Не вдалося зберегти фото в Firestore.' });
+			}
+	});
 
-  try {
-      const photoSnapshot = await db.collection('photos').where('name', '==', photoName).get();
-      
-      if (photoSnapshot.empty) {
-          return res.status(404).json({ message: 'Фото не знайдено.' });
-      }
+	blobStream.end(req.file.buffer);
+} else {
+	res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+}
 
-      photoSnapshot.forEach(async doc => {
-          await doc.ref.delete();
-      });
-      
-      res.status(200).json({ message: 'Фото успішно видалено.' });
-  } catch (error) {
-      console.error('Помилка видалення фото з Firestore:', error);
-      res.status(500).json({ message: 'Не вдалося видалити фото.' });
-  }
-});
 
 
 const PORT = process.env.PORT || 3000;

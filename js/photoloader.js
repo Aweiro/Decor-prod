@@ -1,5 +1,6 @@
 // Динамічне визначення базового URL для запитів
 const baseUrl = window.location.origin;
+const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
 
 
 
@@ -187,7 +188,7 @@ document.getElementById('uploadForm').addEventListener('submit', function (e) {
 	e.preventDefault();
 	const formData = new FormData(this);
 
-	fetch(`${baseUrl}/upload`, {
+	fetch(`${publicUrl}/uploads`, {
 			method: 'POST',
 			body: formData,
 	})
