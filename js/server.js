@@ -17,7 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Додаємо для обробки form-data
 
 // Налаштування статичних файлів
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/css', express.static(path.join(__dirname, '../css')));
 app.use('/img', express.static(path.join(__dirname, '../img')));
 app.use('/js', express.static(path.join(__dirname, '../js')));
@@ -118,10 +117,12 @@ app.post('/upload', upload.single('photo'), async (req, res) => {
   const { description, decorName, price } = req.body;
   if (req.file) {
       try {
+				const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
+
         const newPhoto = {
           name: req.file.filename,
-          url: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`.replace('http:', 'https:'),
-          description: description || 'Опис відсутній',
+          url: publicUrl, // Firebase URL для зображення
+       		description: description || 'Опис відсутній',
           decorName: decorName || 'Назва декору відсутня',
           price: price ? parseFloat(price) : 0
       };
