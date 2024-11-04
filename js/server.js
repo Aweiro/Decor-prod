@@ -1,12 +1,15 @@
 const express = require('express');
 const multer = require('multer');
+
 const path = require('path');
 const cors = require('cors');
 const fs = require('fs');
 const db = require('./firebase');
 
 const bodyParser = require('body-parser');
-const upload = multer({ dest: 'uploads/' });
+// const upload = multer({ dest: 'uploads/' });
+const upload = multer({ storage: multer.memoryStorage() });
+
 
 const app = express();
 // const PORT = process.env.PORT || 3000;
@@ -113,8 +116,10 @@ app.post('/upload', upload.single('photo'), (req, res) => {
 	const { description, decorName, price } = req.body;
 	
 	if (req.file) {
+			console.log('Файл завантажено:', req.file); // Додаємо лог для перевірки
+
 			const uniqueToken = uuidv4();
-			const blob = bucket.file(`uploads/${req.file.filename}`);
+			const blob = bucket.file(`uploads/${req.file.originalname}`);
 			const blobStream = blob.createWriteStream({
 					metadata: {
 							contentType: req.file.mimetype,
@@ -130,10 +135,10 @@ app.post('/upload', upload.single('photo'), (req, res) => {
 			});
 
 			blobStream.on('finish', async () => {
-					const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.filename)}?alt=media&token=${uniqueToken}`;
+					const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.originalname)}?alt=media&token=${uniqueToken}`;
 
 					const newPhoto = {
-							name: req.file.filename,
+							name: req.file.originalname,
 							url: publicUrl,
 							description: description || 'Опис відсутній',
 							decorName: decorName || 'Назва декору відсутня',
@@ -152,7 +157,7 @@ app.post('/upload', upload.single('photo'), (req, res) => {
 
 			blobStream.end(req.file.buffer);
 	} else {
-			res.status(400).json({ message: 'Не вдалося завантажити фото.' });
+			res.status(400).json({ message: 'Файл не завантажено.' });
 	}
 });
 
