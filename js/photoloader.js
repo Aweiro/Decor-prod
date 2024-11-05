@@ -3,13 +3,7 @@ const baseUrl = window.location.origin;
 // const baseUrl = 'https://decor-prod-4.onrender.com';
 
 
-//
-
-
-//
-
-
-// Запит на отримання фотографій
+// Запит на отримання фотографій (основна сторінка)
 fetch(`${baseUrl}/photos`)
   .then(response => {
     if (!response.ok) {
@@ -103,7 +97,7 @@ fetch(`${baseUrl}/photos`)
   .catch(error => console.error('Error fetching photos:', error));
 
 
-
+// обробка завантаження фото
 	const uploadForm = document.getElementById('uploadForm');
 	if (uploadForm) {
 		uploadForm.addEventListener('submit', async function (e) {
@@ -138,7 +132,6 @@ fetch(`${baseUrl}/photos`)
 	}
 
 
-// Завантаження фотографій
 // Завантаження фотографій
 function loadPhotos() {
 	fetch(`${baseUrl}/photos`)
