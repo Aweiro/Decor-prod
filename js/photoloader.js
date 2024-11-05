@@ -44,7 +44,13 @@ fetch(`${baseUrl}/photos`)
     return response.json();
   })
   .then(photos => {
-      const photosContainer = document.getElementById('photosContainer');
+		
+			const photosContainer = document.getElementById('photosContainer');
+			if (!photosContainer) {
+					console.error("Елемент photosContainer не знайдено в DOM.");
+					return;
+			}
+		
       photos.forEach(photo => {
           console.log('Фото:', photo); // Лог для перевірки отриманих даних
 

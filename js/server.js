@@ -93,6 +93,15 @@ app.get('/photos', async (req, res) => {
 //2 ulpoad 
 
 app.post('/upload', upload.single('photo'), async (req, res) => {
+	
+
+	console.log("Файл отримано для завантаження:", req.file);
+
+    if (!req.file) {
+        console.error("Файл відсутній у запиті.");
+        return res.status(400).json({ message: 'Не вдалося завантажити фото, файл відсутній.' });
+    }
+
 	const { description, decorName, price } = req.body;
 
 	if (!req.file) {
