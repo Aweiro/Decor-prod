@@ -1,87 +1,54 @@
 // Динамічне визначення базового URL для запитів
 const baseUrl = window.location.origin;
+// const baseUrl = 'https://decor-prod-4.onrender.com';
+
 
 //
-document.getElementById('uploadForm').addEventListener('submit', async function (e) {
-  e.preventDefault();
 
-  const formData = new FormData();
-  formData.append('photo', document.getElementById('photo').files[0]);
-  formData.append('description', document.getElementById('description').value);
-  formData.append('decorName', document.getElementById('decorName').value);
-  formData.append('price', document.getElementById('price').value);
 
-  try {
-    const response = await fetch(`${window.location.origin}/upload`, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error('Не вдалося завантажити фото');
-    }
-
-    const result = await response.json();
-    alert(result.message); // Повідомлення про успішне завантаження
-    // Очистити форму після успішного завантаження
-    document.getElementById('uploadForm').reset();
-    // Завантажити оновлений список фото (якщо у вас є функція для цього)
-    loadPhotos();
-  } catch (error) {
-    console.error('Помилка завантаження фото:', error);
-  }
-});
 //
 
 
 // Запит на отримання фотографій
 fetch(`${baseUrl}/photos`)
   .then(response => {
-    // Перевірка статусу відповіді
     if (!response.ok) {
-        throw new Error('Network response was not ok');
+      throw new Error('Network response was not ok');
     }
     return response.json();
   })
   .then(photos => {
-      const photosContainer = document.getElementById('photosContainer');
-      photos.forEach(photo => {
-          console.log('Фото:', photo); // Лог для перевірки отриманих даних
+    const photosContainer = document.getElementById('photosContainer');
+    
+    photos.forEach(photo => {
+      console.log('Фото:', photo);
 
-          // Створення контейнера для картки
-          const photoCard = document.createElement('div');
-          photoCard.className = 'photo-card';
+      const photoCard = document.createElement('div');
+      photoCard.className = 'photo-card';
 
-          // Обгортка для зображення
-          const imgWrapper = document.createElement('div');
-          imgWrapper.className = 'photo-card-wrapper';
+      const imgWrapper = document.createElement('div');
+      imgWrapper.className = 'photo-card-wrapper';
 
+      const img = document.createElement('img');
+      img.src = photo.url;
+      img.alt = photo.name || 'Фото';
 
-          // Створення зображення
-          const img = document.createElement('img');
-          img.src = photo.url;
-          img.alt = photo.name || 'Фото';
+      const photoBody = document.createElement('div');
+      photoBody.className = 'photo-card-body';
 
-          // Тіло картки
-          const photoBody = document.createElement('div');
-          photoBody.className = 'photo-card-body';
+      const description = document.createElement('p');
+      description.className = 'photo-card-text';
+      description.innerText = photo.description || 'Опис відсутній';
 
-          // Опис фотографії
-          const description = document.createElement('p');
-          description.className = 'photo-card-text';
-          description.innerText = photo.description || 'Опис відсутній';
+      const title = document.createElement('h3');
+      title.className = 'card-testimonial__title';
+      title.innerText = photo.decorName || 'Назва декору відсутня';
 
-          const title = document.createElement('h3');
-          title.className = 'card-testimonial__title';
-          title.innerText = photo.decorName || 'Назва декору відсутня'; // Відображаємо назву декору
+      const price = document.createElement('p');
+      price.className = 'photo-card-price';
+      price.innerText = `Ціна: ${photo.price ? photo.price + ' грн' : 'Ціна відсутня'}`;
 
-
-          // Ціна фотографії
-          const price = document.createElement('p');
-          price.className = 'photo-card-price';
-          price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`; // Додайте ціну з вашої бази даних
-          
-					// Call button 
+      // Call button 
 					const callButton = document.createElement('button');
 					callButton.className = 'card-testimonial__btn-play';
 					// Створення SVG
@@ -121,22 +88,54 @@ fetch(`${baseUrl}/photos`)
 					callButton.appendChild(svg);
 
 					callButton.onclick = () => confirmCall('+380 95 716 87 47');
+    
 
-          // Додаємо елементи до картки
-          imgWrapper.appendChild(img);
-          imgWrapper.appendChild(callButton); // call button
-          photoBody.appendChild(description);
-          photoBody.appendChild(title); // Додаємо назву декору
-          photoBody.appendChild(price);
-          photoCard.appendChild(imgWrapper);
-          photoCard.appendChild(photoBody);
-          photosContainer.appendChild(photoCard); // Додаємо картку до контейнера
-      });
+      imgWrapper.appendChild(img);
+      imgWrapper.appendChild(callButton);
+      photoBody.appendChild(description);
+      photoBody.appendChild(title);
+      photoBody.appendChild(price);
+      photoCard.appendChild(imgWrapper);
+      photoCard.appendChild(photoBody);
+      photosContainer.appendChild(photoCard);
+    });
   })
   .catch(error => console.error('Error fetching photos:', error));
 
 
 
+	const uploadForm = document.getElementById('uploadForm');
+	if (uploadForm) {
+		uploadForm.addEventListener('submit', async function (e) {
+			e.preventDefault();
+	
+			const formData = new FormData();
+			formData.append('photo', document.getElementById('photo').files[0]);
+			formData.append('description', document.getElementById('description').value);
+			formData.append('decorName', document.getElementById('decorName').value);
+			formData.append('price', document.getElementById('price').value);
+	
+			try {
+				const response = await fetch(`${window.location.origin}/upload`, {
+					method: 'POST',
+					body: formData,
+				});
+	
+				if (!response.ok) {
+					throw new Error('Не вдалося завантажити фото');
+				}
+	
+				const result = await response.json();
+				alert(result.message); // Повідомлення про успішне завантаження
+				// Очистити форму після успішного завантаження
+				uploadForm.reset();
+				// Завантажити оновлений список фото (якщо у вас є функція для цього)
+				loadPhotos();
+			} catch (error) {
+				console.error('Помилка завантаження фото:', error);
+			}
+		});
+	}
 
 
 // Завантаження фотографій
@@ -212,32 +211,6 @@ function deletePhoto(photoName) {
 			console.error('Error deleting photo:', error);
 	});
 }
-
-// Обробка форми завантаження фотографії
-// document.getElementById('uploadForm').addEventListener('submit', function (e) {
-// 	e.preventDefault();
-// 	const formData = new FormData(this);
-
-// 	fetch(`${baseUrl}/upload`, {
-// 			method: 'POST',
-// 			body: formData,
-// 	})
-// 	.then(response => {
-// 			if (!response.ok) {
-// 					throw new Error('Network response was not ok');
-// 			}
-// 			return response.json();
-// 	})
-// 	.then(data => {
-// 			alert(data.message); // Повідомлення про успішне завантаження
-// 			loadPhotos();
-// 			this.reset();
-// 	})
-// 	.catch(error => {
-// 			document.getElementById('uploadMessage').innerText = 'Помилка завантаження.';
-// 			console.error('Error:', error);
-// 	});
-// });
 
 // Завантажуємо фото при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', loadPhotos);
