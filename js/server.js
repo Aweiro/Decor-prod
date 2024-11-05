@@ -38,16 +38,16 @@ app.get('/admin', (req, res) => {
 
 // Отримання списку фото
 app.get('/photos', async (req, res) => {
-	try {
-			const photosSnapshot = await db.collection('photos')
-					.orderBy('timestamp', 'asc') // сортування за часовою міткою
-					.get();
-			const photos = photosSnapshot.docs.map(doc => doc.data());
-			res.status(200).json(photos);
-	} catch (error) {
-			console.error('Помилка отримання фото з Firestore:', error);
-			res.status(500).send('Не вдалося отримати фото');
-	}
+    try {
+        const photosSnapshot = await db.collection('photos')
+            .orderBy('timestamp', 'asc') // сортування за часовою міткою
+            .get();
+        const photos = photosSnapshot.docs.map(doc => doc.data());
+        res.status(200).json(photos);
+    } catch (error) {
+        console.error('Помилка отримання фото з Firestore:', error);
+        res.status(500).send('Не вдалося отримати фото');
+    }
 });
 
 
@@ -90,7 +90,7 @@ app.post('/upload', upload.single('photo'), async (req, res) => {
         description: description || 'Опис відсутній',
         decorName: decorName || 'Назва декору відсутня',
         price: price ? parseFloat(price) : 0,
-				timestamp: admin.firestore.FieldValue.serverTimestamp() // додає поточний час
+				timestamp: new Date() // додає поточний час
       };
 
       try {
