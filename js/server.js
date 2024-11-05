@@ -1,18 +1,17 @@
-require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
-const db = require('./firebase'); // підключення до Firestore
 const { v4: uuidv4 } = require('uuid'); // UUID для унікального токена
 const { Storage } = require('@google-cloud/storage'); // для роботи з Firebase Storage
+
+const { db, bucket } = require('./firebase'); // Імпортуємо db і bucket з firebase.js
+
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() }); // зберігання у пам'яті
 
 // Firebase Storage
-const storage = new Storage();
-const bucket = storage.bucket('west-decor.appspot.com'); // Замість цього додайте вашу назву bucket в .env
 
 // Налаштування CORS
 app.use(cors());
@@ -93,64 +92,58 @@ app.get('/photos', async (req, res) => {
 //2 ulpoad 
 
 app.post('/upload', upload.single('photo'), async (req, res) => {
-	
+  console.log("Файл отримано для завантаження:", req.file);
 
-	console.log("Файл отримано для завантаження:", req.file);
+  if (!req.file) {
+    console.error("Файл відсутній у запиті.");
+    return res.status(400).json({ message: 'Не вдалося завантажити фото, файл відсутній.' });
+  }
 
-    if (!req.file) {
-        console.error("Файл відсутній у запиті.");
-        return res.status(400).json({ message: 'Не вдалося завантажити фото, файл відсутній.' });
-    }
+  const { description, decorName, price } = req.body;
 
-	const { description, decorName, price } = req.body;
+  try {
+    const uniqueToken = uuidv4();
+    const blob = bucket.file(`uploads/${req.file.originalname}`);
+    const blobStream = blob.createWriteStream({
+      metadata: {
+        contentType: req.file.mimetype,
+        metadata: {
+          firebaseStorageDownloadTokens: uniqueToken,
+        },
+      },
+    });
 
-	if (!req.file) {
-			return res.status(400).json({ message: 'Файл не завантажено.' });
-	}
+    blobStream.on('error', (error) => {
+      console.error("Помилка завантаження в Firebase Storage:", error);
+      res.status(500).json({ message: 'Не вдалося завантажити фото.' });
+    });
 
-	try {
-			const uniqueToken = uuidv4();
-			const blob = bucket.file(`uploads/${req.file.originalname}`);
-			const blobStream = blob.createWriteStream({
-					metadata: {
-							contentType: req.file.mimetype,
-							metadata: {
-									firebaseStorageDownloadTokens: uniqueToken,
-							},
-					},
-			});
+    blobStream.on('finish', async () => {
+      const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.originalname)}?alt=media&token=${uniqueToken}`;
 
-			blobStream.on('error', (error) => {
-					console.error("Помилка завантаження в Firebase Storage:", error);
-					res.status(500).json({ message: 'Не вдалося завантажити фото.' });
-			});
+      const newPhoto = {
+        name: req.file.originalname,
+        url: publicUrl,
+        description: description || 'Опис відсутній',
+        decorName: decorName || 'Назва декору відсутня',
+        price: price ? parseFloat(price) : 0,
+      };
 
-			blobStream.on('finish', async () => {
-					const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.originalname)}?alt=media&token=${uniqueToken}`;
+      try {
+        await db.collection('photos').add(newPhoto);
+        console.log("Фото успішно збережено в Firestore:", newPhoto);
+        res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
+      } catch (error) {
+        console.error("Помилка збереження в Firestore:", error);
+        res.status(500).json({ message: 'Не вдалося зберегти фото в Firestore.' });
+      }
+    });
 
-					const newPhoto = {
-							name: req.file.originalname,
-							url: publicUrl,
-							description: description || 'Опис відсутній',
-							decorName: decorName || 'Назва декору відсутня',
-							price: price ? parseFloat(price) : 0,
-					};
-
-					try {
-							await db.collection('photos').add(newPhoto);
-							console.log("Фото успішно збережено в Firestore:", newPhoto);
-							res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
-					} catch (error) {
-							console.error("Помилка збереження в Firestore:", error);
-							res.status(500).json({ message: 'Не вдалося зберегти фото в Firestore.' });
-					}
-			});
-
-			blobStream.end(req.file.buffer);
-	} catch (error) {
-			console.error("Помилка під час обробки файлу:", error);
-			res.status(500).json({ message: 'Помилка завантаження файлу.' });
-	}
+    blobStream.end(req.file.buffer);
+  } catch (error) {
+    console.error("Помилка під час обробки файлу:", error);
+    res.status(500).json({ message: 'Помилка завантаження файлу.' });
+  }
 });
 
 
