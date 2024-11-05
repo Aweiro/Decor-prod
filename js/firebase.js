@@ -1,5 +1,5 @@
 require('dotenv').config();
-const admin = require("firebase-admin");
+const admin = require('firebase-admin');
 
 const serviceAccount = {
   type: "service_account",
@@ -10,7 +10,7 @@ const serviceAccount = {
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://" + process.env.FIREBASE_PROJECT_ID + ".firebaseio.com"
+  storageBucket: "west-decor.appspot.com"
 });
 
 const db = admin.firestore();
