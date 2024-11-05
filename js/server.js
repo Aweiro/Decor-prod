@@ -3,7 +3,6 @@ const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid'); // UUID для унікального токена
-const { Storage } = require('@google-cloud/storage'); // для роботи з Firebase Storage
 
 const { db, bucket } = require('./firebase'); // Імпортуємо db і bucket з firebase.js
 
