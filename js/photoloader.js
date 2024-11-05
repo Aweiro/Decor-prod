@@ -1,6 +1,37 @@
 // Динамічне визначення базового URL для запитів
 const baseUrl = window.location.origin;
 
+//
+document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append('photo', document.getElementById('photo').files[0]);
+  formData.append('description', document.getElementById('description').value);
+  formData.append('decorName', document.getElementById('decorName').value);
+  formData.append('price', document.getElementById('price').value);
+
+  try {
+    const response = await fetch(`${window.location.origin}/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Не вдалося завантажити фото');
+    }
+
+    const result = await response.json();
+    alert(result.message); // Повідомлення про успішне завантаження
+    // Очистити форму після успішного завантаження
+    document.getElementById('uploadForm').reset();
+    // Завантажити оновлений список фото (якщо у вас є функція для цього)
+    loadPhotos();
+  } catch (error) {
+    console.error('Помилка завантаження фото:', error);
+  }
+});
+//
 
 
 // Запит на отримання фотографій
