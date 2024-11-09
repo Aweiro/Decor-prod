@@ -230,19 +230,20 @@ app.get('/api/reviews/approved', async (req, res) => {
 
 app.post('/api/reviews/add', async (req, res) => {
   try {
-    const { name, text } = req.body;
-    await db.collection('reviews').add({
-      name,
-      text,
-      approved: false,
-      createdAt: new Date()
-    });
-    res.status(200).json({ message: 'Відгук додано і очікує на схвалення' });
+      const { name, text } = req.body;
+      await db.collection('reviews').add({
+          name,
+          text,
+          approved: false, // Встановлюємо схвалення за замовчуванням як false
+          createdAt: new Date()
+      });
+      res.status(200).json({ message: 'Відгук додано і очікує на схвалення' });
   } catch (error) {
-    console.error('Помилка додавання відгуку:', error);
-    res.status(500).send('Помилка додавання відгуку');
+      console.error('Помилка додавання відгуку:', error);
+      res.status(500).send('Помилка додавання відгуку');
   }
 });
+
 
 // Отримання списку фото
 app.get('/photos', async (req, res) => {
