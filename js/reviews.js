@@ -1,5 +1,4 @@
 // const baseUrl = 'https://decor-prod-6iah.onrender.com';
-const baseUrl = window.location.origin;
 //
 
 function loadApprovedReviews() {
