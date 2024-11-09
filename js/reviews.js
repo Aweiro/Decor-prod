@@ -1,4 +1,4 @@
-const baseUrl = 'https://decor-prod-4.onrender.com';
+const baseUrl = 'https://decor-prod-6iah.onrender.com';
 
 function loadApprovedReviews() {
   const reviewsContainer = document.getElementById('reviewsContainer');

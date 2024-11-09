@@ -1,6 +1,6 @@
 // Динамічне визначення базового URL для запитів
 // const baseUrl = window.location.origin;
-const baseUrl = 'https://decor-prod-4.onrender.com';
+const baseUrl = 'https://decor-prod-6iah.onrender.com';
 
 
 // Запит на отримання фотографій (основна сторінка)
