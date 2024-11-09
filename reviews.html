@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Відгуки</title>
+
+		<link rel="shortcut icon" href="/img/icons/logo.png" />
+		<link rel="stylesheet" href="/css/main.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="background">
+			<nav class="nav">
+				<div class="container">
+					<div class="nav__row">
+						<div class="logo">
+							<img src="./img/icons/logo2.png" alt="logo" />
+						</div>
+
+						<!--Hamburger menu-->
+						<button id="hamburgerBtn" class="hamburger">&#9776;</button>
+
+						<div class="navigation-list">
+							<ul class="dash-under-link">
+								<li class="nav__link">
+									<a href="index.html" class="active">Головна</a>
+								</li>
+								<li class="nav__link"><a href="about">Про нас</a></li>
+								<li class="nav__link"><a href="#">Портфоліо</a></li>
+								<li class="nav__link"><a href="#">Послуги</a></li>
+								<li class="nav__link"><a href="reviews.html">Відгуки</a></li>
+								<li class="nav__link"><a href="admin">Панель Адміністратора</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
+
+
+    <main>
+        <!-- Секція для відображення відгуків -->
+        <section id="reviews-section">
+            <div id="reviews-container">
+                <!-- Відгуки будуть завантажуватись та відображатись тут -->
+            </div>
+        </section>
+
+        <!-- Форма для додавання відгуку -->
+        <section id="add-review-section">
+          <div id="reviewsContainer"></div>
+            <h2>Залишити відгук</h2>
+            <form id="review-form">
+                <label for="name">Ваше ім'я:</label>
+                <input type="text" id="name" name="name" placeholder="Введіть ваше ім'я" required>
+
+                <label for="review-text">Ваш відгук:</label>
+                <textarea id="review-text" name="review-text" placeholder="Напишіть ваш відгук" required></textarea>
+
+                <label for="review-image">Фото (опціонально):</label>
+                <input type="file" id="review-image" name="review-image" accept="image/*">
+
+                <button type="submit">Відправити</button>
+            </form>
+        </section>
+    </main>
+
+   
+		<footer class="footer">
+			<div class="container">
+				<div class="footer__row">
+					<div class="footer__info">
+						<div class="footer__logo">
+							<div class="logo">
+								<img src="./img/icons/logo.png" alt="logo" />
+							</div>
+						</div>
+
+						<div class="footer__info-text">
+							<p>
+								Декоративні штукатурки West Decor дозволяють створювати сучасні
+								ефекти: камінь, бетон, травертин, марморін, мерехтливий,
+								перламутр, оксамит, мармур.
+							</p>
+						</div>
+
+						<div class="footer__socials">
+							<a href="#!">
+								<img src="./img/social/facebook.svg" alt="fb" />
+							</a>
+							<a href="#!">
+								<img src="./img/social/twitter.svg" alt="tw" />
+							</a>
+							<a href="#!">
+								<img src="./img/social/youtube.svg" alt="yt" />
+							</a>
+							<a href="#!">
+								<img src="./img/social/linkedin.svg" alt="ln" />
+							</a>
+							</div>
+						</div>
+
+					<div class="footer__nav">
+						<div class="footer__nav-block">
+							<h4 class="footer__nav-block-title">Навігація</h4>
+							<ul class="dash-under-link dash-under-link__center">
+								<li><a href="/">Головна</a></li>
+								<li><a href="about">Про нас</a></li>
+								<li><a href="#!">Портфоліо</a></li>
+								<li><a href="#!">Послуги</a></li>
+								<li><a href="#!">Відгуки</a></li>
+								<!--Admin-->
+							</ul>
+						</div>
+
+						<div class="footer__nav-block">
+							<h4 class="footer__nav-block-title">Контакти</h4>
+							<ul>
+								<li>
+									<a href="mailto:info@cutspace.com">info@cutspace.com</a>
+								</li>
+								<li>
+									<a href="#!" onclick="confirmCall('+380 95 716 87 47')"
+										>+380 95 716 87 47</a
+									>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="footer__bottom">
+				<p>&copy; 2024 West Decor. Всі права захищені.</p>
+			</div>
+		</footer>
+
+		<!-- scroll to top -->
+		<button onclick="topFunction()" id="myBtn" title="Go to top">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				shape-rendering="geometricPrecision"
+				text-rendering="geometricPrecision"
+				image-rendering="optimizeQuality"
+				fill-rule="evenodd"
+				clip-rule="evenodd"
+				viewBox="0 0 511.998 511.998"
+			>
+				<path
+					fill-rule="nonzero"
+					d="M255.999 511.999c70.684-.001 134.695-28.658 181.019-74.981 46.323-46.324 74.981-110.335 74.98-181.019 0-70.691-28.657-134.695-74.98-181.018C390.694 28.657 326.691 0 255.999 0 185.308 0 121.304 28.657 74.981 74.981 28.657 121.304 0 185.308 0 255.999c0 70.684 28.657 134.695 74.981 181.019 46.323 46.323 110.327 74.981 181.018 74.981zm-74.995-203.995c-29.412 16.955-43.962-6.609-27.542-23.789l84.234-95.914c15.311-15.318 21.289-15.318 36.607 0l84.234 95.914c16.303 17.26 2.086 40.686-27.549 23.789l-74.989-44.549-74.995 44.549zM410.99 410.99c-39.657 39.657-94.473 64.199-154.991 64.199-60.525 0-115.334-24.542-154.991-64.199-39.657-39.657-64.199-94.473-64.199-154.991 0-60.525 24.542-115.334 64.199-154.991 39.657-39.657 94.466-64.199 154.991-64.199 60.526 0 115.334 24.542 154.991 64.199 39.657 39.657 64.199 94.466 64.199 154.991 0 60.518-24.542 115.334-64.199 154.991z"
+				/>
+			</svg>
+		</button>
+
+    <script src="./js/script.js"></script>
+    <script src ="js/reviews.js"></script>
+</body>
+</html>

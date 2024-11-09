@@ -1,6 +1,6 @@
 // Динамічне визначення базового URL для запитів
-const baseUrl = window.location.origin;
-// const baseUrl = 'https://decor-prod-4.onrender.com';
+// const baseUrl = window.location.origin;
+const baseUrl = 'https://decor-prod-4.onrender.com';
 
 
 // Запит на отримання фотографій (основна сторінка)
@@ -110,7 +110,7 @@ fetch(`${baseUrl}/photos`)
 			formData.append('price', document.getElementById('price').value);
 	
 			try {
-				const response = await fetch(`${window.location.origin}/upload`, {
+				const response = await fetch(`${baseUrl}/upload`, {
 					method: 'POST',
 					body: formData,
 				});
