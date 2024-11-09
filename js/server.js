@@ -350,6 +350,10 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, '../admin.html'));
 });
 
+app.get('/reviews', (req, res) => {
+  res.sendFile(path.join(__dirname, '../reviews.html'));
+});
+
 // Запуск сервера
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
