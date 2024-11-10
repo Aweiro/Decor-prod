@@ -1,3 +1,7 @@
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+
 // Ініціалізація Firebase для клієнтської сторони
 const firebaseConfig = {
   type: "service_account",
@@ -7,9 +11,10 @@ const firebaseConfig = {
 };
 
 // Ініціалізація Firebase та Firestore
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
+export { db };
 
 
 // Функція для відображення схвалених відгуків
