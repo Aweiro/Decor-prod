@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -145,7 +146,6 @@ app.delete('/photos/:name', async (req, res) => {
 
 
 
-
 app.get('/api/reviews/pending', async (req, res) => {
   try {
       const snapshot = await db.collection('reviews').where('approved', '==', false).get();
@@ -157,6 +157,7 @@ app.get('/api/reviews/pending', async (req, res) => {
   }
 });
 
+// API маршрут для отримання схвалених відгуків
 app.get('/api/reviews/approved', async (req, res) => {
   try {
       const reviewsSnapshot = await db.collection('reviews').where('approved', '==', true).get();
@@ -168,10 +169,7 @@ app.get('/api/reviews/approved', async (req, res) => {
   }
 });
 
-app.use(express.json());
-
-
-// // Додавання нового відгуку
+// Додавання нового відгуку
 app.post('/api/reviews/add', async (req, res) => {
   try {
       const { name, text } = req.body;
@@ -187,24 +185,6 @@ app.post('/api/reviews/add', async (req, res) => {
       res.status(500).send('Помилка додавання відгуку');
   }
 });
-
-//rew3
-
-// app.post('/api/review', async (req, res) => {
-//   const { name, review } = req.body;
-
-//   try {
-//     await firestore.collection('reviews').add({
-//       name,
-//       review,
-//       approved: false,
-//       timestamp: new Date()
-//     });
-//     res.status(200).send('Відгук додано');
-//   } catch (error) {
-//     res.status(500).send('Помилка додавання відгуку');
-//   }
-// });
 
 
 
