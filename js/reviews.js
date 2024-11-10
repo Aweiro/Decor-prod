@@ -1,20 +1,15 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-
-
 // Ініціалізація Firebase для клієнтської сторони
 const firebaseConfig = {
   type: "service_account",
-  projectId: process.env.FIREBASE_PROJECT_ID,
+  project_id: process.env.FIREBASE_PROJECT_ID,
   private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
   client_email: process.env.FIREBASE_CLIENT_EMAIL,
 };
 
 // Ініціалізація Firebase та Firestore
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-export { db };
 
 
 // Функція для відображення схвалених відгуків
