@@ -1,4 +1,5 @@
 // Динамічне визначення базового URL для запитів
+// const baseUrl = window.location.origin;
 // const baseUrl = 'https://decor-prod-6iah.onrender.com';
 
 
@@ -203,40 +204,6 @@ function deletePhoto(photoName) {
 			console.error('Error deleting photo:', error);
 	});
 }
-
-
-// Функція для завантаження відгуків, що очікують схвалення
-async function loadPendingReviews() {
-  const snapshot = await db.collection('reviews').where('approved', '==', false).get();
-  const reviewsContainer = document.getElementById('reviewsContainer');
-  reviewsContainer.innerHTML = ''; // Очищуємо контейнер перед додаванням
-
-  snapshot.forEach((doc) => {
-    const reviewData = doc.data();
-    const reviewItem = document.createElement('div');
-    reviewItem.innerHTML = `
-      <p><strong>${reviewData.name}</strong>: ${reviewData.text}</p>
-      <button onclick="approveReview('${doc.id}')">Схвалити</button>
-      <button onclick="deleteReview('${doc.id}')">Видалити</button>
-    `;
-    reviewsContainer.appendChild(reviewItem);
-  });
-}
-
-// Функція для схвалення відгуку
-async function approveReview(id) {
-  await db.collection('reviews').doc(id).update({ approved: true });
-  loadPendingReviews(); // Оновити список після схвалення
-}
-
-// Функція для видалення відгуку
-async function deleteReview(id) {
-  await db.collection('reviews').doc(id).delete();
-  loadPendingReviews(); // Оновити список після видалення
-}
-
-// Завантажити відгуки, що очікують схвалення, при завантаженні сторінки
-loadPendingReviews();
 
 // Завантажуємо фото при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', loadPhotos);
