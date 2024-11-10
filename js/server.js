@@ -207,7 +207,7 @@ app.use(express.urlencoded({ extended: true })); // для обробки form-d
 // Маршрути API
 app.get('/api/reviews/pending', async (req, res) => {
   try {
-    const snapshot = await db.collection('reviews').where('approved', '==', false).get();
+    const snapshot = await db.collection('reviews').where('approved', '==', true).get();
     const reviews = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     res.status(200).json(reviews);
   } catch (error) {
@@ -244,7 +244,7 @@ app.post('/api/reviews/add', async (req, res) => {
       const reviewRef = await db.collection('reviews').add({
           name,
           text,
-          approved: false, // Встановлюємо схвалення за замовчуванням як false
+          approved: true, // Встановлюємо схвалення за замовчуванням як false
           createdAt: new Date()
       });
 
