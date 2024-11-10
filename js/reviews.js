@@ -1,6 +1,8 @@
 // // const baseUrl = 'https://decor-prod-6iah.onrender.com';
 // //
 
+const { db } = require("./firebase");
+
 // function loadApprovedReviews() {
 //   const reviewsContainer = document.getElementById('reviewsContainer');
 
@@ -61,6 +63,20 @@
 // // Завантаження відгуків при завантаженні сторінки
 // document.addEventListener('DOMContentLoaded', loadApprovedReviews);
 
+
+async function displayApprovedReviews() {
+  const reviews = await db.collection('reviews').where('approved', '==', true).get();
+  const approvedReviews = document.getElementById('approvedReviews');
+
+  reviews.forEach((doc) => {
+    const reviewData = doc.data();
+    const reviewItem = document.createElement('div');
+    reviewItem.innerHTML = `<p><strong>${reviewData.name}</strong>: ${reviewData.review}</p>`;
+    approvedReviews.appendChild(reviewItem);
+  });
+}
+
+displayApprovedReviews();
 
 document.getElementById("reviewForm").addEventListener("submit", async (event) => {
   event.preventDefault();
