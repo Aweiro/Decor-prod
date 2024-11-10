@@ -43,34 +43,16 @@
 				</div>
 			</nav>
 
-
-    <main>
-        <!-- Секція для відображення відгуків -->
-        <section id="reviews-section">
-            <div id="reviews-container">
-                <!-- Відгуки будуть завантажуватись та відображатись тут -->
-            </div>
-        </section>
-
-        <!-- Форма для додавання відгуку -->
-        <section id="add-review-section">
-          <div id="reviewsContainer"></div>
-            <h2>Залишити відгук</h2>
-            <form id="review-form">
-                <label for="name">Ваше ім'я:</label>
-                <input type="text" id="name" name="name" placeholder="Введіть ваше ім'я" required>
-
-                <label for="review-text">Ваш відгук:</label>
-                <textarea id="review-text" name="review-text" placeholder="Напишіть ваш відгук" required></textarea>
-
-                <label for="review-image">Фото (опціонально):</label>
-                <input type="file" id="review-image" name="review-image" accept="image/*">
-
-                <button type="submit">Відправити</button>
-            </form>
-        </section>
-    </main>
-
+<!-- rewiews -->
+      <form id="reviewForm">
+        <label>Ваше ім'я:</label>
+        <input type="text" id="name" required />
+      
+        <label>Ваш відгук:</label>
+        <textarea id="reviewText" required></textarea>
+      
+        <button type="submit">Відправити відгук</button>
+      </form>
    
 		<footer class="footer">
 			<div class="container">
@@ -163,5 +145,22 @@
     <script src ="js/config.js"></script>
     <script src="./js/script.js"></script>
     <script src ="js/reviews.js"></script>
+
+
+    <script>
+      async function displayApprovedReviews() {
+        const reviews = await firestore.collection('reviews').where('approved', '==', true).get();
+        const approvedReviews = document.getElementById('approvedReviews');
+    
+        reviews.forEach((doc) => {
+          const reviewData = doc.data();
+          const reviewItem = document.createElement('div');
+          reviewItem.innerHTML = `<p><strong>${reviewData.name}</strong>: ${reviewData.review}</p>`;
+          approvedReviews.appendChild(reviewItem);
+        });
+      }
+    
+      displayApprovedReviews();
+    </script>
 </body>
 </html>
