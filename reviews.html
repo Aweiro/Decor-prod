@@ -43,19 +43,19 @@
 				</div>
 			</nav>
 
-  <!-- Форма для відправки відгуків -->
-  <form id="reviewForm">
-    <label>Ваше ім'я:</label>
-    <input type="text" id="name" required />
-  
-    <label>Ваш відгук:</label>
-    <textarea id="reviewText" required></textarea>
-  
-    <button type="submit">Відправити відгук</button>
-  </form>
-  
-  <!-- Контейнер для відображення схвалених відгуків -->
-  <div id="approvedReviews"></div>
+      <!-- review -->
+      <form id="reviewForm">
+        <label for="name">Ваше ім'я:</label>
+        <input type="text" id="name" name="name" required>
+      
+        <label for="review">Ваш відгук:</label>
+        <textarea id="review" name="review" required></textarea>
+      
+        <button type="submit">Відправити відгук</button>
+      </form>
+      
+      <p id="successMessage" style="display: none;">Ваш відгук надіслано на перевірку!</p>
+      
 
 						<div class="footer__info-text">
 							<p>
