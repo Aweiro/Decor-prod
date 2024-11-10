@@ -24,3 +24,28 @@ document.getElementById('reviewForm').addEventListener('submit', async (event) =
     console.error('Помилка при надсиланні відгуку:', error);
   }
 });
+
+// reviews.js
+async function fetchApprovedReviews() {
+  try {
+    const response = await fetch('/api/reviews/approved'); // Запит на отримання схвалених відгуків
+    const reviews = await response.json();
+
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    reviewsContainer.innerHTML = ''; // Очищуємо контейнер перед додаванням відгуків
+
+    reviews.forEach(review => {
+      const reviewElement = document.createElement('div');
+      reviewElement.classList.add('review');
+      reviewElement.innerHTML = `
+        <p><strong>Ім'я:</strong> ${review.name}</p>
+        <p><strong>Відгук:</strong> ${review.text}</p>
+      `;
+      reviewsContainer.appendChild(reviewElement);
+    });
+  } catch (error) {
+    console.error('Помилка завантаження відгуків:', error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', fetchApprovedReviews);
