@@ -1,3 +1,4 @@
+// reviews.js
 document.getElementById('reviewForm').addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -5,12 +6,12 @@ document.getElementById('reviewForm').addEventListener('submit', async (event) =
   const reviewText = document.getElementById('review').value;
 
   try {
-    const response = await fetch('/addReview', {
+    const response = await fetch('/api/reviews/add', { // змінено URL на правильний
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, reviewText }),
+      body: JSON.stringify({ name, text: reviewText }),
     });
 
     if (response.ok) {
