@@ -1,7 +1,4 @@
 
-
-
-
 // Форма підтвердження дзвінка
 function confirmCall(number) {
 	const confirmMessage = `Ви впевнені, що хочете зателефонувати на номер ${number} - Володимир Ковалів?`;
