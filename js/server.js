@@ -231,18 +231,32 @@ app.get('/api/reviews/approved', async (req, res) => {
 app.post('/api/reviews/add', async (req, res) => {
   try {
       const { name, text } = req.body;
-      await db.collection('reviews').add({
+
+      // Додаємо логування для перевірки отриманих даних
+      console.log("Отримано новий відгук:", { name, text });
+
+      // Переконуємось, що обидва поля наявні
+      if (!name || !text) {
+          return res.status(400).json({ message: 'Поле "name" або "text" відсутнє.' });
+      }
+
+      // Додаємо новий відгук до Firestore
+      const reviewRef = await db.collection('reviews').add({
           name,
           text,
           approved: false, // Встановлюємо схвалення за замовчуванням як false
           createdAt: new Date()
       });
+
+      console.log("Відгук успішно додано з ID:", reviewRef.id);
+
       res.status(200).json({ message: 'Відгук додано і очікує на схвалення' });
   } catch (error) {
       console.error('Помилка додавання відгуку:', error);
       res.status(500).send('Помилка додавання відгуку');
   }
 });
+
 
 
 // Отримання списку фото
