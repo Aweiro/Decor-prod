@@ -1,6 +1,3 @@
-// reviews.js
-import { db } from './firebase.js';
-import { collection, addDoc } from 'firebase/firestore';
 
 document.getElementById('reviewForm').addEventListener('submit', async (event) => {
   event.preventDefault();
