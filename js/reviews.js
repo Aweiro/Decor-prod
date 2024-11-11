@@ -1,36 +1,39 @@
-// reviews.js
 document.addEventListener('DOMContentLoaded', function() {
+  // Форма відправки нового відгуку
   document.getElementById('reviewForm').addEventListener('submit', async (event) => {
-      event.preventDefault();
-  const name = document.getElementById('name').value;
-  const reviewText = document.getElementById('review').value;
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const reviewText = document.getElementById('review').value;
 
-  try {
-    const response = await fetch('/api/reviews/add', { // змінено URL на правильний
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, text: reviewText }),
-    });
+    try {
+      const response = await fetch('/api/reviews/add', { // перевірте URL '/api/reviews/add' на сервері
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, text: reviewText }),
+      });
 
-    if (response.ok) {
-      document.getElementById('successMessage').style.display = 'block';
-      document.getElementById('reviewForm').reset();
-    } else {
-      console.error('Помилка при надсиланні відгуку:', response.statusText);
+      if (response.ok) {
+        document.getElementById('successMessage').style.display = 'block';
+        document.getElementById('reviewForm').reset();
+      } else {
+        console.error('Помилка при надсиланні відгуку:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Помилка при надсиланні відгуку:', error);
     }
-  } catch (error) {
-    console.error('Помилка при надсиланні відгуку:', error);
-  }
-});
+  });
+
+  // Завантаження схвалених відгуків
+  fetchApprovedReviews();
 });
 
-
-// reviews.js
 async function fetchApprovedReviews() {
   try {
-    const response = await fetch('/api/reviews/approved'); // Запит на отримання схвалених відгуків
+    const response = await fetch('/api/reviews/approved'); // перевірте, що API маршрут '/api/reviews/approved' працює
+    if (!response.ok) throw new Error('Failed to fetch approved reviews');
+    
     const reviews = await response.json();
 
     const reviewsContainer = document.getElementById('reviewsContainer');
@@ -49,5 +52,3 @@ async function fetchApprovedReviews() {
     console.error('Помилка завантаження відгуків:', error);
   }
 }
-
-document.addEventListener('DOMContentLoaded', fetchApprovedReviews);
