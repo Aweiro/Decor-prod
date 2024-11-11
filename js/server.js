@@ -168,6 +168,19 @@ app.get('/api/reviews/approved', async (req, res) => {
   }
 });
 
+app.patch('/api/reviews/approve/:id', async (req, res) => {
+  const reviewId = req.params.id;
+
+  try {
+    const reviewRef = db.collection('reviews').doc(reviewId);
+    await reviewRef.update({ approved: true });
+    res.status(200).json({ message: 'Відгук схвалено' });
+  } catch (error) {
+    console.error('Помилка схвалення відгуку:', error);
+    res.status(500).json({ message: 'Не вдалося схвалити відгук' });
+  }
+});
+
 
 // Додавання нового відгуку
 app.post('/api/reviews/add', async (req, res) => {
