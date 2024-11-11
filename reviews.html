@@ -38,17 +38,22 @@
 
 	
     <!-- review -->
-    <form id="reviewForm">
-      <label for="name">Ваше ім'я:</label>
-      <input type="text" id="name" name="name" required>
-    
-      <label for="review">Ваш відгук:</label>
-      <textarea id="review" name="review" required></textarea>
-    
-      <button type="submit">Відправити відгук</button>
-    </form>
-    
-    <p id="successMessage" style="display: none;">Ваш відгук надіслано на перевірку!</p>
+<form id="reviewForm">
+  <label for="name">Ваше ім'я:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="review">Ваш відгук:</label>
+  <textarea id="review" name="review" required></textarea>
+
+  <button type="submit">Відправити відгук</button>
+</form>
+
+<p id="successMessage" style="display: none;">Ваш відгук надіслано на перевірку!</p>
+
+<div id="reviewsContainer">
+    <!-- Схвалені відгуки з’являться тут -->
+</div>
+
 
 </main>
 

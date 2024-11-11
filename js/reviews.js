@@ -1,7 +1,7 @@
 // reviews.js
-document.getElementById('reviewForm').addEventListener('submit', async (event) => {
-  event.preventDefault();
-
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('reviewForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
   const name = document.getElementById('name').value;
   const reviewText = document.getElementById('review').value;
 
@@ -24,6 +24,8 @@ document.getElementById('reviewForm').addEventListener('submit', async (event) =
     console.error('Помилка при надсиланні відгуку:', error);
   }
 });
+});
+
 
 // reviews.js
 async function fetchApprovedReviews() {

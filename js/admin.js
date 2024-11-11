@@ -39,23 +39,6 @@ async function approveReview(reviewId) {
   }
 }
 
-async function approveReview(reviewId) {
-  try {
-    const response = await fetch(`/api/reviews/approve/${reviewId}`, {
-      method: 'PATCH',
-    });
-
-    if (response.ok) {
-      alert('Відгук схвалено!');
-      fetchPendingReviews(); // Оновлюємо список відгуків після схвалення
-    } else {
-      console.error('Помилка схвалення відгуку:', response.statusText);
-    }
-  } catch (error) {
-    console.error('Помилка схвалення відгуку:', error);
-  }
-}
-
 
 // Завантажуємо відгуки при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', fetchPendingReviews);
