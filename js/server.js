@@ -144,31 +144,18 @@ app.delete('/photos/:name', async (req, res) => {
 // Отримання несхвалених відгуків
 
 
-
-
-app.get('/api/reviews/pending', async (req, res) => {
-  try {
-      const snapshot = await db.collection('reviews').where('approved', '==', false).get();
-      const reviews = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      res.status(200).json(reviews);
-  } catch (error) {
-      console.error('Помилка отримання відгуків:', error);
-      res.status(500).send('Помилка отримання відгуків');
-  }
-});
 //aprove
-app.patch('/api/reviews/approve/:id', async (req, res) => {
-  const reviewId = req.params.id;
-
+app.get('/api/reviews/approved', async (req, res) => {
   try {
-    const reviewRef = db.collection('reviews').doc(reviewId);
-    await reviewRef.update({ approved: true });
-    res.status(200).json({ message: 'Відгук схвалено' });
+    const reviewsSnapshot = await db.collection('reviews').where('approved', '==', true).get();
+    const approvedReviews = reviewsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    res.status(200).json(approvedReviews);
   } catch (error) {
-    console.error('Помилка схвалення відгуку:', error);
-    res.status(500).json({ message: 'Не вдалося схвалити відгук' });
+    console.error('Помилка отримання схвалених відгуків:', error);
+    res.status(500).json({ message: 'Не вдалося отримати схвалені відгуки.' });
   }
 });
+
 
 
 // Додавання нового відгуку
