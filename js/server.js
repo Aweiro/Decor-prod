@@ -199,6 +199,18 @@ app.post('/api/reviews/add', async (req, res) => {
   }
 });
 
+app.delete('/api/reviews/:id', async (req, res) => {
+  const reviewId = req.params.id;
+
+  try {
+    // Видаляємо відгук з Firestore
+    await db.collection('reviews').doc(reviewId).delete();
+    res.status(200).json({ message: 'Відгук успішно видалено' });
+  } catch (error) {
+    console.error('Помилка видалення відгуку:', error);
+    res.status(500).json({ message: 'Не вдалося видалити відгук' });
+  }
+});
 
 
 const PORT = process.env.PORT || 3000;
