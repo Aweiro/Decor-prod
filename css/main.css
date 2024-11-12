@@ -1404,14 +1404,32 @@ body {
   font-size: 18px;
   margin-right: 5px;
 }
-.review p {
-  color: #1a1a1a;
-  margin: 0 0 15px;
+.review .review-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-transition: max-height 0.3s ease;
+  transition: max-height 0.3s ease;
 }
-.review p::before {
-  content: "💬 ";
-  font-size: 18px;
-  margin-right: 5px;
+.review .review-text.expanded {
+  -webkit-line-clamp: unset;
+  display: block;
+}
+.review .read-more-btn {
+  background-color: #ffa500;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.review .read-more-btn:hover {
+  background-color: #cc8400;
 }
 .review .review-date {
   font-size: 12px;

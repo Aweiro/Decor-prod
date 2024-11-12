@@ -122,14 +122,32 @@ $accent-color: #007acc;
         }
     }
 
-    p {
-        color: darken($text-color, 10%);
-        margin: 0 0 15px;
+    .review-text {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; // Кількість рядків для відображення
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        transition: max-height 0.3s ease;
 
-        &::before {
-            content: "💬 ";
-            font-size: 18px;
-            margin-right: 5px;
+        &.expanded {
+            -webkit-line-clamp: unset;
+            display: block;
+        }
+    }
+
+    .read-more-btn {
+        background-color: $secondary-color;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: darken($secondary-color, 10%);
         }
     }
 

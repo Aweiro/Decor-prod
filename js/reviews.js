@@ -52,3 +52,25 @@ async function fetchApprovedReviews() {
     console.error('Помилка завантаження відгуків:', error);
   }
 }
+//button
+document.addEventListener("DOMContentLoaded", function () {
+  const readMoreButtons = document.querySelectorAll(".read-more-btn");
+
+  readMoreButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+          const reviewText = this.previousElementSibling;
+
+          // Перемикаємо клас "expanded" для тексту
+          reviewText.classList.toggle("expanded");
+
+          // Змінюємо текст кнопки
+          if (reviewText.classList.contains("expanded")) {
+              this.textContent = "Згорнути";
+          } else {
+              this.textContent = "Читати далі";
+          }
+      });
+  });
+});
+
+
