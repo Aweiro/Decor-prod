@@ -124,18 +124,14 @@ $accent-color: #007acc;
 
     .review-text {
         overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3; // Кількість рядків для відображення
-        -webkit-box-orient: vertical;
-        text-overflow: ellipsis;
+       max-height: 60px; // Висота для трьох рядків тексту
+        overflow: hidden;
         transition: max-height 0.3s ease;
-
+    
         &.expanded {
-            -webkit-line-clamp: unset;
-            display: block;
-        }
+            max-height: none; // Знімає обмеження висоти
     }
-
+  }
     .read-more-btn {
         background-color: $secondary-color;
         color: #fff;

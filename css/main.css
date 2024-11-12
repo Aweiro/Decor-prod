@@ -1406,16 +1406,13 @@ body {
 }
 .review .review-text {
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+  max-height: 60px;
+  overflow: hidden;
   -webkit-transition: max-height 0.3s ease;
   transition: max-height 0.3s ease;
 }
 .review .review-text.expanded {
-  -webkit-line-clamp: unset;
-  display: block;
+  max-height: none;
 }
 .review .read-more-btn {
   background-color: #ffa500;

@@ -48,29 +48,25 @@ async function fetchApprovedReviews() {
       `;
       reviewsContainer.appendChild(reviewElement);
     });
-  } catch (error) {
-    console.error('Помилка завантаження відгуків:', error);
-  }
-}
-//button
-document.addEventListener("DOMContentLoaded", function () {
-  const readMoreButtons = document.querySelectorAll(".read-more-btn");
+  // Додаємо обробник події для кнопок "Читати далі"
+  document.querySelectorAll('.read-more-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const reviewText = this.previousElementSibling;
 
-  readMoreButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-          const reviewText = this.previousElementSibling;
+      // Перемикаємо клас "expanded" для тексту
+      reviewText.classList.toggle('expanded');
 
-          // Перемикаємо клас "expanded" для тексту
-          reviewText.classList.toggle("expanded");
-
-          // Змінюємо текст кнопки
-          if (reviewText.classList.contains("expanded")) {
-              this.textContent = "Згорнути";
-          } else {
-              this.textContent = "Читати далі";
-          }
-      });
+      // Змінюємо текст кнопки
+      if (reviewText.classList.contains('expanded')) {
+        this.textContent = 'Згорнути';
+      } else {
+        this.textContent = 'Читати далі';
+      }
+    });
   });
-});
+} catch (error) {
+  console.error('Помилка завантаження відгуків:', error);
+}
+}
 
 
