@@ -1405,7 +1405,6 @@ body {
   margin-right: 5px;
 }
 .review .review-text {
-  overflow: hidden;
   max-height: 60px;
   overflow: hidden;
   -webkit-transition: max-height 0.3s ease;

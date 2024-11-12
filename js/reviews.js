@@ -1,3 +1,4 @@
+
 // document.addEventListener('DOMContentLoaded', function() {
 //   // Форма відправки нового відгуку
 //   document.getElementById('reviewForm').addEventListener('submit', async (event) => {
@@ -17,6 +18,7 @@
 //       if (response.ok) {
 //         document.getElementById('successMessage').style.display = 'block';
 //         document.getElementById('reviewForm').reset();
+//         fetchApprovedReviews(); // Оновлюємо список відгуків після додавання
 //       } else {
 //         console.error('Помилка при надсиланні відгуку:', response.statusText);
 //       }
@@ -44,30 +46,28 @@
 //       reviewElement.classList.add('review');
 //       reviewElement.innerHTML = `
 //         <p><strong>Ім'я:</strong> ${review.name}</p>
-//         <p><strong>Відгук:</strong> ${review.text}</p>
+//         <p class="review-text"><strong>Відгук:</strong> ${review.text}</p>
+//         <button class="read-more-btn">Читати далі</button>
 //       `;
 //       reviewsContainer.appendChild(reviewElement);
 //     });
-//     // Додаємо обробник події для кнопки "Читати далі" для кожного відгуку
-//     const readMoreButton = reviewElement.querySelector('.read-more-btn');
-//     const reviewText = reviewElement.querySelector('.review-text');
 
-//     readMoreButton.addEventListener('click', function() {
-//       reviewText.classList.toggle('expanded');
+//     // Оновлюємо список кнопок "Читати далі" та додаємо обробники подій після додавання всіх елементів
+//     document.querySelectorAll('.read-more-btn').forEach(button => {
+//       button.addEventListener('click', function() {
+//         const reviewText = this.previousElementSibling;
 
-//       // Змінюємо текст кнопки
-//       if (reviewText.classList.contains('expanded')) {
-//         this.textContent = 'Згорнути';
-//       } else {
-//         this.textContent = 'Читати далі';
-//       }
+//         // Перемикаємо клас "expanded" для тексту
+//         reviewText.classList.toggle('expanded');
+
+//         // Змінюємо текст кнопки
+//         this.textContent = reviewText.classList.contains('expanded') ? 'Згорнути' : 'Читати далі';
+//       });
 //     });
-  
-// } catch (error) {
-//   console.error('Помилка завантаження відгуків:', error);
+//   } catch (error) {
+//     console.error('Помилка завантаження відгуків:', error);
+//   }
 // }
-// }
-
 
 document.addEventListener('DOMContentLoaded', function() {
   // Форма відправки нового відгуку
@@ -117,22 +117,27 @@ async function fetchApprovedReviews() {
       reviewElement.innerHTML = `
         <p><strong>Ім'я:</strong> ${review.name}</p>
         <p class="review-text"><strong>Відгук:</strong> ${review.text}</p>
-        <button class="read-more-btn">Читати далі</button>
       `;
       reviewsContainer.appendChild(reviewElement);
-    });
 
-    // Оновлюємо список кнопок "Читати далі" та додаємо обробники подій після додавання всіх елементів
-    document.querySelectorAll('.read-more-btn').forEach(button => {
-      button.addEventListener('click', function() {
-        const reviewText = this.previousElementSibling;
+      const reviewText = reviewElement.querySelector('.review-text');
 
-        // Перемикаємо клас "expanded" для тексту
-        reviewText.classList.toggle('expanded');
+      // Додаємо кнопку "Читати далі", якщо текст перевищує два рядки
+      if (reviewText.scrollHeight > 60) { // тут "60" можна змінити на точне значення, яке відповідає двом рядкам
+        const readMoreButton = document.createElement('button');
+        readMoreButton.classList.add('read-more-btn');
+        readMoreButton.textContent = 'Читати далі';
 
-        // Змінюємо текст кнопки
-        this.textContent = reviewText.classList.contains('expanded') ? 'Згорнути' : 'Читати далі';
-      });
+        reviewElement.appendChild(readMoreButton);
+
+        // Додаємо обробник події для кнопки "Читати далі"
+        readMoreButton.addEventListener('click', function() {
+          reviewText.classList.toggle('expanded');
+
+          // Змінюємо текст кнопки
+          this.textContent = reviewText.classList.contains('expanded') ? 'Згорнути' : 'Читати далі';
+        });
+      }
     });
   } catch (error) {
     console.error('Помилка завантаження відгуків:', error);
