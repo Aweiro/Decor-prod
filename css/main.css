@@ -1317,7 +1317,7 @@ body {
 }
 #reviewForm input[type=text]:focus,
 #reviewForm textarea:focus {
-  border-color: #ffa500;
+  border-color: #929292;
   outline: none;
 }
 #reviewForm button {
@@ -1414,8 +1414,8 @@ body {
   max-height: none;
 }
 .review .read-more-btn {
-  background-color: #ffa500;
-  color: #fff;
+  background-color: #929292;
+  color: #d5caca;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
@@ -1425,7 +1425,7 @@ body {
   transition: background-color 0.3s;
 }
 .review .read-more-btn:hover {
-  background-color: #cc8400;
+  background-color: #797979;
 }
 .review .review-date {
   font-size: 12px;
