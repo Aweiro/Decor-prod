@@ -79,10 +79,10 @@ async function fetchAllReviews() {
       reviewElement.innerHTML = `
         <p><strong>Ім'я:</strong> ${review.name}</p>
         <p><strong>Відгук:</strong> ${review.text}</p>
-        <button onclick="approveReview('${review.id}', this)" ${review.approved ? 'disabled' : ''}>
+         <button class="approve-button" onclick="approveReview('${review.id}', this)" ${review.approved ? 'disabled' : ''}>
           ${review.approved ? 'Схвалено' : 'Схвалити'}
         </button>
-        <button onclick="deleteReview('${review.id}', this)">Видалити</button>
+         <button class="delete-button" onclick="deleteReview('${review.id}', this)">Видалити</button>
       `;
       reviewsContainer.appendChild(reviewElement);
     });
