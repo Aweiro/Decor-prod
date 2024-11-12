@@ -5,7 +5,16 @@ $background-color: #f5f5f5;
 $text-color: #333;
 $border-color: #ccc;
 $shadow-color: rgba(0, 0, 0, 0.1);
+$accent-color: #007acc;
 
+// Заголовок секції
+#reviewsHeader {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: $primary-color;
+    margin-bottom: 20px;
+}
 
 // Форма для залишення відгуку
 #reviewForm {
@@ -46,16 +55,21 @@ $shadow-color: rgba(0, 0, 0, 0.1);
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 
         &:hover {
             background-color: darken($primary-color, 10%);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
         }
     }
 }
 
 // Повідомлення про успішне відправлення
 #successMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     max-width: 600px;
     margin: 20px auto;
     padding: 15px;
@@ -64,6 +78,12 @@ $shadow-color: rgba(0, 0, 0, 0.1);
     border: 1px solid #c3e6cb;
     border-radius: 5px;
     text-align: center;
+
+    &::before {
+        content: "✔️ ";
+        font-size: 20px;
+        margin-right: 5px;
+    }
 }
 
 // Контейнер для відгуків
@@ -83,20 +103,41 @@ $shadow-color: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 12px $shadow-color;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 
     &:hover {
-        transform: translateY(-5px);
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
     }
 
     h3 {
         margin: 0 0 10px;
         color: $primary-color;
         font-weight: bold;
+
+        &::before {
+            content: "👤 ";
+            font-size: 18px;
+            margin-right: 5px;
+        }
     }
 
     p {
         color: darken($text-color, 10%);
         margin: 0 0 15px;
+
+        &::before {
+            content: "💬 ";
+            font-size: 18px;
+            margin-right: 5px;
+        }
+    }
+
+    .review-date {
+        font-size: 12px;
+        color: darken($text-color, 20%);
+        margin-top: 10px;
+        text-align: right;
+        display: block;
     }
 }
