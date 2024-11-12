@@ -1277,15 +1277,22 @@ body {
   color: #ff4d4d;
 }
 
-/* Картка відгуку */
+/* Центрування заголовка */
+.admin-reviews-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+/* Стиль картки відгуку */
 .review {
   background-color: #ffffff;
-  border: 1px solid #ccc;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 15px 20px;
-  margin-bottom: 10px;
-  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 15px;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   -webkit-transition: -webkit-box-shadow 0.3s ease;
   transition: -webkit-box-shadow 0.3s ease;
   transition: box-shadow 0.3s ease;
@@ -1293,19 +1300,24 @@ body {
 }
 
 .review:hover {
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Відступи між текстом та кнопками */
+.review p {
+  margin-bottom: 10px;
 }
 
 /* Кнопка "Схвалити" */
 button.approve-button {
-  padding: 8px 12px;
+  padding: 8px 16px;
   font-size: 0.9rem;
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #4CAF50; /* Зелений для схвалення */
-  color: white;
+  background-color: #6fbf73; /* М'який зелений колір для схвалення */
+  color: #fff;
   font-weight: bold;
   margin-right: 10px;
   -webkit-transition: background-color 0.3s ease;
@@ -1313,30 +1325,31 @@ button.approve-button {
 }
 
 button.approve-button:hover:not(:disabled) {
-  background-color: #45a049;
+  background-color: #5ca85f;
 }
 
 button.approve-button:disabled {
-  background-color: #a9a9a9; /* Сірий для деактивованої кнопки */
+  background-color: #d3d3d3; /* Сірий для деактивованої кнопки */
   cursor: not-allowed;
+  color: #706f6f;
 }
 
 /* Кнопка "Видалити" */
 button.delete-button {
-  padding: 8px 12px;
+  padding: 8px 16px;
   font-size: 0.9rem;
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #FF4C4C; /* Червоний для видалення */
-  color: white;
+  background-color: #e57373; /* М'який червоний колір для видалення */
+  color: #fff;
   font-weight: bold;
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
 }
 
 button.delete-button:hover {
-  background-color: #e63939;
+  background-color: #cb6060;
 }
 
 #reviewsHeader {
