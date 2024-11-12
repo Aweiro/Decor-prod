@@ -143,7 +143,17 @@ app.delete('/photos/:name', async (req, res) => {
 // Маршрут для додавання нового відгуку
 // Отримання несхвалених відгуків
 
-
+// Маршрут для отримання всіх відгуків
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const reviewsSnapshot = await db.collection('reviews').get();
+    const reviews = reviewsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.error('Помилка отримання всіх відгуків:', error);
+    res.status(500).json({ message: 'Не вдалося отримати відгуки.' });
+  }
+});
 
 
 app.get('/api/reviews/pending', async (req, res) => {
@@ -180,6 +190,8 @@ app.patch('/api/reviews/approve/:id', async (req, res) => {
     res.status(500).json({ message: 'Не вдалося схвалити відгук' });
   }
 });
+
+
 
 
 // Додавання нового відгуку
