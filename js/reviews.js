@@ -48,12 +48,11 @@ async function fetchApprovedReviews() {
       `;
       reviewsContainer.appendChild(reviewElement);
     });
-  // Додаємо обробник події для кнопок "Читати далі"
-  document.querySelectorAll('.read-more-btn').forEach(button => {
-    button.addEventListener('click', function() {
-      const reviewText = this.previousElementSibling;
+    // Додаємо обробник події для кнопки "Читати далі" для кожного відгуку
+    const readMoreButton = reviewElement.querySelector('.read-more-btn');
+    const reviewText = reviewElement.querySelector('.review-text');
 
-      // Перемикаємо клас "expanded" для тексту
+    readMoreButton.addEventListener('click', function() {
       reviewText.classList.toggle('expanded');
 
       // Змінюємо текст кнопки
@@ -63,10 +62,8 @@ async function fetchApprovedReviews() {
         this.textContent = 'Читати далі';
       }
     });
-  });
+  
 } catch (error) {
   console.error('Помилка завантаження відгуків:', error);
 }
 }
-
-
