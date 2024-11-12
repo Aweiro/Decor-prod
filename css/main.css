@@ -1277,60 +1277,7 @@ body {
   color: #ff4d4d;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  color: #333;
-  background-color: #f5f5f5;
-}
-
-#reviewsContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 20px;
-  margin: 40px auto;
-  max-width: 800px;
-}
-#reviewsContainer .review {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 5px;
-  width: 100%;
-  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-#reviewsContainer .review h3 {
-  margin: 0 0 10px;
-  color: #333;
-}
-#reviewsContainer .review p {
-  margin: 0;
-  color: #1a1a1a;
-}
-#reviewsContainer .review img {
-  max-width: 100px;
-  height: auto;
-  margin-top: 10px;
-}
-
-#addReviewSection {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  max-width: 800px;
-  margin: 20px auto;
-  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-#addReviewSection form {
+#reviewForm {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1339,34 +1286,92 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 15px;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-#addReviewSection form label {
+#reviewForm label {
   font-weight: bold;
+  color: #333;
 }
-#addReviewSection form input[type=text],
-#addReviewSection form textarea,
-#addReviewSection form input[type=file],
-#addReviewSection form button {
-  padding: 10px;
+#reviewForm input[type=text],
+#reviewForm textarea {
+  padding: 12px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100%;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
 }
-#addReviewSection form textarea {
-  resize: vertical;
-  min-height: 100px;
+#reviewForm input[type=text]:focus,
+#reviewForm textarea:focus {
+  border-color: #ffa500;
+  outline: none;
 }
-#addReviewSection form button {
+#reviewForm button {
+  padding: 12px;
+  font-size: 16px;
   background-color: #333;
   color: #fff;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
-#addReviewSection form button:hover {
-  background-color: #ffa500;
+#reviewForm button:hover {
+  background-color: #1a1a1a;
+}
+
+#successMessage {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#reviewsContainer {
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.review {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.review:hover {
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+}
+.review h3 {
+  margin: 0 0 10px;
+  color: #333;
+  font-weight: bold;
+}
+.review p {
+  color: #1a1a1a;
+  margin: 0 0 15px;
 }
 
 @media screen and (max-width: 1280px) {
