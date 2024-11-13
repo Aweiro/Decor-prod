@@ -1352,6 +1352,33 @@ button.delete-button:hover {
   background-color: #cb6060;
 }
 
+/* Стиль тексту відгуку */
+.review-text {
+  max-height: 60px;
+  overflow: hidden;
+  -webkit-transition: max-height 0.3s ease;
+  transition: max-height 0.3s ease;
+}
+.review-text.expanded {
+  max-height: none;
+}
+
+/* Стиль кнопки "Читати далі" */
+.read-more-btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.read-more-btn:hover {
+  color: #0056b3;
+}
+
 #reviewsHeader {
   text-align: center;
   font-size: 24px;
