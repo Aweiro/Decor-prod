@@ -183,7 +183,7 @@ button.approve-button {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #7deb83; /* М'який зелений колір для схвалення */
+  background-color:#808000;/* М'який зелений колір для схвалення */
   color: #fff;
   font-weight: bold;
   margin-right: 10px;
@@ -191,13 +191,13 @@ button.approve-button {
 }
 
 button.approve-button:hover:not(:disabled) {
-  background-color: #5ba05e;
+  background-color: #96b297;
 }
 
 button.approve-button:disabled {
-  background-color: #d3d3d3; /* Сірий для деактивованої кнопки */
+  background-color: #A9A9A9; /* Сірий для деактивованої кнопки */
   cursor: not-allowed;
-  color: #706f6f;
+  color: #232222;
 }
 
 /* Кнопка "Видалити" */
@@ -207,14 +207,14 @@ button.delete-button {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #c93939; /* М'який червоний колір для видалення */
+  background-color: #8B0000;/* М'який червоний колір для видалення */
   color: #fff;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
 button.delete-button:hover {
-  background-color: #d33333;
+  background-color: 	#8B0000;
 }
 
 /* Стиль тексту відгуку з обмеженою кількістю рядків */
@@ -234,7 +234,7 @@ button.delete-button:hover {
   margin-top: 10px;
   padding: 5px 10px;
   font-size: 0.9rem;
-  color: #007bff;
+  color: #adc5e0;
   background: none;
   border: none;
   cursor: pointer;
@@ -242,5 +242,5 @@ button.delete-button:hover {
 }
 
 .read-more-btn:hover {
-  color: #0056b3;
+  color: #adc5e0;
 }

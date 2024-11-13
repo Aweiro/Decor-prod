@@ -1315,7 +1315,7 @@ button.approve-button {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #7deb83; /* М'який зелений колір для схвалення */
+  background-color: #808000; /* М'який зелений колір для схвалення */
   color: #fff;
   font-weight: bold;
   margin-right: 10px;
@@ -1324,13 +1324,13 @@ button.approve-button {
 }
 
 button.approve-button:hover:not(:disabled) {
-  background-color: #5ba05e;
+  background-color: #96b297;
 }
 
 button.approve-button:disabled {
-  background-color: #d3d3d3; /* Сірий для деактивованої кнопки */
+  background-color: #A9A9A9; /* Сірий для деактивованої кнопки */
   cursor: not-allowed;
-  color: #706f6f;
+  color: #232222;
 }
 
 /* Кнопка "Видалити" */
@@ -1340,7 +1340,7 @@ button.delete-button {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #c93939; /* М'який червоний колір для видалення */
+  background-color: #8B0000; /* М'який червоний колір для видалення */
   color: #fff;
   font-weight: bold;
   -webkit-transition: background-color 0.3s ease;
@@ -1348,7 +1348,7 @@ button.delete-button {
 }
 
 button.delete-button:hover {
-  background-color: #d33333;
+  background-color: #8B0000;
 }
 
 /* Стиль тексту відгуку з обмеженою кількістю рядків */
@@ -1369,7 +1369,7 @@ button.delete-button:hover {
   margin-top: 10px;
   padding: 5px 10px;
   font-size: 0.9rem;
-  color: #007bff;
+  color: #adc5e0;
   background: none;
   border: none;
   cursor: pointer;
@@ -1377,7 +1377,7 @@ button.delete-button:hover {
 }
 
 .read-more-btn:hover {
-  color: #0056b3;
+  color: #adc5e0;
 }
 
 #reviewsHeader {
@@ -1420,7 +1420,7 @@ button.delete-button:hover {
 }
 #reviewForm input[type=text]:focus,
 #reviewForm textarea:focus {
-  border-color: #929292;
+  border-color: #ab9999;
   outline: none;
 }
 #reviewForm button {
@@ -1517,7 +1517,7 @@ button.delete-button:hover {
   max-height: none;
 }
 .review .read-more-btn {
-  background-color: #929292;
+  background-color: #ab9999;
   color: #d5caca;
   border: none;
   padding: 8px 12px;
@@ -1528,7 +1528,7 @@ button.delete-button:hover {
   transition: background-color 0.3s;
 }
 .review .read-more-btn:hover {
-  background-color: #797979;
+  background-color: #947d7d;
 }
 .review .review-date {
   font-size: 12px;
