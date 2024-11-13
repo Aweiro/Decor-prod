@@ -88,17 +88,20 @@ async function fetchAllReviews() {
       const reviewText = reviewElement.querySelector('.review-text');
 
       // Додаємо кнопку "Читати далі", якщо текст перевищує певну кількість рядків
-      if (reviewText.scrollHeight > 60) { // Змінюйте 60 відповідно до вашого дизайну
-        const readMoreButton = document.createElement('button');
-        readMoreButton.classList.add('read-more-btn');
-        readMoreButton.textContent = 'Читати далі';
-        reviewElement.appendChild(readMoreButton);
+      setTimeout(() => { // Використовуємо setTimeout, щоб дочекатися розрахунку висоти елемента
+        if (reviewText.scrollHeight > 60) { // Змінюйте значення "60" відповідно до вашого дизайну
+          reviewText.classList.add('shortened');
+          const readMoreButton = document.createElement('button');
+          readMoreButton.classList.add('read-more-btn');
+          readMoreButton.textContent = 'Читати далі';
+          reviewElement.appendChild(readMoreButton);
 
-        readMoreButton.addEventListener('click', function() {
-          reviewText.classList.toggle('expanded');
-          this.textContent = reviewText.classList.contains('expanded') ? 'Згорнути' : 'Читати далі';
-        });
-      }
+          readMoreButton.addEventListener('click', function() {
+            reviewText.classList.toggle('expanded');
+            this.textContent = reviewText.classList.contains('expanded') ? 'Згорнути' : 'Читати далі';
+          });
+        }
+      }, 0);
 
       reviewsContainer.appendChild(reviewElement);
     });

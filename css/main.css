@@ -1316,7 +1316,7 @@ button.approve-button {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #6fbf73; /* М'який зелений колір для схвалення */
+  background-color: #7deb83; /* М'який зелений колір для схвалення */
   color: #fff;
   font-weight: bold;
   margin-right: 10px;
@@ -1325,7 +1325,7 @@ button.approve-button {
 }
 
 button.approve-button:hover:not(:disabled) {
-  background-color: #5ca85f;
+  background-color: #5ba05e;
 }
 
 button.approve-button:disabled {
@@ -1341,7 +1341,7 @@ button.delete-button {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #e57373; /* М'який червоний колір для видалення */
+  background-color: #c93939; /* М'який червоний колір для видалення */
   color: #fff;
   font-weight: bold;
   -webkit-transition: background-color 0.3s ease;
@@ -1349,16 +1349,18 @@ button.delete-button {
 }
 
 button.delete-button:hover {
-  background-color: #cb6060;
+  background-color: #d33333;
 }
 
-/* Стиль тексту відгуку */
-.review-text {
+/* Стиль тексту відгуку з обмеженою кількістю рядків */
+.review-text.shortened {
   max-height: 60px;
   overflow: hidden;
   -webkit-transition: max-height 0.3s ease;
   transition: max-height 0.3s ease;
 }
+
+/* Стиль для розгорнутого тексту */
 .review-text.expanded {
   max-height: none;
 }
