@@ -1369,7 +1369,7 @@ button.delete-button:hover {
   margin-top: 10px;
   padding: 5px 10px;
   font-size: 0.9rem;
-  color: #adc5e0;
+  color: #111;
   background: none;
   border: none;
   cursor: pointer;
@@ -1377,7 +1377,7 @@ button.delete-button:hover {
 }
 
 .read-more-btn:hover {
-  color: #adc5e0;
+  color: #111;
 }
 
 #reviewsHeader {
