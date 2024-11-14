@@ -36,6 +36,9 @@ app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin.html'));
 });
 
+app.get('/portfolio', (req, res) => {
+  res.sendFile(path.join(__dirname, '../portfolio.html'));
+});
 
 app.get('/reviews', (req, res) => {
   res.sendFile(path.join(__dirname, '../reviews.html'));
