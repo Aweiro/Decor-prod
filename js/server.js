@@ -20,8 +20,11 @@ app.use(express.urlencoded({ extended: true })); // для обробки form-d
 
 // Налаштування статичних файлів
 app.use('/css', express.static(path.join(__dirname, '../css')));
+app.use('/assets/css', express.static(path.join(__dirname, '../assets/css')));
+
 app.use('/img', express.static(path.join(__dirname, '../img')));
 app.use('/js', express.static(path.join(__dirname, '../js')));
+
 
 // Маршрути для відображення HTML-сторінок
 app.get('/', (req, res) => {
