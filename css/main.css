@@ -2425,96 +2425,89 @@ header.main-header .menu-icon .line:last-child {
   transform: translateX(-10px);
 }
 
-body {
-  font-family: Arial, sans-serif;
-  color: #333;
-  background-color: #f5f5f5;
-}
-
-#reviews-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 20px;
-  margin: 40px auto;
+/* Основні стилі для контейнера відгуків */
+#reviewsContainer {
   max-width: 800px;
-}
-#reviews-container .review-card {
-  background-color: #fff;
-  border: 1px solid #ccc;
+  margin: 0 auto;
   padding: 20px;
-  border-radius: 5px;
-  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
   -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-#reviews-container .review-card h3 {
-  margin: 0 0 10px;
-  color: #333;
-}
-#reviews-container .review-card p {
-  margin: 0;
-  color: #1a1a1a;
-}
-#reviews-container .review-card img {
-  max-width: 100px;
-  height: auto;
-  margin-top: 10px;
+
+/* Стиль кожного окремого відгуку */
+.review {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background-color: #fff;
 }
 
-#add-review-section {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  max-width: 800px;
-  margin: 20px auto;
-  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Заголовок і текст відгуку */
+.review p {
+  margin: 5px 0;
 }
-#add-review-section form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 15px;
-}
-#add-review-section form label {
+
+.review strong {
   font-weight: bold;
+  color: #333;
 }
-#add-review-section form input[type=text],
-#add-review-section form textarea,
-#add-review-section form input[type=file],
-#add-review-section form button {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-}
-#add-review-section form textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-#add-review-section form button {
-  background-color: #333;
-  color: #fff;
+
+/* Додаткові стилі для кнопок в адмін-панелі */
+button {
+  background-color: #4CAF50;
+  color: white;
   border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
-#add-review-section form button:hover {
-  background-color: #ffa500;
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Стиль для заголовків сторінки */
+h1 {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+#successMessage {
+  text-align: center;
+  color: #4CAF50;
+  font-weight: bold;
+  display: none; /* Спочатку прихований */
+  margin-bottom: 20px;
+}
+
+/* Додаємо відступи для полів введення в формі (якщо форма є на сторінці) */
+input[type=text], textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* Стиль для кнопки відправки відгуку */
+button[type=submit] {
+  background-color: #008CBA;
+  color: white;
+}
+
+button[type=submit]:hover {
+  background-color: #007B9A;
 }
 
 @media screen and (max-width: 1280px) {
