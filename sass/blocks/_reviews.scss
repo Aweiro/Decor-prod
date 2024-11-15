@@ -133,18 +133,19 @@ $accent-color: #007acc;
   }
   
     .read-more-btn {
-        background-color: $secondary-color;
+        // background-color: $secondary-color;
+				background: none;
         color: #d5caca;
         border: none;
         padding: 8px 12px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 14px;
-        transition: background-color 0.3s;
+        // transition: background-color 0.3s;
 
-        &:hover {
-            background-color: darken($secondary-color, 10%);
-        }
+        // &:hover {
+            // background-color: darken($secondary-color, 10%);
+        // }
     }
 
     .review-date {
