@@ -2665,18 +2665,13 @@ header.main-header .menu-icon .line:last-child {
   max-height: none;
 }
 .review .read-more-btn {
-  background-color: #ab9999;
+  background: none;
   color: #d5caca;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  -webkit-transition: background-color 0.3s;
-  transition: background-color 0.3s;
-}
-.review .read-more-btn:hover {
-  background-color: #947d7d;
 }
 .review .review-date {
   font-size: 12px;
