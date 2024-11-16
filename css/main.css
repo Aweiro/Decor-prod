@@ -2565,6 +2565,7 @@ header.main-header .menu-icon .line:last-child {
   border-radius: 5px;
   -webkit-transition: border-color 0.3s;
   transition: border-color 0.3s;
+  max-width: 100%;
 }
 #reviewForm input[type=text]:focus,
 #reviewForm textarea:focus {
@@ -2666,7 +2667,7 @@ header.main-header .menu-icon .line:last-child {
 }
 .review .read-more-btn {
   background: none;
-  color: #d5caca;
+  color: #949494;
   border: none;
   padding: 0;
   border-radius: 5px;

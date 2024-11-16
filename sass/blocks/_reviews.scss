@@ -40,6 +40,8 @@ $accent-color: #007acc;
         border: 1px solid $border-color;
         border-radius: 5px;
         transition: border-color 0.3s;
+        max-width: 100%;
+
 
         &:focus {
             border-color: $secondary-color;
@@ -64,6 +66,7 @@ $accent-color: #007acc;
         }
     }
 }
+
 
 // Повідомлення про успішне відправлення
 #successMessage {
@@ -135,7 +138,7 @@ $accent-color: #007acc;
     .read-more-btn {
         // background-color: $secondary-color;
 				background: none;
-        color: #d5caca;
+        color: #949494;
         border: none;
         padding: 0;
         border-radius: 5px;
