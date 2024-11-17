@@ -236,10 +236,20 @@ app.delete('/api/reviews/:id', async (req, res) => {
 // admin
 const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
 
+
 app.post('/check-password', async (req, res) => {
-    const { password } = req.body;
-    const isValid = await bcrypt.compare(password, adminPasswordHash);
-    res.json({ success: isValid });
+  const { password } = req.body;
+  console.log('Отриманий пароль:', password);
+  console.log('Хеш у .env:', adminPasswordHash); // Додано логування хешу
+
+  try {
+      const isValid = await bcrypt.compare(password, adminPasswordHash);
+      console.log('Результат перевірки:', isValid);
+      res.json({ success: isValid });
+  } catch (error) {
+      console.error('Помилка перевірки пароля:', error);
+      res.status(500).json({ success: false, message: 'Помилка сервера' });
+  }
 });
 
 
