@@ -83,7 +83,7 @@ setInterval(() => {
 
 // Відправлення даних у Telegram
 const telegramToken = '7560368551:AAHxWrOZebiC-5-lcxRNF0P3QIxN2SXN-z0'; // Токен вашого Telegram бота
-const chatId = '5772059243'; // Ваш Chat ID або ID вашого аккаунта
+const chatId = '388700840'; 
 
 // Додаємо обробник події для форми
 const consultationForm = document.getElementById('consultationForm');
