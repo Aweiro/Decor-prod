@@ -10,12 +10,17 @@
 	<main class="content">
 
 		<div id="authSection">
-			<h2>Введіть пароль для доступу до адмін-панелі</h2>
-			<input type="password" id="password" placeholder="Пароль" />
-			<button id="loginButton">Увійти</button>
-			<div id="authMessage"></div>
-	</div>
-	<div id="adminPanel" style="display:none;">
+      <label for="password">Введіть пароль для доступу до адмін-панелі</label>
+      <input type="password" id="password" placeholder="Пароль">
+      <button id="loginButton">Увійти</button>
+      <p id="authMessage" style="color: red;"></p>
+  </div>
+  
+  <div id="adminPanel" style="display: none;">
+      <!-- Контент адмін панелі -->
+       123
+      <button onclick="logout()">Вийти</button>
+  </div>
 
 		<nav class="nav">
 			<div class="container">
@@ -178,9 +183,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.getElementById('loginButton').addEventListener('click', async function () {
     const password = document.getElementById('password').value;
+    console.log('Введений пароль:', password);
 
     try {
-        // Надсилаємо запит на сервер
         const response = await fetch('/check-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -188,29 +193,23 @@ document.getElementById('loginButton').addEventListener('click', async function 
         });
 
         const result = await response.json();
+        console.log('Результат запиту:', result);
 
         if (result.success) {
-            localStorage.setItem('isAdminLoggedIn', 'true'); // Зберегти стан входу
+            localStorage.setItem('isAdminLoggedIn', 'true');
             document.getElementById('authSection').style.display = 'none';
             document.getElementById('adminPanel').style.display = 'block';
-            document.getElementById('photosContainer').style.display = 'block'; // Показати контейнер з фото
-            loadPhotos(); // Завантажуємо фотографії
+            // document.getElementById('photosContainer').style.display = 'block';
+            loadPhotos();
         } else {
             document.getElementById('authMessage').innerText = 'Невірний пароль.';
-            document.getElementById('photosContainer').style.display = 'none'; // Сховати контейнер з фото
         }
     } catch (error) {
-        console.error('Помилка під час входу:', error);
+        console.error('Помилка під час запиту:', error);
         document.getElementById('authMessage').innerText = 'Сталася помилка. Спробуйте пізніше.';
     }
 });
 
-function logout() {
-    localStorage.removeItem('isAdminLoggedIn'); // Очищаємо стан входу
-    document.getElementById('adminPanel').style.display = 'none'; // Сховати адмін панель
-    document.getElementById('authSection').style.display = 'block'; // Показати форму входу
-    document.getElementById('photosContainer').style.display = 'none'; // Сховати контейнер з фото
-}
 
 </script>
 
