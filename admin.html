@@ -7,20 +7,15 @@
     <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-	<main class="content">
 
-		<div id="authSection">
-      <label for="password">Введіть пароль для доступу до адмін-панелі</label>
-      <input type="password" id="password" placeholder="Пароль">
-      <button id="loginButton">Увійти</button>
-      <p id="authMessage" style="color: red;"></p>
+  <div id="authSection">
+    <label for="password">Введіть пароль для доступу до адмін-панелі</label>
+    <input type="password" id="password" placeholder="Пароль">
+    <button id="loginButton">Увійти</button>
+    <p id="authMessage" style="color: red;"></p>
   </div>
-  
-  <div id="adminPanel" style="display: none;">
-      <!-- Контент адмін панелі -->
-       123
-      <button onclick="logout()">Вийти</button>
-  </div>
+
+	<main id="adminPanel" style="display: none;" class="content">
 
 		<nav class="nav">
 			<div class="container">
