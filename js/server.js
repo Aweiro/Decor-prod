@@ -1,4 +1,5 @@
 require('dotenv').config();
+const bcrypt = require('bcrypt');
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -7,9 +8,10 @@ const { v4: uuidv4 } = require('uuid'); // UUID для унікального т
 
 const { db, bucket } = require('./firebase'); // Імпортуємо db і bucket з firebase.js
 
-
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() }); // зберігання у пам'яті
+
+
 
 // Firebase Storage
 
@@ -229,6 +231,15 @@ app.delete('/api/reviews/:id', async (req, res) => {
     console.error('Помилка видалення відгуку:', error);
     res.status(500).json({ message: 'Не вдалося видалити відгук' });
   }
+});
+
+// admin
+const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+
+app.post('/check-password', async (req, res) => {
+    const { password } = req.body;
+    const isValid = await bcrypt.compare(password, adminPasswordHash);
+    res.json({ success: isValid });
 });
 
 
