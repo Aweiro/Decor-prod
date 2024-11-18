@@ -316,11 +316,6 @@ body {
           column-gap: 10px;
 }
 
-.testimonials {
-  padding-top: 40px;
-  padding-bottom: 30px;
-}
-
 .testimonials__heading {
   margin-bottom: 40px;
   display: -webkit-box;
@@ -681,9 +676,9 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-column-gap: 30px;
-     -moz-column-gap: 30px;
-          column-gap: 30px;
+  -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px;
 }
 .footer__socials a:hover {
   opacity: 0.7;
@@ -1430,10 +1425,10 @@ theme.
 
 /* ##### 00 : GENERAL  ##### */
 section {
-  margin-top: 80px;
+  margin-top: 40px;
 }
 section:last-of-type {
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
 .green-section {
