@@ -1,4 +1,5 @@
 require('dotenv').config();
+const bcrypt = require('bcryptjs');
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -7,9 +8,10 @@ const { v4: uuidv4 } = require('uuid'); // UUID для унікального т
 
 const { db, bucket } = require('./firebase'); // Імпортуємо db і bucket з firebase.js
 
-
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() }); // зберігання у пам'яті
+
+
 
 // Firebase Storage
 
@@ -20,8 +22,12 @@ app.use(express.urlencoded({ extended: true })); // для обробки form-d
 
 // Налаштування статичних файлів
 app.use('/css', express.static(path.join(__dirname, '../css')));
+app.use('/assets/css', express.static(path.join(__dirname, '../assets/css')));
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+
 app.use('/img', express.static(path.join(__dirname, '../img')));
 app.use('/js', express.static(path.join(__dirname, '../js')));
+
 
 // Маршрути для відображення HTML-сторінок
 app.get('/', (req, res) => {
@@ -36,6 +42,9 @@ app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin.html'));
 });
 
+app.get('/portfolio', (req, res) => {
+  res.sendFile(path.join(__dirname, '../portfolio.html'));
+});
 
 app.get('/reviews', (req, res) => {
   res.sendFile(path.join(__dirname, '../reviews.html'));
@@ -221,6 +230,25 @@ app.delete('/api/reviews/:id', async (req, res) => {
   } catch (error) {
     console.error('Помилка видалення відгуку:', error);
     res.status(500).json({ message: 'Не вдалося видалити відгук' });
+  }
+});
+
+// admin
+const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+
+
+app.post('/check-password', async (req, res) => {
+  const { password } = req.body;
+  console.log('Отриманий пароль:', password);
+  console.log('Хеш у .env:', adminPasswordHash); // Додано логування хешу
+
+  try {
+      const isValid = await bcrypt.compare(password, adminPasswordHash);
+      console.log('Результат перевірки:', isValid);
+      res.json({ success: isValid });
+  } catch (error) {
+      console.error('Помилка перевірки пароля:', error);
+      res.status(500).json({ success: false, message: 'Помилка сервера' });
   }
 });
 

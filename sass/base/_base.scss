@@ -107,3 +107,11 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.background-portfolio {
+	width: 100%;
+	background: #fff no-repeat;
+	background-size: cover;
+	position: relative;
+  background-image: url('../assets/img/site-hero.jpg'); /* Заміни 'your-image.jpg' на шлях до твого зображення */
+}
