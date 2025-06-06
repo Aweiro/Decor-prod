@@ -1,0 +1,88 @@
+// Модальне вікно для редагування фото
+.modal {
+  display: none;  // Спочатку приховано
+  position: fixed;
+  z-index: 1000;  // Над іншими елементами
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Напівпрозорий фон
+  padding-top: 100px;  // Відступ зверху
+  overflow: auto;  // Для скролінгу вмісту, якщо він не поміщається
+  
+
+
+  .modal-content {
+    background-color: white;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 50%;  // Ширина вікна, можна змінити
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  // Тінь для глибини
+    position: relative;
+    
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #333;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: #8c8c8c;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+      outline: none;
+    }
+
+    button {
+      background-color: #4a4a4a;
+      color: #f7f7f7;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #333;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+      background-color: #222;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}
+
+// Показ модального вікна
+.modal.show {
+  display: block; // Відображаємо модальне вікно
+}

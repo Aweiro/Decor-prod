@@ -83,31 +83,3 @@ async function fetchApprovedReviews() {
   }
 }
 
-
-
-//       // Додаємо обробник події для кнопки "Видалити"
-//       const deleteButton = reviewElement.querySelector('.delete-btn');
-//       deleteButton.addEventListener('click', () => deleteReview(review.id, reviewElement));
-//     });
-//   } catch (error) {
-//     console.error('Помилка завантаження відгуків:', error);
-//   }
-// }
-
-// async function deleteReview(reviewId, reviewElement) {
-//   try {
-//     const response = await fetch(`/api/reviews/${reviewId}`, {
-//       method: 'DELETE'
-//     });
-
-//     if (response.ok) {
-//       // Видаляємо елемент відгуку з DOM після успішного видалення з бази даних
-//       reviewElement.remove();
-//       console.log('Відгук успішно видалено');
-//     } else {
-//       console.error('Помилка при видаленні відгуку:', response.statusText);
-//     }
-//   } catch (error) {
-//     console.error('Помилка при видаленні відгуку:', error);
-//   }
-// }

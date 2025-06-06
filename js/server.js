@@ -1,3 +1,5 @@
+
+
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const express = require('express');
@@ -10,10 +12,6 @@ const { db, bucket } = require('./firebase'); // Імпортуємо db і buck
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() }); // зберігання у пам'яті
-
-
-
-// Firebase Storage
 
 // Налаштування CORS
 app.use(cors());
@@ -28,10 +26,13 @@ app.use('/assets', express.static(path.join(__dirname, '../assets')));
 app.use('/img', express.static(path.join(__dirname, '../img')));
 app.use('/js', express.static(path.join(__dirname, '../js')));
 
-
 // Маршрути для відображення HTML-сторінок
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'));
+});
+
+app.get('/product.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../product.html'));
 });
 
 app.get('/about', (req, res) => {
@@ -49,6 +50,7 @@ app.get('/portfolio', (req, res) => {
 app.get('/reviews', (req, res) => {
   res.sendFile(path.join(__dirname, '../reviews.html'));
 });
+
 // Отримання списку фото
 app.get('/photos', async (req, res) => {
     try {
@@ -63,10 +65,7 @@ app.get('/photos', async (req, res) => {
     }
 });
 
-
-
-//2 ulpoad 
-
+// Завантаження фото
 app.post('/upload', upload.single('photo'), async (req, res) => {
   console.log("Файл отримано для завантаження:", req.file);
 
@@ -96,18 +95,21 @@ app.post('/upload', upload.single('photo'), async (req, res) => {
 
     blobStream.on('finish', async () => {
       const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(req.file.originalname)}?alt=media&token=${uniqueToken}`;
-
+    
+      const docRef = db.collection('photos').doc(); // автоматичне створення унікального ID
+    
       const newPhoto = {
+        id: docRef.id, // додаємо це поле
         name: req.file.originalname,
         url: publicUrl,
         description: description || 'Опис відсутній',
         decorName: decorName || 'Назва декору відсутня',
         price: price ? parseFloat(price) : 0,
-				timestamp: new Date() // додає поточний час
+        timestamp: new Date()
       };
-
+    
       try {
-        await db.collection('photos').add(newPhoto);
+        await docRef.set(newPhoto); // саме так, set замість add, бо ми вже створили id
         console.log("Фото успішно збережено в Firestore:", newPhoto);
         res.status(200).json({ message: 'Фото успішно завантажено!', file: newPhoto });
       } catch (error) {
@@ -123,36 +125,82 @@ app.post('/upload', upload.single('photo'), async (req, res) => {
   }
 });
 
-
-app.delete('/photos/:name', async (req, res) => {
-  const photoName = req.params.name;
+// Отримати одне фото за ID
+app.get('/photos/:id', async (req, res) => {
+  const { id } = req.params;
 
   try {
-      const photoSnapshot = await db.collection('photos').where('name', '==', photoName).get();
-      
-      if (photoSnapshot.empty) {
-          return res.status(404).json({ message: 'Фото не знайдено.' });
-      }
+    const doc = await db.collection('photos').doc(id).get();
 
-      photoSnapshot.forEach(async doc => {
-          await doc.ref.delete();
-      });
-      
-      res.status(200).json({ message: 'Фото успішно видалено.' });
+    if (!doc.exists) {
+      return res.status(404).json({ message: 'Фото не знайдено' });
+    }
+
+    res.status(200).json(doc.data());
   } catch (error) {
-      console.error('Помилка видалення фото з Firestore:', error);
-      res.status(500).json({ message: 'Не вдалося видалити фото.' });
+    console.error('Помилка отримання товару:', error);
+    res.status(500).json({ message: 'Помилка сервера' });
   }
 });
 
 
+// Видалити фото
+app.delete('/photos/:name', async (req, res) => {
+  const photoName = req.params.name;
+
+  try {
+    const photoSnapshot = await db.collection('photos').where('name', '==', photoName).get();
+
+    if (photoSnapshot.empty) {
+      return res.status(404).json({ message: 'Фото не знайдено.' });
+    }
+
+    photoSnapshot.forEach(async doc => {
+      await doc.ref.delete();
+    });
+
+    res.status(200).json({ message: 'Фото успішно видалено.' });
+  } catch (error) {
+    console.error('Помилка видалення фото з Firestore:', error);
+    res.status(500).json({ message: 'Не вдалося видалити фото.' });
+  }
+});
+
+// Оновлення фото (редагування)
+// Оновлення фото (редагування)
+app.patch('/photos/:id', async (req, res) => {
+  const { id } = req.params;  // отримуємо ID фото з URL
+  const { name, description, price } = req.body;  // отримуємо нові дані для фото
+
+  try {
+    const photoRef = db.collection('photos').doc(id); // Отримуємо документ фото за ID
+
+    const doc = await photoRef.get();
+    if (!doc.exists) {
+      return res.status(404).json({ message: 'Фото не знайдено' });
+    }
+
+    await photoRef.update({
+      decorName: name || doc.data().decorName,
+      description: description || doc.data().description,
+      price: price !== undefined ? price : doc.data().price,
+      timestamp: new Date(),  // Оновлюємо мітку часу
+    });
+
+    res.status(200).json({ message: 'Інформація успішно оновлена' });
+  } catch (error) {
+    console.error('Помилка редагування фото:', error);
+    res.status(500).json({ message: 'Не вдалося оновити інформацію' });
+  }
+});
+
 
 //rew
-// Маршрут для отримання несхвалених відгуків
-// Маршрут для додавання нового відгуку
-// Отримання несхвалених відгуків
+// // Маршрут для отримання несхвалених відгуків
+// // Маршрут для додавання нового відгуку
+// // Отримання несхвалених відгуків
 
-// Маршрут для отримання всіх відгуків
+// // Маршрут для отримання всіх відгуків
 app.get('/api/reviews', async (req, res) => {
   try {
     const reviewsSnapshot = await db.collection('reviews').get();
