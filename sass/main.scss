@@ -3,12 +3,12 @@
 @import './base/vars';
 @import './base/reset';
 @import './base/base';
+@import './base/mixins';
 
 // Blocks
 
 @import './blocks/nav';
 @import './blocks/logo';
-
 
 @import './blocks/navigation-list';
 @import './blocks/header';
@@ -26,6 +26,17 @@
 @import './blocks/portfolio';
 
 @import './blocks/reviews';
+
+// Product Information
+
+@import './blocks/product-information';
+@import './blocks/accordion';
+@import './blocks/product-info';
+@import './blocks/product-features';
+@import './blocks/related-products';
+@import './blocks/video-wrapper';
+@import './blocks/video-modal';
+
 // Media
 
 @import './base/media';

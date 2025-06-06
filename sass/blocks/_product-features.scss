@@ -1,0 +1,32 @@
+// features
+.product-information__features {
+	font-family: Arial, sans-serif;
+	// padding-inline: 20px;
+	max-width: 600px;
+	margin-top: 10px;
+}
+
+.product-information__features-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.product-information__features-list {
+	list-style-type: disc;
+	margin-left: 10px;
+}
+
+.product-information__features-item {
+	font-size: 18px;
+	// margin-bottom: 10px;
+}
+
+.product-information__features-item::before {
+	content: "•"; /* Custom bullet point */
+	color: #008bc7; /* Gold color for bullet point */
+	font-size: 20px;
+	margin-right: 10px;
+	position: relative;
+	top: 2px;
+}

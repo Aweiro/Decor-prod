@@ -1,0 +1,35 @@
+// product-info
+.product-info {
+	font-family: Arial, sans-serif;
+	// padding: 20px;
+	border-radius: 8px;
+	max-width: 600px;
+	// margin: 0 auto;
+}
+
+.product-info__row {
+	display: flex;
+	// justify-content: space-between;
+	column-gap: 70px;
+	flex-grow: 1;
+	padding: 15px;
+	row-gap: 15px;
+	flex-wrap: wrap;
+}
+
+.product-info__item {
+	display: flex;
+}
+
+.product-info__icon {
+	font-size: 35px;
+	margin-right: 20px;
+}
+
+.product-info__text {
+	font-size: 18px;
+}
+
+.product-info__text strong {
+	font-weight: bold;
+}

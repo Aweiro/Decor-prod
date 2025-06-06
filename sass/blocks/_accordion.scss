@@ -1,0 +1,102 @@
+/* Accordion */
+.product-accordion {
+
+}
+
+.accordion {
+  background: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #444;
+  cursor: pointer;
+  padding: 28px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-top: 1px solid #b4b4b4;
+  outline: none;
+  transition: background-color 0.4s ease;
+}
+
+.accordion__panel:last-of-type {
+  border-bottom: 1px solid #b4b4b4;
+}
+
+/* Active accordion style */
+.accordion-active {
+  // background-color: #efefef; /* Highlight active accordion */
+}
+
+.accordion:after {
+  content: '\002B'; /* Unicode character for "plus" sign (+) */
+  font-size: 33px;
+  color: #777;
+  float: right;
+}
+
+.accordion-active:after {
+  content: "\2212"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Style the accordion panel */
+.accordion__panel {
+  padding: 0 20px;
+  background-color: white;
+  max-height: 0; /* Start with closed panel */
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  width: 100%; /* Ensure panel doesn't overflow */
+  margin-bottom: 0; /* No margin when panel is closed */
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+
+	&__title {
+		font-size: 18px;
+
+	}
+
+}
+
+.accordion-active + .accordion__panel {
+  margin-bottom: 20px; /* Margin between the panel and next element when opened */
+}
+
+/* Для останнього акордеону, коли він відкритий, додаємо відступ та бордер */
+.accordion:last-of-type.accordion-active + .accordion__panel {
+  border-bottom: 1px solid #b4b4b4; /* Border for the last panel */
+	padding-bottom: 20px;
+}
+
+.accordion__panel p {
+  font-size: 14px; /* Adjust font size */
+  margin: 0;
+}
+
+
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-gallery img {
+  // max-width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  // max-width: 200px;
+	width: calc(20% - 8px);
+}
+
+.accordion:after {
+  content: '\002B'; /* Unicode character for "plus" sign (+) */
+  font-size: 33px;
+  color: #777;
+  float: right;
+}
+
+.accordion-active:after {
+  content: "\2212"; /* Unicode character for "minus" sign (-) */
+}
