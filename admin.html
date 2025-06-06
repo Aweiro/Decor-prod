@@ -57,6 +57,31 @@
     <div id="photoList" class="testimonials__row"></div>
 	</section>
 
+  
+  <!-- Форма для редагування фотографії (модальне вікно) -->
+<!-- Модальне вікно для редагування фото -->
+<div id="editFormModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span> <!-- Кнопка закриття -->
+    <h2>Редагування фото</h2>
+    <form id="editForm">
+      <input type="file" id="editPhoto" />
+      <input type="text" id="editName" placeholder="Назва декору" required />
+      <input type="text" id="editDescription" placeholder="Опис" />
+      <input type="number" id="editPrice" placeholder="Ціна" />
+      <div class="button-container">
+        <button type="submit">Зберегти зміни</button>
+        <button type="button" id="cancelEdit">Відмінити зміни</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+  
+
 	<section class="container">
 		<h1 class="admin-reviews-title">Відгуки</h1>
 		<div id="reviewsContainer">

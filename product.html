@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Сторінка товару</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <nav> ...твій навбар... </nav>
+  <nav> ...твій навбар... </nav>
+  <nav> ...твій навбар... </nav>
+  <nav> ...твій навбар... </nav>
+  <nav> ...твій навбар... </nav>
+
+  <main class="container">
+    <div id="product-detail"></div>
+  </main>
+<script src="js/config.js"></script>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get('id');
+
+  fetch(`${baseUrl}/photos/${productId}`)
+    .then(res => res.json())
+    .then(photo => {
+      document.getElementById('product-detail').innerHTML = `
+        <h1>${photo.decorName}</h1>
+        <img src="${photo.url}" alt="${photo.name}">
+        <p>${photo.description}</p>
+        <p>Ціна: ${photo.price} грн</p>
+      `;
+    })
+    .catch(err => {
+      document.getElementById('product-detail').innerHTML = `<p>Товар не знайдено.</p>`;
+    });
+</script>
