@@ -69,10 +69,17 @@ const bigImage = document.querySelector('.product-information__photo-big');
 // Ініціалізація першого фото як за замовчуванням
 bigImage.src = smallImages[0].getAttribute('data-large');
 
+if (smallImages.length > 0) {
+  bigImage.src = smallImages[0].getAttribute('data-large');
+  bigImage.alt = smallImages[0].alt || 'Основне фото';
+}
+
 // Додаємо обробник події для кожного малого фото (тепер на click)
 smallImages.forEach(image => {
-    image.addEventListener('click', (event) => {
-        const largeSrc = event.target.getAttribute('data-large');
-        bigImage.src = largeSrc;
-    });
+  image.addEventListener('click', (event) => {
+      const largeSrc = event.target.getAttribute('data-large');
+      bigImage.src = largeSrc; // Змінюємо src великого фото
+      bigImage.alt = event.target.alt || 'Основне фото';
+  });
 });
+

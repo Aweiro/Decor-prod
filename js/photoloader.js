@@ -147,72 +147,84 @@ callButton.onclick = (event) => {
 
 
 // Завантаження фотографій
+// Завантажуємо фото
 function loadPhotos() {
 	fetch(`${baseUrl}/photos`)
-			.then(response => {
-					if (!response.ok) {
-							throw new Error('Network response was not ok');
-					}
-					return response.json();
-			})
-			.then(photos => {
-					const photoList = document.getElementById('photoList');
-					photoList.innerHTML = '';
-					photos.forEach(photo => {
-							console.log('Отримане фото:', photo);
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			return response.json();
+		})
+		.then(photos => {
+			const photoList = document.getElementById('photoList');
+			photoList.innerHTML = '';
+			photos.forEach(photo => {
+				console.log('Отримане фото:', photo);
 
-							const photoCard = document.createElement('div');
-							photoCard.className = 'photo-card';
+				const photoCard = document.createElement('div');
+				photoCard.className = 'photo-card';
 
-							const imgWrapper = document.createElement('div');
-							imgWrapper.className = 'photo-card-wrapper';
+				const imgWrapper = document.createElement('div');
+				imgWrapper.className = 'photo-card-wrapper';
 
-							const img = document.createElement('img');
-							img.src = photo.url;
-							img.alt = photo.name;
+				const img = document.createElement('img');
+				img.src = photo.url;
+				img.alt = photo.name;
 
-							const photoBody = document.createElement('div');
-							photoBody.className = 'photo-card-body';
+				const photoBody = document.createElement('div');
+				photoBody.className = 'photo-card-body';
 
-							const description = document.createElement('p');
-							description.className = 'photo-card-text';
-							description.innerText = photo.description || 'Опис відсутній';
+				const description = document.createElement('p');
+				description.className = 'photo-card-text';
+				description.innerText = photo.description || 'Опис відсутній';
 
-							const title = document.createElement('h3');
-							title.className = 'card-testimonial__title';
-							title.innerText = photo.decorName || 'Назва декору відсутня';
+				const title = document.createElement('h3');
+				title.className = 'card-testimonial__title';
+				title.innerText = photo.decorName || 'Назва декору відсутня';
 
-							const price = document.createElement('p');
-							price.className = 'photo-card-price';
-							price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`;
+				const price = document.createElement('p');
+				price.className = 'photo-card-price';
+				price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`;
 
+				// Кнопка "Редагувати"
+				const editButton = document.createElement('button');
+				editButton.innerText = 'Редагувати';
+				editButton.className = 'button';
+				editButton.onclick = () => {
+					openEditForm(photo);
+				};
 
-               // Кнопка "Редагувати"
-            const editButton = document.createElement('button');
-            editButton.innerText = 'Редагувати';
-            editButton.className = 'button';
-            editButton.onclick = () => {
-              openEditForm(photo);
-                  };
+				const deleteButton = document.createElement('button');
+				deleteButton.innerText = 'Видалити';
+				deleteButton.className = 'card-delete-button button';
+				deleteButton.onclick = () => deletePhoto(photo.name);
 
-							const deleteButton = document.createElement('button');
-							deleteButton.innerText = 'Видалити';
-							deleteButton.className = 'card-delete-button button';
-							deleteButton.onclick = () => deletePhoto(photo.name);
+				// Кнопка "Додати інформацію"
+				const addInfoButton = document.createElement('button');
+				addInfoButton.innerText = 'Додати інформацію';
+				addInfoButton.className = 'button';
+				addInfoButton.onclick = () => {
+					openAddInfoForm(photo.id);
+				};
 
-							imgWrapper.appendChild(img);
-							photoBody.appendChild(description);
-							photoBody.appendChild(title);
-							photoBody.appendChild(price);
-              photoBody.appendChild(editButton);
-							photoBody.appendChild(deleteButton);
-							photoCard.appendChild(imgWrapper);
-							photoCard.appendChild(photoBody);
-							photoList.appendChild(photoCard);
-					});
-			})
-			.catch(error => console.error('Error fetching photos:', error));
+				// Додаємо кнопки до картки товару
+				photoBody.appendChild(description);
+				photoBody.appendChild(title);
+				photoBody.appendChild(price);
+				photoBody.appendChild(editButton);
+				photoBody.appendChild(deleteButton);
+				photoBody.appendChild(addInfoButton); // Додаємо кнопку "Додати інформацію"
+
+				imgWrapper.appendChild(img);
+				photoCard.appendChild(imgWrapper);
+				photoCard.appendChild(photoBody);
+				photoList.appendChild(photoCard);
+			});
+		})
+		.catch(error => console.error('Error fetching photos:', error));
 }
+
 
 
 //редагування фото 
@@ -261,6 +273,209 @@ const closeButton = document.querySelector('.close-btn');
 closeButton.onclick = () => {
   document.getElementById('editFormModal').classList.remove('show');
 };
+
+
+// Функція для відкриття форми додавання інформації
+function openAddInfoForm(productId) {
+  const modal = document.getElementById('addInfoModal');
+  const productIdInput = document.getElementById('productId');
+  productIdInput.value = productId;
+  modal.style.display = 'block';
+}
+
+function closeModal() {
+  const modal = document.getElementById('addInfoModal');
+  modal.style.display = 'none';
+}
+
+// Додавання нової характеристики
+document.getElementById('add-characteristic-btn').addEventListener('click', function () {
+  const container = document.getElementById('characteristics-container');
+
+  const div = document.createElement('div');
+  div.classList.add('form-group');
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.name = 'characteristic-name[]';
+  nameInput.placeholder = 'Назва характеристики';
+
+  const descInput = document.createElement('input');
+  descInput.type = 'text';
+  descInput.name = 'characteristic-description[]';
+  descInput.placeholder = 'Опис характеристики';
+
+  div.appendChild(nameInput);
+  div.appendChild(descInput);
+  container.appendChild(div);
+});
+
+// Додавання поля для нових даних (data)
+document.getElementById('add-note-btn').addEventListener('click', function() {
+  const noteContainer = document.getElementById('note-container');
+  
+  // Створення нового елемента для введення даних
+  const noteItem = document.createElement('div');
+  noteItem.classList.add('form-group', 'note-item');
+  
+  // Створення поля для введення даних
+  const noteInput = document.createElement('input');
+  noteInput.type = 'text';
+  noteInput.name = 'note[]';  // Масив для збереження кількох значень
+  noteInput.placeholder = 'Введіть нові дані';
+  
+  // Додаємо поле до контейнера
+  noteItem.appendChild(noteInput);
+  noteContainer.appendChild(noteItem);
+});
+
+
+
+// Функція для додавання нових технологій
+document.querySelector('.add-application-btn').addEventListener('click', function() {
+  const container = document.querySelector('.accordion-content');
+  const newInput = document.createElement('div');
+  newInput.innerHTML = `
+    <label>Назва технології:</label>
+    <input type="text" name="application[]" placeholder="Назва технології" />
+    
+    <label>Опис технології:</label>
+    <input type="text" name="application-description[]" placeholder="Опис технології" />
+    
+    <label>Фото:</label>
+    <input type="file" name="application-images[]" />
+  `;
+  container.appendChild(newInput);
+});
+
+// Функція для додавання нових відео
+document.querySelector('.add-video-btn').addEventListener('click', function() {
+  const container = document.querySelector('.accordion-content');
+  const newInput = document.createElement('div');
+  newInput.innerHTML = `
+    <label>Посилання на відео:</label>
+    <input type="text" name="video-links[]" placeholder="Введіть посилання на відео" />
+  `;
+  container.appendChild(newInput);
+});
+
+// Функція для додавання нових фото в галерею
+document.querySelector('.add-gallery-btn').addEventListener('click', function() {
+  const container = document.querySelector('.accordion-content');
+  const newInput = document.createElement('div');
+  newInput.innerHTML = `
+    <label>Фото:</label>
+    <input type="file" name="gallery-images[]" />
+  `;
+  container.appendChild(newInput);
+});
+
+
+// Обробник надсилання форми
+document.getElementById('addInfoForm').addEventListener('submit', async function(e) {
+  e.preventDefault(); // Запобігає перезавантаженню сторінки
+
+  try {
+    const formData = new FormData();
+
+    // Отримуємо дані з полів форми
+    const productId = document.getElementById('productId').value;
+    const decorName = document.getElementById('decorName').value;
+    const description = document.getElementById('description').value;
+    const price = document.getElementById('price').value;
+
+  // Збираємо значення для note
+  const noteValues = [];
+  const noteFields = document.querySelectorAll('input[name="note[]"]');
+  noteFields.forEach(input => {
+    noteValues.push(input.value); // Збираємо значення всіх полів note
+  });
+  
+
+// Додаємо їх до FormData
+  // Передаємо як рядок JSON
+
+
+    // Додавання характеристик
+    const characteristics = [];
+    const characteristicNames = document.querySelectorAll('input[name="characteristic-name[]"]');
+    const characteristicDescriptions = document.querySelectorAll('input[name="characteristic-description[]"]');
+    for (let i = 0; i < characteristicNames.length; i++) {
+      characteristics.push({
+        name: characteristicNames[i].value,
+        description: characteristicDescriptions[i].value,
+      });
+    }
+
+    // Додавання файлів зображень
+    const productImages = document.getElementById('productImages').files;
+    if (productImages.length > 0) {
+      for (let i = 0; i < productImages.length; i++) {
+        formData.append('productImages', productImages[i]);
+      }
+    }
+
+    // Збираємо решту даних
+    formData.append('productId', productId);
+    formData.append('decorName', decorName);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('noteValues', JSON.stringify(noteValues))
+    formData.append('characteristics', JSON.stringify(characteristics));
+
+      // Технологія нанесення
+  const applicationNames = document.querySelectorAll('input[name="application[]"]');
+  const applicationDescriptions = document.querySelectorAll('input[name="application-description[]"]');
+  const applicationImages = document.querySelectorAll('input[name="application-images[]"]');
+  const applications = [];
+  for (let i = 0; i < applicationNames.length; i++) {
+    applications.push({
+      name: applicationNames[i].value,
+      description: applicationDescriptions[i].value,
+      image: applicationImages[i].files[0] // додаємо файл
+    });
+  }
+  
+  formData.append('applications', JSON.stringify(applications));
+
+  // Відео
+  const videoLinks = document.querySelectorAll('input[name="video-links[]"]');
+  const videos = [];
+  videoLinks.forEach(link => {
+    videos.push(link.value);
+  });
+  formData.append('videos', JSON.stringify(videos));
+
+  // Галерея
+  const galleryImages = document.querySelectorAll('input[name="gallery-images[]"]');
+  const gallery = [];
+  galleryImages.forEach(image => {
+    gallery.push(image.files[0]);
+  });
+  formData.append('gallery', gallery); // Додаємо файли в галерею
+
+    // Відправка запиту на сервер
+    const response = await fetch(`/api/products/${productId}/add-info`, {
+      method: 'PATCH',
+      body: formData,
+    });
+
+    if (response.ok) {
+      alert('Інформацію успішно додано!');
+      closeModal(); // Закриваємо модальне вікно
+      loadPhotos(); // Завантажуємо оновлені фото/товари
+    } else {
+      alert('Не вдалося додати інформацію.');
+    }
+  } catch (error) {
+    console.error('Помилка при додаванні інформації:', error);
+    alert('Сталася помилка. Спробуйте пізніше.');
+  }
+});
+
+
+
+
 
 
 

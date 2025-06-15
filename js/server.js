@@ -3,13 +3,12 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
+const multer = require('multer');const path = require('path');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid'); // UUID для унікального токена
 
 const { db, bucket } = require('./firebase'); // Імпортуємо db і bucket з firebase.js
-
+const bodyParser = require('body-parser');
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() }); // зберігання у пам'яті
 
@@ -193,6 +192,127 @@ app.patch('/photos/:id', async (req, res) => {
     res.status(500).json({ message: 'Не вдалося оновити інформацію' });
   }
 });
+
+// Додавання інформації для товару
+const bodyParser = require('body-parser');
+const uuidv4 = require('uuid').v4;
+const { bucket, db } = require('./firebaseConfig'); // Переконайтесь, що у вас є правильний конфіг для Firebase
+
+app.use(bodyParser.json());
+
+// Функція для завантаження зображень на Firebase Storage
+async function uploadImageToFirebase(file) {
+  const uniqueToken = uuidv4();
+  const blob = bucket.file(`uploads/${file.originalname}`);
+  const blobStream = blob.createWriteStream({
+    metadata: {
+      contentType: file.mimetype,
+      metadata: {
+        firebaseStorageDownloadTokens: uniqueToken,
+      },
+    },
+  });
+
+  return new Promise((resolve, reject) => {
+    blobStream.on('error', (error) => reject(error));
+    blobStream.on('finish', async () => {
+      const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(file.originalname)}?alt=media&token=${uniqueToken}`;
+      resolve(publicUrl);
+    });
+    blobStream.end(file.buffer);
+  });
+}
+
+app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async (req, res) => {
+  const { id } = req.params;
+  const { speed, location, application, characteristics, noteValues } = req.body; // отримуємо всі дані
+
+  const productImages = req.files; // отримуємо файли
+
+  console.log('Received PATCH request for product ID:', id);
+  console.log('Data received:', { speed, location, application, characteristics, data, productImages });
+
+  try {
+    const productRef = db.collection('photos').doc(id);
+    const doc = await productRef.get();
+
+    if (!doc.exists) {
+      return res.status(404).json({ message: 'Товар не знайдено' });
+    }
+
+    // Оновлюємо поля
+    const updatedFields = {};
+
+    // Оновлюємо швидкість роботи, локацію і застосування
+    if (speed) updatedFields.speed = speed;
+    if (location) updatedFields.location = location;
+    if (application) updatedFields.application = application;
+
+    // Обробка характеристик
+    if (characteristics) {
+      try {
+        // Якщо characteristics передаються як рядок, перетворюємо в масив
+        if (typeof characteristics === 'string') {
+          updatedFields.characteristics = JSON.parse(characteristics);
+        } else if (Array.isArray(characteristics)) {
+          updatedFields.characteristics = characteristics;
+        } else {
+          throw new Error("Невірний формат характеристик");
+        }
+      } catch (e) {
+        console.error("Помилка парсингу характеристик:", e);
+        return res.status(400).json({ message: 'Невірний формат характеристик' });
+      }
+    } else {
+      console.log('Немає характеристик для додавання');
+    }
+
+    // Обробка додаткових даних
+    if (noteValues) {
+      try {
+        if (typeof noteValues === 'string') {
+          updatedFields.note = JSON.parse(noteValues);  // Перетворюємо в масив
+        } else if (Array.isArray(noteValues)) {
+          updatedFields.note = noteValues;
+        } else {
+          throw new Error("Невірний формат note");
+        }
+      } catch (e) {
+        console.error("Помилка парсингу note:", e);
+        return res.status(400).json({ message: 'Невірний формат note' });
+      }
+    }
+
+    
+      
+
+    // Додавання зображень
+    if (productImages && productImages.length > 0) {
+      const imageUrls = [];
+      for (let i = 0; i < productImages.length; i++) {
+        const uploadedImageUrl = await uploadImageToFirebase(productImages[i]);
+        imageUrls.push(uploadedImageUrl);
+      }
+      updatedFields.images = imageUrls; // Додаємо зображення до оновлених полів
+    }
+
+    console.log('Оновлені поля:', updatedFields);
+
+    
+
+    // Оновлення товару в базі даних
+    await productRef.update(updatedFields);
+
+    res.status(200).json({ message: 'Інформація успішно додана!' });
+  } catch (error) {
+    console.error('Error while updating product:', error);
+    res.status(500).json({ message: 'Не вдалося додати інформацію' });
+  }
+});
+
+
+
+
 
 
 //rew
