@@ -194,13 +194,8 @@ app.patch('/photos/:id', async (req, res) => {
 });
 
 // Додавання інформації для товару
-
-
- // Переконайтесь, що у вас є правильний конфіг для Firebase
-
 app.use(bodyParser.json());
 
-// Функція для завантаження зображень на Firebase Storage
 async function uploadImageToFirebase(file) {
   const uniqueToken = uuidv4();
   const blob = bucket.file(`uploads/${file.originalname}`);
@@ -225,11 +220,11 @@ async function uploadImageToFirebase(file) {
 
 app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async (req, res) => {
   const { id } = req.params;
-  const { speed, location, application, characteristics, data } = req.body; // отримуємо всі дані
+  const { speed, location, application, characteristics } = req.body; // отримуємо характеристики
   const productImages = req.files; // отримуємо файли
 
   console.log('Received PATCH request for product ID:', id);
-  console.log('Data received:', { speed, location, application, characteristics, data, productImages });
+  console.log('Data received:', { speed, location, application, characteristics, productImages });
 
   try {
     const productRef = db.collection('photos').doc(id);
@@ -239,50 +234,31 @@ app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async 
       return res.status(404).json({ message: 'Товар не знайдено' });
     }
 
-    // Оновлюємо поля
-    const updatedFields = {};
+   // Оновлюємо поля
+const updatedFields = {};
 
-    // Оновлюємо швидкість роботи, локацію і застосування
-    if (speed) updatedFields.speed = speed;
-    if (location) updatedFields.location = location;
-    if (application) updatedFields.application = application;
+// Оновлюємо швидкість роботи, локацію і застосування
+if (speed) updatedFields.speed = speed;
+if (location) updatedFields.location = location;
+if (application) updatedFields.application = application;
 
-    // Обробка характеристик
-    if (characteristics) {
-      try {
-        // Якщо characteristics передаються як рядок, перетворюємо в масив
-        if (typeof characteristics === 'string') {
-          updatedFields.characteristics = JSON.parse(characteristics);
-        } else if (Array.isArray(characteristics)) {
-          updatedFields.characteristics = characteristics;
-        } else {
-          throw new Error("Невірний формат характеристик");
-        }
-      } catch (e) {
-        console.error("Помилка парсингу характеристик:", e);
-        return res.status(400).json({ message: 'Невірний формат характеристик' });
-      }
-    } else {
-      console.log('Немає характеристик для додавання');
-    }
-
-    // Обробка додаткових даних
-   if (data) {
+// Обробка характеристик
+if (characteristics) {
   try {
-    // Якщо data передаються як рядок, перетворюємо в масив
-    if (typeof data === 'string') {
-      updatedFields.data = JSON.parse(data); // Перетворюємо рядок в масив
-    } else if (Array.isArray(data)) {
-      updatedFields.data = data; // Якщо вже масив, просто присвоюємо
+    // Якщо characteristics передаються як рядок, перетворюємо в масив
+    if (typeof characteristics === 'string') {
+      updatedFields.characteristics = JSON.parse(characteristics);
+    } else if (Array.isArray(characteristics)) {
+      updatedFields.characteristics = characteristics;
     } else {
-      throw new Error("Невірний формат даних");
+      throw new Error("Невірний формат характеристик");
     }
   } catch (e) {
-    console.error("Помилка парсингу даних:", e);
-    return res.status(400).json({ message: 'Невірний формат даних' });
+    console.error("Помилка парсингу характеристик:", e);
+    return res.status(400).json({ message: 'Невірний формат характеристик' });
   }
 } else {
-  console.log('Немає даних для додавання');
+  console.log('Немає характеристик для додавання');
 }
 
 
@@ -307,6 +283,9 @@ app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async 
     res.status(500).json({ message: 'Не вдалося додати інформацію' });
   }
 });
+
+
+
 
 
 

@@ -108,6 +108,8 @@
             <div class="product-information__features">
               <h2 class="product-information__features-title">Опис</h2>
               <ul class="product-information__features-list" id="product-note-list">
+                <!-- Дані будуть динамічно додаватися сюди -->
+                 <ul id="product-note-list"></ul>
 
               </ul>
             </div>
@@ -316,22 +318,21 @@ fetch(`${baseUrl}/photos/${productId}`)
     }
 
     const noteList = document.getElementById('product-note-list');
-if (noteList) {
-  noteList.innerHTML = ''; // Очищаємо попередні дані
-  if (photo.note && Array.isArray(photo.note) && photo.note.length > 0) {
-    photo.note.forEach(note => {
-      const noteItem = document.createElement('li');
-      noteItem.className = 'product-information__features-item';
-      noteItem.innerText = note || 'Дані відсутні';
-      noteList.appendChild(noteItem);
-    });
-  } else {
-    noteList.innerHTML = '<p>Дані відсутні.</p>';
-  }
-} else {
-  console.error("Елемент 'product-note-list' не знайдено!");
-}
-
+    if (noteList) {
+      noteList.innerHTML = ''; // Очищаємо попередні дані
+      if (photo.note && Array.isArray(photo.note) && photo.note.length > 0) {
+        photo.note.forEach(note => {
+          const noteItem = document.createElement('li');
+          noteItem.className = 'product-information__features-item';
+          noteItem.innerText = note || 'Дані відсутні';
+          noteList.appendChild(noteItem);
+        });
+      } else {
+        noteList.innerHTML = '<p>Дані відсутні.</p>';
+      }
+    } else {
+      console.error("Елемент 'product-note-list' не знайдено!");
+    }
 
   })
   .catch(err => {

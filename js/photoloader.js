@@ -330,58 +330,49 @@ document.getElementById('add-note-btn').addEventListener('click', function() {
 });
 
 // Обробник надсилання форми
-document.getElementById('addInfoForm').addEventListener('submit', async function(e) {
-  e.preventDefault(); // Запобігає перезавантаженню сторінки
+document.getElementById('addInfoForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
 
   try {
+    const productId = document.getElementById('productId').value;
+    const productImages = document.getElementById('productImages').files;
+
     const formData = new FormData();
 
-    // Отримуємо дані з полів форми
-    const productId = document.getElementById('productId').value;
-    const decorName = document.getElementById('decorName').value;
-    const description = document.getElementById('description').value;
-    const price = document.getElementById('price').value;
+    // Стандартні поля
+    formData.append('speed', document.getElementById('speed').value);
+    formData.append('location', document.getElementById('location').value);
+    formData.append('application', document.getElementById('application').value);
 
-  // Збираємо значення для note
-const noteValues = [];
-const noteFields = document.querySelectorAll('input[name="note[]"]');
-noteFields.forEach(input => {
-  noteValues.push(input.value); // Збираємо значення всіх полів note
-});
-
-
-// Додаємо їх до FormData
-  // Передаємо як рядок JSON
-
-
-    // Додавання характеристик
+    // Характеристики
+    const names = document.querySelectorAll('input[name="characteristic-name[]"]');
+    const descriptions = document.querySelectorAll('input[name="characteristic-description[]"]');
     const characteristics = [];
-    const characteristicNames = document.querySelectorAll('input[name="characteristic-name[]"]');
-    const characteristicDescriptions = document.querySelectorAll('input[name="characteristic-description[]"]');
-    for (let i = 0; i < characteristicNames.length; i++) {
-      characteristics.push({
-        name: characteristicNames[i].value,
-        description: characteristicDescriptions[i].value,
-      });
-    }
 
-    // Додавання файлів зображень
-    const productImages = document.getElementById('productImages').files;
-    if (productImages.length > 0) {
-      for (let i = 0; i < productImages.length; i++) {
-        formData.append('productImages', productImages[i]);
+    for (let i = 0; i < names.length; i++) {
+      if (names[i].value || descriptions[i].value) {
+        characteristics.push({
+          name: names[i].value,
+          description: descriptions[i].value,
+        });
       }
     }
-
-    // Збираємо решту даних
-    formData.append('productId', productId);
-    formData.append('decorName', decorName);
-    formData.append('description', description);
-    formData.append('price', price);
-    formData.append('noteValues', JSON.stringify(noteValues))
     formData.append('characteristics', JSON.stringify(characteristics));
 
-    // Відправка запиту на сервер
+    // Додаткові дані
+    const noteInputs = document.querySelectorAll('input[name="note[]"]');
+    const noteValues = [];
+    noteInputs.forEach(input => {
+      if (input.value) noteValues.push(input.value);
+    });
+    formData.append('data', JSON.stringify(noteValues)); // ← важливо: 'data', не 'note'
+
+    // Зображення
+    for (let i = 0; i < productImages.length; i++) {
+      formData.append('productImages', productImages[i]);
+    }
+
+    // Відправка
     const response = await fetch(`/api/products/${productId}/add-info`, {
       method: 'PATCH',
       body: formData,
@@ -389,14 +380,15 @@ noteFields.forEach(input => {
 
     if (response.ok) {
       alert('Інформацію успішно додано!');
-      closeModal(); // Закриваємо модальне вікно
-      loadPhotos(); // Завантажуємо оновлені фото/товари
+      closeModal();
+      loadPhotos();
     } else {
-      alert('Не вдалося додати інформацію.');
+      const errData = await response.json();
+      alert('Помилка: ' + (errData.message || 'Не вдалося додати інформацію.'));
     }
   } catch (error) {
-    console.error('Помилка при додаванні інформації:', error);
-    alert('Сталася помилка. Спробуйте пізніше.');
+    console.error('Помилка при надсиланні:', error);
+    alert('Сталася помилка. Спробуйте ще раз.');
   }
 });
 
