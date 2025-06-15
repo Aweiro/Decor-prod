@@ -221,6 +221,7 @@ async function uploadImageToFirebase(file) {
 app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async (req, res) => {
   const { id } = req.params;
   const { speed, location, application, characteristics } = req.body; // отримуємо характеристики
+  const noteValues = req.body.noteValues;
   const productImages = req.files; // отримуємо файли
 
   console.log('Received PATCH request for product ID:', id);
@@ -242,6 +243,15 @@ if (speed) updatedFields.speed = speed;
 if (location) updatedFields.location = location;
 if (application) updatedFields.application = application;
 
+
+if (Array.isArray(noteValues)) {
+  updatedFields.noteValues = noteValues;
+}
+
+
+
+
+
 // Обробка характеристик
 if (characteristics) {
   try {
@@ -260,7 +270,6 @@ if (characteristics) {
 } else {
   console.log('Немає характеристик для додавання');
 }
-
 
     // Додавання зображень
     if (productImages && productImages.length > 0) {

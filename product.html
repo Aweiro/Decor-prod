@@ -318,21 +318,27 @@ fetch(`${baseUrl}/photos/${productId}`)
     }
 
     const noteList = document.getElementById('product-note-list');
-    if (noteList) {
-      noteList.innerHTML = ''; // Очищаємо попередні дані
-      if (photo.note && Array.isArray(photo.note) && photo.note.length > 0) {
-        photo.note.forEach(note => {
-          const noteItem = document.createElement('li');
-          noteItem.className = 'product-information__features-item';
-          noteItem.innerText = note || 'Дані відсутні';
-          noteList.appendChild(noteItem);
-        });
-      } else {
-        noteList.innerHTML = '<p>Дані відсутні.</p>';
-      }
-    } else {
-      console.error("Елемент 'product-note-list' не знайдено!");
-    }
+
+if (noteList) {
+  noteList.innerHTML = '';
+
+  const notes = photo.noteValues; // ⬅️ ОНОВЛЕНО: беремо правильне поле
+
+  if (Array.isArray(notes) && notes.length > 0) {
+    notes.forEach(note => {
+      const noteItem = document.createElement('li');
+      noteItem.className = 'product-information__features-item';
+      noteItem.innerText = note || 'Дані відсутні';
+      noteList.appendChild(noteItem);
+    });
+  } else {
+    noteList.innerHTML = '<p>Дані відсутні.</p>';
+  }
+} else {
+  console.error("Елемент 'product-note-list' не знайдено!");
+}
+
+
 
   })
   .catch(err => {

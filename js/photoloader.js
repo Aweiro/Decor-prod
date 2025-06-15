@@ -311,23 +311,25 @@ document.getElementById('add-characteristic-btn').addEventListener('click', func
 });
 
 // Додавання поля для нових даних (data)
-document.getElementById('add-note-btn').addEventListener('click', function() {
-  const noteContainer = document.getElementById('note-container');
-  
+
   // Створення нового елемента для введення даних
-  const noteItem = document.createElement('div');
-  noteItem.classList.add('form-group', 'note-item');
-  
-  // Створення поля для введення даних
-  const noteInput = document.createElement('input');
-  noteInput.type = 'text';
-  noteInput.name = 'note[]';  // Масив для збереження кількох значень
-  noteInput.placeholder = 'Введіть нові дані';
-  
-  // Додаємо поле до контейнера
-  noteItem.appendChild(noteInput);
-  noteContainer.appendChild(noteItem);
-});
+  document.getElementById('add-note-btn').addEventListener('click', function() {
+    const noteContainer = document.getElementById('note-container');
+    
+    // Створення нового елемента для введення даних
+    const noteItem = document.createElement('div');
+    noteItem.classList.add('form-group', 'note-item');
+    
+    // Створення поля для введення даних
+    const noteInput = document.createElement('input');
+    noteInput.type = 'text';
+    noteInput.name = 'note[]';  // Масив для збереження кількох значень
+    noteInput.placeholder = 'Введіть нові дані';
+    
+    // Додаємо поле до контейнера
+    noteItem.appendChild(noteInput);
+    noteContainer.appendChild(noteItem);
+  });
 
 // Обробник надсилання форми
 document.getElementById('addInfoForm').addEventListener('submit', async function (e) {
@@ -360,12 +362,18 @@ document.getElementById('addInfoForm').addEventListener('submit', async function
     formData.append('characteristics', JSON.stringify(characteristics));
 
     // Додаткові дані
+
     const noteInputs = document.querySelectorAll('input[name="note[]"]');
-    const noteValues = [];
-    noteInputs.forEach(input => {
-      if (input.value) noteValues.push(input.value);
+const noteValues = [];
+noteInputs.forEach(input => {
+  if (input.value) noteValues.push(input.value);
+});
+    noteValues.forEach(value => {
+      formData.append('noteValues[]', value);
     });
-    formData.append('data', JSON.stringify(noteValues)); // ← важливо: 'data', не 'note'
+    
+
+    console.log('noteValues:', noteValues);
 
     // Зображення
     for (let i = 0; i < productImages.length; i++) {
