@@ -79,6 +79,7 @@
 
 
 <!-- Модальне вікно для додавання інформації -->
+<!-- Модальне вікно для додавання інформації -->
 <div id="addInfoModal" class="modal">
   <div class="modal-content">
     <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -92,12 +93,6 @@
       <div class="form-group">
         <label for="decorName">Назва декору:</label>
         <input type="text" id="decorName" name="decorName" placeholder="Назва декору" required />
-      </div>
-
-      <!-- Опис товару -->
-      <div class="form-group">
-        <label for="description">Опис товару:</label>
-        <textarea id="description" name="description" placeholder="Опис товару" required></textarea>
       </div>
 
       <!-- Дані -->
@@ -149,49 +144,6 @@
         <label for="application">Застосування:</label>
         <input type="text" id="application" name="application" placeholder="Застосування" required />
       </div>
-
-      <!-- Акордеон для технології нанесення -->
-<div class="accordion">
-  <button class="accordion-btn">Технологія нанесення</button>
-  <div class="accordion-content">
-    <div id="applications-container">
-      <label>Назва технології:</label>
-      <input type="text" name="application[]" placeholder="Назва технології" />
-      
-      <label>Опис технології:</label>
-      <input type="text" name="application-description[]" placeholder="Опис технології" />
-      
-      <label>Фото:</label>
-      <input type="file" name="application-images[]" />
-    </div>
-    <button type="button" class="add-application-btn">Додати технологію</button>
-  </div>
-</div>
-
-<!-- Акордеон для відео -->
-<div class="accordion">
-  <button class="accordion-btn">Відео</button>
-  <div class="accordion-content">
-    <div id="videos-container">
-      <label>Посилання на відео:</label>
-      <input type="text" name="video-links[]" placeholder="Введіть посилання на відео" />
-    </div>
-    <button type="button" class="add-video-btn">Додати відео</button>
-  </div>
-</div>
-
-<!-- Акордеон для галереї -->
-<div class="accordion">
-  <button class="accordion-btn">Галерея</button>
-  <div class="accordion-content">
-    <div id="gallery-container">
-      <label>Фото:</label>
-      <input type="file" name="gallery-images[]" />
-    </div>
-    <button type="button" class="add-gallery-btn">Додати фото в галерею</button>
-  </div>
-</div>
-
 
       <!-- Кнопки -->
       <div class="form-actions">

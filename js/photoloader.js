@@ -329,48 +329,6 @@ document.getElementById('add-note-btn').addEventListener('click', function() {
   noteContainer.appendChild(noteItem);
 });
 
-
-
-// Функція для додавання нових технологій
-document.querySelector('.add-application-btn').addEventListener('click', function() {
-  const container = document.querySelector('.accordion-content');
-  const newInput = document.createElement('div');
-  newInput.innerHTML = `
-    <label>Назва технології:</label>
-    <input type="text" name="application[]" placeholder="Назва технології" />
-    
-    <label>Опис технології:</label>
-    <input type="text" name="application-description[]" placeholder="Опис технології" />
-    
-    <label>Фото:</label>
-    <input type="file" name="application-images[]" />
-  `;
-  container.appendChild(newInput);
-});
-
-// Функція для додавання нових відео
-document.querySelector('.add-video-btn').addEventListener('click', function() {
-  const container = document.querySelector('.accordion-content');
-  const newInput = document.createElement('div');
-  newInput.innerHTML = `
-    <label>Посилання на відео:</label>
-    <input type="text" name="video-links[]" placeholder="Введіть посилання на відео" />
-  `;
-  container.appendChild(newInput);
-});
-
-// Функція для додавання нових фото в галерею
-document.querySelector('.add-gallery-btn').addEventListener('click', function() {
-  const container = document.querySelector('.accordion-content');
-  const newInput = document.createElement('div');
-  newInput.innerHTML = `
-    <label>Фото:</label>
-    <input type="file" name="gallery-images[]" />
-  `;
-  container.appendChild(newInput);
-});
-
-
 // Обробник надсилання форми
 document.getElementById('addInfoForm').addEventListener('submit', async function(e) {
   e.preventDefault(); // Запобігає перезавантаженню сторінки
@@ -385,12 +343,12 @@ document.getElementById('addInfoForm').addEventListener('submit', async function
     const price = document.getElementById('price').value;
 
   // Збираємо значення для note
-  const noteValues = [];
-  const noteFields = document.querySelectorAll('input[name="note[]"]');
-  noteFields.forEach(input => {
-    noteValues.push(input.value); // Збираємо значення всіх полів note
-  });
-  
+const noteValues = [];
+const noteFields = document.querySelectorAll('input[name="note[]"]');
+noteFields.forEach(input => {
+  noteValues.push(input.value); // Збираємо значення всіх полів note
+});
+
 
 // Додаємо їх до FormData
   // Передаємо як рядок JSON
@@ -422,37 +380,6 @@ document.getElementById('addInfoForm').addEventListener('submit', async function
     formData.append('price', price);
     formData.append('noteValues', JSON.stringify(noteValues))
     formData.append('characteristics', JSON.stringify(characteristics));
-
-      // Технологія нанесення
-  const applicationNames = document.querySelectorAll('input[name="application[]"]');
-  const applicationDescriptions = document.querySelectorAll('input[name="application-description[]"]');
-  const applicationImages = document.querySelectorAll('input[name="application-images[]"]');
-  const applications = [];
-  for (let i = 0; i < applicationNames.length; i++) {
-    applications.push({
-      name: applicationNames[i].value,
-      description: applicationDescriptions[i].value,
-      image: applicationImages[i].files[0] // додаємо файл
-    });
-  }
-  
-  formData.append('applications', JSON.stringify(applications));
-
-  // Відео
-  const videoLinks = document.querySelectorAll('input[name="video-links[]"]');
-  const videos = [];
-  videoLinks.forEach(link => {
-    videos.push(link.value);
-  });
-  formData.append('videos', JSON.stringify(videos));
-
-  // Галерея
-  const galleryImages = document.querySelectorAll('input[name="gallery-images[]"]');
-  const gallery = [];
-  galleryImages.forEach(image => {
-    gallery.push(image.files[0]);
-  });
-  formData.append('gallery', gallery); // Додаємо файли в галерею
 
     // Відправка запиту на сервер
     const response = await fetch(`/api/products/${productId}/add-info`, {

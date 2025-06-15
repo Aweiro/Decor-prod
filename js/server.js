@@ -194,9 +194,9 @@ app.patch('/photos/:id', async (req, res) => {
 });
 
 // Додавання інформації для товару
-const bodyParser = require('body-parser');
-const uuidv4 = require('uuid').v4;
-const { bucket, db } = require('./firebaseConfig'); // Переконайтесь, що у вас є правильний конфіг для Firebase
+
+
+ // Переконайтесь, що у вас є правильний конфіг для Firebase
 
 app.use(bodyParser.json());
 
@@ -225,8 +225,7 @@ async function uploadImageToFirebase(file) {
 
 app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async (req, res) => {
   const { id } = req.params;
-  const { speed, location, application, characteristics, noteValues } = req.body; // отримуємо всі дані
-
+  const { speed, location, application, characteristics, data } = req.body; // отримуємо всі дані
   const productImages = req.files; // отримуємо файли
 
   console.log('Received PATCH request for product ID:', id);
@@ -268,23 +267,24 @@ app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async 
     }
 
     // Обробка додаткових даних
-    if (noteValues) {
-      try {
-        if (typeof noteValues === 'string') {
-          updatedFields.note = JSON.parse(noteValues);  // Перетворюємо в масив
-        } else if (Array.isArray(noteValues)) {
-          updatedFields.note = noteValues;
-        } else {
-          throw new Error("Невірний формат note");
-        }
-      } catch (e) {
-        console.error("Помилка парсингу note:", e);
-        return res.status(400).json({ message: 'Невірний формат note' });
-      }
+   if (data) {
+  try {
+    // Якщо data передаються як рядок, перетворюємо в масив
+    if (typeof data === 'string') {
+      updatedFields.data = JSON.parse(data); // Перетворюємо рядок в масив
+    } else if (Array.isArray(data)) {
+      updatedFields.data = data; // Якщо вже масив, просто присвоюємо
+    } else {
+      throw new Error("Невірний формат даних");
     }
+  } catch (e) {
+    console.error("Помилка парсингу даних:", e);
+    return res.status(400).json({ message: 'Невірний формат даних' });
+  }
+} else {
+  console.log('Немає даних для додавання');
+}
 
-    
-      
 
     // Додавання зображень
     if (productImages && productImages.length > 0) {
@@ -297,8 +297,6 @@ app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async 
     }
 
     console.log('Оновлені поля:', updatedFields);
-
-    
 
     // Оновлення товару в базі даних
     await productRef.update(updatedFields);
