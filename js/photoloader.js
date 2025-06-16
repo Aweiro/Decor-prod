@@ -46,7 +46,7 @@ fetch(`${baseUrl}/photos`)
     
       const price = document.createElement('p');
       price.className = 'photo-card-price';
-      price.innerText = `Ціна: ${photo.price ? photo.price + ' грн' : 'Ціна відсутня'}`;
+      price.innerText = `Ціна: ${photo.price ? photo.price + ' UAH/m²' : 'Ціна відсутня'}`;
 
 
       // Call button 
@@ -185,7 +185,7 @@ function loadPhotos() {
 
 				const price = document.createElement('p');
 				price.className = 'photo-card-price';
-				price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`;
+				price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' UAH/m²' : 'Ціна відсутня'}`;
 
 				// Кнопка "Редагувати"
 				const editButton = document.createElement('button');
