@@ -60,22 +60,35 @@
   
   <!-- Форма для редагування фотографії (модальне вікно) -->
 <!-- Модальне вікно для редагування фото -->
+<!-- Модальне вікно для редагування фото з додатковими полями -->
 <div id="editFormModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn">&times;</span> <!-- Кнопка закриття -->
-    <h2>Редагування фото</h2>
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>Редагування товару</h2>
     <form id="editForm">
-      <input type="file" id="editPhoto" />
+      <input type="hidden" id="editId" />
+
       <input type="text" id="editName" placeholder="Назва декору" required />
       <input type="text" id="editDescription" placeholder="Опис" />
       <input type="number" id="editPrice" placeholder="Ціна" />
+      <input type="text" id="editSpeed" placeholder="Швидкість роботи" />
+      <input type="text" id="editLocation" placeholder="Локація" />
+      <input type="text" id="editApplication" placeholder="Застосування" />
+
+      <div id="edit-note-container"></div>
+      <button type="button" onclick="addEditNote()">Додати дані</button>
+
+      <div id="edit-characteristics-container"></div>
+      <button type="button" onclick="addEditCharacteristic()">Додати характеристику</button>
+
       <div class="button-container">
         <button type="submit">Зберегти зміни</button>
-        <button type="button" id="cancelEdit">Відмінити зміни</button>
+        <button type="button" onclick="closeModal()">Відмінити</button>
       </div>
     </form>
   </div>
 </div>
+
 
 
 <!-- Модальне вікно для додавання інформації -->

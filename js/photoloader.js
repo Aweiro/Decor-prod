@@ -232,47 +232,138 @@ function loadPhotos() {
 function openEditForm(photo) {
   const editForm = document.getElementById('editForm');
   const modal = document.getElementById('editFormModal');
-  document.getElementById('editName').value = photo.decorName;
-  document.getElementById('editDescription').value = photo.description;
-  document.getElementById('editPrice').value = photo.price;
 
-  // Зберігаємо ID фото, яке редагуємо
+  if (!editForm || !modal) {
+    console.error('Форма або модальне вікно не знайдені');
+    return;
+  }
+
+  document.getElementById('editName').value = photo.decorName || '';
+  document.getElementById('editDescription').value = photo.description || '';
+  document.getElementById('editPrice').value = photo.price || '';
+  document.getElementById('editSpeed').value = photo.speed || '';
+  document.getElementById('editLocation').value = photo.location || '';
+  document.getElementById('editApplication').value = photo.application || '';
+
   editForm.dataset.photoId = photo.id;
 
-  modal.classList.add('show'); // Відображаємо модальне вікно
+  // Очищення контейнерів
+  document.getElementById('edit-note-container').innerHTML = '';
+  document.getElementById('edit-characteristics-container').innerHTML = '';
 
-  // Обробник події на формі для редагування
+  // Вставка полів note[]
+const notes = photo.noteValues || [];
+notes.forEach(note => addEditNote(note));
+
+
+
+  // Вставка характеристик
+  (photo.characteristics || []).forEach(c =>
+    addEditCharacteristic(c.name, c.description)
+  );
+
+  modal.classList.add('show');
+
   editForm.onsubmit = async (e) => {
-    e.preventDefault(); // Запобігаємо перезавантаженню сторінки
+    e.preventDefault();
 
     const name = document.getElementById('editName').value;
     const description = document.getElementById('editDescription').value;
     const price = document.getElementById('editPrice').value;
+    const speed = document.getElementById('editSpeed').value;
+    const location = document.getElementById('editLocation').value;
+    const application = document.getElementById('editApplication').value;
     const photoId = editForm.dataset.photoId;
+
+    const noteValues = [...document.querySelectorAll('input[name="editNote[]"]')].map(n => n.value);
+    const charNames = [...document.querySelectorAll('input[name="editCharacteristic-name[]"]')];
+    const charDescs = [...document.querySelectorAll('input[name="editCharacteristic-description[]"]')];
+
+    const characteristics = charNames.map((el, i) => ({
+      name: el.value,
+      description: charDescs[i]?.value || ''
+    }));
+
+    console.log('Дані для редагування:', { name, description, price, speed, location, application,  noteValues, characteristics });
 
     const response = await fetch(`/photos/${photoId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, description, price })
+      body: JSON.stringify({ name, description, price, speed, location, application, noteValues, characteristics })
     });
 
     if (response.ok) {
       alert('Інформація успішно оновлена');
-      modal.classList.remove('show'); // Закриваємо модальне вікно
-      loadPhotos(); // Оновлюємо список фото
+      modal.classList.remove('show');
+      loadPhotos();
     } else {
       alert('Не вдалося оновити інформацію');
     }
   };
-
- 
 }
+
+
+
+function addEditNote(note = '') {
+  const container = document.getElementById('edit-note-container');
+
+  const div = document.createElement('div');
+  div.classList.add('form-group');
+
+  const noteInput = document.createElement('input');
+  noteInput.type = 'text';
+  noteInput.name = 'editNote[]';
+  noteInput.placeholder = 'Введіть дані';
+  noteInput.value = note;
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.textContent = '✕';
+  deleteBtn.classList.add('delete-btn');
+  deleteBtn.onclick = () => div.remove(); // просто видаляє блок
+
+  div.appendChild(noteInput);
+  div.appendChild(deleteBtn);
+  container.appendChild(div);
+}
+
+function addEditCharacteristic(name = '', description = '') {
+  const container = document.getElementById('edit-characteristics-container');
+
+  const div = document.createElement('div');
+  div.classList.add('form-group');
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.name = 'editCharacteristic-name[]';
+  nameInput.placeholder = 'Назва характеристики';
+  nameInput.value = name;
+
+  const descInput = document.createElement('input');
+  descInput.type = 'text';
+  descInput.name = 'editCharacteristic-description[]';
+  descInput.placeholder = 'Опис характеристики';
+  descInput.value = description;
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.textContent = '✕';
+  deleteBtn.classList.add('delete-btn');
+  deleteBtn.onclick = () => div.remove(); // видаляє блок
+
+  div.appendChild(nameInput);
+  div.appendChild(descInput);
+  div.appendChild(deleteBtn);
+  container.appendChild(div);
+}
+
 
 // Закриття модального вікна при натисканні на кнопку закриття
 const closeButton = document.querySelector('.close-btn');
 closeButton.onclick = () => {
   document.getElementById('editFormModal').classList.remove('show');
 };
+
 
 
 // Функція для відкриття форми додавання інформації

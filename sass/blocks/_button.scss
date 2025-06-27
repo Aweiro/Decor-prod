@@ -45,6 +45,19 @@
 }
 
 
+.delete-field-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-field-btn:hover {
+  background-color: #ff1a1a;
+}
 // scroll to top
 
 #myBtn {
