@@ -1,728 +1,745 @@
- <!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>West Decor</title>
+    <!DOCTYPE html>
+    <html lang="uk">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>West Decor</title>
 
-  <link rel="shortcut icon" href="/img/icons/logo.png" />
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-</head>
-<body>
-  <!-- Навбар -->
-  <nav class="nav">
-    <div class="container">
-      <div class="nav__row">
-        <a href="/" class="logo">
-          <img src="/img/icons/logo2.png" alt="logo" />
-        </a>
+      <link rel="shortcut icon" href="/img/icons/logo.png" />
+      <link rel="stylesheet" href="/css/main.css" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet"
+      />
+    </head>
+    <body>
+      <!-- Навбар -->
+      <nav class="nav">
+        <div class="container">
+          <div class="nav__row">
+            <a href="/" class="logo">
+              <img src="/img/icons/logo2.png" alt="logo" />
+            </a>
 
-        <button id="hamburgerBtn" class="hamburger">&#9776;</button>
+            <button id="hamburgerBtn" class="hamburger">&#9776;</button>
 
-        <div class="navigation-list">
-          <ul class="dash-under-link">
-            <li class="nav__link"><a href="/" class="active">Головна</a></li>
-            <li class="nav__link"><a href="about">Про нас</a></li>
-            <li class="nav__link"><a href="portfolio">Портфоліо</a></li>
-            <li class="nav__link"><a href="reviews">Відгуки</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Головна частина сторінки товару -->
-  <main class="content">
-    <section class="product-information">
-      <div class="container">
-        <div class="product-information__main">
-          <div class="product-information__left-wrapper">
-            <!-- Назва товару -->
-            <h1 class="product-information__title product-information__title--phone" id="product-title">
-              <!-- Назва товару з JavaScript -->
-            </h1>
-
-            <div class="product-information__photo-wrapper">
-              <div class="product-information__photo-row" id="product-additional-images">
-                <!-- Тут будуть відображатись додаткові зображення -->
-
-              </div>
-              <div class="product-information__photo-focus">
-                <img class="product-information__photo-big" id="product-main-image" alt="Основне фото товару" />
-              </div>
+            <div class="navigation-list">
+              <ul class="dash-under-link">
+                <li class="nav__link"><a href="/" class="active">Головна</a></li>
+                <li class="nav__link"><a href="about">Про нас</a></li>
+                <li class="nav__link"><a href="portfolio">Портфоліо</a></li>
+                <li class="nav__link"><a href="reviews">Відгуки</a></li>
+              </ul>
             </div>
+          </div>
+        </div>
+      </nav>
 
+      <!-- Головна частина сторінки товару -->
+      <main class="content">
+        <section class="product-information">
+          <div class="container">
+            <div class="product-information__main">
+              <div class="product-information__left-wrapper">
+                <!-- Назва товару -->
+                <h1 class="product-information__title product-information__title--phone" id="product-title">
+                  <!-- Назва товару з JavaScript -->
+                </h1>
 
-             <div class="product-information__reference">
-              <div class="product-information__reference-characteristics">
-                <!-- Виведення характеристик динамічно -->
-                <div id="characteristics-container"></div> <!-- тут будуть характеристики -->
+                <div class="product-information__photo-wrapper">
+                  <div class="product-information__photo-row" id="product-additional-images">
+                    <!-- Тут будуть відображатись додаткові зображення -->
+
+                  </div>
+                  <div class="product-information__photo-focus">
+                    <img class="product-information__photo-big" id="product-main-image" alt="Основне фото товару" />
+                  </div>
+                </div>
+
+                <div class="product-information__reference">
+                  <div class="product-information__reference-characteristics">
+                    <!-- Виведення характеристик динамічно -->
+                    <div id="characteristics-container"></div> <!-- тут будуть характеристики -->
+                    
+                  </div>
+                </div>
+              </div>
+
+              <div class="product-information__info-wrapper">
+                <h1 class="product-information__title product-information__title--tablet" id="product-title-tablet">
+                  <!-- Назва товару з JavaScript -->
+                </h1>
+                <p class="product-information__price" id="product-price">850 UAH/m²</p>
+                <div class="product-information__buttons">
+                  <a href="#tell-me" class="button button--call">Замовити дзвінок</a>
+                </div>
+
+                <div class="product-information__characteristics">
+                  <div class="related__product-info">
+                    <div class="product-info__row">
+                      <div class="product-info__item">
+                        <div class="product-info__icon">🏠</div>
+                        <div class="product-info__text">
+                          <strong>Швидкість роботи:</strong><br />
+                          <span id="product-speed"></span>
+                        </div>
+                      </div>
+                
+                      <div class="product-info__item">
+                        <div class="product-info__icon">📦</div>
+                        <div class="product-info__text">
+                          <strong>Локація:</strong><br />
+                          <span id="product-location"></span>
+                        </div>
+                      </div>
+                
+                      <div class="product-info__item">
+                        <div class="product-info__icon">📏</div>
+                        <div class="product-info__text">
+                          <strong>Застосування:</strong><br />
+                          <span id="product-application"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-information__features">
+                  <h2 class="product-information__features-title">Опис</h2>
+                  <ul class="product-information__features-list" id="product-note-list">
+                    <!-- Дані будуть динамічно додаватися сюди -->
+                    <ul id="product-note-list"></ul>
+
+                  </ul>
+                </div>
                 
               </div>
             </div>
           </div>
+        </section>
 
-          <div class="product-information__info-wrapper">
-            <h1 class="product-information__title product-information__title--tablet" id="product-title-tablet">
-              <!-- Назва товару з JavaScript -->
-            </h1>
-            <p class="product-information__price" id="product-price">850 UAH/m²</p>
-            <div class="product-information__buttons">
-              <a href="#tell-me" class="button button--call">Замовити дзвінок</a>
+        <section class="tell-me" id="tell-me">
+            <div class="container">
+              <div class="tell-me__block">
+                <div class="tell-me__row">
+                  <h1>Замовити консультацію</h1>
+                  <form action="" id="consultationForm">
+                    <div class="tell-me__inputs">
+                      <label for="name">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 48 48"
+                        >
+                          <g
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="4"
+                          >
+                            <circle cx="24" cy="11" r="7" />
+                            <path
+                              d="M4 41c0-8.837 8.059-16 18-16m9 17l10-10l-4-4l-10 10v4z"
+                            />
+                          </g>
+                        </svg>
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          placeholder="Ваше ім'я"
+                          required
+                        />
+                      </label>
+
+                      <label for="phone">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 24"
+                        >
+                          <g fill="none" fill-rule="evenodd">
+                            <path
+                              d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M8.172 15.829c3.845 3.845 7.408 4.266 8.454 4.305c1.264.046 2.554-.986 3.112-2.043c-.89-1.044-2.049-1.854-3.318-2.732c-.749.748-1.672 2.138-2.901 1.64c-.699-.281-2.425-1.076-3.933-2.585S7.283 11.18 7 10.482c-.498-1.231.896-2.156 1.645-2.905c-.878-1.29-1.674-2.479-2.716-3.324c-1.072.56-2.11 1.84-2.063 3.121c.039 1.046.46 4.609 4.306 8.455m8.38 6.304c-1.44-.053-5.521-.617-9.795-4.89c-4.273-4.274-4.836-8.354-4.89-9.795c-.08-2.196 1.602-4.329 3.545-5.162a1.47 1.47 0 0 1 1.445.159c1.608 1.173 2.717 2.95 3.67 4.342A1.504 1.504 0 0 1 10.35 8.7l-1.356 1.357C9.309 10.752 9.95 11.95 11 13s2.248 1.691 2.944 2.006l1.355-1.356a1.5 1.5 0 0 1 1.918-.171c1.42.984 3.088 2.077 4.304 3.634a1.47 1.47 0 0 1 .189 1.485c-.837 1.953-2.955 3.616-5.158 3.535"
+                            />
+                          </g>
+                        </svg>
+                        <input
+                          type="tel"
+                          name="phone"
+                          id="phone"
+                          placeholder="Номер телефону"
+                          required
+                        />
+                      </label>
+                    </div>
+
+                    <button type="submit" class="button" id="submitBtn">Відправити</button>
+                  </form>
+                </div>
+              </div>
             </div>
+        </section>
 
-            <div class="product-information__characteristics">
-              <div class="related__product-info">
-                <div class="product-info__row">
-                  <div class="product-info__item">
-                    <div class="product-info__icon">🏠</div>
-                    <div class="product-info__text">
-                      <strong>Швидкість роботи:</strong><br />
-                      <span id="product-speed"></span>
+        <section class="product-accordion">
+          <div class="container">
+            <!-- Тут динамічно додаються акордеони (технологія, відео, галерея) -->
+            <div id="accordion-wrapper" class="accordion-wrapper"></div>
+          </div>
+        
+          <!-- Модальне вікно для відео -->
+          <div id="videoModal" class="video-modal">
+            <div class="video-modal__content">
+              <span class="video-modal__close">&times;</span>
+              <div class="video-modal__modal-video">
+                <iframe id="videoFrame" width="100%" height="100%" src="" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <section class="product-materials">
+            <div class="related-products">
+              <div class="container">
+                <h2>RELATED PRODUCTS</h2>
+
+                <div class="related__product-container">
+                  <div class="related__product">
+                    <a href="#" class="related__product-link">
+                      <img
+                        src="/img/materials/elf-decor.jpg"
+                        alt="Restaurant WP Theme"
+                        class="related__product-image"
+                      />
+                      <div class="related__product-info">
+                        <h3>Restaurant WP Theme</h3>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                          Praesent ultricies dapibus erat vel aliquet.
+                        </p>
+                        <p class="related__product-price">$59.00</p>
+                        <div class="related__product-actions">
+                          <a href="#" class="related__cart-icon">🛒</a>
+                          <a href="#" class="related__more-info">•••</a>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="related__product">
+                    <a href="#" class="related__product-link">
+                      <img
+                        src="/img/materials/elf-decor.jpg"
+                        alt="Restaurant WP Theme"
+                        class="related__product-image"
+                      />
+                      <div class="related__product-info">
+                        <h3>Restaurant WP Theme</h3>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                          Praesent ultricies dapibus erat vel aliquet.
+                        </p>
+                        <p class="related__product-price">$59.00</p>
+                        <div class="related__product-actions">
+                          <a href="#" class="related__cart-icon">🛒</a>
+                          <a href="#" class="related__more-info">•••</a>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="related__product">
+                    <a href="#" class="related__product-link">
+                      <img
+                        src="/img/materials/elf-decor.jpg"
+                        alt="Fair Mobile UI Kit"
+                        class="related__product-image"
+                      />
+                      <div class="related__product-info">
+                        <h3>Fair Mobile UI Kit</h3>
+                        <p>
+                          Fair Mobile UI Kit is the excellent assistant for fast
+                          creation of your project.
+                        </p>
+                        <p class="related__product-price">$59.00</p>
+                        <div class="related__product-actions">
+                          <a href="#" class="related__cart-icon">🛒</a>
+                          <a href="#" class="related__more-info">•••</a>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="related__product">
+                    <a href="#" class="related__product-link">
+                      <img
+                        src="/img/materials/elf-decor.jpg"
+                        alt="Fair Mobile UI Kit"
+                        class="related__product-image"
+                      />
+                      <div class="related__product-info">
+                        <h3>Fair Mobile UI Kit</h3>
+                        <p>
+                          Fair Mobile UI Kit is the excellent assistant for fast
+                          creation of your project.
+                        </p>
+                        <p class="related__product-price">$59.00</p>
+                        <div class="related__product-actions">
+                          <a href="#" class="related__cart-icon">🛒</a>
+                          <a href="#" class="related__more-info">•••</a>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="related__product">
+                    <img
+                      src="/img/materials/elf-decor.jpg"
+                      alt="Fair Mobile UI Kit"
+                      class="related__product-image"
+                    />
+                    <div class="related__product-info">
+                      <h3>Fair Mobile UI Kit</h3>
+                      <p>
+                        Fair Mobile UI Kit is the excellent assistant for fast
+                        creation of your project.
+                      </p>
+                      <p class="related__product-price">$59.00</p>
+                      <div class="related__product-actions">
+                        <a href="#" class="related__cart-icon">🛒</a>
+                        <a href="#" class="related__more-info">•••</a>
+                      </div>
                     </div>
                   </div>
-            
-                  <div class="product-info__item">
-                    <div class="product-info__icon">📦</div>
-                    <div class="product-info__text">
-                      <strong>Локація:</strong><br />
-                      <span id="product-location"></span>
+                  <div class="related__product">
+                    <img
+                      src="/img/materials/elf-decor.jpg"
+                      alt="Fair Mobile UI Kit"
+                      class="related__product-image"
+                    />
+                    <div class="related__product-info">
+                      <h3>Fair Mobile UI Kit</h3>
+                      <p>
+                        Fair Mobile UI Kit is the excellent assistant for fast
+                        creation of your project.
+                      </p>
+                      <p class="related__product-price">$59.00</p>
+                      <div class="related__product-actions">
+                        <a href="#" class="related__cart-icon">🛒</a>
+                        <a href="#" class="related__more-info">•••</a>
+                      </div>
                     </div>
                   </div>
-            
-                  <div class="product-info__item">
-                    <div class="product-info__icon">📏</div>
-                    <div class="product-info__text">
-                      <strong>Застосування:</strong><br />
-                      <span id="product-application"></span>
+                  <div class="related__product">
+                    <img
+                      src="/img/materials/elf-decor.jpg"
+                      alt="Ecommerce Kit"
+                      class="related__product-image"
+                    />
+                    <div class="related__product-info">
+                      <h3>Ecommerce Kit</h3>
+                      <p>
+                        Check out this summer e-commerce elements. This is a very
+                        good inspiration indeed.
+                      </p>
+                      <p class="related__product-price">$49.00</p>
+                      <div class="related__product-actions">
+                        <a href="#" class="related__cart-icon">🛒</a>
+                        <a href="#" class="related__more-info">•••</a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="product-information__features">
-              <h2 class="product-information__features-title">Опис</h2>
-              <ul class="product-information__features-list" id="product-note-list">
-                <!-- Дані будуть динамічно додаватися сюди -->
-                 <ul id="product-note-list"></ul>
+          </section>
+      </main>
 
-              </ul>
+      <footer class="footer">
+        <div class="container">
+          <div class="footer__row">
+            <div class="footer__info">
+              <div class="footer__logo">
+                <div class="logo">
+                  <img src="/img/icons/logo.png" alt="logo" />
+                </div>
+              </div>
+
+              <div class="footer__info-text">
+                <p>
+                  Декоративні штукатурки West Decor дозволяють створювати сучасні
+                  ефекти: камінь, бетон, травертин, марморін, мерехтливий,
+                  перламутр, оксамит, мармур.
+                </p>
+              </div>
+
+              <div class="footer__socials">
+                <a
+                  target="_blank"
+                  href="https://www.instagram.com/westdecor_if?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                >
+                  <img src="/img/social/instagram.svg" alt="inst" />
+                </a>
+                <a target="_blank" href="https://t.me/sarmat_1997">
+                  <img src="/img/social/telegram.svg" alt="tg" />
+                </a>
+              </div>
             </div>
-            
-          </div>
-        </div>
-      </div>
-    </section>
 
-		<section class="tell-me" id="tell-me">
-				<div class="container">
-					<div class="tell-me__block">
-						<div class="tell-me__row">
-							<h1>Замовити консультацію</h1>
-							<form action="" id="consultationForm">
-								<div class="tell-me__inputs">
-									<label for="name">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="1em"
-											height="1em"
-											viewBox="0 0 48 48"
-										>
-											<g
-												fill="none"
-												stroke="currentColor"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="4"
-											>
-												<circle cx="24" cy="11" r="7" />
-												<path
-													d="M4 41c0-8.837 8.059-16 18-16m9 17l10-10l-4-4l-10 10v4z"
-												/>
-											</g>
-										</svg>
-										<input
-											type="text"
-											name="name"
-											id="name"
-											placeholder="Ваше ім'я"
-											required
-										/>
-									</label>
+            <div class="footer__nav">
+              <div class="footer__nav-block">
+                <h4 class="footer__nav-block-title">Навігація</h4>
+                <ul class="dash-under-link dash-under-link__center">
+                  <li><a href="/">Головна</a></li>
+                  <li><a href="about">Про нас</a></li>
+                  <li><a href="portfolio">Портфоліо</a></li>
+                  <li><a href="reviews">Відгуки</a></li>
+                </ul>
+              </div>
 
-									<label for="phone">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="1em"
-											height="1em"
-											viewBox="0 0 24 24"
-										>
-											<g fill="none" fill-rule="evenodd">
-												<path
-													d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
-												/>
-												<path
-													fill="currentColor"
-													d="M8.172 15.829c3.845 3.845 7.408 4.266 8.454 4.305c1.264.046 2.554-.986 3.112-2.043c-.89-1.044-2.049-1.854-3.318-2.732c-.749.748-1.672 2.138-2.901 1.64c-.699-.281-2.425-1.076-3.933-2.585S7.283 11.18 7 10.482c-.498-1.231.896-2.156 1.645-2.905c-.878-1.29-1.674-2.479-2.716-3.324c-1.072.56-2.11 1.84-2.063 3.121c.039 1.046.46 4.609 4.306 8.455m8.38 6.304c-1.44-.053-5.521-.617-9.795-4.89c-4.273-4.274-4.836-8.354-4.89-9.795c-.08-2.196 1.602-4.329 3.545-5.162a1.47 1.47 0 0 1 1.445.159c1.608 1.173 2.717 2.95 3.67 4.342A1.504 1.504 0 0 1 10.35 8.7l-1.356 1.357C9.309 10.752 9.95 11.95 11 13s2.248 1.691 2.944 2.006l1.355-1.356a1.5 1.5 0 0 1 1.918-.171c1.42.984 3.088 2.077 4.304 3.634a1.47 1.47 0 0 1 .189 1.485c-.837 1.953-2.955 3.616-5.158 3.535"
-												/>
-											</g>
-										</svg>
-										<input
-											type="tel"
-											name="phone"
-											id="phone"
-											placeholder="Номер телефону"
-											required
-										/>
-									</label>
-								</div>
-
-								<button type="submit" class="button" id="submitBtn">Відправити</button>
-							</form>
-						</div>
-					</div>
-				</div>
-		</section>
-
-    <section class="product-accordion">
-      <!-- Акордеони текстового типу -->
-      <!-- Контейнер для акордеонів -->
-<div id="accordion-wrapper"></div>
-
-<!-- Модальне вікно -->
-<div id="videoModal" class="video-modal">
-  <div class="video-modal__content">
-    <span class="video-modal__close">&times;</span>
-    <div class="video-modal__modal-video">
-      <iframe id="videoFrame" width="100%" height="100%" src="" frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-    </div>
-  </div>
-</div>
-      </section>
-      
-
-				<button class="accordion">Галерея</button>
-				<div class="accordion__panel">
-					<div class="image-gallery">
-						<img src="/img/testimonials/02.jpg" alt="Image 1" />
-						<img src="/img/testimonials/03.jpg" alt="Image 2" />
-						<img src="/img/testimonials/04.jpg" alt="Image 2" />
-						<img src="/img/testimonials/05.jpg" alt="Image 2" />
-						<img src="/img/testimonials/2.jpg" alt="Image 2" />
-						<img src="/img/testimonials/3.jpg" alt="Image 2" />
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="product-materials">
-				<div class="related-products">
-					<div class="container">
-						<h2>RELATED PRODUCTS</h2>
-
-						<div class="related__product-container">
-							<div class="related__product">
-								<a href="#" class="related__product-link">
-									<img
-										src="/img/materials/elf-decor.jpg"
-										alt="Restaurant WP Theme"
-										class="related__product-image"
-									/>
-									<div class="related__product-info">
-										<h3>Restaurant WP Theme</h3>
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Praesent ultricies dapibus erat vel aliquet.
-										</p>
-										<p class="related__product-price">$59.00</p>
-										<div class="related__product-actions">
-											<a href="#" class="related__cart-icon">🛒</a>
-											<a href="#" class="related__more-info">•••</a>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="related__product">
-								<a href="#" class="related__product-link">
-									<img
-										src="/img/materials/elf-decor.jpg"
-										alt="Restaurant WP Theme"
-										class="related__product-image"
-									/>
-									<div class="related__product-info">
-										<h3>Restaurant WP Theme</h3>
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Praesent ultricies dapibus erat vel aliquet.
-										</p>
-										<p class="related__product-price">$59.00</p>
-										<div class="related__product-actions">
-											<a href="#" class="related__cart-icon">🛒</a>
-											<a href="#" class="related__more-info">•••</a>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="related__product">
-								<a href="#" class="related__product-link">
-									<img
-										src="/img/materials/elf-decor.jpg"
-										alt="Fair Mobile UI Kit"
-										class="related__product-image"
-									/>
-									<div class="related__product-info">
-										<h3>Fair Mobile UI Kit</h3>
-										<p>
-											Fair Mobile UI Kit is the excellent assistant for fast
-											creation of your project.
-										</p>
-										<p class="related__product-price">$59.00</p>
-										<div class="related__product-actions">
-											<a href="#" class="related__cart-icon">🛒</a>
-											<a href="#" class="related__more-info">•••</a>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="related__product">
-								<a href="#" class="related__product-link">
-									<img
-										src="/img/materials/elf-decor.jpg"
-										alt="Fair Mobile UI Kit"
-										class="related__product-image"
-									/>
-									<div class="related__product-info">
-										<h3>Fair Mobile UI Kit</h3>
-										<p>
-											Fair Mobile UI Kit is the excellent assistant for fast
-											creation of your project.
-										</p>
-										<p class="related__product-price">$59.00</p>
-										<div class="related__product-actions">
-											<a href="#" class="related__cart-icon">🛒</a>
-											<a href="#" class="related__more-info">•••</a>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="related__product">
-								<img
-									src="/img/materials/elf-decor.jpg"
-									alt="Fair Mobile UI Kit"
-									class="related__product-image"
-								/>
-								<div class="related__product-info">
-									<h3>Fair Mobile UI Kit</h3>
-									<p>
-										Fair Mobile UI Kit is the excellent assistant for fast
-										creation of your project.
-									</p>
-									<p class="related__product-price">$59.00</p>
-									<div class="related__product-actions">
-										<a href="#" class="related__cart-icon">🛒</a>
-										<a href="#" class="related__more-info">•••</a>
-									</div>
-								</div>
-							</div>
-							<div class="related__product">
-								<img
-									src="/img/materials/elf-decor.jpg"
-									alt="Fair Mobile UI Kit"
-									class="related__product-image"
-								/>
-								<div class="related__product-info">
-									<h3>Fair Mobile UI Kit</h3>
-									<p>
-										Fair Mobile UI Kit is the excellent assistant for fast
-										creation of your project.
-									</p>
-									<p class="related__product-price">$59.00</p>
-									<div class="related__product-actions">
-										<a href="#" class="related__cart-icon">🛒</a>
-										<a href="#" class="related__more-info">•••</a>
-									</div>
-								</div>
-							</div>
-							<div class="related__product">
-								<img
-									src="/img/materials/elf-decor.jpg"
-									alt="Ecommerce Kit"
-									class="related__product-image"
-								/>
-								<div class="related__product-info">
-									<h3>Ecommerce Kit</h3>
-									<p>
-										Check out this summer e-commerce elements. This is a very
-										good inspiration indeed.
-									</p>
-									<p class="related__product-price">$49.00</p>
-									<div class="related__product-actions">
-										<a href="#" class="related__cart-icon">🛒</a>
-										<a href="#" class="related__more-info">•••</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-  </main>
-
-
-
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__row">
-        <div class="footer__info">
-          <div class="footer__logo">
-            <div class="logo">
-              <img src="/img/icons/logo.png" alt="logo" />
+              <div class="footer__nav-block">
+                <h4 class="footer__nav-block-title">Контакти</h4>
+                <ul>
+                  <li>
+                    <a href="mailto:aweiro.corporation@gmail.com"
+                      >aweiro.corporation@gmail.com</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#!" onclick="confirmCall('+380 95 716 87 47')"
+                      >+380 95 716 87 47</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-
-          <div class="footer__info-text">
-            <p>
-              Декоративні штукатурки West Decor дозволяють створювати сучасні
-              ефекти: камінь, бетон, травертин, марморін, мерехтливий,
-              перламутр, оксамит, мармур.
-            </p>
-          </div>
-
-          <div class="footer__socials">
-            <a
-              target="_blank"
-              href="https://www.instagram.com/westdecor_if?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-            >
-              <img src="/img/social/instagram.svg" alt="inst" />
-            </a>
-            <a target="_blank" href="https://t.me/sarmat_1997">
-              <img src="/img/social/telegram.svg" alt="tg" />
-            </a>
-          </div>
         </div>
 
-        <div class="footer__nav">
-          <div class="footer__nav-block">
-            <h4 class="footer__nav-block-title">Навігація</h4>
-            <ul class="dash-under-link dash-under-link__center">
-              <li><a href="/">Головна</a></li>
-              <li><a href="about">Про нас</a></li>
-              <li><a href="portfolio">Портфоліо</a></li>
-              <!-- <li><a href="">Послуги</a></li> -->
-              <li><a href="reviews">Відгуки</a></li>
-            </ul>
-          </div>
-
-          <div class="footer__nav-block">
-            <h4 class="footer__nav-block-title">Контакти</h4>
-            <ul>
-              <li>
-                <a href="mailto:aweiro.corporation@gmail.com"
-                  >aweiro.corporation@gmail.com</a
-                >
-              </li>
-              <li>
-                <a href="#!" onclick="confirmCall('+380 95 716 87 47')"
-                  >+380 95 716 87 47</a
-                >
-              </li>
-            </ul>
-          </div>
+        <div class="footer__bottom">
+          <p>&copy; 2024 West Decor. Всі права захищені.</p>
         </div>
-      </div>
-    </div>
+      </footer>
 
-    <div class="footer__bottom">
-      <p>&copy; 2024 West Decor. Всі права захищені.</p>
-    </div>
-  </footer>
-
-  <!-- scroll to top -->
-  <button onclick="topFunction()" id="myBtn" title="Go to top">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      shape-rendering="geometricPrecision"
-      text-rendering="geometricPrecision"
-      image-rendering="optimizeQuality"
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      viewBox="0 0 511.998 511.998"
-    >
-      <path
-        fill-rule="nonzero"
-        d="M255.999 511.999c70.684-.001 134.695-28.658 181.019-74.981 46.323-46.324 74.981-110.335 74.98-181.019 0-70.691-28.657-134.695-74.98-181.018C390.694 28.657 326.691 0 255.999 0 185.308 0 121.304 28.657 74.981 74.981 28.657 121.304 0 185.308 0 255.999c0 70.684 28.657 134.695 74.981 181.019 46.323 46.323 110.327 74.981 181.018 74.981zm-74.995-203.995c-29.412 16.955-43.962-6.609-27.542-23.789l84.234-95.914c15.311-15.318 21.289-15.318 36.607 0l84.234 95.914c16.303 17.26 2.086 40.686-27.549 23.789l-74.989-44.549-74.995 44.549zM410.99 410.99c-39.657 39.657-94.473 64.199-154.991 64.199-60.525 0-115.334-24.542-154.991-64.199-39.657-39.657-64.199-94.473-64.199-154.991 0-60.525 24.542-115.334 64.199-154.991 39.657-39.657 94.466-64.199 154.991-64.199 60.526 0 115.334 24.542 154.991 64.199 39.657 39.657 64.199 94.466 64.199 154.991 0 60.518-24.542 115.334-64.199 154.991z"
-      />
-    </svg>
-  </button>
-
-
-  <!-- Підключаємо JavaScript -->
-  <script src="js/config.js"></script>
-  <script>
-    // Отримуємо параметри з URL
-   // Отримуємо параметри з URL
-const urlParams = new URLSearchParams(window.location.search);
-const productId = urlParams.get('id');  // Отримуємо ID товару з параметрів URL
-
-// Виконуємо запит до сервера для отримання даних товару за його ID
-fetch(`${baseUrl}/photos/${productId}`)
-  .then(res => {
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
-  })
-  .then(photo => {
-    if (!photo) {
-      throw new Error('Товар не знайдено');
-    }
-
-    console.log('Отримані дані товару:', photo);
-
-    // Назва товару
-    document.getElementById('product-title').innerText = photo.decorName || 'Назва не знайдена';
-    document.getElementById('product-title-tablet').innerText = photo.decorName || 'Назва не знайдена';
-
-    // Ціна
-    document.getElementById('product-price').innerText = `${photo.price || 'Ціна не вказана'} UAH/m²`;
-
-    // Характеристики
-    document.getElementById('product-speed').innerText = photo.speed || 'Не вказано';
-    document.getElementById('product-location').innerText = photo.location || 'Не вказано';
-    document.getElementById('product-application').innerText = photo.application || 'Не вказано';
-
- // 🟡 Додати ВІДЕО-акордеон якщо є
- if (Array.isArray(photo.videoItems)) {
-      console.log('Отримані відео:', photo.videoItems);
-      renderVideoAccordion(photo.videoItems); // ⬅️ ця функція рендерить блок відео
-    }
-
-		
-
-// Перевірка, чи існує photo та photo.images
-console.log('Об\'єкт photo:', photo); // Логування об\'єкта photo
-console.log('Зображення в photo.images:', photo ? photo.images : 'photo.images не існує');
-
-// Якщо photo не існує або в ньому немає зображень, ініціалізуємо їх
-if (!photo || !Array.isArray(photo.images)) {
-  photo = {
-    images: [photo.url], // Використовуємо основне зображення як єдине
-    url: photo.url || '/img/placeholder.png' // Якщо немає URL, використовуємо заглушку
-  };
-}
-
-// Додавання основного зображення
-const mainImage = document.getElementById('product-main-image');
-const additionalImagesContainer = document.getElementById('product-additional-images');
-additionalImagesContainer.innerHTML = ''; // Очищаємо попередні зображення
-
-// Перевірка, чи є зображення в photo.images
-if (photo.images.length > 0) {
-  const firstImageUrl = photo.images[0]; // Перше зображення
-
-  // Встановлюємо основне зображення
-  mainImage.src = firstImageUrl; 
-  mainImage.alt = 'Основне фото товару';
-
-  // Створюємо елемент для основного фото в списку малих зображень
-  const mainImageElement = document.createElement('img');
-  mainImageElement.className = 'product-information__photo-small'; // Клас для маленьких зображень
-  mainImageElement.src = firstImageUrl;
-  mainImageElement.alt = 'Основне фото товару';
-  mainImageElement.setAttribute('data-large', firstImageUrl); // Додаємо атрибут для великого зображення
-
-  // Додаємо обробник події для великого зображення
-  mainImageElement.addEventListener('click', () => {
-    mainImage.src = firstImageUrl;
-    mainImage.alt = 'Основне фото товару';
-  });
-
-  // Додаємо основне зображення на перше місце в список малих зображень
-  additionalImagesContainer.appendChild(mainImageElement);
-
-  // Додаємо решту додаткових зображень
-  photo.images.slice(1).forEach((imgUrl) => {
-    const imgElement = document.createElement('img');
-    imgElement.className = 'product-information__photo-small'; // Використовується клас шаблону
-    imgElement.src = imgUrl;
-    imgElement.alt = 'Додаткове зображення';
-    imgElement.setAttribute('data-large', imgUrl); // Додаємо атрибут для великого зображення
-
-    // Додаємо обробник події для великого зображення
-    imgElement.addEventListener('click', () => {
-      mainImage.src = imgUrl;
-      mainImage.alt = 'Додаткове фото';
-    });
-
-    // Додаємо додаткові зображення до контейнера
-    additionalImagesContainer.appendChild(imgElement);
-  });
-} else {
-  // Якщо додаткових зображень немає
-  mainImage.src = photo.url || '/img/placeholder.png'; // Заглушка, якщо фото відсутнє
-  mainImage.alt = 'Основне фото товару';
-  
-  additionalImagesContainer.innerHTML = '<p>Додаткові зображення відсутні.</p>';
-}
-
-
-    // Додавання характеристик товару
-    const characteristicsContainer = document.getElementById('characteristics-container');
-    characteristicsContainer.innerHTML = ''; // Очищаємо попередні характеристики
-    if (photo.characteristics && Array.isArray(photo.characteristics) && photo.characteristics.length > 0) {
-      photo.characteristics.forEach(characteristic => {
-        const characteristicItem = document.createElement('div');
-        characteristicItem.className = 'product-information__reference-row';
-
-        const characteristicName = document.createElement('span');
-        characteristicName.className = 'product-information__reference-label';
-        characteristicName.innerText = characteristic.name || 'Без назви';
-
-        const characteristicDescription = document.createElement('span');
-        characteristicDescription.className = 'product-information__reference-value';
-        characteristicDescription.innerText = characteristic.description || 'Без опису';
-
-        characteristicItem.appendChild(characteristicName);
-        characteristicItem.appendChild(characteristicDescription);
-        characteristicsContainer.appendChild(characteristicItem);
-      });
-    } else {
-      characteristicsContainer.innerHTML = '<p>Характеристики відсутні.</p>';
-    } 
-    const noteList = document.getElementById('product-note-list');
-
-if (noteList) {
-  noteList.innerHTML = '';
-
-  const notes = photo.noteValues; // ⬅️ ОНОВЛЕНО: беремо правильне поле
-
-  if (Array.isArray(notes) && notes.length > 0) {
-    notes.forEach(note => {
-      const noteItem = document.createElement('li');
-      noteItem.className = 'product-information__features-item';
-      noteItem.innerText = note || 'Дані відсутні';
-      noteList.appendChild(noteItem);
-    });
-  } else {
-    noteList.innerHTML = '<p>Дані відсутні.</p>';
-  }
-} else {
-  console.error("Елемент 'product-note-list' не знайдено!");
-}
-
-   // === ДОДАЄМО АКОРДЕОНИ ===
-const accordionWrapper = document.getElementById('accordion-wrapper'); // контейнер у HTML
-
-if (accordionWrapper && Array.isArray(photo.accordionItems) && photo.accordionItems.length > 0) {
-  const button = document.createElement('button');
-  button.className = 'accordion';
-  button.innerText = 'Технологія нанесення';
-  accordionWrapper.appendChild(button);
-
-  const panel = document.createElement('div');
-  panel.className = 'accordion__panel';
-
-  photo.accordionItems.forEach(item => {
-    const block = document.createElement('div');
-    block.className = 'accordion__panel-text-block';
-
-    const h2 = document.createElement('h2');
-    h2.className = 'accordion__panel-title';
-    h2.innerText = item.title || 'Без назви';
-
-    const p = document.createElement('p');
-    p.innerText = item.description || 'Без опису';
-
-    block.appendChild(h2);
-    block.appendChild(p);
-    panel.appendChild(block);
-  });
-
-  // Додати галерею якщо потрібно
-  const gallery = document.createElement('div');
-  gallery.className = 'image-gallery';
-  gallery.innerHTML = `
-    <img src="/img/testimonials/03.jpg" alt="Image 1" />
-    <img src="/img/testimonials/02.jpg" alt="Image 2" />
-    <img src="/img/testimonials/02.jpg" alt="Image 3" />
-  `;
-  panel.appendChild(gallery);
-
-  accordionWrapper.appendChild(panel);
-
-  accordionWrapper.appendChild(button);
-  accordionWrapper.appendChild(panel);
-
-}
-
-// === ДОДАЄМО ВІДЕО АКОРДЕОН ===
-// === ДОДАЄМО ВІДЕО АКОРДЕОН ===
-function getYoutubeIdFromUrl(url) {
-  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
-  return match ? match[1] : null;
-}
-
-function renderVideoAccordion(videoItems) {
-  const accordionWrapper = document.getElementById('accordion-wrapper');
-  if (!accordionWrapper || !Array.isArray(videoItems) || videoItems.length === 0) return;
-
-  const button = document.createElement('button');
-  button.className = 'accordion';
-  button.innerText = 'Відео матеріал';
-
-  const panel = document.createElement('div');
-  panel.className = 'accordion__panel';
-
-  const videoWrapper = document.createElement('div');
-  videoWrapper.className = 'video-wrapper';
-
-  videoItems.forEach(url => {
-    const videoCard = document.createElement('div');
-    videoCard.className = 'video-card';
-    videoCard.setAttribute('data-video-url', url);
-
-    const videoId = getYoutubeIdFromUrl(url);
-    const thumbnail = videoId
-      ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-      : '/img/materials/window.jpg';
-
-    videoCard.innerHTML = `
-      <img src="${thumbnail}" alt="Відео" class="video-thumbnail"/>
-      <button class="play-button">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M8 5v14l11-7z" />
+      <!-- scroll to top -->
+      <button onclick="topFunction()" id="myBtn" title="Go to top">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          shape-rendering="geometricPrecision"
+          text-rendering="geometricPrecision"
+          image-rendering="optimizeQuality"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          viewBox="0 0 511.998 511.998"
+        >
+          <path
+            fill-rule="nonzero"
+            d="M255.999 511.999c70.684-.001 134.695-28.658 181.019-74.981 46.323-46.324 74.981-110.335 74.98-181.019 0-70.691-28.657-134.695-74.98-181.018C390.694 28.657 326.691 0 255.999 0 185.308 0 121.304 28.657 74.981 74.981 28.657 121.304 0 185.308 0 255.999c0 70.684 28.657 134.695 74.981 181.019 46.323 46.323 110.327 74.981 181.018 74.981zm-74.995-203.995c-29.412 16.955-43.962-6.609-27.542-23.789l84.234-95.914c15.311-15.318 21.289-15.318 36.607 0l84.234 95.914c16.303 17.26 2.086 40.686-27.549 23.789l-74.989-44.549-74.995 44.549zM410.99 410.99c-39.657 39.657-94.473 64.199-154.991 64.199-60.525 0-115.334-24.542-154.991-64.199-39.657-39.657-64.199-94.473-64.199-154.991 0-60.525 24.542-115.334 64.199-154.991 39.657-39.657 94.466-64.199 154.991-64.199 60.526 0 115.334 24.542 154.991 64.199 39.657 39.657 64.199 94.466 64.199 154.991 0 60.518-24.542 115.334-64.199 154.991z"
+          />
         </svg>
       </button>
-    `;
 
-    videoWrapper.appendChild(videoCard);
-  });
 
-  panel.appendChild(videoWrapper);
-  accordionWrapper.appendChild(button);
-  accordionWrapper.appendChild(panel);
+      <!-- Підключаємо JavaScript -->
+      <script src="js/config.js"></script>
+      <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');  // Отримуємо ID товару з параметрів URL
 
-  // обов’язково!
-}
-setupAccordion();
+    // Виконуємо запит до сервера для отримання даних товару за його ID
+    fetch(`${baseUrl}/photos/${productId}`)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(photo => {
+        if (!photo) {
+          throw new Error('Товар не знайдено');
+        }
 
-  })
-  .catch(err => {
-    console.error('Error:', err);
-    document.getElementById('product-gallery').innerHTML = `<p>Товар не знайдено.</p>`;
-  });
+        console.log('Отримані дані товару:', photo);
 
-    </script>
-  <script src="/js/script.js"></script>
-  <script src="/js/product-page.js"></script>
-</body>
-</html>
+        // Назва товару
+        document.getElementById('product-title').innerText = photo.decorName || 'Назва не знайдена';
+        document.getElementById('product-title-tablet').innerText = photo.decorName || 'Назва не знайдена';
+
+        // Ціна
+        document.getElementById('product-price').innerText = `${photo.price || 'Ціна не вказана'} UAH/m²`;
+
+        // Характеристики
+        document.getElementById('product-speed').innerText = photo.speed || 'Не вказано';
+        document.getElementById('product-location').innerText = photo.location || 'Не вказано';
+        document.getElementById('product-application').innerText = photo.application || 'Не вказано';
+
+    //  Додати ВІДЕО-акордеон
+    if (Array.isArray(photo.videoItems)) {
+          console.log('Отримані відео:', photo.videoItems);
+          renderVideoAccordion(photo.videoItems);
+        }
+
+    // Перевірка, чи існує photo та photo.images
+    console.log('Об\'єкт photo:', photo); // Логування об\'єкта photo
+    console.log('Зображення в photo.images:', photo ? photo.images : 'photo.images не існує');
+
+    // Якщо photo не існує або в ньому немає зображень, ініціалізуємо їх
+    if (!photo || !Array.isArray(photo.images)) {
+      photo = {
+        images: [photo.url], // Використовуємо основне зображення як єдине
+        url: photo.url || '/img/placeholder.png' // Якщо немає URL, використовуємо заглушку
+      };
+    }
+
+    // Додавання основного зображення
+    const mainImage = document.getElementById('product-main-image');
+    const additionalImagesContainer = document.getElementById('product-additional-images');
+    additionalImagesContainer.innerHTML = ''; // Очищаємо попередні зображення
+
+    // Перевірка, чи є зображення в photo.images
+    if (photo.images.length > 0) {
+      const firstImageUrl = photo.images[0]; // Перше зображення
+
+      // Встановлюємо основне зображення
+      mainImage.src = firstImageUrl; 
+      mainImage.alt = 'Основне фото товару';
+
+      // Створюємо елемент для основного фото в списку малих зображень
+      const mainImageElement = document.createElement('img');
+      mainImageElement.className = 'product-information__photo-small'; // Клас для маленьких зображень
+      mainImageElement.src = firstImageUrl;
+      mainImageElement.alt = 'Основне фото товару';
+      mainImageElement.setAttribute('data-large', firstImageUrl); // Додаємо атрибут для великого зображення
+
+      // Додаємо обробник події для великого зображення
+      mainImageElement.addEventListener('click', () => {
+        mainImage.src = firstImageUrl;
+        mainImage.alt = 'Основне фото товару';
+      });
+
+      // Додаємо основне зображення на перше місце в список малих зображень
+      additionalImagesContainer.appendChild(mainImageElement);
+
+      // Додаємо решту додаткових зображень
+      photo.images.slice(1).forEach((imgUrl) => {
+        const imgElement = document.createElement('img');
+        imgElement.className = 'product-information__photo-small'; 
+        imgElement.alt = 'Додаткове зображення';
+        imgElement.setAttribute('data-large', imgUrl); 
+
+        // Додаємо обробник події для великого зображення
+        imgElement.addEventListener('click', () => {
+          mainImage.src = imgUrl;
+          mainImage.alt = 'Додаткове фото';
+        });
+
+        // Додаємо додаткові зображення до контейнера
+        additionalImagesContainer.appendChild(imgElement);
+      });
+    } else {
+      // Якщо додаткових зображень немає
+      mainImage.src = photo.url || '/img/placeholder.png'; // Заглушка, якщо фото відсутнє
+      mainImage.alt = 'Основне фото товару';
+      
+      additionalImagesContainer.innerHTML = '<p>Додаткові зображення відсутні.</p>';
+    }
+
+
+        // Додавання характеристик товару
+        const characteristicsContainer = document.getElementById('characteristics-container');
+        characteristicsContainer.innerHTML = ''; // Очищаємо попередні характеристики
+        if (photo.characteristics && Array.isArray(photo.characteristics) && photo.characteristics.length > 0) {
+          photo.characteristics.forEach(characteristic => {
+            const characteristicItem = document.createElement('div');
+            characteristicItem.className = 'product-information__reference-row';
+
+            const characteristicName = document.createElement('span');
+            characteristicName.className = 'product-information__reference-label';
+            characteristicName.innerText = characteristic.name || 'Без назви';
+
+            const characteristicDescription = document.createElement('span');
+            characteristicDescription.className = 'product-information__reference-value';
+            characteristicDescription.innerText = characteristic.description || 'Без опису';
+
+            characteristicItem.appendChild(characteristicName);
+            characteristicItem.appendChild(characteristicDescription);
+            characteristicsContainer.appendChild(characteristicItem);
+          });
+        } else {
+          characteristicsContainer.innerHTML = '<p>Характеристики відсутні.</p>';
+        } 
+        const noteList = document.getElementById('product-note-list');
+
+        //ОПИС
+    if (noteList) {
+      noteList.innerHTML = '';
+
+      const notes = photo.noteValues; 
+
+      if (Array.isArray(notes) && notes.length > 0) {
+        notes.forEach(note => {
+          const noteItem = document.createElement('li');
+          noteItem.className = 'product-information__features-item';
+          noteItem.innerText = note || 'Дані відсутні';
+          noteList.appendChild(noteItem);
+        });
+      } else {
+        noteList.innerHTML = '<p>Дані відсутні.</p>';
+      }
+    } else {
+      console.error("Елемент 'product-note-list' не знайдено!");
+    }
+
+      // === ДОДАЄМО АКОРДЕОНИ ===
+    const accordionWrapper = document.getElementById('accordion-wrapper'); // контейнер у HTML
+
+    if (accordionWrapper && Array.isArray(photo.accordionItems) && photo.accordionItems.length > 0) {
+      const button = document.createElement('button');
+      button.className = 'accordion';
+      button.innerText = 'Технологія нанесення';
+      accordionWrapper.appendChild(button);
+
+      const panel = document.createElement('div');
+      panel.className = 'accordion__panel';
+
+      photo.accordionItems.forEach(item => {
+        const block = document.createElement('div');
+        block.className = 'accordion__panel-text-block';
+
+        const h2 = document.createElement('h2');
+        h2.className = 'accordion__panel-title';
+        h2.innerText = item.title || 'Без назви';
+
+        const p = document.createElement('p');
+        p.innerText = item.description || 'Без опису';
+
+        block.appendChild(h2);
+        block.appendChild(p);
+        panel.appendChild(block);
+      });
+
+      // Додати галерею якщо потрібно
+      const gallery = document.createElement('div');
+      gallery.className = 'image-gallery';
+      gallery.innerHTML = `
+        <img src="/img/testimonials/03.jpg" alt="Image 1" />
+        <img src="/img/testimonials/02.jpg" alt="Image 2" />
+        <img src="/img/testimonials/02.jpg" alt="Image 3" />
+      `;
+      panel.appendChild(gallery);
+
+
+      accordionWrapper.appendChild(button);
+      accordionWrapper.appendChild(panel);
+    }
+
+    //  ВІДЕО АКОРДЕОН
+    function getYoutubeIdFromUrl(url) {
+      const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+      return match ? match[1] : null;
+    }
+
+    function renderVideoAccordion(videoItems) {
+      const accordionWrapper = document.getElementById('accordion-wrapper');
+      if (!accordionWrapper || !Array.isArray(videoItems) || videoItems.length === 0) return;
+
+      const button = document.createElement('button');
+      button.className = 'accordion';
+      button.innerText = 'Відео матеріал';
+
+      const panel = document.createElement('div');
+      panel.className = 'accordion__panel';
+
+      const videoWrapper = document.createElement('div');
+      videoWrapper.className = 'video-wrapper';
+
+      videoItems.forEach(url => {
+        const videoCard = document.createElement('div');
+        videoCard.className = 'video-card';
+        videoCard.setAttribute('data-video-url', url);
+
+        const videoId = getYoutubeIdFromUrl(url);
+        const thumbnail = videoId
+          ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+          : '/img/materials/window.jpg';
+
+        videoCard.innerHTML = `
+          <img src="${thumbnail}" alt="Відео" class="video-thumbnail"/>
+          <button class="play-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </button>
+        `;
+
+        videoWrapper.appendChild(videoCard);
+      });
+
+      panel.appendChild(videoWrapper);
+      accordionWrapper.appendChild(button);
+      accordionWrapper.appendChild(panel);
+
+    }
+
+      // Додати галерею до акордеону
+      function renderAccordionGallery(photo) {
+      if (!photo || !Array.isArray(photo.galleryImages) || photo.galleryImages.length === 0) return;
+      const accordionWrapper = document.getElementById("accordion-wrapper");
+
+      const button = document.createElement("button");
+      button.className = "accordion";
+      button.textContent = "Галерея";
+
+      const panel = document.createElement("div");
+      panel.className = "accordion__panel";
+
+      const galleryDiv = document.createElement("div");
+      galleryDiv.className = "image-gallery";
+
+      photo.galleryImages.forEach((imgUrl, index) => {
+        const img = document.createElement("img");
+        img.src = imgUrl;
+        img.alt = `Image ${index + 1}`;
+        galleryDiv.appendChild(img);
+      });
+
+      panel.appendChild(galleryDiv);
+      accordionWrapper.appendChild(button);
+      accordionWrapper.appendChild(panel);
+    }
+        renderAccordionGallery(photo); // Виклик функції для рендерингу галереї
+
+        // Ініціалізуємо акордеони
+        const setupAccordion = () => {
+          const accordions = document.querySelectorAll('.accordion');
+          accordions.forEach(accordion => {
+            accordion.addEventListener('click', function() {
+              this.classList.toggle('active');
+              const panel = this.nextElementSibling;
+              if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+              } else {
+                panel.style.maxHeight = panel.scrollHeight + 'px';
+              }
+            });
+          });
+        };
+    setupAccordion();
+      })
+      
+      .catch(err => {
+        console.error('Error:', err);
+        document.getElementById('product-gallery').innerHTML = `<p>Товар не знайдено.</p>`;
+      });
+
+        </script>
+      <script src="/js/script.js"></script>
+      <script src="/js/product-page.js"></script>
+    </body>
+    </html>

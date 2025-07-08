@@ -1,22 +1,4 @@
 
-
-function setupAccordion() {
-  const acc = document.getElementsByClassName("accordion");
-  for (let i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-      this.classList.toggle("accordion-active");
-      const panel = this.nextElementSibling;
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      }
-    });
-  }
-}
-
-
-
 function extractVideoId(url) {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
   return match ? match[1] : null;
@@ -38,26 +20,6 @@ document.addEventListener('click', function (e) {
     document.getElementById('videoFrame').src = '';
   }
 });
-function setupAccordion() {
-  const accordions = document.querySelectorAll(".accordion");
-  accordions.forEach(btn => {
-    btn.addEventListener("click", function () {
-      this.classList.toggle("active");
-      const panel = this.nextElementSibling;
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      }
-    });
-  });
-}
-
-
-
-
-
-
 
 // Зум фото товару
 const smallImages = document.querySelectorAll('.product-information__photo-small');
