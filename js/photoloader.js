@@ -46,7 +46,7 @@ fetch(`${baseUrl}/photos`)
     
       const price = document.createElement('p');
       price.className = 'photo-card-price';
-      price.innerText = `Ціна: ${photo.price ? photo.price + ' грн' : 'Ціна відсутня'}`;
+      price.innerText = `Ціна: ${photo.price ? photo.price + ' UAH/m²' : 'Ціна відсутня'}`;
 
 
       // Call button 
@@ -185,7 +185,7 @@ function loadPhotos() {
 
 				const price = document.createElement('p');
 				price.className = 'photo-card-price';
-				price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' грн' : 'Ціна відсутня'}`;
+				price.innerText = `Ціна: ${photo.price !== undefined ? photo.price + ' UAH/m²' : 'Ціна відсутня'}`;
 
 				// Кнопка "Редагувати"
 				const editButton = document.createElement('button');
@@ -402,25 +402,55 @@ document.getElementById('add-characteristic-btn').addEventListener('click', func
 });
 
 // Додавання поля для нових даних (data)
-
-  // Створення нового елемента для введення даних
   document.getElementById('add-note-btn').addEventListener('click', function() {
     const noteContainer = document.getElementById('note-container');
-    
-    // Створення нового елемента для введення даних
     const noteItem = document.createElement('div');
     noteItem.classList.add('form-group', 'note-item');
-    
-    // Створення поля для введення даних
+
     const noteInput = document.createElement('input');
     noteInput.type = 'text';
     noteInput.name = 'note[]';  // Масив для збереження кількох значень
     noteInput.placeholder = 'Введіть нові дані';
-    
-    // Додаємо поле до контейнера
     noteItem.appendChild(noteInput);
     noteContainer.appendChild(noteItem);
   });
+
+  // Додавання нового блоку акордеону Технології нанесення
+document.getElementById('add-accordion-btn').addEventListener('click', function () {
+  const container = document.getElementById('accordion-container');
+
+  const item = document.createElement('div');
+  item.classList.add('form-group', 'accordion-item');
+
+  item.innerHTML = `
+    <label>Заголовок:</label>
+    <input type="text" name="accordion-title[]" placeholder="Заголовок акордеону" />
+    <label>Опис:</label>
+    <textarea name="accordion-description[]" placeholder="Опис акордеону"></textarea>
+  `;
+
+  container.appendChild(item);
+});
+// Додавання нового блоку акордеону Відео матеріали
+// ДОДАВАННЯ НОВОГО ПОЛЯ ДЛЯ ВІДЕО
+document.getElementById('add-video-btn').addEventListener('click', function () {
+  const container = document.getElementById('video-container');
+
+  const div = document.createElement('div');
+  div.classList.add('form-group', 'video-item');
+
+  div.innerHTML = `
+    <label>Посилання на відео:</label>
+    <input type="text" name="videoUrl[]" placeholder="https://www.youtube.com/watch?v=..." />
+  `;
+
+  container.appendChild(div);
+});
+
+
+
+
+
 
 // Обробник надсилання форми
 document.getElementById('addInfoForm').addEventListener('submit', async function (e) {
@@ -465,6 +495,27 @@ noteInputs.forEach(input => {
     
 
     console.log('noteValues:', noteValues);
+
+// Акордеон Технології нанесення  
+    const titles = document.querySelectorAll('input[name="accordion-title[]"]');
+const accordionDescriptions = document.querySelectorAll('textarea[name="accordion-description[]"]');
+
+for (let i = 0; i < titles.length; i++) {
+  formData.append('accordionTitle', titles[i].value);
+  formData.append('accordionDescription', accordionDescriptions[i].value);
+}
+// Акордеон Відео матеріали
+const videoInputs = document.querySelectorAll('input[name="videoUrl[]"]');
+const videoUrls = Array.from(videoInputs)
+  .map(input => input.value.trim())
+  .filter(url => url !== '');
+
+formData.append('videoItems', JSON.stringify(videoUrls));
+
+
+
+
+
 
     // Зображення
     for (let i = 0; i < productImages.length; i++) {

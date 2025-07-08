@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
@@ -191,37 +191,9 @@
 		</section>
 
     <section class="product-accordion">
-      <!-- Акордеони текстового типу -->
-      <!-- Контейнер для акордеонів -->
-<div id="accordion-wrapper"></div>
-
-<!-- Модальне вікно -->
-<div id="videoModal" class="video-modal">
-  <div class="video-modal__content">
-    <span class="video-modal__close">&times;</span>
-    <div class="video-modal__modal-video">
-      <iframe id="videoFrame" width="100%" height="100%" src="" frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-    </div>
-  </div>
-</div>
-      </section>
-      
-
-				<button class="accordion">Галерея</button>
-				<div class="accordion__panel">
-					<div class="image-gallery">
-						<img src="/img/testimonials/02.jpg" alt="Image 1" />
-						<img src="/img/testimonials/03.jpg" alt="Image 2" />
-						<img src="/img/testimonials/04.jpg" alt="Image 2" />
-						<img src="/img/testimonials/05.jpg" alt="Image 2" />
-						<img src="/img/testimonials/2.jpg" alt="Image 2" />
-						<img src="/img/testimonials/3.jpg" alt="Image 2" />
-					</div>
-				</div>
-			</div>
-		</section>
+      <div class="container" id="accordion-wrapper"></div>
+    </section>
+    
 
 		<section class="product-materials">
 				<div class="related-products">
@@ -500,11 +472,7 @@ fetch(`${baseUrl}/photos/${productId}`)
     document.getElementById('product-location').innerText = photo.location || 'Не вказано';
     document.getElementById('product-application').innerText = photo.application || 'Не вказано';
 
- // 🟡 Додати ВІДЕО-акордеон якщо є
- if (Array.isArray(photo.videoItems)) {
-      console.log('Отримані відео:', photo.videoItems);
-      renderVideoAccordion(photo.videoItems); // ⬅️ ця функція рендерить блок відео
-    }
+
 
 		
 
@@ -618,8 +586,7 @@ if (noteList) {
 } else {
   console.error("Елемент 'product-note-list' не знайдено!");
 }
-
-   // === ДОДАЄМО АКОРДЕОНИ ===
+// === ДОДАЄМО АКОРДЕОНИ ===
 const accordionWrapper = document.getElementById('accordion-wrapper'); // контейнер у HTML
 
 if (accordionWrapper && Array.isArray(photo.accordionItems) && photo.accordionItems.length > 0) {
@@ -659,61 +626,44 @@ if (accordionWrapper && Array.isArray(photo.accordionItems) && photo.accordionIt
 
   accordionWrapper.appendChild(panel);
 
-  accordionWrapper.appendChild(button);
-  accordionWrapper.appendChild(panel);
-
+  // ✅ ВИКЛИКАЄМО ПІСЛЯ вставки акордеону:
+  setupAccordion(); 
 }
 
-// === ДОДАЄМО ВІДЕО АКОРДЕОН ===
-// === ДОДАЄМО ВІДЕО АКОРДЕОН ===
-function getYoutubeIdFromUrl(url) {
-  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
-  return match ? match[1] : null;
-}
-
-function renderVideoAccordion(videoItems) {
-  const accordionWrapper = document.getElementById('accordion-wrapper');
-  if (!accordionWrapper || !Array.isArray(videoItems) || videoItems.length === 0) return;
-
+const videoWrapper = document.getElementById('video-accordion-wrapper');
+if (videoWrapper && Array.isArray(photo.videoAccordionItems) && photo.videoAccordionItems.length > 0) {
   const button = document.createElement('button');
   button.className = 'accordion';
-  button.innerText = 'Відео матеріал';
+  button.innerText = 'Відео матеріали';
+  videoWrapper.appendChild(button);
 
   const panel = document.createElement('div');
   panel.className = 'accordion__panel';
 
-  const videoWrapper = document.createElement('div');
-  videoWrapper.className = 'video-wrapper';
+  photo.videoAccordionItems.forEach(item => {
+    const block = document.createElement('div');
+    block.className = 'accordion__panel-text-block';
 
-  videoItems.forEach(url => {
-    const videoCard = document.createElement('div');
-    videoCard.className = 'video-card';
-    videoCard.setAttribute('data-video-url', url);
+    const h2 = document.createElement('h2');
+    h2.className = 'accordion__panel-title';
+    h2.innerText = item.title || 'Відео';
 
-    const videoId = getYoutubeIdFromUrl(url);
-    const thumbnail = videoId
-      ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-      : '/img/materials/window.jpg';
+    const iframe = document.createElement('iframe');
+    iframe.src = item.url;
+    iframe.width = '100%';
+    iframe.height = '315';
+    iframe.frameBorder = '0';
+    iframe.allowFullscreen = true;
 
-    videoCard.innerHTML = `
-      <img src="${thumbnail}" alt="Відео" class="video-thumbnail"/>
-      <button class="play-button">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M8 5v14l11-7z" />
-        </svg>
-      </button>
-    `;
-
-    videoWrapper.appendChild(videoCard);
+    block.appendChild(h2);
+    block.appendChild(iframe);
+    panel.appendChild(block);
   });
 
-  panel.appendChild(videoWrapper);
-  accordionWrapper.appendChild(button);
-  accordionWrapper.appendChild(panel);
-
-  // обов’язково!
+  videoWrapper.appendChild(panel);
+  setupAccordion(); // 🔑 не забудь активувати акордеон
 }
-setupAccordion();
+
 
   })
   .catch(err => {
@@ -726,3 +676,56 @@ setupAccordion();
   <script src="/js/product-page.js"></script>
 </body>
 </html>
+
+
+
+
+
+<button class="accordion">Відео матеріал</button>
+				<div class="accordion__panel">
+					<div class="video-tutorials">
+						<div class="video-wrapper">
+							<div class="video-card" data-video-id="wd6fAfllm6k">
+								<img
+									src="/img/materials/window.jpg"
+									alt="Video Thumbnail"
+									class="video-thumbnail"
+								/>
+								<button class="play-button">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+										<path d="M8 5v14l11-7z" />
+										<!-- Стрілка play -->
+									</svg>
+								</button>
+								<p class="video-title">Video Tutorial 1</p>
+							</div>
+
+							<div class="video-card" data-video-id="wd6fAfllm6k">
+								<img
+									src="/img/materials/window.jpg"
+									alt="Video Thumbnail"
+									class="video-thumbnail"
+								/>
+								<button class="play-button">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+										<path d="M8 5v14l11-7z" />
+										<!-- Стрілка play -->
+									</svg>
+								</button>
+								<p class="video-title">Video Tutorial 1</p>
+							</div>
+
+							<div class="video-card" data-video-id="wd6fAfllm6k">
+								<img
+									src="/img/materials/window.jpg"
+									alt="Video Thumbnail"
+									class="video-thumbnail"
+								/>
+								<button class="play-button">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+										<path d="M8 5v14l11-7z" />
+										<!-- Стрілка play -->
+									</svg>
+								</button>
+								<p class="video-title">Video Tutorial 1</p>
+							</div>

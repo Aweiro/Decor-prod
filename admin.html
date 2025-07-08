@@ -103,10 +103,10 @@
       <input type="hidden" id="productId" name="productId" />
 
       <!-- Назва декору -->
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="decorName">Назва декору:</label>
         <input type="text" id="decorName" name="decorName" placeholder="Назва декору" required />
-      </div>
+      </div> -->
 
       <!-- Дані -->
       <div id="note-container">
@@ -114,14 +114,14 @@
           <label>Дані:</label>
           <input type="text" name="note[]" placeholder="Введіть дані" />
         </div>
-        <button type="button" id="add-note-btn">Додати дані</button>
       </div>
+			<button type="button" id="add-note-btn">Додати дані</button>
 
       <!-- Ціна -->
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="price">Ціна:</label>
         <input type="number" id="price" name="price" placeholder="Ціна" step="0.01" required />
-      </div>
+      </div> -->
 
       <!-- Зображення -->
       <div class="form-group">
@@ -158,6 +158,32 @@
         <input type="text" id="application" name="application" placeholder="Застосування" required />
       </div>
 
+      <!-- Accordion inputs -->
+    <div id="accordion-container">
+      <div class="form-group accordion-item">
+        <label>Заголовок:</label>
+        <input type="text" name="accordion-title[]" placeholder="Заголовок акордеону" />
+        <label>Опис:</label>
+        <textarea name="accordion-description[]" placeholder="Опис акордеону"></textarea>
+      </div>
+    </div>
+    <button type="button" id="add-accordion-btn">Додати блок акордеону</button>
+
+            <!-- Accordion відео -->
+            <!-- Кнопка додати ще одне відео -->
+<button type="button" id="add-video-btn">Додати відео</button>
+
+<!-- Контейнер для всіх відео -->
+<div id="video-container">
+  <div class="form-group video-item">
+    <label>Посилання на відео:</label>
+    <input type="text" name="videoUrl[]" placeholder="https://www.youtube.com/watch?v=..." />
+  </div>
+</div>
+
+            
+
+
       <!-- Кнопки -->
       <div class="form-actions">
         <button type="submit">Зберегти інформацію</button>
@@ -166,8 +192,6 @@
     </form>
   </div>
 </div>
-
-
 
 
 

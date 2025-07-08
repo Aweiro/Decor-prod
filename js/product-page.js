@@ -1,68 +1,61 @@
 
 
+function setupAccordion() {
+  const acc = document.getElementsByClassName("accordion");
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("accordion-active");
+      const panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  }
+}
 
 
-// Акордеон
-var acc = document.getElementsByClassName("accordion");
-var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    // Toggle the 'active' class to change button style
-    this.classList.toggle("accordion-active");
-    var panel = this.nextElementSibling;
+function extractVideoId(url) {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+  return match ? match[1] : null;
+}
 
-    // Toggle max-height to open/close panel
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null; // Close the panel
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px"; // Open the panel
+document.addEventListener('click', function (e) {
+  if (e.target.closest('.video-thumbnail') || e.target.closest('.play-button')) {
+    const videoCard = e.target.closest('.video-card');
+    const videoUrl = videoCard.getAttribute('data-video-url');
+    const videoId = extractVideoId(videoUrl);
+    if (videoId) {
+      document.getElementById('videoModal').style.display = 'flex';
+      document.getElementById('videoFrame').src = `https://www.youtube.com/embed/${videoId}`;
     }
-  });
-}
+  }
 
-
-
-// modal window for video
-var videoCards = document.querySelectorAll('.video-card');
-var modal = document.getElementById('videoModal');
-var closeButton = modal.querySelector('.video-modal__close');
-
-// Функція для відкриття відео в модальному вікні
-function openModal(videoId) {
-  modal.style.display = "flex"; // Відкриваємо модальне вікно
-  var videoUrl = "https://www.youtube.com/embed/" + videoId; // Формуємо URL відео
-  document.getElementById("videoFrame").src = videoUrl; // Вставляємо відео в iframe
-}
-
-// Додаємо обробник події для кожної відеокартки
-videoCards.forEach(function(card) {
-  // Якщо натискаємо на картку або на зображення
-  card.querySelector('.video-thumbnail').addEventListener("click", function() {
-    var videoId = card.getAttribute('data-video-id'); // Отримуємо ID відео з data-атрибута
-    openModal(videoId); // Відкриваємо модальне вікно з відео
-  });
-
-  // Якщо натискаємо на кнопку play
-  card.querySelector('.play-button').addEventListener("click", function() {
-    var videoId = card.getAttribute('data-video-id'); // Отримуємо ID відео з data-атрибута
-    openModal(videoId); // Відкриваємо модальне вікно з відео
-  });
-});
-
-// Закриваємо модальне вікно
-closeButton.addEventListener("click", function() {
-  modal.style.display = "none"; // Приховуємо модальне вікно
-  document.getElementById("videoFrame").src = ""; // Очищаємо src, щоб зупинити відео
-});
-
-// Закриття модального вікна при натисканні за межами вікна
-window.addEventListener("click", function(event) {
-  if (event.target === modal) {
-    modal.style.display = "none"; // Приховуємо модальне вікно, якщо натиснуто за межами
-    document.getElementById("videoFrame").src = ""; // Зупиняємо відео
+  if (e.target.matches('.video-modal__close') || e.target.matches('#videoModal')) {
+    document.getElementById('videoModal').style.display = 'none';
+    document.getElementById('videoFrame').src = '';
   }
 });
+function setupAccordion() {
+  const accordions = document.querySelectorAll(".accordion");
+  accordions.forEach(btn => {
+    btn.addEventListener("click", function () {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  });
+}
+
+
+
+
 
 
 

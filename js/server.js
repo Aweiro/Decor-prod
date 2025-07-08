@@ -165,6 +165,8 @@ app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async 
   const { id } = req.params;
   const { speed, location, application, characteristics } = req.body;
   const noteValues = req.body.noteValues;
+  const { accordionTitle, accordionDescription } = req.body;
+  const { videoItems } = req.body;
   const productImages = req.files;
 
   try {
@@ -187,6 +189,36 @@ app.patch('/api/products/:id/add-info', upload.array('productImages', 3), async 
         return res.status(400).json({ message: 'Невірний формат характеристик' });
       }
     }
+//Акордеон Технології
+    let accordionItems = [];
+    if (accordionTitle && accordionDescription) {
+      if (Array.isArray(accordionTitle)) {
+        accordionItems = accordionTitle.map((title, i) => ({
+          title,
+          description: accordionDescription[i] || ''
+        }));
+      } else {
+        accordionItems = [{
+          title: accordionTitle,
+          description: accordionDescription
+        }];
+      }
+    
+      updatedFields.accordionItems = accordionItems;
+    }
+//Акордеон Відео
+if (videoItems) {
+  try {
+    const parsedItems = typeof videoItems === 'string'
+      ? JSON.parse(videoItems)
+      : videoItems;
+
+    updatedFields.videoItems = parsedItems;
+  } catch {
+    return res.status(400).json({ message: 'Невірний формат videoItems' });
+  }
+}
+
 
     if (productImages?.length) {
       const imageUrls = await Promise.all(productImages.map(uploadImageToFirebase));
