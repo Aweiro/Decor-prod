@@ -112,6 +112,7 @@
       noteValues,
       characteristics,
       accordionItems,
+      videoUrls,
       gallery
     } = req.body;
   
@@ -132,7 +133,8 @@
         noteValues: Array.isArray(noteValues) ? noteValues : [],
         characteristics: Array.isArray(characteristics) ? characteristics : [],
         accordionItems: Array.isArray(req.body.accordionItems) ? req.body.accordionItems : [],
-        gallery: Array.isArray(req.body.gallery) ? req.body.gallery : [],
+        videoUrls: Array.isArray(videoUrls) ? videoUrls : [],
+        // gallery: Array.isArray(req.body.gallery) ? req.body.gallery : [],
         timestamp: new Date()
       };
       

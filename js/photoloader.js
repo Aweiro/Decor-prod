@@ -245,8 +245,10 @@
         document.getElementById('edit-note-container').innerHTML = '';
         document.getElementById('edit-characteristics-container').innerHTML = '';
         document.getElementById('edit-accordion-container').innerHTML = '';
-        document.getElementById('edit-gallery-container').innerHTML = '';
-      
+        // document.getElementById('edit-gallery-container').innerHTML = '';
+document.getElementById('edit-videos-container').innerHTML = '';
+
+
         // Заповнення нотаток
         (photo.noteValues || []).forEach(note => addEditNote(note));
       
@@ -260,6 +262,8 @@
           addEditAccordionItem(item.title, item.description)
         );
       
+        (photo.videoItems || []).forEach(url => addEditVideo(url));
+        
         // Заповнення галереї
         (photo.gallery || []).forEach(url => addGalleryImage(url));
       
@@ -292,7 +296,9 @@
             description: accordionDescriptions[i]?.value || ''
           }));
       
-          const gallery = [...document.querySelectorAll('input[name="editGallery[]"]')].map(i => i.value);
+          const videoItems = [...document.querySelectorAll('input[name="editVideos[]"]')].map(v => v.value.trim()).filter(Boolean);
+
+          // const gallery = [...document.querySelectorAll('input[name="editGallery[]"]')].map(i => i.value);
       
           const response = await fetch(`/photos/${photoId}`, {
             method: 'PATCH',
@@ -307,7 +313,8 @@
               noteValues,
               characteristics,
               accordionItems,
-              gallery
+              videoItems
+              // gallery
             })
           });
       
@@ -403,34 +410,58 @@
         container.appendChild(div);
       }
 
-      function addGalleryImage(url = '') {
-        const container = document.getElementById('edit-gallery-container');
+      function addEditVideo(url = '') {
+        const container = document.getElementById('edit-videos-container');
       
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('gallery-item');
-      
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = 'Фото';
-        img.style.width = '100px';
-        img.style.borderRadius = '8px';
-      
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = '✖';
-        deleteBtn.type = 'button';
-        deleteBtn.classList.add('delete-btn');
-        deleteBtn.onclick = () => wrapper.remove();
+        const div = document.createElement('div');
+        div.classList.add('form-group');
       
         const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'editGallery[]';
+        input.type = 'text';
+        input.name = 'editVideos[]';
+        input.placeholder = 'https://youtube.com/...';
         input.value = url;
       
-        wrapper.appendChild(img);
-        wrapper.appendChild(deleteBtn);
-        wrapper.appendChild(input);
-        container.appendChild(wrapper);
+        const deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+        deleteBtn.textContent = '✕';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.onclick = () => div.remove();
+      
+        div.appendChild(input);
+        div.appendChild(deleteBtn);
+        container.appendChild(div);
       }
+      
+
+      // function addGalleryImage(url = '') {
+      //   const container = document.getElementById('edit-gallery-container');
+      
+      //   const wrapper = document.createElement('div');
+      //   wrapper.classList.add('gallery-item');
+      
+      //   const img = document.createElement('img');
+      //   img.src = url;
+      //   img.alt = 'Фото';
+      //   img.style.width = '100px';
+      //   img.style.borderRadius = '8px';
+      
+      //   const deleteBtn = document.createElement('button');
+      //   deleteBtn.textContent = '✖';
+      //   deleteBtn.type = 'button';
+      //   deleteBtn.classList.add('delete-btn');
+      //   deleteBtn.onclick = () => wrapper.remove();
+      
+      //   const input = document.createElement('input');
+      //   input.type = 'hidden';
+      //   input.name = 'editGallery[]';
+      //   input.value = url;
+      
+      //   wrapper.appendChild(img);
+      //   wrapper.appendChild(deleteBtn);
+      //   wrapper.appendChild(input);
+      //   container.appendChild(wrapper);
+      // }
       
 
 
