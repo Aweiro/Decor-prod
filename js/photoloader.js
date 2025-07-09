@@ -226,41 +226,48 @@
       function openEditForm(photo) {
         const editForm = document.getElementById('editForm');
         const modal = document.getElementById('editFormModal');
-
+      
         if (!editForm || !modal) {
           console.error('Форма або модальне вікно не знайдені');
           return;
         }
-
+      
+        // Заповнення полів
         document.getElementById('editName').value = photo.decorName || '';
         document.getElementById('editDescription').value = photo.description || '';
         document.getElementById('editPrice').value = photo.price || '';
         document.getElementById('editSpeed').value = photo.speed || '';
         document.getElementById('editLocation').value = photo.location || '';
         document.getElementById('editApplication').value = photo.application || '';
-
         editForm.dataset.photoId = photo.id;
-
-        // Очищення контейнерів
+      
+        // Очистка контейнерів
         document.getElementById('edit-note-container').innerHTML = '';
         document.getElementById('edit-characteristics-container').innerHTML = '';
-
-        // Вставка полів note[]
-      const notes = photo.noteValues || [];
-      notes.forEach(note => addEditNote(note));
-
-
-
-        // Вставка характеристик
+        document.getElementById('edit-accordion-container').innerHTML = '';
+        document.getElementById('edit-gallery-container').innerHTML = '';
+      
+        // Заповнення нотаток
+        (photo.noteValues || []).forEach(note => addEditNote(note));
+      
+        // Заповнення характеристик
         (photo.characteristics || []).forEach(c =>
           addEditCharacteristic(c.name, c.description)
         );
-
+      
+        // Заповнення акордеонів
+        (photo.accordionItems || []).forEach(item =>
+          addEditAccordionItem(item.title, item.description)
+        );
+      
+        // Заповнення галереї
+        (photo.gallery || []).forEach(url => addGalleryImage(url));
+      
         modal.classList.add('show');
-
+      
         editForm.onsubmit = async (e) => {
           e.preventDefault();
-
+      
           const name = document.getElementById('editName').value;
           const description = document.getElementById('editDescription').value;
           const price = document.getElementById('editPrice').value;
@@ -268,24 +275,42 @@
           const location = document.getElementById('editLocation').value;
           const application = document.getElementById('editApplication').value;
           const photoId = editForm.dataset.photoId;
-
+      
           const noteValues = [...document.querySelectorAll('input[name="editNote[]"]')].map(n => n.value);
           const charNames = [...document.querySelectorAll('input[name="editCharacteristic-name[]"]')];
           const charDescs = [...document.querySelectorAll('input[name="editCharacteristic-description[]"]')];
-
+      
           const characteristics = charNames.map((el, i) => ({
             name: el.value,
             description: charDescs[i]?.value || ''
           }));
-
-          console.log('Дані для редагування:', { name, description, price, speed, location, application,  noteValues, characteristics });
-
+      
+          const accordionTitles = [...document.querySelectorAll('input[name="editAccordion-title[]"]')];
+          const accordionDescriptions = [...document.querySelectorAll('textarea[name="editAccordion-description[]"]')];
+          const accordionItems = accordionTitles.map((el, i) => ({
+            title: el.value,
+            description: accordionDescriptions[i]?.value || ''
+          }));
+      
+          const gallery = [...document.querySelectorAll('input[name="editGallery[]"]')].map(i => i.value);
+      
           const response = await fetch(`/photos/${photoId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, description, price, speed, location, application, noteValues, characteristics })
+            body: JSON.stringify({
+              name,
+              description,
+              price,
+              speed,
+              location,
+              application,
+              noteValues,
+              characteristics,
+              accordionItems,
+              gallery
+            })
           });
-
+      
           if (response.ok) {
             alert('Інформація успішно оновлена');
             modal.classList.remove('show');
@@ -295,9 +320,7 @@
           }
         };
       }
-
-
-
+      
       function addEditNote(note = '') {
         const container = document.getElementById('edit-note-container');
 
@@ -350,6 +373,65 @@
         div.appendChild(deleteBtn);
         container.appendChild(div);
       }
+
+      function addEditAccordionItem(title = '', description = '') {
+        const container = document.getElementById('edit-accordion-container');
+      
+        const div = document.createElement('div');
+        div.classList.add('form-group');
+      
+        const titleInput = document.createElement('input');
+        titleInput.type = 'text';
+        titleInput.name = 'editAccordion-title[]';
+        titleInput.placeholder = 'Заголовок';
+        titleInput.value = title;
+      
+        const descInput = document.createElement('textarea');
+        descInput.name = 'editAccordion-description[]';
+        descInput.placeholder = 'Опис';
+        descInput.value = description;
+      
+        const deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+        deleteBtn.textContent = '✕';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.onclick = () => div.remove();
+      
+        div.appendChild(titleInput);
+        div.appendChild(descInput);
+        div.appendChild(deleteBtn);
+        container.appendChild(div);
+      }
+
+      function addGalleryImage(url = '') {
+        const container = document.getElementById('edit-gallery-container');
+      
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('gallery-item');
+      
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = 'Фото';
+        img.style.width = '100px';
+        img.style.borderRadius = '8px';
+      
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '✖';
+        deleteBtn.type = 'button';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.onclick = () => wrapper.remove();
+      
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'editGallery[]';
+        input.value = url;
+      
+        wrapper.appendChild(img);
+        wrapper.appendChild(deleteBtn);
+        wrapper.appendChild(input);
+        container.appendChild(wrapper);
+      }
+      
 
 
       // Закриття модального вікна при натисканні на кнопку закриття

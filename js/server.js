@@ -110,14 +110,18 @@
       location,
       application,
       noteValues,
-      characteristics
+      characteristics,
+      accordionItems,
+      gallery
     } = req.body;
-
+  
     try {
       const ref = db.collection('photos').doc(id);
       const doc = await ref.get();
-      if (!doc.exists) return res.status(404).json({ message: 'Фото не знайдено' });
-
+      if (!doc.exists) {
+        return res.status(404).json({ message: 'Фото не знайдено' });
+      }
+  
       const updatedData = {
         decorName: name ?? doc.data().decorName,
         description: description ?? doc.data().description,
@@ -127,9 +131,12 @@
         application,
         noteValues: Array.isArray(noteValues) ? noteValues : [],
         characteristics: Array.isArray(characteristics) ? characteristics : [],
+        accordionItems: Array.isArray(req.body.accordionItems) ? req.body.accordionItems : [],
+        gallery: Array.isArray(req.body.gallery) ? req.body.gallery : [],
         timestamp: new Date()
       };
-
+      
+  
       await ref.update(updatedData);
       res.status(200).json({ message: 'Інформацію оновлено' });
     } catch (error) {
@@ -137,7 +144,7 @@
       res.status(500).json({ message: 'Не вдалося оновити інформацію' });
     }
   });
-
+  
 
 
   // [5] --- ДОДАТКОВА сторінка ДЛЯ ПРОДУКТУ ---
