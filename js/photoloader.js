@@ -195,7 +195,8 @@
               const deleteButton = document.createElement('button');
               deleteButton.innerText = 'Видалити';
               deleteButton.className = 'card-delete-button button';
-              deleteButton.onclick = () => deletePhoto(photo.name);
+              deleteButton.onclick = () => deletePhoto(photo.id);
+
 
               // Кнопка "Додати інформацію"
               const addInfoButton = document.createElement('button');
@@ -246,7 +247,7 @@
         document.getElementById('edit-characteristics-container').innerHTML = '';
         document.getElementById('edit-accordion-container').innerHTML = '';
         // document.getElementById('edit-gallery-container').innerHTML = '';
-document.getElementById('edit-videos-container').innerHTML = '';
+        document.getElementById('edit-videos-container').innerHTML = '';
 
 
         // Заповнення нотаток
@@ -296,7 +297,8 @@ document.getElementById('edit-videos-container').innerHTML = '';
             description: accordionDescriptions[i]?.value || ''
           }));
       
-          const videoItems = [...document.querySelectorAll('input[name="editVideos[]"]')].map(v => v.value.trim()).filter(Boolean);
+          const videoItems = [...document.querySelectorAll('input[name="editVideos[]"]')]
+          .map(v => v.value.trim()).filter(Boolean);
 
           // const gallery = [...document.querySelectorAll('input[name="editGallery[]"]')].map(i => i.value);
       
@@ -421,7 +423,7 @@ document.getElementById('edit-videos-container').innerHTML = '';
         input.name = 'editVideos[]';
         input.placeholder = 'https://youtube.com/...';
         input.value = url;
-      
+
         const deleteBtn = document.createElement('button');
         deleteBtn.type = 'button';
         deleteBtn.textContent = '✕';
@@ -674,17 +676,17 @@ document.getElementById('edit-videos-container').innerHTML = '';
 
 
       // Видалення фотографії
-      function deletePhoto(photoName) {
-        fetch(`${baseUrl}/photos/${photoName}`, {
-            method: 'DELETE',
+      function deletePhoto(photoId) {
+        fetch(`${baseUrl}/photos/${photoId}`, {
+          method: 'DELETE',
         })
         .then(response => response.json())
         .then(data => {
-            alert(data.message);
-            loadPhotos();
+          alert(data.message);
+          loadPhotos();
         })
         .catch(error => {
-            console.error('Error deleting photo:', error);
+          console.error('Error deleting photo:', error);
         });
       }
       window.onload = function() {

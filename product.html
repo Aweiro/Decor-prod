@@ -530,6 +530,7 @@
       photo.images.slice(1).forEach((imgUrl) => {
         const imgElement = document.createElement('img');
         imgElement.className = 'product-information__photo-small'; 
+        imgElement.src = imgUrl;
         imgElement.alt = 'Додаткове зображення';
         imgElement.setAttribute('data-large', imgUrl); 
 

@@ -54,13 +54,19 @@
     }
   });
 
-  app.delete('/photos/:name', async (req, res) => {
+  app.delete('/photos/:id', async (req, res) => {
     try {
-      const snapshot = await db.collection('photos').where('name', '==', req.params.name).get();
-      if (snapshot.empty) return res.status(404).json({ message: 'Фото не знайдено' });
-      await Promise.all(snapshot.docs.map(doc => doc.ref.delete()));
+      const docRef = db.collection('photos').doc(req.params.id);
+      const doc = await docRef.get();
+  
+      if (!doc.exists) {
+        return res.status(404).json({ message: 'Фото не знайдено' });
+      }
+  
+      await docRef.delete();
       res.status(200).json({ message: 'Фото успішно видалено' });
     } catch (error) {
+      console.error('Помилка при видаленні:', error);
       res.status(500).json({ message: 'Не вдалося видалити фото' });
     }
   });
@@ -112,7 +118,7 @@
       noteValues,
       characteristics,
       accordionItems,
-      videoUrls,
+      videoItems,
       gallery
     } = req.body;
   
@@ -133,7 +139,7 @@
         noteValues: Array.isArray(noteValues) ? noteValues : [],
         characteristics: Array.isArray(characteristics) ? characteristics : [],
         accordionItems: Array.isArray(req.body.accordionItems) ? req.body.accordionItems : [],
-        videoUrls: Array.isArray(videoUrls) ? videoUrls : [],
+        videoItems: Array.isArray(videoItems) ? videoItems : currentData.videoItems ?? [],
         // gallery: Array.isArray(req.body.gallery) ? req.body.gallery : [],
         timestamp: new Date()
       };
