@@ -182,6 +182,18 @@ body {
   max-width: 150px;
 }
 
+.navigation-list .nav__link {
+  display: inline-block;
+}
+.navigation-list .nav__link a {
+  display: block;
+  transition: all 0.2s ease-in;
+}
+.navigation-list .nav__link :not(.active):hover {
+  color: #a09d9d;
+  transform: scale(1);
+}
+
 .navigation-list ul {
   display: flex;
   list-style-type: none;

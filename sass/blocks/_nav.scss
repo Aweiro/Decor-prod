@@ -25,6 +25,22 @@
   max-width: 150px;
 }
 
+.navigation-list {
+	.nav__link {
+		display: inline-block;
+
+		a {
+			display: block;
+			transition: all 0.2s ease-in;
+		}
+
+	}
+	.nav__link :not(.active):hover {
+		color: $accent-color;
+		transform: scale(1);
+	}
+}
+
 .navigation-list ul {
   display: flex;
   list-style-type: none;
