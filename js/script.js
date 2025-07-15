@@ -39,14 +39,24 @@ if (mybutton) {
 
 // Меню-гамбургер
 const hamburgerBtn = document.getElementById('hamburgerBtn');
-if (hamburgerBtn) {
-	hamburgerBtn.addEventListener('click', function () {
-		const navigationList = document.querySelector('.navigation-list');
-		if (navigationList) {
-			navigationList.classList.toggle('show');
-		}
-	});
-}
+const closeMenu = document.getElementById('closeMenu');
+const menu = document.getElementById('menu');
+
+// Відкриваємо меню
+hamburgerBtn.addEventListener('click', () => {
+  menu.classList.add('show'); // Додаємо клас show
+  document.body.style.overflow = 'hidden'; // Вимикаємо прокручування сторінки
+});
+
+// Закриваємо меню
+closeMenu.addEventListener('click', () => {
+  menu.classList.remove('show'); // Видаляємо клас show
+  document.body.style.overflow = 'auto'; // Вмикаємо прокручування сторінки
+});
+
+
+
+
 
 // Карусель
 let slideIndex = 0;

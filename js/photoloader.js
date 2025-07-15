@@ -187,7 +187,7 @@
               // Кнопка "Редагувати"
               const editButton = document.createElement('button');
               editButton.innerText = 'Редагувати';
-              editButton.className = 'button';
+              editButton.className = 'card-edit-button button';
               editButton.onclick = () => {
                 openEditForm(photo);
               };
@@ -201,7 +201,7 @@
               // Кнопка "Додати інформацію"
               const addInfoButton = document.createElement('button');
               addInfoButton.innerText = 'Додати інформацію';
-              addInfoButton.className = 'button';
+              addInfoButton.className = 'card-addinfo-button button';
               addInfoButton.onclick = () => {
                 openAddInfoForm(photo.id);
               };

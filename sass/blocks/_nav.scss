@@ -1,35 +1,139 @@
+/* Основні стилі для навігації */
 .nav {
-	padding-top: 20px;
-	padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 
-
+	.container {
+		width: 100%;
+	}
 }
 
 .nav__row {
-	display: flex;
+  display: flex;
+  align-items: center;
+	width: 100%;
 	justify-content: space-between;
+}
+
+.nav__list {
+	width: 100%;
+}
+
+.logo img {
+  max-width: 150px;
+}
+
+.navigation-list ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation-list li {
+  margin-right: 30px;
+}
+
+.navigation-list .nav__link {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+}
+
+/* Гамбургер-меню */
+.hamburger {
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none; /* Приховуємо гамбургер на великих екранах */
+}
+
+#closeMenu {
+	width: 25px;
+	text-align: center;
+}
+
+.top-bar__logo {
+
+}
+
+/* Мобільне меню */
+// .page__menu {
+//   display: none; /* Меню приховане за замовчуванням */
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background: rgb(255, 255, 255); /* Темне затемнення для фону */
+//   z-index: 1000;
+//   transition: all 0.3s ease-in-out;
+//   // padding: 20px;
+// }
+
+// .page__menu.show {
+//   display: block; /* Меню відображається при наявності класу show */
+// }
+
+/* Мобільне меню */
+.page__menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Початкове меню за межами екрану */
+  bottom: 0;
+  width: 100%; /* Ширина меню */
+  background: rgb(255, 255, 255); /* Білий фон для меню */
+  z-index: 1000;
+  opacity: 0; /* Початкова непрозорість меню */
+  transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Плавна анімація */
+}
+
+/* Відображаємо меню, коли є клас show */
+.page__menu.show {
+  right: 0; /* Меню з'являється з правого боку */
+  opacity: 1; /* Збільшуємо непрозорість до 1 */
+}
+
+.menu__top {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 	align-items: center;
 }
 
-.navigation-list {
-	.nav__link {
-		display: inline-block;
-		margin: 0 2rem;
-
-
-
-		a {
-			display: block;
-			transition: all 0.2s ease-in;
-		}
-
-		
-	}
-	.nav__link :not(.active):hover {
-		color: $accent-color;
-		transform: scale(1);
-	}
+.menu__bottom {
+  // padding: 20px;
 }
 
+.menu__nav ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-// hamburger menu
+.menu__nav .nav__item {
+  margin-bottom: 20px;
+}
+
+.menu__nav .nav__link {
+  text-decoration: none;
+  color: #000000;
+  font-size: 14px;
+  display: block;
+  padding: 10px;
+	width: 100%;
+	border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block; /* Показуємо гамбургер на мобільних пристроях */
+  }
+
+  .navigation-list {
+    display: none; /* Приховуємо навігацію на мобільних */
+  }
+}

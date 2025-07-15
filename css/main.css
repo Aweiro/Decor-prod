@@ -156,30 +156,118 @@ body {
   background-image: url("../assets/img/site-hero.jpg"); /* Заміни 'your-image.jpg' на шлях до твого зображення */
 }
 
+/* Основні стилі для навігації */
 .nav {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.nav .container {
+  width: 100%;
 }
 
 .nav__row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.nav__list {
+  width: 100%;
+}
+
+.logo img {
+  max-width: 150px;
+}
+
+.navigation-list ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation-list li {
+  margin-right: 30px;
 }
 
 .navigation-list .nav__link {
-  display: inline-block;
-  margin: 0 2rem;
-}
-.navigation-list .nav__link a {
-  display: block;
-  transition: all 0.2s ease-in;
-}
-.navigation-list .nav__link :not(.active):hover {
-  color: #a09d9d;
-  transform: scale(1);
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
 }
 
+/* Гамбургер-меню */
+.hamburger {
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none; /* Приховуємо гамбургер на великих екранах */
+}
+
+#closeMenu {
+  width: 25px;
+  text-align: center;
+}
+
+/* Мобільне меню */
+/* Мобільне меню */
+.page__menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Початкове меню за межами екрану */
+  bottom: 0;
+  width: 100%; /* Ширина меню */
+  background: rgb(255, 255, 255); /* Білий фон для меню */
+  z-index: 1000;
+  opacity: 0; /* Початкова непрозорість меню */
+  transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Плавна анімація */
+}
+
+/* Відображаємо меню, коли є клас show */
+.page__menu.show {
+  right: 0; /* Меню з'являється з правого боку */
+  opacity: 1; /* Збільшуємо непрозорість до 1 */
+}
+
+.menu__top {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+.menu__nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu__nav .nav__item {
+  margin-bottom: 20px;
+}
+
+.menu__nav .nav__link {
+  text-decoration: none;
+  color: #000000;
+  font-size: 14px;
+  display: block;
+  padding: 10px;
+  width: 100%;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block; /* Показуємо гамбургер на мобільних пристроях */
+  }
+  .navigation-list {
+    display: none; /* Приховуємо навігацію на мобільних */
+  }
+}
 .logo {
   display: flex;
   align-items: center;
@@ -439,6 +527,20 @@ body {
   left: 30px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.delete-field-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-field-btn:hover {
+  background-color: #ff1a1a;
 }
 
 #myBtn {
@@ -842,7 +944,7 @@ body {
     color: rgb(46, 45, 45);
   }
 }
-.card-delete-button {
+.card-edit-button, .card-delete-button, .card-addinfo-button {
   margin-top: 10px;
 }
 
@@ -2522,23 +2624,13 @@ header.main-header .menu-icon .line:last-child {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   width: 100%; /* Ensure panel doesn't overflow */
-  margin-bottom: 0; /* No margin when panel is closed */
+  padding-bottom: 0; /* No margin when panel is closed */
   display: flex;
   flex-direction: column;
   row-gap: 20px;
 }
 .accordion__panel__title {
   font-size: 18px;
-}
-
-.accordion-active + .accordion__panel {
-  margin-bottom: 20px; /* Margin between the panel and next element when opened */
-}
-
-/* Для останнього акордеону, коли він відкритий, додаємо відступ та бордер */
-.accordion:last-of-type.accordion-active + .accordion__panel {
-  border-bottom: 1px solid #b4b4b4; /* Border for the last panel */
-  padding-bottom: 20px;
 }
 
 .accordion__panel p {
@@ -2848,6 +2940,81 @@ header.main-header .menu-icon .line:last-child {
   color: #aaa;
   text-decoration: none;
   cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 100px;
+  overflow: auto;
+}
+.modal .modal-content {
+  background-color: white;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.modal .modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.modal .modal-content input, .modal .modal-content button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.modal .modal-content input[type=text]:focus,
+.modal .modal-content input[type=number]:focus {
+  border-color: #8c8c8c;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+.modal .modal-content button {
+  background-color: #4a4a4a;
+  color: #f7f7f7;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.modal .modal-content button:hover {
+  background-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.modal .modal-content button:active {
+  background-color: #222;
+}
+.modal .modal-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+.modal .modal-content .close-btn:hover {
+  color: black;
+}
+
+.modal.show {
+  display: block;
 }
 
 .modal {

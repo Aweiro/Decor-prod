@@ -19,16 +19,20 @@
 	</head>
 	<body>
 	<div class="background-portfolio"> 
+
+		<!-- Навігація -->
 		<nav class="nav">
 			<div class="container">
 				<div class="nav__row">
+					<!-- Логотип -->
 					<a href="/" class="logo">
 						<img src="./img/icons/logo2.png" alt="logo" />
 					</a>
 
-					<!--Hamburger menu-->
+					<!-- Гамбургер-меню -->
 					<button id="hamburgerBtn" class="hamburger">&#9776;</button>
 
+					<!-- Список навігаційних лінків (буде приховано на мобільних пристроях) -->
 					<div class="navigation-list">
 						<ul class="dash-under-link">
 							<li class="nav__link">
@@ -36,13 +40,33 @@
 							</li>
 							<li class="nav__link"><a href="about">Про нас</a></li>
 							<li class="nav__link"><a href="portfolio" class="active">Портфоліо</a></li>
-							<!-- <li class="nav__link"><a href="#">Послуги</a></li> -->
 							<li class="nav__link"><a href="reviews">Відгуки</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</nav>
+
+		<!-- Мобільне меню -->
+		<aside class="page__menu menu" id="menu">
+				<div class="top-bar menu__top">
+					<a href="/" class="logo top-bar__logo-link">
+						<img class="top-bar__logo" src="./img/icons/logo2.png" alt="logo" />
+					</a>
+					<a href="#" class="icon icon--close" id="closeMenu">&#10005;</a>
+				</div>
+
+				<div class="menu__bottom">
+					<nav class="nav menu__nav">
+						<ul class="nav__list">
+							<li class="nav__item"><a class="nav__link" href="/">Головна</a></li>
+							<li class="nav__item"><a class="nav__link" href="about">Про нас</a></li>
+							<li class="nav__item"><a class="nav__link" href="portfolio">Портфоліо</a></li>
+							<li class="nav__item"><a class="nav__link" href="reviews">Відгуки</a></li>
+						</ul>
+					</nav>
+				</div>
+		</aside>
 
 			<main class="content">
 				
