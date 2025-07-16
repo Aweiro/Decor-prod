@@ -87,9 +87,10 @@
       <div id="edit-videos-container"></div>
 <button type="button" onclick="addEditVideo()">Додати відео</button>
 
-      <!-- Gallery -->
-      <!-- <h4>Галерея</h4>
-      <div id="edit-gallery-container" style="display: flex; flex-wrap: wrap; gap: 10px;"></div> -->
+<h4>Галерея (макс. 10 фото)</h4>
+<div id="edit-gallery-container" class="admin-gallery-container"></div>
+<input type="file" id="edit-gallery-input" accept="image/*" multiple style="display: none;">
+<button type="button" onclick="triggerEditGalleryInput()">Додати фото до галереї</button>
 
 
           <div class="button-container">
@@ -110,11 +111,7 @@
         <form id="addInfoForm">
           <input type="hidden" id="productId" name="productId" />
 
-          <!-- Назва декору -->
-          <!-- <div class="form-group">
-            <label for="decorName">Назва декору:</label>
-            <input type="text" id="decorName" name="decorName" placeholder="Назва декору" required />
-          </div> -->
+          
 
           <!-- Дані -->
           <div id="note-container">
@@ -125,11 +122,7 @@
           </div>
           <button type="button" id="add-note-btn">Додати дані</button>
 
-          <!-- Ціна -->
-          <!-- <div class="form-group">
-            <label for="price">Ціна:</label>
-            <input type="number" id="price" name="price" placeholder="Ціна" step="0.01" required />
-          </div> -->
+  
 
           <!-- Зображення -->
           <div class="form-group">

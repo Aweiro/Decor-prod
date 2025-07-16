@@ -441,6 +441,20 @@ body {
   transform: translateY(-50%);
 }
 
+.delete-field-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-field-btn:hover {
+  background-color: #ff1a1a;
+}
+
 #myBtn {
   display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
@@ -2848,6 +2862,81 @@ header.main-header .menu-icon .line:last-child {
   color: #aaa;
   text-decoration: none;
   cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 100px;
+  overflow: auto;
+}
+.modal .modal-content {
+  background-color: white;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.modal .modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.modal .modal-content input, .modal .modal-content button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.modal .modal-content input[type=text]:focus,
+.modal .modal-content input[type=number]:focus {
+  border-color: #8c8c8c;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  outline: none;
+}
+.modal .modal-content button {
+  background-color: #4a4a4a;
+  color: #f7f7f7;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.modal .modal-content button:hover {
+  background-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.modal .modal-content button:active {
+  background-color: #222;
+}
+.modal .modal-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+.modal .modal-content .close-btn:hover {
+  color: black;
+}
+
+.modal.show {
+  display: block;
 }
 
 .modal {

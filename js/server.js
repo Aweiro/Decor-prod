@@ -84,6 +84,7 @@
         metadata: { firebaseStorageDownloadTokens: uniqueToken },
       },
     });
+    
 
     blobStream.on('error', error => res.status(500).json({ message: 'Помилка завантаження' }));
     blobStream.on('finish', async () => {
@@ -105,6 +106,38 @@
     blobStream.end(file.buffer);
   });
 
+  // [4.1] --- ЗАВАНТАЖЕННЯ ФОТО ДЛЯ ГАЛЕРЕЇ ---
+app.post('/upload-gallery-image', upload.single('image'), async (req, res) => {
+  try {
+    const { file } = req;
+    if (!file) return res.status(400).json({ message: 'Файл відсутній' });
+
+    const uniqueToken = uuidv4();
+    const blob = bucket.file(`uploads/${file.originalname}`);
+    const blobStream = blob.createWriteStream({
+      metadata: {
+        contentType: file.mimetype,
+        metadata: { firebaseStorageDownloadTokens: uniqueToken },
+      },
+    });
+
+    blobStream.on('error', (error) => {
+      console.error('Помилка завантаження галереї:', error);
+      res.status(500).json({ message: 'Помилка при завантаженні файлу в галерею' });
+    });
+
+    blobStream.on('finish', () => {
+      const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(file.originalname)}?alt=media&token=${uniqueToken}`;
+      res.status(200).json({ url: publicUrl });
+    });
+
+    blobStream.end(file.buffer);
+  } catch (error) {
+    console.error('Помилка сервера при завантаженні галереї:', error);
+    res.status(500).json({ message: 'Не вдалося завантажити фото в галерею' });
+  }
+});
+
   // [4] --- РЕДАГУВАННЯ ---
   app.patch('/photos/:id', async (req, res) => {
     const { id } = req.params;
@@ -119,31 +152,38 @@
       characteristics,
       accordionItems,
       videoItems,
-      gallery
+      galleryImages
     } = req.body;
   
     try {
       const ref = db.collection('photos').doc(id);
       const doc = await ref.get();
+  
       if (!doc.exists) {
         return res.status(404).json({ message: 'Фото не знайдено' });
       }
   
+      const currentData = doc.data();
+  
+      // Фільтрація galleryImages, якщо там прийшли об’єкти замість рядків:
+      const cleanGalleryImages = Array.isArray(galleryImages)
+        ? galleryImages.map(item => typeof item === 'string' ? item : item.url).filter(Boolean)
+        : currentData.galleryImages ?? [];
+  
       const updatedData = {
-        decorName: name ?? doc.data().decorName,
-        description: description ?? doc.data().description,
-        price: price ?? doc.data().price,
+        decorName: name ?? currentData.decorName,
+        description: description ?? currentData.description,
+        price: price ?? currentData.price,
         speed,
         location,
         application,
-        noteValues: Array.isArray(noteValues) ? noteValues : [],
-        characteristics: Array.isArray(characteristics) ? characteristics : [],
-        accordionItems: Array.isArray(req.body.accordionItems) ? req.body.accordionItems : [],
+        noteValues: Array.isArray(noteValues) ? noteValues : currentData.noteValues ?? [],
+        characteristics: Array.isArray(characteristics) ? characteristics : currentData.characteristics ?? [],
+        accordionItems: Array.isArray(accordionItems) ? accordionItems : currentData.accordionItems ?? [],
         videoItems: Array.isArray(videoItems) ? videoItems : currentData.videoItems ?? [],
-        // gallery: Array.isArray(req.body.gallery) ? req.body.gallery : [],
+        galleryImages: cleanGalleryImages,
         timestamp: new Date()
       };
-      
   
       await ref.update(updatedData);
       res.status(200).json({ message: 'Інформацію оновлено' });
@@ -152,6 +192,8 @@
       res.status(500).json({ message: 'Не вдалося оновити інформацію' });
     }
   });
+  
+  
   
 
 
@@ -258,6 +300,7 @@
     }
   });
 
+  
 
   // [6] --- ВІДГУКИ ---
   app.get('/api/reviews', async (req, res) => {
@@ -331,6 +374,8 @@
       res.status(500).json({ success: false, message: 'Помилка сервера' });
     }
   });
+
+  
 
   // [8] --- СТАРТ СЕРВЕРА ---
   const PORT = process.env.PORT || 3000;

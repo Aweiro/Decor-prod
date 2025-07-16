@@ -224,111 +224,108 @@
       }
 
       //редагування інформації про фото
-      function openEditForm(photo) {
-        const editForm = document.getElementById('editForm');
-        const modal = document.getElementById('editFormModal');
-      
-        if (!editForm || !modal) {
-          console.error('Форма або модальне вікно не знайдені');
-          return;
-        }
-      
-        // Заповнення полів
-        document.getElementById('editName').value = photo.decorName || '';
-        document.getElementById('editDescription').value = photo.description || '';
-        document.getElementById('editPrice').value = photo.price || '';
-        document.getElementById('editSpeed').value = photo.speed || '';
-        document.getElementById('editLocation').value = photo.location || '';
-        document.getElementById('editApplication').value = photo.application || '';
-        editForm.dataset.photoId = photo.id;
-      
-        // Очистка контейнерів
-        document.getElementById('edit-note-container').innerHTML = '';
-        document.getElementById('edit-characteristics-container').innerHTML = '';
-        document.getElementById('edit-accordion-container').innerHTML = '';
-        // document.getElementById('edit-gallery-container').innerHTML = '';
-        document.getElementById('edit-videos-container').innerHTML = '';
+      let editGalleryImages = [];
 
+function openEditForm(photo) {
+  const editForm = document.getElementById('editForm');
+  const modal = document.getElementById('editFormModal');
 
-        // Заповнення нотаток
-        (photo.noteValues || []).forEach(note => addEditNote(note));
-      
-        // Заповнення характеристик
-        (photo.characteristics || []).forEach(c =>
-          addEditCharacteristic(c.name, c.description)
-        );
-      
-        // Заповнення акордеонів
-        (photo.accordionItems || []).forEach(item =>
-          addEditAccordionItem(item.title, item.description)
-        );
-      
-        (photo.videoItems || []).forEach(url => addEditVideo(url));
-        
-        // Заповнення галереї
-        (photo.gallery || []).forEach(url => addGalleryImage(url));
-      
-        modal.classList.add('show');
-      
-        editForm.onsubmit = async (e) => {
-          e.preventDefault();
-      
-          const name = document.getElementById('editName').value;
-          const description = document.getElementById('editDescription').value;
-          const price = document.getElementById('editPrice').value;
-          const speed = document.getElementById('editSpeed').value;
-          const location = document.getElementById('editLocation').value;
-          const application = document.getElementById('editApplication').value;
-          const photoId = editForm.dataset.photoId;
-      
-          const noteValues = [...document.querySelectorAll('input[name="editNote[]"]')].map(n => n.value);
-          const charNames = [...document.querySelectorAll('input[name="editCharacteristic-name[]"]')];
-          const charDescs = [...document.querySelectorAll('input[name="editCharacteristic-description[]"]')];
-      
-          const characteristics = charNames.map((el, i) => ({
-            name: el.value,
-            description: charDescs[i]?.value || ''
-          }));
-      
-          const accordionTitles = [...document.querySelectorAll('input[name="editAccordion-title[]"]')];
-          const accordionDescriptions = [...document.querySelectorAll('textarea[name="editAccordion-description[]"]')];
-          const accordionItems = accordionTitles.map((el, i) => ({
-            title: el.value,
-            description: accordionDescriptions[i]?.value || ''
-          }));
-      
-          const videoItems = [...document.querySelectorAll('input[name="editVideos[]"]')]
-          .map(v => v.value.trim()).filter(Boolean);
+  if (!editForm || !modal) {
+    console.error('Форма або модальне вікно не знайдені');
+    return;
+  }
 
-          // const gallery = [...document.querySelectorAll('input[name="editGallery[]"]')].map(i => i.value);
-      
-          const response = await fetch(`/photos/${photoId}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name,
-              description,
-              price,
-              speed,
-              location,
-              application,
-              noteValues,
-              characteristics,
-              accordionItems,
-              videoItems
-              // gallery
-            })
-          });
-      
-          if (response.ok) {
-            alert('Інформація успішно оновлена');
-            modal.classList.remove('show');
-            loadPhotos();
-          } else {
-            alert('Не вдалося оновити інформацію');
-          }
-        };
+  document.getElementById('editName').value = photo.decorName || '';
+  document.getElementById('editDescription').value = photo.description || '';
+  document.getElementById('editPrice').value = photo.price || '';
+  document.getElementById('editSpeed').value = photo.speed || '';
+  document.getElementById('editLocation').value = photo.location || '';
+  document.getElementById('editApplication').value = photo.application || '';
+  editForm.dataset.photoId = photo.id;
+
+  document.getElementById('edit-note-container').innerHTML = '';
+  document.getElementById('edit-characteristics-container').innerHTML = '';
+  document.getElementById('edit-accordion-container').innerHTML = '';
+  document.getElementById('edit-videos-container').innerHTML = '';
+  document.getElementById('edit-gallery-container').innerHTML = '';
+
+  (photo.noteValues || []).forEach(note => addEditNote(note));
+  (photo.characteristics || []).forEach(c => addEditCharacteristic(c.name, c.description));
+  (photo.accordionItems || []).forEach(item => addEditAccordionItem(item.title, item.description));
+  (photo.videoItems || []).forEach(url => addEditVideo(url));
+
+  editGalleryImages = Array.isArray(photo.galleryImages)
+    ? photo.galleryImages.map(url => ({ url }))
+    : [];
+
+  renderEditGallery();
+
+  modal.classList.add('show');
+
+  editForm.onsubmit = async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('editName').value;
+    const description = document.getElementById('editDescription').value;
+    const price = document.getElementById('editPrice').value;
+    const speed = document.getElementById('editSpeed').value;
+    const location = document.getElementById('editLocation').value;
+    const application = document.getElementById('editApplication').value;
+    const photoId = editForm.dataset.photoId;
+
+    const noteValues = [...document.querySelectorAll('input[name="editNote[]"]')].map(n => n.value);
+    const charNames = [...document.querySelectorAll('input[name="editCharacteristic-name[]"]')];
+    const charDescs = [...document.querySelectorAll('input[name="editCharacteristic-description[]"]')];
+    const characteristics = charNames.map((el, i) => ({
+      name: el.value,
+      description: charDescs[i]?.value || ''
+    }));
+    const accordionTitles = [...document.querySelectorAll('input[name="editAccordion-title[]"]')];
+    const accordionDescriptions = [...document.querySelectorAll('textarea[name="editAccordion-description[]"]')];
+    const accordionItems = accordionTitles.map((el, i) => ({
+      title: el.value,
+      description: accordionDescriptions[i]?.value || ''
+    }));
+    const videoItems = [...document.querySelectorAll('input[name="editVideos[]"]')].map(v => v.value.trim()).filter(Boolean);
+
+    const uploadedUrls = [];
+    for (const item of editGalleryImages) {
+      if (item.file) {
+        const url = await uploadGalleryImageToServer(item.file);
+        uploadedUrls.push(url);
+      } else {
+        uploadedUrls.push(item.url);
       }
+    }
+
+    const response = await fetch(`/photos/${photoId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        description,
+        price,
+        speed,
+        location,
+        application,
+        noteValues,
+        characteristics,
+        accordionItems,
+        videoItems,
+        galleryImages: uploadedUrls
+      })
+    });
+
+    if (response.ok) {
+      alert('Інформація успішно оновлена');
+      modal.classList.remove('show');
+      loadPhotos();
+    } else {
+      alert('Не вдалося оновити інформацію');
+    }
+  };
+}
+      
       
       function addEditNote(note = '') {
         const container = document.getElementById('edit-note-container');
@@ -436,37 +433,78 @@
       }
       
 
-      // function addGalleryImage(url = '') {
-      //   const container = document.getElementById('edit-gallery-container');
+      function renderEditGallery() {
+        const container = document.getElementById('edit-gallery-container');
+        container.innerHTML = '';
       
-      //   const wrapper = document.createElement('div');
-      //   wrapper.classList.add('gallery-item');
+        editGalleryImages.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.style.position = 'relative';
       
-      //   const img = document.createElement('img');
-      //   img.src = url;
-      //   img.alt = 'Фото';
-      //   img.style.width = '100px';
-      //   img.style.borderRadius = '8px';
+          const img = document.createElement('img');
+          img.src = item.url;
+          img.style.width = '80px';
+          img.style.height = '80px';
+          img.style.objectFit = 'cover';
       
-      //   const deleteBtn = document.createElement('button');
-      //   deleteBtn.textContent = '✖';
-      //   deleteBtn.type = 'button';
-      //   deleteBtn.classList.add('delete-btn');
-      //   deleteBtn.onclick = () => wrapper.remove();
+          const deleteBtn = document.createElement('button');
+          deleteBtn.type = 'button';
+          deleteBtn.textContent = '✕';
+          deleteBtn.classList.add('delete-btn');
+          deleteBtn.style.position = 'absolute';
+          deleteBtn.style.top = '0';
+          deleteBtn.style.right = '0';
+          deleteBtn.onclick = () => {
+            editGalleryImages.splice(index, 1);
+            renderEditGallery();
+          };
       
-      //   const input = document.createElement('input');
-      //   input.type = 'hidden';
-      //   input.name = 'editGallery[]';
-      //   input.value = url;
+          div.appendChild(img);
+          div.appendChild(deleteBtn);
+          container.appendChild(div);
+        });
+      }
       
-      //   wrapper.appendChild(img);
-      //   wrapper.appendChild(deleteBtn);
-      //   wrapper.appendChild(input);
-      //   container.appendChild(wrapper);
-      // }
+      function triggerEditGalleryInput() {
+        if (editGalleryImages.length >= 10) {
+          alert('Максимум 10 фото в галереї');
+          return;
+        }
+        document.getElementById('edit-gallery-input').click();
+      }
       
-
-
+      document.getElementById('edit-gallery-input').addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        if (editGalleryImages.length + files.length > 10) {
+          alert(`Можна додати максимум ${10 - editGalleryImages.length} фото`);
+          e.target.value = '';
+          return;
+        }
+      
+        for (const file of files) {
+          editGalleryImages.push({ url: URL.createObjectURL(file), file });
+        }
+      
+        renderEditGallery();
+      });
+      
+      async function uploadGalleryImageToServer(file) {
+        const formData = new FormData();
+        formData.append('image', file);
+      
+        const response = await fetch('/upload-gallery-image', {
+          method: 'POST',
+          body: formData
+        });
+      
+        if (!response.ok) {
+          throw new Error(`Server error ${response.status}`);
+        }
+      
+        const data = await response.json();
+        return data.url;
+      }
+      
       // Закриття модального вікна при натисканні на кнопку закриття
       const closeButton = document.querySelector('.close-btn');
       closeButton.onclick = () => {
