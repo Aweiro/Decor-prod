@@ -956,7 +956,9 @@ body {
     color: rgb(46, 45, 45);
   }
 }
-.card-edit-button, .card-delete-button, .card-addinfo-button {
+.card-edit-button,
+.card-delete-button,
+.card-addinfo-button {
   margin-top: 10px;
 }
 
@@ -1145,7 +1147,7 @@ button.approve-button:hover:not(:disabled) {
 }
 
 button.approve-button:disabled {
-  background-color: #A9A9A9; /* Сірий для деактивованої кнопки */
+  background-color: #a9a9a9; /* Сірий для деактивованої кнопки */
   cursor: not-allowed;
   color: #232222;
 }
@@ -1157,14 +1159,14 @@ button.delete-button {
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  background-color: #8B0000; /* М'який червоний колір для видалення */
+  background-color: #8b0000; /* М'який червоний колір для видалення */
   color: #fff;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
 button.delete-button:hover {
-  background-color: #8B0000;
+  background-color: #8b0000;
 }
 
 /* Стиль тексту відгуку з обмеженою кількістю рядків */
@@ -1193,6 +1195,28 @@ button.delete-button:hover {
 
 .read-more-btn:hover {
   color: #111;
+}
+
+.editAccordion-description__textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 50px;
+}
+
+#edit-gallery-container {
+  margin-bottom: 15px;
+}
+
+@media (min-width: 1280px) {
+  .edit-gallery-container__img:hover .delete-btn__hover {
+    display: block;
+  }
+}
+
+@media (min-width: 1280px) {
+  .delete-btn__hover {
+    display: none;
+  }
 }
 
 /*

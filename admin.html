@@ -90,30 +90,51 @@
         <form id="editForm">
           <input type="hidden" id="editId" />
 
+					<label for="editName">Назва декору:</label>
           <input type="text" id="editName" placeholder="Назва декору" required />
-          <input type="text" id="editDescription" placeholder="Опис" />
-          <input type="number" id="editPrice" placeholder="Ціна" />
+					
+					<label for="editDescription">Опис:</label>
+          <input type="text" id="editDescription" placeholder="Опис" required />
+
+					<label for="editPrice">Ціна:</label>
+          <input type="number" id="editPrice" placeholder="Ціна" required />
+
+					<h4 style="text-align: center;">Інформація про товар</h4>
+
+					<label for="editSpeed">Швидкість роботи:</label>
           <input type="text" id="editSpeed" placeholder="Швидкість роботи" />
+
+					<label for="editLocation">Локація:</label>
           <input type="text" id="editLocation" placeholder="Локація" />
+
+					<label for="editApplication">Застосування:</label>
           <input type="text" id="editApplication" placeholder="Застосування" />
+
+					<h4 style="text-align: center;">Дані про товар</h4>
 
           <div id="edit-note-container"></div>
           <button type="button" onclick="addEditNote()">Додати дані</button>
 
+					<h4 style="text-align: center;">Характеристики</h4>
+
           <div id="edit-characteristics-container"></div>
           <button type="button" onclick="addEditCharacteristic()">Додати характеристику</button>
 
-                <!-- Accordion Items -->
-      <h4>Технологія нанесення</h4>
-      <div id="edit-accordion-container"></div>
-      <button type="button" onclick="addEditAccordionItem()"> Додати блок технології</button>
+					<h1 style="text-align: center;">Акордеон</h1>
 
-      <div id="edit-videos-container"></div>
-<button type="button" onclick="addEditVideo()">Додати відео</button>
+          <!-- Accordion Items -->
+					<h4 style="text-align: center;">Технологія нанесення:</h4>
+					<div id="edit-accordion-container"></div>
+					<button type="button" onclick="addEditAccordionItem()"> Додати блок технології</button>
 
-      <!-- Gallery -->
-      <!-- <h4>Галерея</h4>
-      <div id="edit-gallery-container" style="display: flex; flex-wrap: wrap; gap: 10px;"></div> -->
+					<h4 style="text-align: center;">Блок відео:</h4>
+      		<div id="edit-videos-container"></div>
+					<button type="button" onclick="addEditVideo()">Додати відео</button>
+
+					<h4 style="text-align: center;">Галерея (макс. 10 фото)</h4>
+					<div id="edit-gallery-container" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+					<input type="file" id="edit-gallery-input" accept="image/*" multiple style="display: none;">
+					<button type="button" onclick="triggerEditGalleryInput()">Додати фото до галереї</button>
 
 
           <div class="button-container">
@@ -132,13 +153,9 @@
         <h2>Додати інформацію для товару</h2>
 
         <form id="addInfoForm">
-          <input type="hidden" id="productId" name="productId" />
-
-          <!-- Назва декору -->
-          <!-- <div class="form-group">
-            <label for="decorName">Назва декору:</label>
-            <input type="text" id="decorName" name="decorName" placeholder="Назва декору" required />
-          </div> -->
+					<input type="hidden" id="productId" name="productId" />
+					
+					<h4 style="text-align: center;">Дані про товар</h4>
 
           <!-- Дані -->
           <div id="note-container">
@@ -155,11 +172,17 @@
             <input type="number" id="price" name="price" placeholder="Ціна" step="0.01" required />
           </div> -->
 
+					<h4 style="text-align: center;">Фото товару</h4>
+
+
           <!-- Зображення -->
           <div class="form-group">
             <label for="productImages">Зображення товару (до 3):</label>
             <input type="file" id="productImages" name="productImages" accept="image/*" multiple required />
           </div>
+
+					<h4 style="text-align: center;">Характеристики</h4>
+
 
           <!-- Характеристики -->
           <div id="characteristics-container">
@@ -171,6 +194,8 @@
             </div>
           </div>
           <button type="button" id="add-characteristic-btn">Додати характеристику</button>
+
+					<h4 style="text-align: center;">Інформація про товар</h4>
 
           <!-- Швидкість -->
           <div class="form-group">
@@ -190,35 +215,42 @@
             <input type="text" id="application" name="application" placeholder="Застосування" required />
           </div>
 
+					<h4 style="text-align: center;">Акордеон</h4>
+
           <!-- Accordion inputs -->
+				<h4 style="text-align: center;">Технологія нанесення:</h4>
+
         <div id="accordion-container">
           <div class="form-group accordion-item">
             <label>Заголовок:</label>
             <input type="text" name="accordion-title[]" placeholder="Заголовок акордеону" />
-            <label>Опис:</label>
-            <textarea name="accordion-description[]" placeholder="Опис акордеону"></textarea>
+            <label>Опис:</label><br>
+            <textarea class="editAccordion-description__textarea" name="accordion-description[]" placeholder="Опис акордеону"></textarea>
           </div>
         </div>
         <button type="button" id="add-accordion-btn">Додати блок акордеону</button>
 
-    <!-- Контейнер для всіх відео -->
-    <div id="video-container">
-      <div class="form-group video-item">
-        <label>Посилання на відео:</label>
-        <input type="text" name="videoUrl[]" placeholder="https://www.youtube.com/watch?v=..." />
-      </div>
-    </div>
-    <button type="button" id="add-video-btn">Додати відео</button>
-            
-    <!-- Галерея  акордеон -->
-    <button type="button" class="accordion">Галерея</button>
-    <div class="panel">
-      <div class="form-group">
-        <label for="galleryImages">Завантажити фото (до 10):</label>
-        <input type="file" id="galleryImages" name="galleryImages" accept="image/*" multiple />
-        <div id="galleryPreview" class="gallery-preview" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
-      </div>
-    </div>
+				<h4 style="text-align: center;">Блок відео:</h4>
+
+				<!-- Контейнер для всіх відео -->
+				<div id="video-container">
+					<div class="form-group video-item">
+						<label>Посилання на відео:</label>
+						<input type="text" name="videoUrl[]" placeholder="https://www.youtube.com/watch?v=..." />
+					</div>
+				</div>
+				<button type="button" id="add-video-btn">Додати відео</button>
+
+				<h4 style="text-align: center;">Галерея (макс. 10 фото):</h4>
+
+				<!-- Галерея  акордеон -->
+				<div class="panel">
+					<div class="form-group">
+						<label for="galleryImages">Завантажити фото (до 10):</label>
+						<input type="file" id="galleryImages" name="galleryImages" accept="image/*" multiple />
+						<div id="galleryPreview" class="gallery-preview" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
+					</div>
+				</div>
 
           <!-- Кнопки -->
           <div class="form-actions">

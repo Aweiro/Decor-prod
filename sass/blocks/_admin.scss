@@ -1,4 +1,6 @@
-.card-edit-button, .card-delete-button, .card-addinfo-button {
+.card-edit-button,
+.card-delete-button,
+.card-addinfo-button {
 	margin-top: 10px;
 }
 
@@ -11,82 +13,81 @@
 	margin-bottom: 40px;
 }
 
-
 // Форма завантаження
 
 #uploadForm {
-  display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  width: 100%;
-  padding: 20px;
-  background-color: #f1f1f1;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+	width: 100%;
+	padding: 20px;
+	background-color: #f1f1f1;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	font-family: Arial, sans-serif;
 }
 
-#uploadForm input[type="file"],
-#uploadForm input[type="text"],
-#uploadForm input[type="number"],
+#uploadForm input[type='file'],
+#uploadForm input[type='text'],
+#uploadForm input[type='number'],
 #uploadForm button {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 12px;
-  font-size: 16px;
-  color: #333;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+	width: 100%;
+	margin-bottom: 15px;
+	padding: 12px;
+	font-size: 16px;
+	color: #333;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#uploadForm input[type="text"]:focus,
-#uploadForm input[type="number"]:focus,
-#uploadForm input[type="file"]:focus {
-  border-color: #8c8c8c;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  outline: none;
+#uploadForm input[type='text']:focus,
+#uploadForm input[type='number']:focus,
+#uploadForm input[type='file']:focus {
+	border-color: #8c8c8c;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+	outline: none;
 }
 
 #uploadForm button {
-  background-color: #4a4a4a;
-  color: #f7f7f7;
-  font-weight: bold;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	background-color: #4a4a4a;
+	color: #f7f7f7;
+	font-weight: bold;
+	cursor: pointer;
+	border: none;
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #uploadForm button:hover {
-  background-color: #333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	background-color: #333;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 #uploadForm button:active {
-  background-color: #222;
+	background-color: #222;
 }
 
-#uploadForm input[type="file"]::file-selector-button {
-  background-color: #4a4a4a;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+#uploadForm input[type='file']::file-selector-button {
+	background-color: #4a4a4a;
+	color: #fff;
+	border: none;
+	padding: 8px 12px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 }
 
-#uploadForm input[type="file"]::file-selector-button:hover {
-  background-color: #333;
+#uploadForm input[type='file']::file-selector-button:hover {
+	background-color: #333;
 }
 
 #uploadForm input::placeholder {
-  color: #999;
+	color: #999;
 }
 
-// login form 
+// login form
 
 #authSection {
 	background-color: #ffffff;
@@ -151,96 +152,121 @@
 //revstyle
 /* Центрування заголовка */
 .admin-reviews-title {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+	text-align: center;
+	font-size: 1.5rem;
+	margin-bottom: 20px;
 }
 
-
 .review {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
+	background-color: #ffffff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+	transition: box-shadow 0.3s ease;
 }
 
 .review:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Відступи між текстом та кнопками */
 .review p {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 /* Кнопка "Схвалити" */
 button.approve-button {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  background-color:#808000;/* М'який зелений колір для схвалення */
-  color: #fff;
-  font-weight: bold;
-  margin-right: 10px;
-  transition: background-color 0.3s ease;
+	padding: 8px 16px;
+	font-size: 0.9rem;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+	background-color: #808000; /* М'який зелений колір для схвалення */
+	color: #fff;
+	font-weight: bold;
+	margin-right: 10px;
+	transition: background-color 0.3s ease;
 }
 
 button.approve-button:hover:not(:disabled) {
-  background-color: #96b297;
+	background-color: #96b297;
 }
 
 button.approve-button:disabled {
-  background-color: #A9A9A9; /* Сірий для деактивованої кнопки */
-  cursor: not-allowed;
-  color: #232222;
+	background-color: #a9a9a9; /* Сірий для деактивованої кнопки */
+	cursor: not-allowed;
+	color: #232222;
 }
 
 /* Кнопка "Видалити" */
 button.delete-button {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  background-color: #8B0000;/* М'який червоний колір для видалення */
-  color: #fff;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+	padding: 8px 16px;
+	font-size: 0.9rem;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+	background-color: #8b0000; /* М'який червоний колір для видалення */
+	color: #fff;
+	font-weight: bold;
+	transition: background-color 0.3s ease;
 }
 
 button.delete-button:hover {
-  background-color: 	#8B0000;
+	background-color: #8b0000;
 }
 
 /* Стиль тексту відгуку з обмеженою кількістю рядків */
 .review-text.shortened {
-  max-height: 60px; // Висота для двох рядків тексту
-  overflow: hidden;
-  transition: max-height 0.3s ease;
+	max-height: 60px; // Висота для двох рядків тексту
+	overflow: hidden;
+	transition: max-height 0.3s ease;
 }
 
 /* Стиль для розгорнутого тексту */
 .review-text.expanded {
-  max-height: none; 
+	max-height: none;
 }
 
 /* Стиль кнопки "Читати далі" */
 .read-more-btn {
-  margin-top: 10px;
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  color: #111;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-decoration: underline;
+	margin-top: 10px;
+	padding: 5px 10px;
+	font-size: 0.9rem;
+	color: #111;
+	background: none;
+	border: none;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .read-more-btn:hover {
-  color: #111;
+	color: #111;
+}
+
+.editAccordion-description__textarea {
+	width: 100%;
+	max-width: 100%;
+	min-height: 50px;
+}
+
+#edit-gallery-container {
+	margin-bottom: 15px;
+}
+
+.edit-gallery-container__img {
+	@include on-desktop {
+		&:hover {
+			.delete-btn__hover {
+				display: block;
+			}
+		}
+	}
+}
+
+.delete-btn__hover {
+	@include on-desktop {
+		display: none;
+	}
 }
