@@ -283,9 +283,13 @@ app.post('/upload-gallery-image', upload.single('image'), async (req, res) => {
       }
 
       // Фото 3 шт
-      if (productImages.length) {
-        const imageUrls = await Promise.all(productImages.map(uploadImageToFirebase));
-        updatedFields.images = imageUrls;
+      if ('productImages' in req.files) {
+        if (productImages.length > 0) {
+          const imageUrls = await Promise.all(productImages.map(uploadImageToFirebase));
+          updatedFields.images = imageUrls;
+        } else {
+          updatedFields.images = [];
+        }
       }
 
       // Фото галереї

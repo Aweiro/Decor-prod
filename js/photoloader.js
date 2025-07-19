@@ -513,204 +513,224 @@ function openEditForm(photo) {
 
 
 
-      // Функція для відкриття форми додавання інформації
-      function openAddInfoForm(productId) {
-        const modal = document.getElementById('addInfoModal');
-        const productIdInput = document.getElementById('productId');
-        productIdInput.value = productId;
-        modal.style.display = 'block';
+  // Функція для відкриття форми додавання інформації
+  function openAddInfoForm(productId) {
+    const modal = document.getElementById('addInfoModal');
+    const productIdInput = document.getElementById('productId');
+    productIdInput.value = productId;
+    modal.style.display = 'block';
+  
+    // Зробити поле productImages необов’язковим
+    const productImageInput = document.getElementById('productImages');
+    if (productImageInput) {
+      productImageInput.required = false;
+    }
+  }
+  
+  function closeModal() {
+    const modal = document.getElementById('addInfoModal');
+    modal.style.display = 'none';
+  }
+  
+  // Додавання нової характеристики
+  document.getElementById('add-characteristic-btn').addEventListener('click', function () {
+    const container = document.getElementById('characteristics-container');
+    const div = document.createElement('div');
+    div.classList.add('form-group');
+  
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.name = 'characteristic-name[]';
+    nameInput.placeholder = 'Назва характеристики';
+  
+    const descInput = document.createElement('input');
+    descInput.type = 'text';
+    descInput.name = 'characteristic-description[]';
+    descInput.placeholder = 'Опис характеристики';
+  
+    div.appendChild(nameInput);
+    div.appendChild(descInput);
+    container.appendChild(div);
+  });
+  
+  // Додавання нотаток
+  document.getElementById('add-note-btn').addEventListener('click', function () {
+    const noteContainer = document.getElementById('note-container');
+    const noteItem = document.createElement('div');
+    noteItem.classList.add('form-group', 'note-item');
+  
+    const noteInput = document.createElement('input');
+    noteInput.type = 'text';
+    noteInput.name = 'note[]';
+    noteInput.placeholder = 'Введіть нові дані';
+  
+    noteItem.appendChild(noteInput);
+    noteContainer.appendChild(noteItem);
+  });
+  
+  // Додавання акордеону
+  document.getElementById('add-accordion-btn').addEventListener('click', function () {
+    const container = document.getElementById('accordion-container');
+    const item = document.createElement('div');
+    item.classList.add('form-group', 'accordion-item');
+  
+    item.innerHTML = `
+      <label>Заголовок:</label>
+      <input type="text" name="accordion-title[]" placeholder="Заголовок акордеону" />
+      <label>Опис:</label>
+      <textarea name="accordion-description[]" placeholder="Опис акордеону"></textarea>
+    `;
+  
+    container.appendChild(item);
+  });
+  
+  // Додавання відео
+  document.getElementById('add-video-btn').addEventListener('click', function () {
+    const container = document.getElementById('video-container');
+    const div = document.createElement('div');
+    div.classList.add('form-group', 'video-item');
+  
+    div.innerHTML = `
+      <label>Посилання на відео:</label>
+      <input type="text" name="videoUrl[]" placeholder="https://www.youtube.com/watch?v=..." />
+    `;
+  
+    container.appendChild(div);
+  });
+  
+  // Галерея: прев’ю та обмеження
+  const galleryInput = document.getElementById('galleryImages');
+  const galleryPreview = document.getElementById('galleryPreview');
+  
+  if (galleryInput) {
+    galleryInput.addEventListener('change', () => {
+      galleryPreview.innerHTML = '';
+      const files = Array.from(galleryInput.files);
+  
+      if (files.length > 10) {
+        alert('Можна завантажити максимум 10 фото!');
+        galleryInput.value = '';
+        return;
       }
-
-      function closeModal() {
-        const modal = document.getElementById('addInfoModal');
-        modal.style.display = 'none';
-      }
-
-      // Додавання нової характеристики
-      document.getElementById('add-characteristic-btn').addEventListener('click', function () {
-        const container = document.getElementById('characteristics-container');
-
-        const div = document.createElement('div');
-        div.classList.add('form-group');
-
-        const nameInput = document.createElement('input');
-        nameInput.type = 'text';
-        nameInput.name = 'characteristic-name[]';
-        nameInput.placeholder = 'Назва характеристики';
-
-        const descInput = document.createElement('input');
-        descInput.type = 'text';
-        descInput.name = 'characteristic-description[]';
-        descInput.placeholder = 'Опис характеристики';
-
-        div.appendChild(nameInput);
-        div.appendChild(descInput);
-        container.appendChild(div);
+  
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.style.width = '100px';
+          img.style.height = '100px';
+          img.style.objectFit = 'cover';
+          img.style.borderRadius = '6px';
+          img.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+          galleryPreview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
       });
-
-      // Додавання поля для нових даних (data)
-        document.getElementById('add-note-btn').addEventListener('click', function() {
-          const noteContainer = document.getElementById('note-container');
-          const noteItem = document.createElement('div');
-          noteItem.classList.add('form-group', 'note-item');
-
-          const noteInput = document.createElement('input');
-          noteInput.type = 'text';
-          noteInput.name = 'note[]';
-          noteInput.placeholder = 'Введіть нові дані';
-          noteItem.appendChild(noteInput);
-          noteContainer.appendChild(noteItem);
-        });
-
-        // Додавання нового блоку акордеону Технології нанесення
-      document.getElementById('add-accordion-btn').addEventListener('click', function () {
-        const container = document.getElementById('accordion-container');
-
-        const item = document.createElement('div');
-        item.classList.add('form-group', 'accordion-item');
-
-        item.innerHTML = `
-          <label>Заголовок:</label>
-          <input type="text" name="accordion-title[]" placeholder="Заголовок акордеону" />
-          <label>Опис:</label>
-          <textarea name="accordion-description[]" placeholder="Опис акордеону"></textarea>
-        `;
-
-        container.appendChild(item);
-      });
-      // Додавання нового блоку акордеону Відео матеріали
-      document.getElementById('add-video-btn').addEventListener('click', function () {
-        const container = document.getElementById('video-container');
-
-        const div = document.createElement('div');
-        div.classList.add('form-group', 'video-item');
-
-        div.innerHTML = `
-          <label>Посилання на відео:</label>
-          <input type="text" name="videoUrl[]" placeholder="https://www.youtube.com/watch?v=..." />
-        `;
-
-        container.appendChild(div);
-      });
-
-
-      // Галерея: показ превʼю + обмеження
-      const galleryInput = document.getElementById('galleryImages');
-      const galleryPreview = document.getElementById('galleryPreview');
-
-      if (galleryInput) {
-        galleryInput.addEventListener('change', () => {
-          galleryPreview.innerHTML = '';
-          const files = Array.from(galleryInput.files);
-
-          if (files.length > 10) {
-            alert('Можна завантажити максимум 10 фото!');
-            galleryInput.value = '';
-            return;
-          }
-
-          files.forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              const img = document.createElement('img');
-              img.src = e.target.result;
-              galleryPreview.appendChild(img);
-            };
-            reader.readAsDataURL(file);
+    });
+  }
+  
+  // Submit форми
+  document.getElementById('addInfoForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+  
+    try {
+      const productId = document.getElementById('productId').value;
+      const formData = new FormData();
+  
+      // Основні поля
+      const speed = document.getElementById('speed').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const application = document.getElementById('application').value.trim();
+  
+      if (speed) formData.append('speed', speed);
+      if (location) formData.append('location', location);
+      if (application) formData.append('application', application);
+  
+      // Характеристики
+      const names = document.querySelectorAll('input[name="characteristic-name[]"]');
+      const descriptions = document.querySelectorAll('input[name="characteristic-description[]"]');
+      const characteristics = [];
+  
+      for (let i = 0; i < names.length; i++) {
+        if (names[i].value || descriptions[i].value) {
+          characteristics.push({
+            name: names[i].value.trim(),
+            description: descriptions[i].value.trim()
           });
-        });
+        }
       }
-
-      // Обробник надсилання форми
-      document.getElementById('addInfoForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        try {
-          const productId = document.getElementById('productId').value;
-          const productImages = document.getElementById('productImages').files;
-
-          const formData = new FormData();
-
-          // Стандартні поля
-          formData.append('speed', document.getElementById('speed').value);
-          formData.append('location', document.getElementById('location').value);
-          formData.append('application', document.getElementById('application').value);
-
-          // Характеристики
-          const names = document.querySelectorAll('input[name="characteristic-name[]"]');
-          const descriptions = document.querySelectorAll('input[name="characteristic-description[]"]');
-          const characteristics = [];
-
-          for (let i = 0; i < names.length; i++) {
-            if (names[i].value || descriptions[i].value) {
-              characteristics.push({
-                name: names[i].value,
-                description: descriptions[i].value,
-              });
-            }
-          }
-          formData.append('characteristics', JSON.stringify(characteristics));
-
-          // опис на сторінці
-          const noteInputs = document.querySelectorAll('input[name="note[]"]');
-      const noteValues = [];
-      noteInputs.forEach(input => {
-        if (input.value) noteValues.push(input.value);
-      });
-          noteValues.forEach(value => {
-            formData.append('noteValues[]', value);
-          });
-          
-
-          console.log('noteValues:', noteValues);
-
-      // Акордеон Технології нанесення  
-          const titles = document.querySelectorAll('input[name="accordion-title[]"]');
+  
+      if (characteristics.length > 0) {
+        formData.append('characteristics', JSON.stringify(characteristics));
+      }
+  
+      // Нотатки
+      const noteInputs = document.querySelectorAll('input[name="note[]"]');
+      const noteValues = Array.from(noteInputs)
+        .map(input => input.value.trim())
+        .filter(value => value !== '');
+  
+      if (noteValues.length > 0) {
+        noteValues.forEach(value => formData.append('noteValues[]', value));
+      }
+  
+      // Акордеони
+      const titles = document.querySelectorAll('input[name="accordion-title[]"]');
       const accordionDescriptions = document.querySelectorAll('textarea[name="accordion-description[]"]');
-
       for (let i = 0; i < titles.length; i++) {
-        formData.append('accordionTitle', titles[i].value);
-        formData.append('accordionDescription', accordionDescriptions[i].value);
+        if (titles[i].value.trim() || accordionDescriptions[i].value.trim()) {
+          formData.append('accordionTitle', titles[i].value.trim());
+          formData.append('accordionDescription', accordionDescriptions[i].value.trim());
+        }
       }
-      // Акордеон Відео матеріали
+  
+      // Відео
       const videoInputs = document.querySelectorAll('input[name="videoUrl[]"]');
       const videoUrls = Array.from(videoInputs)
         .map(input => input.value.trim())
         .filter(url => url !== '');
-
-      formData.append('videoItems', JSON.stringify(videoUrls));
-
-
-          // Зображення 
-          for (let i = 0; i < productImages.length; i++) {
-            formData.append('productImages', productImages[i]);
-          }
-
-            // Фото галереї акордеон
-            const galleryFiles = document.getElementById('galleryImages').files;
-            for (let i = 0; i < galleryFiles.length; i++) {
-              formData.append('galleryImages', galleryFiles[i]);
-            }
-
-          // Відправка
-          const response = await fetch(`/api/products/${productId}/add-info`, {
-            method: 'PATCH',
-            body: formData,
-          });
-
-          if (response.ok) {
-            alert('Інформацію успішно додано!');
-            closeModal();
-            loadPhotos();
-          } else {
-            const errData = await response.json();
-            alert('Помилка: ' + (errData.message || 'Не вдалося додати інформацію.'));
-          }
-        } catch (error) {
-          console.error('Помилка при надсиланні:', error);
-          alert('Сталася помилка. Спробуйте ще раз.');
+      if (videoUrls.length > 0) {
+        formData.append('videoItems', JSON.stringify(videoUrls));
+      }
+  
+      // Фото товару (до 3) — не обовʼязково
+      const productImages = document.getElementById('productImages').files;
+      if (productImages.length > 0) {
+        for (let i = 0; i < productImages.length; i++) {
+          formData.append('productImages', productImages[i]);
         }
+      }
+  
+      // Галерея
+      const galleryFiles = document.getElementById('galleryImages').files;
+      if (galleryFiles.length > 0) {
+        for (let i = 0; i < galleryFiles.length; i++) {
+          formData.append('galleryImages', galleryFiles[i]);
+        }
+      }
+  
+      // Відправка
+      const response = await fetch(`/api/products/${productId}/add-info`, {
+        method: 'PATCH',
+        body: formData
       });
+  
+      if (response.ok) {
+        alert('Інформацію успішно додано!');
+        closeModal();
+        loadPhotos?.();
+      } else {
+        const errData = await response.json();
+        alert('Помилка: ' + (errData.message || 'Не вдалося додати інформацію.'));
+      }
+  
+    } catch (error) {
+      console.error('Помилка при надсиланні:', error);
+      alert('Сталася помилка. Спробуйте ще раз.');
+    }
+  });
+  
 
 
       // Видалення фотографії

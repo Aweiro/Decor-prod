@@ -490,12 +490,9 @@
     console.log('Зображення в photo.images:', photo ? photo.images : 'photo.images не існує');
 
     // Якщо photo не існує або в ньому немає зображень, ініціалізуємо їх
-    if (!photo || !Array.isArray(photo.images)) {
-      photo = {
-        images: [photo.url], // Використовуємо основне зображення як єдине
-        url: photo.url || '/img/placeholder.png' // Якщо немає URL, використовуємо заглушку
-      };
-    }
+    if (!Array.isArray(photo.images)) {
+  photo.images = photo.url ? [photo.url] : [];
+}
 
     // Додавання основного зображення
     const mainImage = document.getElementById('product-main-image');
