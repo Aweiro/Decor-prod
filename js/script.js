@@ -155,5 +155,3 @@ if (consultationForm) {
 			});
 	});
 }
-
-

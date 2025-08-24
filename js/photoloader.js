@@ -630,9 +630,9 @@ closeButton.onclick = () => {
   
     item.innerHTML = `
       <label>Заголовок:</label>
-      <input type="text" name="accordion-title[]" placeholder="Заголовок акордеону" />
+      <input type="text" name="accordion-title[]" placeholder="Заголовок технології" />
       <label>Опис:</label>
-      <textarea name="accordion-description[]" placeholder="Опис акордеону"></textarea>
+      <textarea class="editAccordion-description__textarea" name="accordion-description[]" placeholder="Опис технології"></textarea>
     `;
   
     container.appendChild(item);
