@@ -1,68 +1,97 @@
-
-.about__header {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-}
-
 .slideshow-container {
-  position: relative;
-  // width: 90%;
-  max-width: 1000px;
-
-  margin: auto;
-  border: none; 
-    border-radius: 20px; 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); 
-    overflow: hidden;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+	position: relative;
+	max-width: 1000px;
+	min-height: 500px;
+	margin: auto;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+	background: #000;
+	margin-block: 30px;
 }
 
-.slide {
-  display: none; /* Сховати всі слайди за замовчуванням */
-  transition: opacity 1s ease-in-out, transform 1s ease-in-out; 
+/* слайди */
+.slideshow-slide {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+	z-index: 1;
+	pointer-events: none;
 }
 
-
-.slide img {
-  width: 100%;   
-  height: auto;  
-  max-height: 500px; 
-  object-fit: cover; 
-  border-radius: 20px;
-  transition: transform 0.3s ease; 
+.slideshow-slide.active {
+	opacity: 1;
 }
 
-.slide img:hover {
-  transform: scale(1.05); /* Ефект збільшення при наведенні */
+/* зображення */
+.slideshow-slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
 }
-
-.prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.7); 
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Сильніша тінь для кнопок */
-    transition: background-color 0.3s ease;
-}
-
-.prev:hover, .next:hover {
-  background-color: rgba(0, 0, 0, 0.9); /* Зміна кольору при наведенні */
-}
-
-.prev {
-  left: 0;
-}
-
+.prev,
 .next {
-  right: 0;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 3;
+	cursor: pointer;
+
+	width: 48px;
+	height: 48px;
+	border-radius: 12px; /* soft square */
+	border: none;
+
+	background: rgba(255, 255, 255, 0.18);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+
+	color: #fff;
+	font-size: 22px;
+	font-weight: 600;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	box-shadow:
+		0 10px 25px rgba(0, 0, 0, 0.35),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+
+	transition:
+		transform 0.25s ease,
+		background 0.3s ease,
+		box-shadow 0.3s ease;
 }
 
-/* Адаптивність */
+.prev:hover,
+.next:hover {
+	background: rgba(255, 255, 255, 0.3);
+	transform: translateY(-50%) scale(1.08);
+}
+
+.prev { left: 16px; }
+.next { right: 16px; left: auto; }
+
+/* адаптив */
+@media (max-width: 600px) {
+	.slideshow-container {
+		min-height: 260px;
+	}
+	.prev,
+	.next {
+		width: 44px;
+		height: 44px;
+		font-size: 22px;
+	}
+
+	.prev {
+		left: 12px;
+	}
+
+	.next {
+		right: 12px;
+	}
+}

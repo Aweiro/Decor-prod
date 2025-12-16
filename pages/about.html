@@ -115,23 +115,20 @@
       <!--карусель з фото-->
        <header class="about__header">
 				<div class="container">
-					<a href="/#testimonials">
-						<div class="slideshow-container">
-							<div class="slide">
-								<img src="./img/testimonials/2.jpg" alt="Photo 1"> 
-							</div>
-							<div class="slide">
-								<img src="./img/testimonials/3.jpg" alt="Photo 2"> 
-							</div>
-							<div class="slide">
-								<img src="./img/testimonials/5.jpg" alt="Photo 3"> 
-							</div>
-
-							<!--button-->
-							<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-							<a class="next" onclick="changeSlide(1)">&#10095;</a>
+					<div class="slideshow-container" id="slider">
+						<div class="slideshow-slide active">
+							<img src="/img/testimonials/2.jpg" alt="">
 						</div>
-					</a>
+						<div class="slideshow-slide">
+							<img src="/img/testimonials/3.jpg" alt="">
+						</div>
+						<div class="slideshow-slide">
+							<img src="/img/testimonials/5.jpg" alt="">
+						</div>
+
+						<button class="prev" aria-label="Previous slide"><</button>
+						<button class="next" aria-label="Next slide">></button>
+					</div>
 				</div>
        </header> 
 </div>

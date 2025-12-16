@@ -1,388 +1,447 @@
-  // [1] --- ІМПОРТИ ТА НАЛАШТУВАННЯ ---
-  require('dotenv').config();
-  const express = require('express');
-  const path = require('path');
-  const multer = require('multer');
-  const cors = require('cors');
-  const bcrypt = require('bcryptjs');
-  const { v4: uuidv4 } = require('uuid');
-  const bodyParser = require('body-parser');
-  const { db, bucket } = require('./firebase');
+// [1] --- ІМПОРТИ ТА НАЛАШТУВАННЯ ---
+require('dotenv').config()
+const express = require('express')
+const path = require('path')
+const multer = require('multer')
+const cors = require('cors')
+const bcrypt = require('bcryptjs')
+const { v4: uuidv4 } = require('uuid')
+const bodyParser = require('body-parser')
+const { db, bucket } = require('./firebase')
 
-  const app = express();
-  const upload = multer({ storage: multer.memoryStorage() });
+const app = express()
+const upload = multer({ storage: multer.memoryStorage() })
 
-  app.use(cors());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
-  // [2] --- СТАТИЧНІ ФАЙЛИ ---
-  app.use('/css', express.static(path.join(__dirname, '../css')));
-  app.use('/assets/css', express.static(path.join(__dirname, '../assets/css')));
-  app.use('/assets', express.static(path.join(__dirname, '../assets')));
-  app.use('/img', express.static(path.join(__dirname, '../img')));
-  app.use('/js', express.static(path.join(__dirname, '../js')));
+// [2] --- СТАТИЧНІ ФАЙЛИ ---
+app.use('/css', express.static(path.join(__dirname, '../css')))
+app.use('/assets/css', express.static(path.join(__dirname, '../assets/css')))
+app.use('/assets', express.static(path.join(__dirname, '../assets')))
+app.use('/img', express.static(path.join(__dirname, '../img')))
+app.use('/js', express.static(path.join(__dirname, '../js')))
 
-  // [3] --- HTML МАРШРУТИ ---
-  app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
-  app.get('/product.html', (req, res) => res.sendFile(path.join(__dirname, '../product.html')));
-  app.get('/about', (req, res) => res.sendFile(path.join(__dirname, '../about.html')));
-  app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, '../admin.html')));
-  app.get('/portfolio', (req, res) => res.sendFile(path.join(__dirname, '../portfolio.html')));
-  app.get('/reviews', (req, res) => res.sendFile(path.join(__dirname, '../reviews.html')));
+// [3] --- HTML МАРШРУТИ ---
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
+app.get('/product.html', (req, res) =>
+	res.sendFile(path.join(__dirname, '../pages/product.html'))
+)
+app.get('/about', (req, res) => {
+	res.sendFile(path.join(__dirname, '../pages/about.html'))
+})
+app.get('/admin', (req, res) =>
+	res.sendFile(path.join(__dirname, '../pages/admin.html'))
+)
+app.get('/portfolio', (req, res) =>
+	res.sendFile(path.join(__dirname, '../pages/portfolio.html'))
+)
+app.get('/reviews', (req, res) =>
+	res.sendFile(path.join(__dirname, '../pages/reviews.html'))
+)
 
-  // [4] --- ФОТО ---
-  app.get('/photos', async (req, res) => {
-    try {
-      const snapshot = await db.collection('photos').orderBy('timestamp', 'asc').get();
-      const photos = snapshot.docs.map(doc => doc.data());
-      res.status(200).json(photos);
-    } catch (error) {
-      console.error('Помилка отримання фото:', error);
-      res.status(500).send('Не вдалося отримати фото');
-    }
-  });
+// [4] --- ФОТО ---
+app.get('/photos', async (req, res) => {
+	try {
+		const snapshot = await db
+			.collection('photos')
+			.orderBy('timestamp', 'asc')
+			.get()
+		const photos = snapshot.docs.map((doc) => doc.data())
+		res.status(200).json(photos)
+	} catch (error) {
+		console.error('Помилка отримання фото:', error)
+		res.status(500).send('Не вдалося отримати фото')
+	}
+})
 
-  app.get('/photos/:id', async (req, res) => {
-    try {
-      const doc = await db.collection('photos').doc(req.params.id).get();
-      if (!doc.exists) return res.status(404).json({ message: 'Фото не знайдено' });
-      res.status(200).json(doc.data());
-    } catch (error) {
-      res.status(500).json({ message: 'Помилка сервера' });
-    }
-  });
+app.get('/photos/:id', async (req, res) => {
+	try {
+		const doc = await db.collection('photos').doc(req.params.id).get()
+		if (!doc.exists)
+			return res.status(404).json({ message: 'Фото не знайдено' })
+		res.status(200).json(doc.data())
+	} catch (error) {
+		res.status(500).json({ message: 'Помилка сервера' })
+	}
+})
 
-  app.delete('/photos/:id', async (req, res) => {
-    try {
-      const docRef = db.collection('photos').doc(req.params.id);
-      const doc = await docRef.get();
-  
-      if (!doc.exists) {
-        return res.status(404).json({ message: 'Фото не знайдено' });
-      }
-  
-      await docRef.delete();
-      res.status(200).json({ message: 'Фото успішно видалено' });
-    } catch (error) {
-      console.error('Помилка при видаленні:', error);
-      res.status(500).json({ message: 'Не вдалося видалити фото' });
-    }
-  });
+app.delete('/photos/:id', async (req, res) => {
+	try {
+		const docRef = db.collection('photos').doc(req.params.id)
+		const doc = await docRef.get()
 
-  app.post('/upload', upload.single('photo'), async (req, res) => {
-    const { file, body } = req;
-    if (!file) return res.status(400).json({ message: 'Файл відсутній' });
+		if (!doc.exists) {
+			return res.status(404).json({ message: 'Фото не знайдено' })
+		}
 
-    const { description, decorName, price } = body;
-    const uniqueToken = uuidv4();
-    const blob = bucket.file(`uploads/${file.originalname}`);
-    const blobStream = blob.createWriteStream({
-      metadata: {
-        contentType: file.mimetype,
-        metadata: { firebaseStorageDownloadTokens: uniqueToken },
-      },
-    });
-    
+		await docRef.delete()
+		res.status(200).json({ message: 'Фото успішно видалено' })
+	} catch (error) {
+		console.error('Помилка при видаленні:', error)
+		res.status(500).json({ message: 'Не вдалося видалити фото' })
+	}
+})
 
-    blobStream.on('error', error => res.status(500).json({ message: 'Помилка завантаження' }));
-    blobStream.on('finish', async () => {
-      const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(file.originalname)}?alt=media&token=${uniqueToken}`;
-      const docRef = db.collection('photos').doc();
-      const newPhoto = {
-        id: docRef.id,
-        name: file.originalname,
-        url: publicUrl,
-        description: description || 'Опис відсутній',
-        decorName: decorName || 'Назва декору відсутня',
-        price: price ? parseFloat(price) : 0,
-        timestamp: new Date()
-      };
-      await docRef.set(newPhoto);
-      res.status(200).json({ message: 'Фото успішно завантажено', file: newPhoto });
-    });
+app.post('/upload', upload.single('photo'), async (req, res) => {
+	const { file, body } = req
+	if (!file) return res.status(400).json({ message: 'Файл відсутній' })
 
-    blobStream.end(file.buffer);
-  });
+	const { description, decorName, price } = body
+	const uniqueToken = uuidv4()
+	const blob = bucket.file(`uploads/${file.originalname}`)
+	const blobStream = blob.createWriteStream({
+		metadata: {
+			contentType: file.mimetype,
+			metadata: { firebaseStorageDownloadTokens: uniqueToken }
+		}
+	})
 
-  // [4.1] --- ЗАВАНТАЖЕННЯ ФОТО ДЛЯ ГАЛЕРЕЇ ---
+	blobStream.on('error', (error) =>
+		res.status(500).json({ message: 'Помилка завантаження' })
+	)
+	blobStream.on('finish', async () => {
+		const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${
+			bucket.name
+		}/o/uploads%2F${encodeURIComponent(
+			file.originalname
+		)}?alt=media&token=${uniqueToken}`
+		const docRef = db.collection('photos').doc()
+		const newPhoto = {
+			id: docRef.id,
+			name: file.originalname,
+			url: publicUrl,
+			description: description || 'Опис відсутній',
+			decorName: decorName || 'Назва декору відсутня',
+			price: price ? parseFloat(price) : 0,
+			timestamp: new Date()
+		}
+		await docRef.set(newPhoto)
+		res
+			.status(200)
+			.json({ message: 'Фото успішно завантажено', file: newPhoto })
+	})
+
+	blobStream.end(file.buffer)
+})
+
+// [4.1] --- ЗАВАНТАЖЕННЯ ФОТО ДЛЯ ГАЛЕРЕЇ ---
 app.post('/upload-gallery-image', upload.single('image'), async (req, res) => {
-  try {
-    const { file } = req;
-    if (!file) return res.status(400).json({ message: 'Файл відсутній' });
+	try {
+		const { file } = req
+		if (!file) return res.status(400).json({ message: 'Файл відсутній' })
 
-    const uniqueToken = uuidv4();
-    const blob = bucket.file(`uploads/${file.originalname}`);
-    const blobStream = blob.createWriteStream({
-      metadata: {
-        contentType: file.mimetype,
-        metadata: { firebaseStorageDownloadTokens: uniqueToken },
-      },
-    });
+		const uniqueToken = uuidv4()
+		const blob = bucket.file(`uploads/${file.originalname}`)
+		const blobStream = blob.createWriteStream({
+			metadata: {
+				contentType: file.mimetype,
+				metadata: { firebaseStorageDownloadTokens: uniqueToken }
+			}
+		})
 
-    blobStream.on('error', (error) => {
-      console.error('Помилка завантаження галереї:', error);
-      res.status(500).json({ message: 'Помилка при завантаженні файлу в галерею' });
-    });
+		blobStream.on('error', (error) => {
+			console.error('Помилка завантаження галереї:', error)
+			res
+				.status(500)
+				.json({ message: 'Помилка при завантаженні файлу в галерею' })
+		})
 
-    blobStream.on('finish', () => {
-      const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(file.originalname)}?alt=media&token=${uniqueToken}`;
-      res.status(200).json({ url: publicUrl });
-    });
+		blobStream.on('finish', () => {
+			const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${
+				bucket.name
+			}/o/uploads%2F${encodeURIComponent(
+				file.originalname
+			)}?alt=media&token=${uniqueToken}`
+			res.status(200).json({ url: publicUrl })
+		})
 
-    blobStream.end(file.buffer);
-  } catch (error) {
-    console.error('Помилка сервера при завантаженні галереї:', error);
-    res.status(500).json({ message: 'Не вдалося завантажити фото в галерею' });
-  }
-});
+		blobStream.end(file.buffer)
+	} catch (error) {
+		console.error('Помилка сервера при завантаженні галереї:', error)
+		res.status(500).json({ message: 'Не вдалося завантажити фото в галерею' })
+	}
+})
 
-  // [4] --- РЕДАГУВАННЯ ---
-  app.patch('/photos/:id', async (req, res) => {
-    const { id } = req.params;
-    const {
-      name,
-      description,
-      price,
-      speed,
-      location,
-      application,
-      noteValues,
-      characteristics,
-      accordionItems,
-      videoItems,
-      galleryImages
-    } = req.body;
-  
-    try {
-      const ref = db.collection('photos').doc(id);
-      const doc = await ref.get();
-  
-      if (!doc.exists) {
-        return res.status(404).json({ message: 'Фото не знайдено' });
-      }
-  
-      const currentData = doc.data();
-  
-      // Фільтрація galleryImages, якщо там прийшли об’єкти замість рядків:
-      const cleanGalleryImages = Array.isArray(galleryImages)
-        ? galleryImages.map(item => typeof item === 'string' ? item : item.url).filter(Boolean)
-        : currentData.galleryImages ?? [];
-  
-      const updatedData = {
-        decorName: name ?? currentData.decorName,
-        description: description ?? currentData.description,
-        price: price ?? currentData.price,
-        speed,
-        location,
-        application,
-        noteValues: Array.isArray(noteValues) ? noteValues : currentData.noteValues ?? [],
-        characteristics: Array.isArray(characteristics) ? characteristics : currentData.characteristics ?? [],
-        accordionItems: Array.isArray(accordionItems) ? accordionItems : currentData.accordionItems ?? [],
-        videoItems: Array.isArray(videoItems) ? videoItems : currentData.videoItems ?? [],
-        galleryImages: cleanGalleryImages,
-        timestamp: new Date()
-      };
-  
-      await ref.update(updatedData);
-      res.status(200).json({ message: 'Інформацію оновлено' });
-    } catch (error) {
-      console.error('❌ Помилка оновлення:', error);
-      res.status(500).json({ message: 'Не вдалося оновити інформацію' });
-    }
-  });
-  
-  
-  
+// [4] --- РЕДАГУВАННЯ ---
+app.patch('/photos/:id', async (req, res) => {
+	const { id } = req.params
+	const {
+		name,
+		description,
+		price,
+		speed,
+		location,
+		application,
+		noteValues,
+		characteristics,
+		accordionItems,
+		videoItems,
+		galleryImages
+	} = req.body
 
+	try {
+		const ref = db.collection('photos').doc(id)
+		const doc = await ref.get()
 
-  // [5] --- ДОДАТКОВА сторінка ДЛЯ ПРОДУКТУ ---
-  async function uploadImageToFirebase(file) {
-    const uniqueToken = uuidv4();
-    const blob = bucket.file(`uploads/${file.originalname}`);
-    const blobStream = blob.createWriteStream({
-      metadata: {
-        contentType: file.mimetype,
-        metadata: { firebaseStorageDownloadTokens: uniqueToken },
-      },
-    });
+		if (!doc.exists) {
+			return res.status(404).json({ message: 'Фото не знайдено' })
+		}
 
-    return new Promise((resolve, reject) => {
-      blobStream.on('error', reject);
-      blobStream.on('finish', () => {
-        const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/uploads%2F${encodeURIComponent(file.originalname)}?alt=media&token=${uniqueToken}`;
-        resolve(publicUrl);
-      });
-      blobStream.end(file.buffer);
-    });
-  }
+		const currentData = doc.data()
 
-  app.patch('/api/products/:id/add-info', upload.fields([
-    { name: 'productImages', maxCount: 3 },
-    { name: 'galleryImages', maxCount: 10 }
-  ]), async (req, res) => {
-    const { id } = req.params;
-    const { speed, location, application, characteristics } = req.body;
-    const noteValues = req.body.noteValues;
-    const { accordionTitle, accordionDescription } = req.body;
-    const { videoItems } = req.body;
-    const productImages = req.files['productImages'] || [];
-    const galleryImages = req.files['galleryImages'] || [];
+		// Фільтрація galleryImages, якщо там прийшли об’єкти замість рядків:
+		const cleanGalleryImages = Array.isArray(galleryImages)
+			? galleryImages
+					.map((item) => (typeof item === 'string' ? item : item.url))
+					.filter(Boolean)
+			: currentData.galleryImages ?? []
 
-    try {
-      const ref = db.collection('photos').doc(id);
-      const doc = await ref.get();
-      if (!doc.exists) return res.status(404).json({ message: 'Товар не знайдено' });
+		const updatedData = {
+			decorName: name ?? currentData.decorName,
+			description: description ?? currentData.description,
+			price: price ?? currentData.price,
+			speed,
+			location,
+			application,
+			noteValues: Array.isArray(noteValues)
+				? noteValues
+				: currentData.noteValues ?? [],
+			characteristics: Array.isArray(characteristics)
+				? characteristics
+				: currentData.characteristics ?? [],
+			accordionItems: Array.isArray(accordionItems)
+				? accordionItems
+				: currentData.accordionItems ?? [],
+			videoItems: Array.isArray(videoItems)
+				? videoItems
+				: currentData.videoItems ?? [],
+			galleryImages: cleanGalleryImages,
+			timestamp: new Date()
+		}
 
-      const updatedFields = {};
-      if (speed) updatedFields.speed = speed;
-      if (location) updatedFields.location = location;
-      if (application) updatedFields.application = application;
-      if (noteValues) updatedFields.noteValues = Array.isArray(noteValues) ? noteValues : [noteValues];
+		await ref.update(updatedData)
+		res.status(200).json({ message: 'Інформацію оновлено' })
+	} catch (error) {
+		console.error('❌ Помилка оновлення:', error)
+		res.status(500).json({ message: 'Не вдалося оновити інформацію' })
+	}
+})
 
-      if (characteristics) {
-        try {
-          updatedFields.characteristics = typeof characteristics === 'string'
-            ? JSON.parse(characteristics)
-            : characteristics;
-        } catch {
-          return res.status(400).json({ message: 'Невірний формат характеристик' });
-        }
-      }
+// [5] --- ДОДАТКОВА сторінка ДЛЯ ПРОДУКТУ ---
+async function uploadImageToFirebase(file) {
+	const uniqueToken = uuidv4()
+	const blob = bucket.file(`uploads/${file.originalname}`)
+	const blobStream = blob.createWriteStream({
+		metadata: {
+			contentType: file.mimetype,
+			metadata: { firebaseStorageDownloadTokens: uniqueToken }
+		}
+	})
 
-      // Акордеон Технології нанесення
-      let accordionItems = [];
-      if (accordionTitle && accordionDescription) {
-        if (Array.isArray(accordionTitle)) {
-          accordionItems = accordionTitle.map((title, i) => ({
-            title,
-            description: accordionDescription[i] || ''
-          }));
-        } else {
-          accordionItems = [{
-            title: accordionTitle,
-            description: accordionDescription
-          }];
-        }
+	return new Promise((resolve, reject) => {
+		blobStream.on('error', reject)
+		blobStream.on('finish', () => {
+			const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${
+				bucket.name
+			}/o/uploads%2F${encodeURIComponent(
+				file.originalname
+			)}?alt=media&token=${uniqueToken}`
+			resolve(publicUrl)
+		})
+		blobStream.end(file.buffer)
+	})
+}
 
-        updatedFields.accordionItems = accordionItems;
-      }
+app.patch(
+	'/api/products/:id/add-info',
+	upload.fields([
+		{ name: 'productImages', maxCount: 3 },
+		{ name: 'galleryImages', maxCount: 10 }
+	]),
+	async (req, res) => {
+		const { id } = req.params
+		const { speed, location, application, characteristics } = req.body
+		const noteValues = req.body.noteValues
+		const { accordionTitle, accordionDescription } = req.body
+		const { videoItems } = req.body
+		const productImages = req.files['productImages'] || []
+		const galleryImages = req.files['galleryImages'] || []
 
-      // Акордеон Відео
-      if (videoItems) {
-        try {
-          const parsedItems = typeof videoItems === 'string'
-            ? JSON.parse(videoItems)
-            : videoItems;
+		try {
+			const ref = db.collection('photos').doc(id)
+			const doc = await ref.get()
+			if (!doc.exists)
+				return res.status(404).json({ message: 'Товар не знайдено' })
 
-          updatedFields.videoItems = parsedItems;
-        } catch {
-          return res.status(400).json({ message: 'Невірний формат videoItems' });
-        }
-      }
+			const updatedFields = {}
+			if (speed) updatedFields.speed = speed
+			if (location) updatedFields.location = location
+			if (application) updatedFields.application = application
+			if (noteValues)
+				updatedFields.noteValues = Array.isArray(noteValues)
+					? noteValues
+					: [noteValues]
 
-      // Фото 3 шт
-      if ('productImages' in req.files) {
-        if (productImages.length > 0) {
-          const imageUrls = await Promise.all(productImages.map(uploadImageToFirebase));
-          updatedFields.images = imageUrls;
-        } else {
-          updatedFields.images = [];
-        }
-      }
+			if (characteristics) {
+				try {
+					updatedFields.characteristics =
+						typeof characteristics === 'string'
+							? JSON.parse(characteristics)
+							: characteristics
+				} catch {
+					return res
+						.status(400)
+						.json({ message: 'Невірний формат характеристик' })
+				}
+			}
 
-      // Фото галереї
-      if (galleryImages.length) {
-        const galleryUrls = await Promise.all(galleryImages.map(uploadImageToFirebase));
-        updatedFields.galleryImages = galleryUrls;
-      }
-      await ref.update(updatedFields);
-      res.status(200).json({ message: 'Інформація успішно додана' });
-    } catch (error) {
-      res.status(500).json({ message: 'Не вдалося додати інформацію' });
-    }
-  });
+			// Акордеон Технології нанесення
+			let accordionItems = []
+			if (accordionTitle && accordionDescription) {
+				if (Array.isArray(accordionTitle)) {
+					accordionItems = accordionTitle.map((title, i) => ({
+						title,
+						description: accordionDescription[i] || ''
+					}))
+				} else {
+					accordionItems = [
+						{
+							title: accordionTitle,
+							description: accordionDescription
+						}
+					]
+				}
 
-  
+				updatedFields.accordionItems = accordionItems
+			}
 
-  // [6] --- ВІДГУКИ ---
-  app.get('/api/reviews', async (req, res) => {
-    try {
-      const snapshot = await db.collection('reviews').get();
-      const reviews = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      res.status(200).json(reviews);
-    } catch (error) {
-      res.status(500).json({ message: 'Не вдалося отримати відгуки' });
-    }
-  });
+			// Акордеон Відео
+			if (videoItems) {
+				try {
+					const parsedItems =
+						typeof videoItems === 'string' ? JSON.parse(videoItems) : videoItems
 
-  app.get('/api/reviews/pending', async (req, res) => {
-    try {
-      const snapshot = await db.collection('reviews').where('approved', '==', false).get();
-      res.status(200).json(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    } catch (error) {
-      res.status(500).send('Помилка отримання відгуків');
-    }
-  });
+					updatedFields.videoItems = parsedItems
+				} catch {
+					return res.status(400).json({ message: 'Невірний формат videoItems' })
+				}
+			}
 
-  app.get('/api/reviews/approved', async (req, res) => {
-    try {
-      const snapshot = await db.collection('reviews').where('approved', '==', true).get();
-      res.status(200).json(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    } catch (error) {
-      res.status(500).json({ message: 'Не вдалося отримати схвалені відгуки' });
-    }
-  });
+			// Фото 3 шт
+			if ('productImages' in req.files) {
+				if (productImages.length > 0) {
+					const imageUrls = await Promise.all(
+						productImages.map(uploadImageToFirebase)
+					)
+					updatedFields.images = imageUrls
+				} else {
+					updatedFields.images = []
+				}
+			}
 
-  app.patch('/api/reviews/approve/:id', async (req, res) => {
-    try {
-      await db.collection('reviews').doc(req.params.id).update({ approved: true });
-      res.status(200).json({ message: 'Відгук схвалено' });
-    } catch (error) {
-      res.status(500).json({ message: 'Не вдалося схвалити відгук' });
-    }
-  });
+			// Фото галереї
+			if (galleryImages.length) {
+				const galleryUrls = await Promise.all(
+					galleryImages.map(uploadImageToFirebase)
+				)
+				updatedFields.galleryImages = galleryUrls
+			}
+			await ref.update(updatedFields)
+			res.status(200).json({ message: 'Інформація успішно додана' })
+		} catch (error) {
+			res.status(500).json({ message: 'Не вдалося додати інформацію' })
+		}
+	}
+)
 
-  app.post('/api/reviews/add', async (req, res) => {
-    try {
-      const { name, text } = req.body;
-      await db.collection('reviews').add({
-        name: name.trim(),
-        text: text.trim(),
-        approved: false,
-        createdAt: new Date()
-      });
-      res.status(200).json({ message: 'Відгук додано і очікує на схвалення' });
-    } catch (error) {
-      res.status(500).send('Помилка додавання відгуку');
-    }
-  });
+// [6] --- ВІДГУКИ ---
+app.get('/api/reviews', async (req, res) => {
+	try {
+		const snapshot = await db.collection('reviews').get()
+		const reviews = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+		res.status(200).json(reviews)
+	} catch (error) {
+		res.status(500).json({ message: 'Не вдалося отримати відгуки' })
+	}
+})
 
-  app.delete('/api/reviews/:id', async (req, res) => {
-    try {
-      await db.collection('reviews').doc(req.params.id).delete();
-      res.status(200).json({ message: 'Відгук успішно видалено' });
-    } catch (error) {
-      res.status(500).json({ message: 'Не вдалося видалити відгук' });
-    }
-  });
+app.get('/api/reviews/pending', async (req, res) => {
+	try {
+		const snapshot = await db
+			.collection('reviews')
+			.where('approved', '==', false)
+			.get()
+		res
+			.status(200)
+			.json(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+	} catch (error) {
+		res.status(500).send('Помилка отримання відгуків')
+	}
+})
 
-  // [7] --- ПЕРЕВІРКА ПАРОЛЯ АДМІНА ---
-  const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
-  app.post('/check-password', async (req, res) => {
-    try {
-      const isValid = await bcrypt.compare(req.body.password, adminPasswordHash);
-      res.json({ success: isValid });
-    } catch (error) {
-      res.status(500).json({ success: false, message: 'Помилка сервера' });
-    }
-  });
+app.get('/api/reviews/approved', async (req, res) => {
+	try {
+		const snapshot = await db
+			.collection('reviews')
+			.where('approved', '==', true)
+			.get()
+		res
+			.status(200)
+			.json(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+	} catch (error) {
+		res.status(500).json({ message: 'Не вдалося отримати схвалені відгуки' })
+	}
+})
 
-  
+app.patch('/api/reviews/approve/:id', async (req, res) => {
+	try {
+		await db.collection('reviews').doc(req.params.id).update({ approved: true })
+		res.status(200).json({ message: 'Відгук схвалено' })
+	} catch (error) {
+		res.status(500).json({ message: 'Не вдалося схвалити відгук' })
+	}
+})
 
-  // [8] --- СТАРТ СЕРВЕРА ---
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Сервер запущено на порту ${PORT}`);
-  });
+app.post('/api/reviews/add', async (req, res) => {
+	try {
+		const { name, text } = req.body
+		await db.collection('reviews').add({
+			name: name.trim(),
+			text: text.trim(),
+			approved: false,
+			createdAt: new Date()
+		})
+		res.status(200).json({ message: 'Відгук додано і очікує на схвалення' })
+	} catch (error) {
+		res.status(500).send('Помилка додавання відгуку')
+	}
+})
+
+app.delete('/api/reviews/:id', async (req, res) => {
+	try {
+		await db.collection('reviews').doc(req.params.id).delete()
+		res.status(200).json({ message: 'Відгук успішно видалено' })
+	} catch (error) {
+		res.status(500).json({ message: 'Не вдалося видалити відгук' })
+	}
+})
+
+// [7] --- ПЕРЕВІРКА ПАРОЛЯ АДМІНА ---
+const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH
+app.post('/check-password', async (req, res) => {
+	try {
+		const isValid = await bcrypt.compare(req.body.password, adminPasswordHash)
+		res.json({ success: isValid })
+	} catch (error) {
+		res.status(500).json({ success: false, message: 'Помилка сервера' })
+	}
+})
+
+// [8] --- СТАРТ СЕРВЕРА ---
+const PORT = process.env.PORT || 3002
+app.listen(PORT, () => {
+	console.log(`Сервер запущено на порту ${PORT}`)
+})

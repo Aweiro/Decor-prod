@@ -2,7 +2,8 @@
   "name": "Decor-prod",
   "version": "1.0.0",
   "scripts": {
-    "start": "node js/server.js"
+    "start": "node js/server.js",
+		"scss": "sass --watch sass/main.scss:css/main.css"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.14.0",
@@ -16,5 +17,8 @@
     "firebase-admin": "^12.7.0",
     "multer": "^1.4.5-lts.1",
     "uuid": "^11.0.2"
+  },
+  "devDependencies": {
+    "sass": "^1.97.0"
   }
 }
